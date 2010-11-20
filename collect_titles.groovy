@@ -1,5 +1,5 @@
 
-def langProp = new ConfigSlurper().parse(new File("./src/ja.groovy").toURL())
+def langProp = new ConfigSlurper().parse(new File("./src/ja/titles.groovy").toURL())
 def titles = langProp.titles
 
 def docFiles  = new File('original/grails-doc/src/guide')
