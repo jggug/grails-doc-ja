@@ -1,0 +1,135 @@
+スカッフォルディングをすることで指定したドメインクラスのコントローラ・ビューを自動生成してくれます。
+
+* 必要な[ビュー|guide:GSP]
+* コントローラのアクションに作成、読込、更新、削除(CRUD)の実装
+
+h4. スカッフォルドを有効にする(ダイナミックスカッフォルディング)
+
+スカッフォルドを簡単に始めるには @scaffold@　プロパティを有効にするだけです。 ドメインクラスと同名のコントローラでスカッフォルドを有効にするには、 @scaffold@ プロパティに true を指定します。例では、ドメインクラス@Book@を対象にコントローラに定義しています:
+
+{code:java}
+class BookController {
+   def scaffold = true
+}
+{code}
+
+上記の例では @BookController@の対象に@Book@という同名のドメインクラスを使用したのでtrueを指定しましたが、ドメインクラス名を指定して定義することもできます。
+
+{code:java}
+def scaffold = Author
+{code}
+
+With  that done if you run this grails application the necessary actions and views will be auto-generated at runtime. The following actions are dynamically implemented by default by the runtime scaffolding mechanism:
+
+* list
+* show
+* edit
+* delete
+* create
+* save
+* update
+
+As well as this a CRUD interface will be generated. To access the interface in the above example simply go to @http://localhost:8080/app/book@ 
+
+If you prefer to keep your domain model in Java and [mapped with Hibernate|guide:hibernate] you can still use scaffolding, simply import the necessary class and set the scaffold property to it.
+
+h4. ダイナミックスカッフォルディング
+
+Note that when using the scaffold property Grails does not use code templates, or code generation to achieve this so you can add your own actions to the scaffolded controller that interact with the scaffolded actions. For example, in the below example, @changeAuthor@ redirects to the @show@ action which doesn't actually exist physically:
+
+{code:java}
+class BookController {
+   def scaffold = Book
+
+   def changeAuthor = {
+        def b = Book.get( params["id"] )
+        b.author = Author.get( params["author.id"] )
+        b.save()
+
+        // redirect to a scaffolded action
+        redirect(action:show)
+   }
+}
+{code}
+
+You can also override the scaffolded actions with your own actions if necessary:
+
+{code:java}
+class BookController {
+   def scaffold = Book
+
+   // overrides scaffolded action to return both authors and books
+   def list = {
+         [ "books" : Book.list(), "authors": Author.list() ]
+   }
+}
+{code}
+
+All of this is what is known as "dynamic scaffolding" where the CRUD interface is generated dynamically at runtime. Grails also supports "static" scaffolding which will be discussed in the following sections.
+
+h4. 生成ビューのカスタマイズ
+
+The views that Grails generates have some form of intelligence in that they adapt to the [Validation constraints|guide:constraints]. For example you can change the order that fields appear in the views simply by re-ordering the constraints in the builder:
+
+{code:java}
+def constraints = {
+      title()
+      releaseDate()
+}
+{code}
+
+You can also get the generator to generate lists instead of text inputs if you use the @inList@ constraint:
+
+{code:java}
+def constraints = {
+      title()
+      category(inList:["Fiction", "Non-fiction", "Biography"])
+      releaseDate()
+}
+{code}
+
+Or if you use the @range@ constraint on a number:
+
+{code:java}
+def constraints = {
+        age(range:18..65)
+}
+{code}
+
+Restricting the size via a constraint also effects how many characters can be entered in the generated view:
+
+{code:java}
+def constraints = {
+        name(size:0..30)
+}
+{code}
+
+h4. コントローラとビューの生成
+
+The above scaffolding features are useful but in real world situations its likely that you will want to customize the logic and views. Grails allows you to generate a controller and the views used to create the above interface via the command line. To generate a controller type:
+
+{code:java}
+grails generate-controller Book
+{code}
+
+Or to generate the views type:
+
+{code:java}
+grails generate-views Book
+{code}
+
+Or to generate everything type:
+
+{code:java}
+grails generate-all Book
+{code}
+
+If you have a domain class in a package or are generating from a [Hibernate mapped class|guide:hibernate] remember to include the fully qualified package name:
+
+{code:java}
+grails generate-all com.bookstore.Book
+{code}
+
+h4. スカッフォルディングテンプレートのカスタマイズ
+
+The templates used by Grails to generate the controller and views can be customized by installing the templates with the [install-templates|commandLine] command.
