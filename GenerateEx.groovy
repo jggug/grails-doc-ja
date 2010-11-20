@@ -186,7 +186,7 @@ vars = [
         footer: props.footer + langProp.props.footer,
         authors: props.authors + langProp.props.authors,
         version: props."grails.version",
-        copyright: props.copyright,
+        copyright: props.copyright + langProp.props.copyright,
 
         toc: fullToc.toString(),
         body: fullContents.toString()

@@ -251,5 +251,6 @@ props = [
 title: 'The Grails Framework',
 subtitle: 'See the light - agile, industrial strength, rapid web application development made easy',
 footer: '  Japanese version by Japan Grails Groovy User Group jggug.org',
-authors: '  日本語版: T.Yamamoto(@tyama) '
+authors: '  日本語版: T.Yamamoto(@tyama) ',
+copyright:' <br/><span style="color:red">このドキュメントの内容はスナップショットバージョンを元に意訳されているため、一部現行バージョンでは未対応の機能もあります。</span>'
 ]
