@@ -10,6 +10,7 @@ BASEDIR = System.getProperty("base.dir") ?: '.'
 GRAILS_HOME = System.getProperty("grails.home")
 CONTEXT_PATH = DocEngine.CONTEXT_PATH
 SOURCE_FILE = DocEngine.SOURCE_FILE
+LANG = System.getProperty("doc.lang")
 
 props = new Properties()
 new File("${BASEDIR}/resources/doc.properties").withInputStream {input ->
@@ -19,9 +20,9 @@ new File("${GRAILS_HOME}/build.properties").withInputStream {input ->
     props.load(input)
 }
 
-def lang = 'ja'
+def lang = LANG
 
-langProp = new ConfigSlurper().parse(new File("${BASEDIR}/lang/${lang}/${lang}.groovy").toURL())
+langProp = new ConfigSlurper().parse(new File("./src/${lang}/titles.groovy").toURL())
 title = props.title
 version = props."grails.version"
 authors = props.author
@@ -48,7 +49,7 @@ def compare = [equals: { false },
 }] as Comparator
 
 files = new File("${BASEDIR}/src/guide").listFiles().findAll { it.name.endsWith(".gdoc") }.sort(compare)
-files_i18n = new File("${BASEDIR}/lang/ja/guide").listFiles().findAll { it.name.endsWith(".gdoc") }.sort(compare)
+files_i18n = new File("./src/${lang}/guide").listFiles().findAll { it.name.endsWith(".gdoc") }.sort(compare)
 context = new BaseInitialRenderContext()
 context.set(CONTEXT_PATH, "..")
 context.setParameters([:]) // required by some macros
@@ -88,7 +89,7 @@ chapterHeader = null
 chapterToc = new StringBuffer()
 
 void writeChapter() {
-    new File("${BASEDIR}/output/guide/${chapterTitle}.html").withWriter {
+    new File("./output/guide/${chapterTitle}.html").withWriter {
         template.make(title:chapterTitle,
                       header:chapterHeader,
                       toc:chapterToc.toString(),
@@ -100,8 +101,8 @@ void writeChapter() {
 
 }
 
-ant.mkdir(dir: "${BASEDIR}/output/guide")
-ant.mkdir(dir: "${BASEDIR}/output/guide/pages")
+ant.mkdir(dir: "./output/guide")
+ant.mkdir(dir: "./output/guide/pages")
 new File("${BASEDIR}/resources/style/guideItem.html").withReader("UTF-8") {reader ->
     template = templateEngine.createTemplate(reader)
 
@@ -151,7 +152,7 @@ new File("${BASEDIR}/resources/style/guideItem.html").withReader("UTF-8") {reade
         fullContents << header << body
         chapterContents <<  body
 
-        new File("${BASEDIR}/output/guide/pages/${title}.html").withWriter("UTF-8") {
+        new File("./output/guide/pages/${title}.html").withWriter("UTF-8") {
             template.make(title:title, header:header,
                           toc:"", content:body, path:"../..").writeTo(it)
         }
@@ -162,28 +163,28 @@ if (chapterTitle) // write final chapter collected (if any seen)
 
 /* Resources */
 
-ant.mkdir(dir: "${BASEDIR}/output")
-ant.mkdir(dir: "${BASEDIR}/output/img")
-ant.mkdir(dir: "${BASEDIR}/output/css")
-ant.mkdir(dir: "${BASEDIR}/output/ref")
+ant.mkdir(dir: "./output")
+ant.mkdir(dir: "./output/img")
+ant.mkdir(dir: "./output/css")
+ant.mkdir(dir: "./output/ref")
 
-ant.copy(file: "${BASEDIR}/resources/style/index.html", todir: "${BASEDIR}/output")
-ant.copy(todir: "${BASEDIR}/output/img") {
+ant.copy(file: "${BASEDIR}/resources/style/index.html", todir: "./output")
+ant.copy(todir: "./output/img") {
     fileset(dir: "${BASEDIR}/resources/img")
 }
-ant.copy(todir: "${BASEDIR}/output/css") {
+ant.copy(todir: "./output/css") {
     fileset(dir: "${BASEDIR}/resources/css")
 }
-ant.copy(todir: "${BASEDIR}/output/ref") {
+ant.copy(todir: "./output/ref") {
     fileset(dir: "${BASEDIR}/resources/style/ref")
 }
 
 /* Reference documentation */
 vars = [
-        title: props.title,
-        subtitle: props.subtitle,
-        footer: props.footer,
-        authors: props.authors,
+        title: langProp.props.title,
+        subtitle: langProp.props.subtitle,
+        footer: props.footer + langProp.props.footer,
+        authors: props.authors + langProp.props.authors,
         version: props."grails.version",
         copyright: props.copyright,
 
@@ -193,12 +194,12 @@ vars = [
 
 new File("${BASEDIR}/resources/style/layout.html").withReader("UTF-8") {reader ->
     template = templateEngine.createTemplate(reader)
-    new File("${BASEDIR}/output/guide/single.html").withWriter("UTF-8") {out ->
+    new File("./output/guide/single.html").withWriter("UTF-8") {out ->
         template.make(vars).writeTo(out)
     }
     vars.toc = chaptersOnlyToc
     vars.body = ""
-    new File("${BASEDIR}/output/guide/index.html").withWriter("UTF-8") {out ->
+    new File("./output/guide/index.html").withWriter("UTF-8") {out ->
         template.make(vars).writeTo(out)
     }
 }
@@ -214,7 +215,7 @@ void writeReferenceItem(File file, String path, String section, String name) {
     menu << "<div class='${divClass}'><a href=\"${section}/${name}.html\" target=\"mainFrame\">${nameRef}</a></div>"
 
     def content = engine.render(file.text, context)
-    new File("${BASEDIR}/output/ref/${section}/${name}.html").withWriter("UTF-8") {
+    new File("./output/ref/${section}/${name}.html").withWriter("UTF-8") {
         template.make(content:content).writeTo(it)
     }
 }
@@ -229,7 +230,7 @@ new File("${BASEDIR}/resources/style/referenceItem.html").withReader("UTF-8") {r
             def section = f.name
             def sectionName = langProp.refTitle[f.name]?:f.name
             menu << "<h1 class=\"menuTitle\">${sectionName}</h1>"
-            new File("${BASEDIR}/output/ref/${section}").mkdirs()
+            new File("./output/ref/${section}").mkdirs()
 
             def usageFile = new File("${BASEDIR}/src/ref/${section}.gdoc")
             if (usageFile.exists()) {
@@ -247,11 +248,11 @@ new File("${BASEDIR}/resources/style/referenceItem.html").withReader("UTF-8") {r
 vars.menu = menu
 new File("${BASEDIR}/resources/style/menu.html").withReader("UTF-8") {reader ->
     template = templateEngine.createTemplate(reader)
-    new File("${BASEDIR}/output/ref/menu.html").withWriter("UTF-8") {out ->
+    new File("./output/ref/menu.html").withWriter("UTF-8") {out ->
         template.make(vars).writeTo(out)
     }
 }
 
-PdfBuilder.build(BASEDIR)
+//PdfBuilder.build(BASEDIR)
 
 println "Done. Look at output/index.html"

@@ -205,7 +205,34 @@ titles = [
 '9. Testing':'9. テスト',
 '9.1 Unit Testing':'9.1 ユニットテスト Unit Testing',
 '9.2 Integration Testing':'9.2 統合テスト Integration Testing',
-'9.3 Functional Testing':'9.3 機能テスト Functional Testing'
+'9.3 Functional Testing':'9.3 機能テスト Functional Testing',
+
+'11.4.1 Spring Security':'11.4.1 Spring Security',
+'11.4.2 Shiro':'11.4.2 Shiro',
+'12.5 Evaluating Conventions':'12.5 Evaluating Conventions',
+'12.6 Hooking into Build Events':'12.6 Hooking into Build Events',
+'12.7 Hooking into Runtime Configuration':'12.7 Hooking into Runtime Configuration',
+'12.9 Participating in Auto Reload Events':'12.9 Participating in Auto Reload Events',
+'15.1 Using Hibernate XML Mapping Files':'15.1 Using Hibernate XML Mapping Files',
+'15.2 Mapping with Hibernate Annotations':'15.2 Mapping with Hibernate Annotations',
+'15.3 Adding Constraints':'15.3 Adding Constraints',
+'15.4 Further Reading':'15.4 Further Reading',
+'2.12 Creating Artefacts':'2.12 Creating Artefacts',
+'3.3.4 Transaction-aware DataSource Proxy':'3.3.4 Transaction-aware DataSource Proxy',
+'3.3.5 Database Console':'3.3.5 Database Console',
+'3.7.10 Plugin Dependencies':'3.7.10 Plugin Dependencies',
+'3.7.5 Providing Default Dependencies':'3.7.5 Providing Default Dependencies',
+'3.7.6 Dependency Reports':'3.7.6 Dependency Reports',
+'3.7.7 Plugin JAR Dependencies':'3.7.7 Plugin JAR Dependencies',
+'3.7.8 Maven Integration':'3.7.8 Maven Integration',
+'3.7.9 Deploying to a Maven Repository':'3.7.9 Deploying to a Maven Repository',
+'5.2.1.1 Many-to-one and one-to-one':'5.2.1.1 Many-to-one and one-to-one',
+'5.3.6 Modification Checking':'5.3.6 Modification Checking',
+'5.5.2.12 Custom Naming Strategy':'5.5.2.12 Custom Naming Strategy',
+'6.1.11 Handling Duplicate Form Submissions':'6.1.11 Handling Duplicate Form Submissions',
+'6.2.6 Making Changes to a Deployed Application':'6.2.6 Making Changes to a Deployed Application',
+'6.2.7 GSP Debugging':'6.2.7 GSP Debugging',
+'6.6.4 Filter Dependencies':'6.6.4 Filter Dependencies'
 ]
 refTitle = [
 'Command Line':'コマンドライン',
@@ -219,4 +246,10 @@ refTitle = [
 'Tag Libraries':'タグライブラリ変数',
 'Tags':'タグ',
 'Usage':'使用方法'
+]
+props = [
+title: 'The Grails Framework',
+subtitle: 'See the light - agile, industrial strength, rapid web application development made easy',
+footer: '  Japanese version by Japan Grails Groovy User Group jggug.org',
+authors: '  日本語版: T.Yamamoto(@tyama) '
 ]
