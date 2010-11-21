@@ -22,7 +22,7 @@ new File("${GRAILS_HOME}/build.properties").withInputStream {input ->
 
 def lang = LANG
 
-langProp = new ConfigSlurper().parse(new File("./src/${lang}/titles.groovy").toURL())
+langProp = new ConfigSlurper().parse(new File("./src/${lang}/titles.groovy").getText('UTF-8'))
 title = props.title
 version = props."grails.version"
 authors = props.author
