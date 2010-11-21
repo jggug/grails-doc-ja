@@ -5,7 +5,7 @@ git submodule init && git submodule update
 ant dist-nojavadoc -Ddoc.lang=ja
 // or if you have grails sources
 ant dist-nojavadoc -Ddoc.lang=ja -Dgrails.home=./checkout/grails-src
-<pre>
+</pre>
 
 h2. 翻訳ルールについて
 
