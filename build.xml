@@ -4,6 +4,10 @@
     <property name="base.dir" value="./original/grails-doc" />
 
     <target name="init">
+        <available property="grails.home"
+          value="${basedir}/checkout/grails-src"
+          file="${basedir}/checkout/grails-src"/>
+
         <condition property="grails.home.was.set">
             <isset property="grails.home"/>
         </condition>
