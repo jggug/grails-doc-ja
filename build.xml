@@ -47,7 +47,7 @@
             </classpath>
         </taskdef>
 
-
+        <mkdir dir="bin" />
         <mkdir dir="${base.dir}/bin" />
         <copy todir="${base.dir}/bin" file="${base.dir}/resources/log4j.properties"/>
         <groovyc srcdir="${base.dir}/src/groovy" destdir="bin">
@@ -69,6 +69,7 @@
                 <fileset dir="${grails.home}/lib" includes="*.jar"  />
                 <fileset dir="${base.dir}/lib" />
                 <pathelement location="${base.dir}/bin" />
+                <pathelement location="bin" />
             </classpath>
         </java>
     </target>
