@@ -89,7 +89,7 @@ chapterHeader = null
 chapterToc = new StringBuffer()
 
 void writeChapter() {
-    new File("./output/guide/${chapterTitle}.html").withWriter {
+    new File("./output/guide/${chapterTitle}.html").withWriter("UTF-8") {
         template.make(title:chapterTitle,
                       header:chapterHeader,
                       toc:chapterToc.toString(),
