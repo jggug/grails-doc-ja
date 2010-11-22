@@ -1,0 +1,16 @@
+By default the user locale is detected from the incoming @Accept-Language@ header. However, you can provide users the capability to switch locales by simply passing a parameter called @lang@ to Grails as a request parameter:
+
+デフォルトで
+@Accept-Languag@ ヘッダーによりロケールが決まります。
+URLのリクエストパラメータ指定により簡単に指定のロケールに変更できます。
+
+{code:java}
+/book/list?lang=es
+{code}
+
+Grails will automatically switch the user locale and store it in a cookie so subsequent requests will have the new header.
+
+これにより自動的に
+現在のユーザロケールを変更し、それをクッキーに保存します。
+それに続くリクエストのヘッダは指定したロケールになります。
+
