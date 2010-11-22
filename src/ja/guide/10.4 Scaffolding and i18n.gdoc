@@ -3,7 +3,7 @@ Grails does not ship with i18n aware [scaffolding|guide:scaffolding] templates t
 [scaffolding|guide:scaffolding] テンプレートを使って生成されるコントローラとビューは i18n 対応していません。
 しかし、i18n対応テンプレートが必要な場合は
 the i18n templates プラグインがあります。
-このテンプレートはGrailsデフォルトのテンプレートと同じ内容ですが、ラベルとかボタンに適用される[message|tags] タグだけが異なります。
+このテンプレートはGrailsデフォルトのテンプレートと同じ内容ですが、ラベルやボタンなどに適用される [message|tags] タグだけが異なります。
 
 To get started install the i18n templates with the following command:
 

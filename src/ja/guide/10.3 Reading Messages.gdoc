@@ -3,7 +3,7 @@ h4. ビュー内でのメッセージ読み込み (Reading Messages in the View)
 The most common place that you need messages is inside the view. To read messages from the view just use the [message|tags] tag:
 
 メッセージを使うもっとも一般的な場所はビューの中です。
-ビューでメッセージを取得するには単に[message|tags]タグを使います。
+ビューでメッセージを取得するには単に [message|tags] タグを使います。
 
 {code:xml}
 <g:message code="my.localized.content" />
@@ -51,8 +51,8 @@ def show = {
 The same technique can be used on [tag libraries|guide:taglibs], but note if your tag library has a different
 [namespace|guide:namespaces] then you will need to @g.@ prefix:
 
-同じ方法が[tag libraries|guide:taglibs]でも使えます。
-もしタグライブラリで異なる[namespace|guide:namespaces] を使っている場合は @g.@ を前に付けます。
+同じ方法が [tag libraries|guide:taglibs] でも使えます。
+もしタグライブラリで異なる [namespace|guide:namespaces] を使っている場合は @g.@ を前に付けます。
 
 {code:java}
 def myTag = { attrs, body ->
