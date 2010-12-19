@@ -103,6 +103,12 @@ void writeChapter() {
 
 ant.mkdir(dir: "./output/guide")
 ant.mkdir(dir: "./output/guide/pages")
+
+// Deletion {original} tag @fumokmm
+def deleteOriginal(contents) {
+  contents.replaceAll(/(?s)\{original\}.*?\{original\}/, '')
+}
+
 new File("${BASEDIR}/resources/style/guideItem.html").withReader("UTF-8") {reader ->
     template = templateEngine.createTemplate(reader)
 
@@ -147,7 +153,9 @@ new File("${BASEDIR}/resources/style/guideItem.html").withReader("UTF-8") {reade
         fullToc << tocEntry
         context.set(SOURCE_FILE, entry.value)
         context.set(CONTEXT_PATH, "..")
-        def body = engine.render(entry.value.text, context)
+// deleteOriginalを使うように修正 @fumokmm
+//      def body = engine.render(entry.value.text, context)
+        def body = engine.render(deleteOriginal(entry.value.text), context)
 
         fullContents << header << body
         chapterContents <<  body
