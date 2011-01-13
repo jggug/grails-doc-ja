@@ -1,0 +1,20 @@
+Grailsは任意のServlet 2.4上のコンテナで動作し、次の特定のコンテナ製品で動作することが確認されています。:
+
+* Tomcat 5.5 	  	
+* Tomcat 6.0 		
+* SpringSource tc Server
+* SpringSource dm Server 1.0
+* GlassFish v1 (Sun AS 9.0) 		
+* GlassFish v2 (Sun AS 9.1) 	
+* GlassFish v3 Prelude	
+* Sun App Server 8.2 		
+* Websphere 6.1 		
+* Websphere 5.1 		
+* Resin 3.2 		
+* Oracle AS 		
+* JBoss 4.2 		
+* Jetty 6.1
+* Jetty 5
+* Weblogic 7/8/9/10
+
+一部のコンテナはバグを抱えていますが、ほとんどの場合、回避することができます。[既知の開発時における問題のリスト|http://grails.org/Deployment]は、GrailsのWiki上で見つけることができます。

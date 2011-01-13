@@ -1,14 +1,14 @@
-The first step to getting up and running with Grails is to install the distribution. To do so follow these steps:
+Grailsの起動と実行の最初のステップは、ディストリビューションをインストールすることです。手順については、次をご覧ください。:
 
-* "Download":http://grails.org/Download a binary distribution of Grails and extract the resulting zip file to a location of your choice
-* Set the GRAILS_HOME environment variable to the location where you extracted the zip
-** On Unix/Linux based systems this is typically a matter of adding something like the following @export GRAILS_HOME=/path/to/grails@ to your profile
-** On Windows this is typically a matter of setting an environment variable under @My Computer/Advanced/Environment Variables@
-* Now you need to add the @bin@ directory to your @PATH@ variable:
-** On Unix/Linux base system this can be done by doing a @export PATH="$PATH:$GRAILS_HOME/bin"@
-** On windows this is done by modifying the @Path@ environment variable under @My Computer/Advanced/Environment Variables@ 
+* Grailsのバイナリディストリビューションを[ダウンロード|http://grails.org/Download]し、任意の場所にzipファイルを解凍します。
+* zipファイルを解凍した場所にGRAILS_HOME環境変数を設定します。
+** Unix / Linuxベースのシステムでは、次ののようなものをプロファイルに追加します。@export GRAILS_HOME=/path/to/grails@
+** Windowsでは、マイコンピュータ/詳細/環境変数に設定します。
+* さらに、@PATH@変数に@bin@ディレクトリを追加する必要があります。:
+** UNIX / Linuxベースのシステムでは、このように設定します。@export PATH="$PATH:$GRAILS_HOME/bin"@
+** Windowsでは、マイコンピュータ/詳細/環境変数の@Path@変数を変更することによって設定します。
 
-If Grails is working correctly you should now be able to type @grails@ in the terminal window and see output similar to the below:
+Grailsが正常に動作する場合は、ターミナルウィンドウで@grails@と入力することで下記のような出力がされます。:
 
 bc.
 Welcome to Grails 1.0 - http://grails.org/

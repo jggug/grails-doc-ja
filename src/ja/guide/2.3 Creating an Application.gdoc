@@ -1,0 +1,16 @@
+Grailsアプリケーションを作成するためには、最初に次の書式で使われる@grails@コマンドの使用法に慣れる必要があります。:
+
+{code}
+grails [コマンド名]
+{code}
+
+この場合に実行すべきコマンドは、[create-app|commandLine]です。:
+
+bc.
+grails create-app helloworld
+
+これにより、現在のディレクトリ内にプロジェクトが含まれる新しいディレクトリが作成されます。ターミナルで、このディレクトリに移動してください。:
+
+bc.
+cd helloworld
+

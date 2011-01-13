@@ -1,0 +1,17 @@
+Grailsは、"convention over configuration"を使用して、自動的に設定をおこないます。一般的に、名前とファイルの位置が明確な構成の代わりに使われることを意味します。それゆえに、Grailsによって提供されるディレクトリ構造に慣れ親む必要があります。
+
+概要と関連するセクションへのリンクです。:
+
+* @grails-app@ - Groovyのソースディレクトリの最上位
+** @conf@ - [設定ソース|guide:3. Configuration]
+** @controllers@ - [Webコントローラ|guide:6.1 Controllers] - MVCのC
+** @domain@ - [アプリケーションドメイン|guide:5. Object Relational Mapping (GORM)]
+** @i18n@ - [国際化（i18n）|guide:10. Internationalization]のサポート 
+** @services@ - [サービス層|guide:8. The Service Layer]
+** @taglib@ - [タグライブラリ|guide:6.3 Tag Libraries]
+** @views@ - [Groovy Server Pages|guide:6.2 Groovy Server Pages]
+* @scripts@ - [Gantスクリプト|guide:4. The Command Line]
+* @src@ - サポートソース
+** @groovy@ - その他のGroovyのソース
+** @java@ - その他のJavaソース
+* @test@  - [ユニットテストと統合テスト|guide:9. Testing]

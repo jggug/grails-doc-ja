@@ -1,0 +1,6 @@
+Grailsですぐに始めるために、アプリケーションのスケルトンを生成する[スカッフォールディング|guide:scaffolding]と呼ばれる機能を使用することはしばしば有用です。これは、[コントローラ|guide:controllers]と関連する[ビュー|guide:gsp]を生成する[generate-all|commandLine]のような@generate-*@コマンドの１つを使用して実行します。:
+
+{code}
+grails generate-all Book
+{code}
+

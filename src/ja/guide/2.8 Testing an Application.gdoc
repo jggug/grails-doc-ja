@@ -1,0 +1,13 @@
+Grailsの@create-*@コマンドは、自動的に@test/integration@ディレクトリに統合テストを作成します。有効なテストロジックや[Testing|guide:testing]のセクションで発見できる情報を組み上げることは、もちろんあなたがします。ただし、テストを実行したい場合は、[test-app|commandLine]コマンドを次のように実行することができます。:
+
+{code}
+grails test-app
+{code}
+
+Grailsは、[test-app|commandLine]コマンドにテストの実行を委譲することのできるAntの@build.xml@ファイルも自動生成します。:
+
+{code}
+ant test
+{code}
+
+これは、CruiseControlのように継続的インテグレーションプラットフォームなどの一環として、Grailsアプリケーションを構築する必要がある場合に便利です。

@@ -1,0 +1,193 @@
+Grails開発チームでは破損を最小限に維持しようとしていますが、Grailsの1.0.x、1.1.x、または1.2.xのアプリケーションをGrails 1.3に更新するときに考慮することがいくつかあります。主な変更点については、以下に詳細を説明します。
+
+h3. Grails 1.2.xからの更新
+
+h4. プラグイン・リポジトリ
+
+Grails 1.3では、セキュリティで保護されたSVNリポジトリ内のプラグインに対してネイティブ解決をサポートしていません。Grails 1.2 とそれ以下のプラグイン解決の仕組みは、通常のGrailsリポジトリと同様MavenリポジトリのGrailsプラグインに対しても解決できるIvyの利点の上に築かれたものに置き換えかれました。
+
+Ivyは、WebDAV, HTTP, SSHやFTPへのサポートを含めたプラグイン解決のためのリポジトリ解決のセッターをより豊富にサポートしています。全ての利用可能なオプションについてはIvyのドキュメントの[リゾルバ|http://ant.apache.org/ivy/history/trunk/settings/resolvers.html]のセクションを、追加リゾルバの設定方法の説明については、ユーザーガイドの[プラグイン・リポジトリ|guide:repositories]のセクションを参照してください。
+
+もし、まだセキュリティで保護されたSVNリポジトリ内に対してプラグインを解決するためのサポートが必要であれば、[IvySvn|http://code.google.com/p/ivysvn/]プロジェクトがSVNリポジトリに対する解決のためのIvyリゾルバのセットを提供します。 
+
+h3. Grails 1.1.xからの更新
+
+h4. プラグインのパス
+
+Grails 1.1.xでは、通常@pluginContextPath@変数がプラグインリソースへのパスを確立するために使用されました。例えば:
+
+{code}
+<g:resource dir="${pluginContextPath}/images" file="foo.jpg" />
+{code}
+
+Grails 1.2 のビューではプラグインの認識は行われており、これはもはや必要ありません。:
+
+{code}
+<g:resource dir="images" file="foo.jpg" />
+{code}
+
+また、上記の例では、もはやプラグインのビューからアプリケーションの画像にリンクしません。そのため、あなたは上記を変える必要があります。:
+
+{code}
+<g:resource contextPath="" dir="images" file="foo.jpg" />
+{code}
+
+同じ規則は[javascript|tags]や[render|tags]にも適用されます。
+
+h4. タグとボディの戻り値
+
+タグはもはや@java.lang.String@のインスタンスを戻さず、その代わりに@StreamCharBuffer@インスタンスを返します。@StreamCharBuffer@クラスは、@String@と全て同じメソッドを実装します。しかしこのようなコードの場合は破綻します。:
+
+{code}
+def foo = body()
+if(foo instanceof String) {
+	// do something
+}
+{code}
+
+これらの場合では、@String@と@StreamCharBuffer@の両方が実装している@java.lang.CharSequence@インタフェースを使用するべきです。:
+
+{code}
+def foo = body()
+if(foo instanceof CharSequence) {
+	// do something
+}
+{code}
+
+h4. 新しいJSONBuilder
+
+以前のGrailsのバージョンとは意味的に異なる@JSONBuilder@の新しいバージョンがあります。ただし、あなたのアプリケーションが古い意味論に依存する場合は、Config.groovyに次のプロパティを@true@に設定することで、廃止された実装を使用し続けることができます。:
+
+{code}
+grails.json.legacy.builder=true
+{code}
+
+h4. フラッシュでの検証
+
+現在、Grailsは無効なオブジェクトが永続化されないことを保証するために、基底となるHibernateのセッションがフラッシュされるときに検証ルーチンを実行します。制約（カスタム検証など）の１つが問い合わせを実行している時に、追加のフラッシュの結果として@StackOverflowError@引き起こすことがあります。例えば:
+
+{code}
+static constraints = {
+	author validator: { a ->
+		assert a != Book.findByTitle("My Book").author		
+	}
+}
+{code}
+
+上記のコードは、Grails 1.2では@StackOverflowError@となる可能性があります。解決策は、新しいHibernateセッションを用いて問い合わせを行います。（一般的に、Hibernateがフラッシュ中に、他の問題を引き起こす可能性のある場合に推奨されます）:
+
+{code}
+static constraints = {
+	author validator: { a ->
+		Book.withNewSession {
+			assert a != Book.findByTitle("My Book").author					
+		}
+	}
+}
+{code}
+
+h3. Grails 1.0.xからの更新
+
+h4. Groovy 1.6
+
+Grails 1.1とGroovy 1.6上でリリースされたものは、もはやGroovyの1.5向けでコンパイルされたコードをサポートしません。Groovy 1.5で書かれているライブラリを使用している場合は、Grails 1.1でそれを使用する前に、Groovy 1.6向けに再コンパイルする必要があります。
+
+h4. Java 5.0
+
+Grails 1.1は、もはやJDK 1.4をサポートしていません。もしGrailsを引き続き使用したい場合は、JDKを更新できるようになるまでは、Grails 1.0.x系に留めておくことを推奨します。
+
+h4. 構成の変更
+
+1) @grails.testing.reports.destDir@の設定は、一貫性を保つため@grails.project.test.reports.dir@に変更されました。
+
+2) 以下の設定は、@grails-app/conf/Config.groovy@から@grails-app/conf/BuildConfig.groovy@に移動されました。:
+** @grails.config.base.webXml@
+** @grails.project.war.file@ (@grails.war.destFile@にリネーム)
+** @grails.war.dependencies@
+** @grails.war.copyToWebApp@
+** @grails.war.resources@
+
+3) Java 5.0がベースラインとなったため、@grails.war.java5.dependencies@オプションはサポートされません。（上記を参照してください）
+
+4) jsessionidの使用は（現在有害と考えられる）はデフォルトで無効になりました。jsessionidを必要とするアプリケーションでは、@grails-app/conf/Config.groovy@に次の設定を追加することにより、その使用を有効にすることができます。:
+
+{code}
+grails.views.enable.jsessionid=true
+{code}
+
+5) Log4jの設定で使用する構文は変更されました。詳細についてはユーザーガイドの[ロギング|guide:logging]のセクションを参照してください。
+
+h4. プラグインの変更 
+
+Grails 1.1以降では、デフォルトで@PROJECT_HOME/plugins@ディレクトリ内にプラグインを保存しなくなりました。これにより、すべてのプラグインを再インストールするか、@grails-app/conf/BuildConfig.groovy@に次のようにプロパティを設定するかのいずれかをしない限り、アプリケーションはコンパイルエラーに終わる可能性があります。:
+
+{code}
+grails.project.plugins.dir="./plugins"
+{code}
+
+h4. スクリプトの変更
+
+1) 以前にGrails 1.0.3もしくは以下の構文を使用していた場合に、GRAILS_HOMEからスクリプトをインポートすることはサポートされなくなりました。:
+
+{code}
+Ant.property(environment:"env")                             
+grailsHome = Ant.antProject.properties."env.GRAILS_HOME"    
+
+includeTargets << new File ( "${grailsHome}/scripts/Bootstrap.groovy" )
+{code}
+
+その代わりに、新しい@grailsScript@メソッドを使用してスクリプトをインポートする必要があります。:
+
+{code}
+includeTargets << grailsScript( "Bootstrap.groovy" )
+{code}
+
+2) Gantへアップグレードすることによりに、@Ant@変数へのすべての参照は、@ant@に変更しなければなりません。
+
+3) プロジェクトのルートディレクトリはクラスパス上になくなりました。その結果、このようにリソースをロードすることはできなくなりました。:
+
+{code}
+def stream = getClass().classLoader.getResourceAsStream("grails-app/conf/my-config.xml")
+{code}
+
+その代わりに、@basedir@プロパティと共にJavaのFile APIを使用する必要があります。:
+
+{code}
+new File("${basedir}/grails-app/conf/my-config.xml").withInputStream { stream -> 
+      // read the file	
+}
+{code}
+
+h4. コマンドラインの変更
+
+@run-app-https@および@run-war-https@コマンドは無くなり、[run-app|commandLine]の引数に置き換えられました。:
+
+{code}
+grails run-app -https
+{code}
+
+h4. データマッピングの変更点
+
+1) 列挙型は、現在では序数の値ではなく、文字列値を使用してマッピングされます。次のようにマッピングを変更することにより、以前の動作に戻すことができます。:
+
+{code}
+static mapping = {
+      someEnum enumType:"ordinal"
+}
+{code}
+
+2) 双方向のone-to-one関連は、現在では所有している側の単一列と外部キーの参照でマッピングされます。しかし、重複するデータが含まれる逆側の列を削除したいかもしれませんが、何も変更する必要はありません。
+
+h4. RESTのサポート
+
+入力のXMLリクエストは今では自動的に解析されません。RESTのリクエスト解析を有効にするには、@parseRequest@引数を使用することで内部でURLマッピングを行うことができます。:
+
+{code}
+"/book"(controller:"book",parseRequest:true)
+{code}
+
+あるいは、デフォルトで解析が利用可能な新しい@resource@引数を使用することもできます。:
+
+{code}
+"/book"(resource:"book")
+{code}

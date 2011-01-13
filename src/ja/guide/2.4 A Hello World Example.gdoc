@@ -1,0 +1,30 @@
+典型的な"Hello World！"を実装するには、[create-controller|commandLine]コマンドを実行します。:
+
+bc.
+grails create-controller hello  
+
+これによって、@grails-app/controllers@ディレクトリ内に、@HelloController.groovy@という新しいコントローラ（詳細については[コントローラ|guide:controllers]のセクションを参照してください）が作成されます。
+
+コントローラは、Webリクエストに対処することができます。"hello world!"を実現するユースケースの実装は、次のようにする必要があります。:
+
+{code:java}
+class HelloController {
+	def world = {
+		render "Hello World!"
+	}
+}                           
+{code}
+
+実装は以上です。今すぐ[run-app|commandLine]という別の新しいコマンドでコンテナをスタートさせます。:
+
+bc.
+grails run-app
+
+これで8080ポートでサーバを起動します。URL：@http://localhost:8080/helloworld@を指定することでアプリケーションにアクセスできるようになります。 
+
+結果は次のスクリーンショットのようになります。:
+
+!intropage.png!
+
+これは@web-app/index.gsp@ファイルによってレンダリングされたGrailsのイントロページです。そこにはコントローラの存在を検出しており、コントローラへのリンクをクリックすることで、ブラウザ画面に出力されている"Hello World！"のテキストを見ることができます。
+
