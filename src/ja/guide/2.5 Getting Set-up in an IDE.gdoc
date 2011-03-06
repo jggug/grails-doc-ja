@@ -1,8 +1,8 @@
 h4. IntelliJ IDEA
 
-[IntelliJ IDEA|http://www.jetbrains.com/idea]と[JetGroovy|http://www.jetbrains.net/confluence/display/GRVY/Groovy+Home]プラグインは、Groovy＆Grailsの開発者に良いサポートを提供します。機能概要については、JetBrainsのウェブサイトの[Groovy and Grails|http://www.jetbrains.com/idea/features/groovy_grails.html]を参照してください。
+[IntelliJ IDEA|http://www.jetbrains.com/idea]と[JetGroovy|http://www.jetbrains.net/confluence/display/GRVY/Groovy+Home]プラグインは、Groovy＆Grailsの開発者に十分な機能を提供します。機能概要については、JetBrainsのウェブサイトの[Groovy and Grails|http://www.jetbrains.com/idea/features/groovy_grails.html]を参照してください。
 
-IntelliJでGrails 1.2を統合するには、次のコマンドを実行して適切なプロジェクトファイルを生成します。:
+Grails 1.2でIntelliJの設定をするには、次のコマンドを実行してIntelliJ用のプロジェクトファイルを生成します。
 
 {code}
 grails integrate-with --intellij
@@ -10,23 +10,23 @@ grails integrate-with --intellij
 
 h4. NetBeans 
 
-良好なオープンソースの代替IDEはSunのNetBeansで、自動的にGrailsプロジェクトを認識するGroovy/Grailsプラグインを提供します。そしてIDEでのGrailsアプリケーションの実行、コード補完、SunのGlassfishサーバとの統合などの機能を提供しています。機能概要は、NetBeansチームによって書かれたGrailsのウェブサイトの[NetBeans Integration|http://www.grails.org/NetBeans+Integration]ガイドを参照してください。
+他にも良好なオープンソースのIDEとしてSunのNetBeansがあります。NetBeansはGroovy/Grailsプラグインで自動的にGrailsプロジェクトを認識します。また、IDEでのGrailsアプリケーションの実行、コード補完、SunのGlassfishサーバとの連携などの機能も提供しています。機能概要については、NetBeansチームによって記述されたGrails公式サイト上の[NetBeans Integration|http://www.grails.org/NetBeans+Integration]ガイドを参照してください。
 
 h4. Eclipse
 
-"Eclipse":http://www.eclipse.org/ ユーザーがGrailsアプリケーションの開発をする際には、[SpringSource Tool Suite|http://www.springsource.com/products/sts]を探して取得することをお勧めします。それは自動クラスパス管理機能、GSPエディタやGrailsコマンドへの迅速なアクセス機能を含んだGrailsのためのサポートが組み込まれて提供されています。概要については、[STS Integration|http://www.grails.org/STS+Integration]のページを参照してください。
+"Eclipse":http://www.eclipse.org/ ユーザーがGrailsアプリケーションの開発をする際は、[SpringSource Tool Suite|http://www.springsource.com/products/sts]を探して取得することをお勧めします。それは自動クラスパス管理機能、GSPエディタやGrailsコマンドへの迅速なアクセス機能を含んだGrailsのためのサポートが組み込まれて提供されています。概要については、[STS Integration|http://www.grails.org/STS+Integration]のページを参照してください。
 
 h4. TextMate
 
-Grailsの焦点が簡潔さにあるため、より簡単なエディタを利用することはしばしば可能です。そしてMac上の "TextMate":http://macromates.com/ は[TextmateにバンドルされたSVN|http://wiki.macromates.com/Main/SubversionCheckout]から優秀なGroovy/Grailsバンドルを利用可能です。
+単純さに焦点があたっているGrailsは、より単純なエディタやを利用することはしばしば可能です。そしてMac上の "TextMate":http://macromates.com/ は[TextmateにバンドルされたSVN|http://wiki.macromates.com/Main/SubversionCheckout]から優秀なGroovy/Grailsバンドルを利用可能です。
 
-TextMateでGrails 1.2を統合するには、次のコマンドを実行して適切なプロジェクトファイルを生成します。:
+Grails 1.2でTextMateの設定をするには、次のコマンドを実行してTextMate用のプロジェクトファイルを生成します。
 
 {code}
 grails integrate-with --textmate
 {code}
 
-またTextMateはプロジェクトのルートから次のコマンドを発行することによりコマンドラインと統合し、任意のプロジェクトを簡単に開くことができます。:
+またTextMateはプロジェクトのルートから次のコマンドを発行することによりコマンドラインと統合し、任意のプロジェクトを簡単に開くことができます。
 
 {code}
 mate .

@@ -1,42 +1,42 @@
-Grails開発チームでは破損を最小限に維持しようとしていますが、Grailsの1.0.x、1.1.x、または1.2.xのアプリケーションをGrails 1.3に更新するときに考慮することがいくつかあります。主な変更点については、以下に詳細を説明します。
+Although the Grails development team have tried to keep breakages to a minimum there are a number of items to consider when upgrading a Grails 1.0.x, 1.1.x, or 1.2.x applications to Grails 1.3. The major changes are described in detail below.
 
-h3. Grails 1.2.xからの更新
+h3. Upgrading from Grails 1.2.x
 
-h4. プラグイン・リポジトリ
+h4. Plugin Repositories
 
-Grails 1.3では、セキュリティで保護されたSVNリポジトリ内のプラグインに対してネイティブ解決をサポートしていません。Grails 1.2 とそれ以下のプラグイン解決の仕組みは、通常のGrailsリポジトリと同様MavenリポジトリのGrailsプラグインに対しても解決できるIvyの利点の上に築かれたものに置き換えかれました。
+As of Grails 1.3, Grails no longer natively supports resolving plugins against secured SVN repositories. Grails 1.2 and below's plugin resolution mechanism has been replaced by one built on Ivy the upside of which is that you can now resolve Grails plugins against Maven repositories as well as regular Grails repositories.
 
-Ivyは、WebDAV, HTTP, SSHやFTPへのサポートを含めたプラグイン解決のためのリポジトリ解決のセッターをより豊富にサポートしています。全ての利用可能なオプションについてはIvyのドキュメントの[リゾルバ|http://ant.apache.org/ivy/history/trunk/settings/resolvers.html]のセクションを、追加リゾルバの設定方法の説明については、ユーザーガイドの[プラグイン・リポジトリ|guide:repositories]のセクションを参照してください。
+Ivy supports a much richer setter of repository resolvers for resolving plugins with, including support for Webdav, HTTP, SSH and FTP. See the section on [resolvers|http://ant.apache.org/ivy/history/trunk/settings/resolvers.html] in the Ivy docs for all the available options and the section of [plugin repositories|guide:repositories] in the user guide which explains how to configure additional resolvers.
 
-もし、まだセキュリティで保護されたSVNリポジトリ内に対してプラグインを解決するためのサポートが必要であれば、[IvySvn|http://code.google.com/p/ivysvn/]プロジェクトがSVNリポジトリに対する解決のためのIvyリゾルバのセットを提供します。 
+If you still need support for resolving plugins against secured SVN repositories then the [IvySvn|http://code.google.com/p/ivysvn/] project provides a set of Ivy resolvers for resolving against SVN repositories.
 
-h3. Grails 1.1.xからの更新
+h3. Upgrading from Grails 1.1.x
 
-h4. プラグインのパス
+h4. Plugin paths
 
-Grails 1.1.xでは、通常@pluginContextPath@変数がプラグインリソースへのパスを確立するために使用されました。例えば:
+In Grails 1.1.x typically a @pluginContextPath@ variable was used to establish paths to plugin resources. For example:
 
 {code}
 <g:resource dir="${pluginContextPath}/images" file="foo.jpg" />
 {code}
 
-Grails 1.2 のビューではプラグインの認識は行われており、これはもはや必要ありません。:
+In Grails 1.2 views have been made plugin aware and this is no longer necessary:
 
 {code}
 <g:resource dir="images" file="foo.jpg" />
 {code}
 
-また、上記の例では、もはやプラグインのビューからアプリケーションの画像にリンクしません。そのため、あなたは上記を変える必要があります。:
+Additionally the above example will no longer link to an application image from a plugin view. To do so you need to change the above to:
 
 {code}
 <g:resource contextPath="" dir="images" file="foo.jpg" />
 {code}
 
-同じ規則は[javascript|tags]や[render|tags]にも適用されます。
+The same rules apply to the [javascript|tags] and [render|tags]
 
-h4. タグとボディの戻り値
+h4. Tag and Body return values
 
-タグはもはや@java.lang.String@のインスタンスを戻さず、その代わりに@StreamCharBuffer@インスタンスを返します。@StreamCharBuffer@クラスは、@String@と全て同じメソッドを実装します。しかしこのようなコードの場合は破綻します。:
+Tags no longer return @java.lang.String@ instances but instead return a @StreamCharBuffer@ instance. The @StreamCharBuffer@ class implements all the same methods as @String@, however code like this may break:
 
 {code}
 def foo = body()
@@ -45,7 +45,7 @@ if(foo instanceof String) {
 }
 {code}
 
-これらの場合では、@String@と@StreamCharBuffer@の両方が実装している@java.lang.CharSequence@インタフェースを使用するべきです。:
+In these cases you should use the @java.lang.CharSequence@ interface, which both @String@ and @StreamCharBuffer@ implement:
 
 {code}
 def foo = body()
@@ -54,17 +54,17 @@ if(foo instanceof CharSequence) {
 }
 {code}
 
-h4. 新しいJSONBuilder
+h4. New JSONBuilder
 
-以前のGrailsのバージョンとは意味的に異なる@JSONBuilder@の新しいバージョンがあります。ただし、あなたのアプリケーションが古い意味論に依存する場合は、Config.groovyに次のプロパティを@true@に設定することで、廃止された実装を使用し続けることができます。:
+There is a new version of @JSONBuilder@ which is semantically different to earlier versions of Grails. However, if your application depends on the older semantics you can still use the now deprecated implementation by settings the following property to @true@ in Config.groovy:
 
 {code}
 grails.json.legacy.builder=true
 {code}
 
-h4. フラッシュでの検証
+h4. Validation on Flush
 
-現在、Grailsは無効なオブジェクトが永続化されないことを保証するために、基底となるHibernateのセッションがフラッシュされるときに検証ルーチンを実行します。制約（カスタム検証など）の１つが問い合わせを実行している時に、追加のフラッシュの結果として@StackOverflowError@引き起こすことがあります。例えば:
+Grails now executes validation routines when the underlying Hibernate session is flushed to ensure that no invalid objects are persisted. If one of your constraints (such as a custom validator) is executing a query then this can cause an addition flush resulting in a @StackOverflowError@. Example:
 
 {code}
 static constraints = {
@@ -74,7 +74,7 @@ static constraints = {
 }
 {code}
 
-上記のコードは、Grails 1.2では@StackOverflowError@となる可能性があります。解決策は、新しいHibernateセッションを用いて問い合わせを行います。（一般的に、Hibernateがフラッシュ中に、他の問題を引き起こす可能性のある場合に推奨されます）:
+The above code can lead to a @StackOverflowError@ in Grails 1.2. The solution is to run the query in a new Hibernate @session@ (which is recommended in general as doing Hibernate work during flushing can cause other issues):
 
 {code}
 static constraints = {
@@ -86,48 +86,48 @@ static constraints = {
 }
 {code}
 
-h3. Grails 1.0.xからの更新
+h3. Upgrading from Grails 1.0.x
 
 h4. Groovy 1.6
 
-Grails 1.1とGroovy 1.6上でリリースされたものは、もはやGroovyの1.5向けでコンパイルされたコードをサポートしません。Groovy 1.5で書かれているライブラリを使用している場合は、Grails 1.1でそれを使用する前に、Groovy 1.6向けに再コンパイルする必要があります。
+Grails 1.1 and above ship with Groovy 1.6 and no longer supports code compiled against Groovy 1.5. If you have a library that is written in Groovy 1.5 you will need to recompile it against Groovy 1.6 before using it with Grails 1.1.
 
 h4. Java 5.0
 
-Grails 1.1は、もはやJDK 1.4をサポートしていません。もしGrailsを引き続き使用したい場合は、JDKを更新できるようになるまでは、Grails 1.0.x系に留めておくことを推奨します。
+Grails 1.1 now no longer supports JDK 1.4, if you wish to continue using Grails then it is recommended you stick to the Grails 1.0.x stream until you are able to upgrade your JDK.
 
-h4. 構成の変更
+h4. Configuration Changes
 
-1) @grails.testing.reports.destDir@の設定は、一貫性を保つため@grails.project.test.reports.dir@に変更されました。
+1) The setting @grails.testing.reports.destDir@ has been renamed to @grails.project.test.reports.dir@ for consistency.
 
-2) 以下の設定は、@grails-app/conf/Config.groovy@から@grails-app/conf/BuildConfig.groovy@に移動されました。:
+2) The following settings have been moved from @grails-app/conf/Config.groovy@ to @grails-app/conf/BuildConfig.groovy@:
 ** @grails.config.base.webXml@
-** @grails.project.war.file@ (@grails.war.destFile@にリネーム)
+** @grails.project.war.file@ (renamed from @grails.war.destFile@)
 ** @grails.war.dependencies@
 ** @grails.war.copyToWebApp@
 ** @grails.war.resources@
 
-3) Java 5.0がベースラインとなったため、@grails.war.java5.dependencies@オプションはサポートされません。（上記を参照してください）
+3) The @grails.war.java5.dependencies@ option is no longer supported, since Java 5.0 is now the baseline (see above).
 
-4) jsessionidの使用は（現在有害と考えられる）はデフォルトで無効になりました。jsessionidを必要とするアプリケーションでは、@grails-app/conf/Config.groovy@に次の設定を追加することにより、その使用を有効にすることができます。:
+4) The use of jsessionid (now considered harmful) is disabled by default. If your application requires jsessionid you can re-enable its usage by adding the following to @grails-app/conf/Config.groovy@:
 
 {code}
 grails.views.enable.jsessionid=true
 {code}
 
-5) Log4jの設定で使用する構文は変更されました。詳細についてはユーザーガイドの[ロギング|guide:logging]のセクションを参照してください。
+5) The syntax used to configure Log4j has changed. See the user guide section on [Logging|guide:logging] for more information.
 
-h4. プラグインの変更 
+h4. Plugin Changes 
 
-Grails 1.1以降では、デフォルトで@PROJECT_HOME/plugins@ディレクトリ内にプラグインを保存しなくなりました。これにより、すべてのプラグインを再インストールするか、@grails-app/conf/BuildConfig.groovy@に次のようにプロパティを設定するかのいずれかをしない限り、アプリケーションはコンパイルエラーに終わる可能性があります。:
+Since 1.1, Grails no longer stores plugins inside your @PROJECT_HOME/plugins@ directory by default. This may result in compilation errors in your application unless you either re-install all your plugins or set the following property in @grails-app/conf/BuildConfig.groovy@:
 
 {code}
 grails.project.plugins.dir="./plugins"
 {code}
 
-h4. スクリプトの変更
+h4. Script Changes
 
-1) 以前にGrails 1.0.3もしくは以下の構文を使用していた場合に、GRAILS_HOMEからスクリプトをインポートすることはサポートされなくなりました。:
+1) If you were previously using Grails 1.0.3 or below the following syntax is no longer support for importing scripts from GRAILS_HOME:
 
 {code}
 Ant.property(environment:"env")                             
@@ -136,21 +136,21 @@ grailsHome = Ant.antProject.properties."env.GRAILS_HOME"
 includeTargets << new File ( "${grailsHome}/scripts/Bootstrap.groovy" )
 {code}
 
-その代わりに、新しい@grailsScript@メソッドを使用してスクリプトをインポートする必要があります。:
+Instead you should use the new @grailsScript@ method to import a named script:
 
 {code}
 includeTargets << grailsScript( "Bootstrap.groovy" )
 {code}
 
-2) Gantへアップグレードすることによりに、@Ant@変数へのすべての参照は、@ant@に変更しなければなりません。
+2) Due to an upgrade to Gant all references to the variable @Ant@ should be changed to @ant@.
 
-3) プロジェクトのルートディレクトリはクラスパス上になくなりました。その結果、このようにリソースをロードすることはできなくなりました。:
+3) The root directory of the project is no long on the classpath, the result is that loading a resource like this will no longer work:
 
 {code}
 def stream = getClass().classLoader.getResourceAsStream("grails-app/conf/my-config.xml")
 {code}
 
-その代わりに、@basedir@プロパティと共にJavaのFile APIを使用する必要があります。:
+Instead you should use the Java File APIs with the @basedir@ property:
 
 {code}
 new File("${basedir}/grails-app/conf/my-config.xml").withInputStream { stream -> 
@@ -158,17 +158,17 @@ new File("${basedir}/grails-app/conf/my-config.xml").withInputStream { stream ->
 }
 {code}
 
-h4. コマンドラインの変更
+h4. Command Line Changes
 
-@run-app-https@および@run-war-https@コマンドは無くなり、[run-app|commandLine]の引数に置き換えられました。:
+The @run-app-https@ and @run-war-https@ commands no longer exist and have been replaced by an argument to [run-app|commandLine]:
 
 {code}
 grails run-app -https
 {code}
 
-h4. データマッピングの変更点
+h4. Data Mapping Changes
 
-1) 列挙型は、現在では序数の値ではなく、文字列値を使用してマッピングされます。次のようにマッピングを変更することにより、以前の動作に戻すことができます。:
+1) Enum types are now mapped using their String value rather than the ordinal value. You can revert to the old behavior by changing your mapping as follows:
 
 {code}
 static mapping = {
@@ -176,17 +176,17 @@ static mapping = {
 }
 {code}
 
-2) 双方向のone-to-one関連は、現在では所有している側の単一列と外部キーの参照でマッピングされます。しかし、重複するデータが含まれる逆側の列を削除したいかもしれませんが、何も変更する必要はありません。
+2) Bidirectional one-to-one associations are now mapped with a single column on the owning side and a foreign key reference. You shouldn't need to change anything, however you may want to drop the column on the inverse side as it contains duplicate data.
 
-h4. RESTのサポート
+h4. REST Support
 
-入力のXMLリクエストは今では自動的に解析されません。RESTのリクエスト解析を有効にするには、@parseRequest@引数を使用することで内部でURLマッピングを行うことができます。:
+Incoming XML requests are now no longer automatically parsed. To enable parsing of REST requests you can do so using the @parseRequest@ argument inside a URL mapping:
 
 {code}
 "/book"(controller:"book",parseRequest:true)
 {code}
 
-あるいは、デフォルトで解析が利用可能な新しい@resource@引数を使用することもできます。:
+Alternatively, you can use the new @resource@ argument, which enables parsing by default:
 
 {code}
 "/book"(resource:"book")

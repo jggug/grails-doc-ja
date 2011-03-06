@@ -1,14 +1,14 @@
-Grailsの起動と実行の最初のステップは、ディストリビューションをインストールすることです。手順については、次をご覧ください。:
+まず最初にGrailsをインストールすることから始めましょう。手順は次のようになります。
 
-* Grailsのバイナリディストリビューションを[ダウンロード|http://grails.org/Download]し、任意の場所にzipファイルを解凍します。
+* Grailsを[ダウンロード|http://grails.org/Download]し、任意の場所にzipファイルを解凍します。
 * zipファイルを解凍した場所にGRAILS_HOME環境変数を設定します。
-** Unix / Linuxベースのシステムでは、次ののようなものをプロファイルに追加します。@export GRAILS_HOME=/path/to/grails@
-** Windowsでは、マイコンピュータ/詳細/環境変数に設定します。
-* さらに、@PATH@変数に@bin@ディレクトリを追加する必要があります。:
-** UNIX / Linuxベースのシステムでは、このように設定します。@export PATH="$PATH:$GRAILS_HOME/bin"@
-** Windowsでは、マイコンピュータ/詳細/環境変数の@Path@変数を変更することによって設定します。
+** Unix/Linuxベースのシステムでは、次ののようなものをプロファイル（.profileなど）に追加します。@export GRAILS_HOME=/path/to/grails@
+** Windowsでは、マイコンピュータ＞詳細＞環境変数に設定します。
+* さらに、@PATH@変数に@bin@ディレクトリを追加する必要があります。
+** Unix/Linuxベースのシステムでは、このように設定します。@export PATH="$PATH:$GRAILS_HOME/bin"@
+** Windowsでは、マイコンピュータ＞詳細＞環境変数の@Path@に%GRAILS_HOME%\binを追加します。
 
-Grailsが正常に動作する場合は、ターミナルウィンドウで@grails@と入力することで下記のような出力がされます。:
+ターミナルで@grails@と入力し実行することで下記のような出力がされれば、Grailsが正常に動作しています。
 
 bc.
 Welcome to Grails 1.0 - http://grails.org/
