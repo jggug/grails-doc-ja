@@ -23,10 +23,10 @@ h1. 目標
 h1. 担当
 
 # イントロダクション - (済み)
-# はじめに - [~all]
+# はじめに - [~all] - (済み)
 # 設定
 # コマンドライン - [~fumokmm]
-# *O/Rマッピング (GORM)* - [~watabiki]
+# O/Rマッピング (GORM) - [~watabiki]
 # 5.1 クイックスタートガイド
 # 5.2 GORMでのドメインモデリング
 # 5.3 永続化の基礎
@@ -34,14 +34,14 @@ h1. 担当
 # 5.5 高度なGORMの機能 - [~watabiki]
 # 5.6 プログラマチックトランザクション
 # 5.7 GORM と制約 
-# *Webレイヤ* - [~tama]
+# Webレイヤ - [~tama]
 # バリデーション
-# *サービスレイヤー* - [~touchez]
-# *テスト* - [~watabiki2]
+# サービスレイヤー - [~touchez]
+# テスト - [~watabiki2]
 # 国際化 - [~osima]
 # セキュリティ - [~kiy0taka]
-# *プラグイン* - [~tyama]
-# Webサービス - [~baraki]
+# プラグイン - [~tyama]
+# Webサービス - [~baraki] - (済み)
 # GrailsとSpring - [~tyama]
 # GrailsとHibernate
 # スカッフォルド - [~mkawa]
