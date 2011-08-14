@@ -50,7 +50,7 @@ task publishGuide(/*dependsOn:':grails-doc:publishGuide'*/){
       //loading props for translation
       def langProp = new ConfigSlurper().parse(new File("./src/ja/titles.groovy").getText('UTF-8'))
       props.title = langProp.props.title
-      props.authors = props.authors + langProp.props.authors
+      props.authors = props.authors + langProp.props.authors + langProp.props.translatorMessage
       props.footer = props.footer + langProp.props.footer
       props.copyright = props.copyright + langProp.props.copyright
       
@@ -64,7 +64,6 @@ task publishGuide(/*dependsOn:':grails-doc:publishGuide'*/){
       publisher.title = props.title
       publisher.version = props."grails.version"
       publisher.authors = props.authors
-      publisher.authors = publisher.authors + langProp.props.translatorMessage
       publisher.copyright = props.copyright
       publisher.footer = props.footer
       publisher.logo = '<a href="http://grails.org" target="_blank"><img alt="Grails Logo" title="The Grails Framework" src="${path}/img/grails.png" border="0"/></a>'
