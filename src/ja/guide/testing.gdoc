@@ -1,18 +1,22 @@
-Automated testing is seen as a key part of Grails, implemented using [Groovy Tests|http://groovy.codehaus.org/Testing+Guide]. Hence, Grails provides many ways to making testing easier from low level unit testing to high level functional tests. This section details the different capabilities that Grails offers in terms of testing.
+Automated testing is a key part of Grails. Hence, Grails provides many ways to making testing easier from low level unit testing to high level functional tests. This section details the different capabilities that Grails offers for testing.
 
-The first thing to be aware of is that all of the @create-*@ commands actually end up creating @unit@ tests automatically for you. For example say you run the [create-controller|commandLine] command as follows:
+{note}
+Grails 1.3.x and below used the @grails.test.GrailsUnitTestCase@ class hierarchy for testing in a JUnit 3 style. Grails 2.0.x and above deprecates these test harnesses in favour of mixins that can be applied to a range of different kinds of tests (JUnit 3, Junit 4, Spock etc.) without subclassing
+{note}
+
+The first thing to be aware of is that all of the @create-\*@ and @generate-\*@ commands create @unit@ or @integration@ tests automatically. For example if you run the [create-controller|commandLine] command as follows:
 
 {code:java}
-grails create-controller com.yourcompany.yourapp.simple
+grails create-controller com.acme.app.simple
 {code}
 
-Not only will Grails create a controller at @grails-app/controllers/com/yourcompany/yourapp/SimpleController.groovy@, but also an unit test at @test/unit/com/yourcompany/yourapp/SimpleControllerTests.groovy@. What Grails won't do however is populate the logic inside the test! That is left up to you.
+Grails will create a controller at @grails-app/controllers/com/acme/app/SimpleController.groovy@, and also a unit test at @test/unit/com/acme/app/SimpleControllerTests.groovy@. What Grails won't do however is populate the logic inside the test! That is left up to you.
 
 {note}
-As of Grails 1.2.2,the suffix of @Test@ is also supported for test cases.
+The default class name suffix is @Tests@ but as of Grails 1.2.2, the suffix of @Test@ is also supported.
 {note}
 
-h4. テストを実行する
+h4. Running Tests
 
 Test are run with the [test-app|commandLine] command:
 
@@ -20,7 +24,15 @@ Test are run with the [test-app|commandLine] command:
 grails test-app
 {code}
 
-The above command will produce output such as:
+Note that you will be able to run unit tests much quicker if you use an IDE or if you use the "interactive mode" to start-up Grails, thus preventing the need to stop the JVM:
+
+{code:java}
+grails
+...
+test-app
+{code}
+
+The @test-app@ command will produce output such as:
 
 {code:java}
 -------------------------------------------------------
@@ -32,13 +44,13 @@ Unit Tests Completed in 464ms ...
 Tests failed: 0 errors, 1 failures
 {code}
 
-Whilst reports will have been written out the @target/test-reports@ directory. 
+Whilst reports will have been written out the @target/test-reports@ directory.
 
 {note}
 You can force a clean before running tests by passing @-clean@ to the @test-app@ command.
 {note}
 
-h5. テスト対象の指定
+h4. Targeting Tests
 
 You can selectively target the test(s) to be run in different ways. To run all tests for a controller named @SimpleController@ you would run:
 
@@ -67,7 +79,7 @@ grails test-app some.org.*
 or to run all tests in a package including subpackages...
 
 {code}
-grails test-app some.org.**
+grails test-app some.org.**.*
 {code}
 
 You can also target particular test methods...
@@ -82,14 +94,14 @@ This will run the @testLogin@ test in the @SimpleController@ tests. You can spec
 grails test-app some.org.* SimpleController.testLogin BookController
 {code}
 
-h5. Targeting Test Types and/or Phases
+h4. Targeting Test Types and/or Phases
 
 In addition to targeting certain tests, you can also target test _types_ and/or _phases_ by using the @phase:type@ syntax.
 
 {note}
-Grails organises tests by phase and by type. A test phase relates to the state of the Grails application during the tests, and the type relates to the testing mechanism. 
+Grails organises tests by phase and by type. A test phase relates to the state of the Grails application during the tests, and the type relates to the testing mechanism.
 
-Grails comes with support for 4 test phases (@unit@, @integration@, @functional@ and @other@) and JUnit test types for the @unit@ and @integration@ phases. These test types have the same name as the phase. 
+Grails comes with support for 4 test phases (@unit@, @integration@, @functional@ and @other@) and JUnit test types for the @unit@ and @integration@ phases. These test types have the same name as the phase.
 
 Testing plugins may provide new test phases or new test types for existing phases. Refer to the plugin documentation.
 {note}
@@ -124,12 +136,12 @@ More than one pattern can be specified...
 grails test-app unit:spock integration:spock
 {code}
 
-h5. Targeting Tests in Types and/or Phases
+h4. Targeting Tests in Types and/or Phases
 
 Test and type/phase targetting can be applied at the same time:
 
 {code}
-grails test-app integration: unit: some.org.**
+grails test-app integration: unit: some.org.**.*
 {code}
 
-This would run all tests in the @integration@ and @unit@ phases that are in the page @some.org@ or a subpackage of.
+This would run all tests in the @integration@ and @unit@ phases that are in the package @some.org@ or a subpackage.
