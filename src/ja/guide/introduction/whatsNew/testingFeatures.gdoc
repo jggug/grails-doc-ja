@@ -1,0 +1,37 @@
+h4. 新Unitテストのコンソール出力
+
+test-app実行時のテストコンソール出力が向上しました:
+
+!test-output.png!
+
+h4. 新しいUnitテストAPI
+
+JUnit3,4,Spock(Spock 0.6以上)のテストに対応した、Mixinsベースの新しUnitテストAPIが追加されました:
+
+{code:java}
+import grails.test.mixin.TestFor
+
+@TestFor(SimpleController)
+class SimpleControllerTests  {
+    void testIndex() {
+        controller.home()
+
+        assert view == "/simple/homePage"
+        assert model.title == "Hello World"
+    }
+}
+{code}
+
+テストのドキュメントが、この新しいフレームワークのために書き直されました。詳細は [テストのドキュメント|guide:testing] を参照してください。
+
+h4. GORMのUnitテスト
+
+メモリ上で動作するGORM実装により、今までにサポートされていなかった、クライテリアクエリ、名前付きクエリなど、様々なGORM APIのテストがUnitテストで可能になりました。
+
+h4. インタラクティブモードで快速なUnitテストを
+
+'grails'と入力するだけで実行できるインタラクティブモードでのUnitテスト・統合テストの実行速度が向上しました。
+
+h4. Unit Test スカッフォルド
+
+スカッフォルドされたコントローラのUnitテストが生成されるようになりました。

@@ -1,0 +1,105 @@
+h4. インタラクティブモードとコンソールの強化
+
+Grails 2.0では、より簡潔でユーザフレンドリな、新コンソール出力を実装しました。以下の例はテストを実行した内容です。
+
+!test-output.png!
+
+コマンド実行の際に、重要な情報のみ１行を更新表示するようになりました。例えば、以前のバージョンまでは、warコマンドを実行すると大量のログが表示されていましたが、2.0からは1行だけで表示されます。
+
+!war-output.png!
+
+さらに、単にgrailsコマンドをコンソールで実行するだけで、新しいインタラクティブモードが開始され、JVMが起動したままとなりコマンドが迅速に実行でき、タブ補完、コマンド履歴も使用できます。
+
+!interactive-output.png!
+
+詳しい情報は、ユーザガイドのコンソールとインタラクティブモードを参照してください。 [インタラクティブモード|guide:interactiveMode].
+
+h4. リロードエージェント
+
+Grails 2.0からのリロード機能は、クラスローダを使用せずJVMエージェントを使用してクラスファイルのリロードを行います。その結果、変更保存されたクラスが確実にメモリにロードされようになり、変更時のリロードが大いに向上しました。今までより、cleanコマンドの実行回数を減らすことができます。
+
+h4. 新テストレポートとドキュメントテンプレート
+
+以前のレポートよりクリーンでユーザフレンドリーなテストリポートテンプレートに変更されました:
+
+!test-template.png!
+
+さらに、アプリケーションやプラグインで使用する、Grailsドキュメントエンジンのテンプレートもリニューアルされました:
+
+!doc-template.png!
+
+詳細はドキュメントエンジンのセクションを参照してください。 [プロジェクト・ドキュメント|guide:docengine]
+
+h4. Use a TOC for Project Docs
+
+The old documentation engine relied on you putting section numbers into the gdoc filenames. Although convenient, this effectively made it difficult to restructure your user guide by inserting new chapters and sections. In addition, any such restructuring or renaming of section titles resulted in breaking changes to the URLs.
+
+You can now use logical names for your gdoc files and define the structure and section titles in a YAML table-of-contents file, as described in the section on the [documentation engine|guide:docengine]. The logical names appear in the URLs, so as long as you don't change those, your URLs will always remain the same no matter how much restructuring or changing of titles you do.
+
+Grails 2.0 even provides a [migrate-docs|commandLine] command to aid you in migrating existing gdoc user guides.
+
+h4. エラーレポートと分析表示の強化
+
+スタックトレース分析、コード内の位置表示など、エラーレポートと分析表示が向上しました:
+
+!errors-view.png!
+
+そして、さらにスタックトレースフィルターが強化され、関係のあるトレースのみが表示されるようになりました:
+
+{code}
+   Line | Method
+->>   9 | getValue     in Book.groovy
+- - - - - - - - - - - - - - - - - - - - - - - - -
+|     7 | getBookValue in BookService.groovy
+|   886 | runTask . .  in ThreadPoolExecutor.java
+|   908 | run          in     ''
+^   662 | run . . . .  in Thread.java
+{code}
+
+h4. H2データベースとDBコンソール
+
+Grails 2.0では、今までのHSQLDBに代わりH2データベースを使用します。H2データベース付属のコンソール機能を開発モードで有効にしています。(URI /dbconsoleで表示可能) メモリ動作のデータベースでも簡単にブラウザからクエリ実行することができます:
+
+!h2-console.png!
+
+h4. プラグイン使用数等のトラッキング機能
+
+どのプラグインが人気があるのか等の情報を収集する。プラグイン使用レポートを収集する機能が実装されました。今後のプラグインサポートや、人気の無いプラグインの今後の努力などに役立てます。
+
+
+h4. 依存管理機能改善
+
+Ivyでハンドリングされている依存管理機能に多くの改善をしました:
+
+* Grailsは、 @BuildConfig.groovy@ を変更しない限り前回の依存解決した内容を再解決させないように前回の内容をキャッシュするようになりました。
+* プラグイン依存関係も @grails dependency-report@ のレポートに現れるようになりました。
+* release-plugin で発行されたプラグインは、推移的なプラグイン依存をPOMに発行するようになりました。
+* ivyキャッシュ用ディレクトリを @BuildConfig.groovy@ で変更できます。
+
+
+{code}
+grails.project.dependency.resolution = {
+    cacheDir "target/ivy-cache"
+}
+{code}
+
+* リポジトリの引継を完全に無効にできます(他のプラグインで定義されている場合等):
+
+{code}
+grails.project.dependency.resolution = {
+
+    repositories {
+        inherits false // Whether to inherit repository definitions from plugins
+        ...
+    }
+    ...
+}
+{code}
+
+* チェックサムを無効にできます:
+
+{code}
+grails.project.dependency.resolution = {
+    checksums false // whether to verify checksums or not
+}
+{code}

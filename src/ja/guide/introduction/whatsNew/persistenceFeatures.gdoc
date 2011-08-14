@@ -1,0 +1,79 @@
+h4. GORM API
+
+GORM APIは、 @GormStaticApi@ 、 @GormInstanceApi@ 、 @GormValidationApi@ というクラスに置き換えられたことによって、全てのドメインのバイトコードレベルに注入されます。この実装でIDEでのコード補完、Javaとの統合、様々なデータストアへのGORM実装への可能性が向上しました。
+
+h4. 新findOrCreateとfindOrSaveメソッド
+
+ドメインクラスに、findWhereやfindByメソッドに似た、nullを返さない、findOrCreateWhere, findOrSaveWhere, findOrCreateBy, findOrSaveByのクエリーをサポートしました。実行結果にインスタンスが見つからない場合は、指定された値で、新規にインスタンスを作成して返します。findOrSaveWhereとfindOrSaveByの場合はインスタンスを保存してからインスタンスを返します。
+
+{code}
+def book = Book.findOrCreateWhere(author: 'Douglas Adams', title: "The Hitchiker's Guide To The Galaxy")
+def book = Book.findOrSaveWhere(author: 'Daniel Suarez', title: 'Daemon')
+def book = Book.findOrCreateByAuthorAndTitle('Daniel Suarez', 'Daemon')
+def book = Book.findOrSaveByAuthorAndTitle('Daniel Suarez', 'Daemon')
+{code}
+
+h4. 抽象クラス継承のサポート
+
+GORMが抽象クラス継承階層をサポートしました。これによって、関連リンクやクエリ等を抽象クラスに定義することができます:
+
+{code}
+abstract Media {
+    String title
+    …
+}
+class Book extends Media {
+}
+class Album extends Media {
+
+}
+class Account {
+    static hasMany = [purchasedMedia:Media]
+}
+
+..
+
+def allMedia = Media.list()
+{code}
+
+h4. 複数データソースサポート
+
+DataSource.groovyに複数データソースの定義が可能になり、特定のドメインに複数のデータソースが設定できます:
+
+{code}
+class ZipCode {
+
+   String code
+
+   static mapping = {
+      datasource 'ZIP_CODES'
+   }
+}
+{code}
+
+複数のデータソースを定義したドメインでは、GORMメソッドの前にネームスペースとしてデータソース名を定義することで特定した実行が可能です:
+
+{code}
+def zipCode = ZipCode.auditing.get(42)
+{code}
+
+詳しくは [複数データソース|guide:multipleDatasources] を参照してください。
+
+h4. データベースマイグレーション
+
+データベースマイグレーションを行うプラグインが、Grails 2.0用にデザイン構築されました。現行の状況との違いや、変更のロールバックがデータベースマイグレーションで可能になります。 [database migration plugin|http://grails.org/plugin/database-migration]
+
+h4. データベースリバースエンジニアリング
+
+データベースリバースエンジニアリングを行うプラグインが、Grails 2.0用にデザイン構築されました。既存のデータベーススキーマからドメインクラスを生成可能とします。 [database reverse engineering|http://www.grails.org/plugin/db-reverse-engineer]
+
+h4. Hibernate 3.6
+
+Grails 2.0では、Hibernate 3.6を使用しています。
+
+h4. Bagコレクション
+
+You can now use Hibernate [Bag|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/collections.html]s for mapped collections to avoid the memory and performance issues of loading large collections to enforce @Set@ uniqueness or @List@ order.
+
+詳しくは [セット、リスト、マップ|guide:sets,ListsAndMaps] を参照してください。
+

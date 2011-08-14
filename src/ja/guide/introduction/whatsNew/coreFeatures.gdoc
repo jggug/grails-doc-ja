@@ -1,0 +1,11 @@
+h4. バイナリプラグイン
+
+Grailsプラグインは、JARファイルとしてパッケージして、Mavenリポジトリへ発行できるようになりました。GSPや静的リソースでも可能です。詳しくは、 [バイナリプラグイン|guide:binaryPlugins]  のセクションを参考にしてください。
+
+h4. Groovy 1.8
+
+Grails 2.0は、多くの新機能と向上をしたGroovy 1.8がバンドルされています。 [Groovy 1.8 リリースノート|http://docs.codehaus.org/display/GROOVY/Groovy+1.8+release+notes]
+
+h4. Spring 3.1 プロファイルサポート
+
+Grailsの環境サポートがSpring 3.1プロフィールサポートとブリッジできます。例えば、Grailsの環境で"production"で動作している場合、Springプロフィール"production"がアクティベートされます。これによって、Springビーン定義APIでのビーン定義でプロフィールを指定できます。

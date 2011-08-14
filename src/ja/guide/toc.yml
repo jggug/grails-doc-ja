@@ -1,0 +1,282 @@
+introduction:
+  title: イントロダクション
+  whatsNew:
+    title: Grails 2.0の新機能
+    developmentEnvironmentFeatures: 開発環境機能
+    coreFeatures: コア機能
+    webFeatures: Web機能
+    persistenceFeatures: 永続化機能
+    testingFeatures: テスト機能
+gettingStarted:
+  title: スタートガイド
+  downloadingAndInstalling: ダウンロードとインストール
+  upgradingFromPreviousVersionsOfGrails: Grails下位バージョンからの更新
+  creatingAnApplication: アプリケーション作成
+  aHelloWorldExample: ハローワールド例
+  usingInteractiveMode: インタラクティブモードの利用
+  ide: IDEの設定
+  conventionOverConfiguration: Convention over Configuration 設定より規約
+  runningAnApplication: アプリケーションの起動
+  testingAnApplication: アプリケーションのテスト
+  deployingAnApplication: アプリケーションのデプロイ
+  supportedJavaEEContainers: サポートされている Java EE コンテナ
+  generatingAnApplication: アプリケーション生成
+  creatingArtefacts: アーテファクトの作成
+conf:
+  title: 設定
+  config:
+    title: 基本設定
+    builtInOptions: 組込オプション
+    logging: ロギング
+    configGORM: GORM
+  environments: 環境
+  dataSource:
+    title: データソース
+    dataSourcesAndEnvironments: データソースと環境
+    JNDIDataSources: JNDI データソース
+    automaticDatabaseMigration: 自動データベースマイグレーション
+    transactionAwareDataSourceProxy: Transaction-awareデータソースプロキシ
+    databaseConsole: データベースコンソール
+    multipleDatasources: 複数データソース
+  configExternalized: 設定の外部化
+  versioning: バージョニング
+  docengine: プロジェクト・ドキュメント
+  ivy:
+    title: 依存性解決
+    configurationsAndDependencies: 設定と依存
+    dependencyRepositories: 依存管理リポジトリ
+    debuggingResolution: 依存解決デバッグ
+    inheritedDependencies: 依存の受け継ぎ
+    providingDefaultDependencies: 基本依存管理の提供
+    dependencyReports: 依存管理レポート
+    pluginJARDependencies: プラグインJAR依存
+    mavenIntegration: Maven統合
+    mavendeploy: Mavenリポジトリへのデプロイ
+    pluginDependencies: プラグイン依存管理
+commandLine:
+  title: コマンドライン
+  interactiveMode: インタラクティブモード
+  creatingGantScripts: Gantスクリプトの作成
+  reusingGrailsScripts: Grailsスクリプトの再利用
+  events: イベントを取得する
+  buildCustomising: ビルドのカスタマイズ
+  antAndMaven: AntとMaven
+GORM:
+  title: O/Rマッピング (GORM)
+  quickStartGuide:
+    title: クイックスタートガイド
+    basicCRUD: 基本CRUD
+  domainClasses:
+    title: GORMでのドメインモデリング
+    gormAssociation:
+      title: GORMでのアソシエーション
+      manyToOneAndOneToOne: 多対1、1対1 Many-to-One One-to-one
+      oneToMany: 1対多 One-to-many
+      manyToMany: 多対多 Many-to-many
+      basicCollectionTypes: 基本コレクション型
+    gormComposition: GORMでのコンポジション
+    inheritanceInGORM: GORMでの継承
+    sets,ListsAndMaps: セット、リスト、マップ
+  persistenceBasics:
+    title: 永続化の基礎
+    savingAndUpdating: 保存と更新
+    deletingObjects: オブジェクトの削除
+    cascades: カスケード更新削除を理解する
+    fetching: EagerとLazyフェッチング
+    locking: 悲観的(Pessimistic)と楽観的(Optimistic)ロック
+    modificationChecking: 変更確認
+  querying:
+    title: GORMでクエリー
+    finders: ダイナミックファインダー
+    criteria: クライテリア
+    hql: Hibernateクエリー言語 (HQL)
+  advancedGORMFeatures:
+    title: 高度なGORMの機能
+    eventsAutoTimestamping: イベントと自動タイムスタンプ
+    ormdsl:
+      title: カスタムORマッピング
+      tableAndColumnNames: テーブル名、カラム名
+      caching: キャッシングストラテジー
+      inheritanceStrategies: 継承ストラテジー
+      identity: カスタムデータベースアイデンティティー
+      compositePrimaryKeys: プライマリキー合成
+      databaseIndices: データベースインデックス
+      optimisticLockingAndVersioning: 楽観的ロックとバージョニング
+      fetchingDSL: EagerとLazyフェッチング
+      customCascadeBehaviour: カスケードの振る舞いを変える
+      customHibernateTypes: Hibernateユーザ定義型
+      derivedProperties: 派生プロパティ
+      customNamingStrategy: 命名標準のカスタマイズ
+    defaultSortOrder: デフォルトソート順
+  programmaticTransactions: プログラマチックトランザクション
+  gormConstraints: GORM と制約
+theWebLayer:
+  title: Webレイヤ
+  controllers:
+    title: コントローラ
+    understandingControllersAndActions: コントローラとアクションの理解
+    controllersAndScopes: コントローラとスコープ
+    modelsAndViews: モデルとビュー
+    redirectsAndChaining: リダイレクトとチェイン
+    interceptors: コントローラ・インターセプター
+    dataBinding: データバインディング
+    xmlAndJSON: XMLとJSONのレスポンス
+    moreOnJSONBuilder: JSONBuilder (JSONビルダー)
+    uploadingFiles: ファイルアップロード
+    commandObjects: コマンドオブジェクト
+    formtokens: フォーム二重送信のハンドリング
+    typeConverters: シンプルタイプコンバータ
+    asynchronousRequestProcessing: 非同期リクエスト処理
+  gsp:
+    title: Groovyサーバーページ
+    GSPBasics:
+      title: GSPの基本
+      variablesAndScopes: 変数とスコープ
+      logicAndIteration: ロジックとイテレーション
+      pageDirectives: ページディレクティブ
+      expressions: エクスプレッション
+    tags:
+      title: GSPタグ
+      tagVariablesAndScopes: 変数とスコープ
+      tagLogicAndIteration: ロジックとイテレーション
+      searchAndFiltering: 検索とフィルタリング
+      linksAndResources: リンクとリソース
+      formsAndFields: フォームとフィールド
+      tagsAsMethodCalls: タグをメソッドとして使用
+    viewsAndTemplates: ビューとテンプレート
+    layouts: Sitemeshでレイアウト
+    resources:
+      title: 静的リソース
+      includingResourcesUsingTheResourceTags: リソースタグでのリソースの使用
+      otherResourceTags: 他のリソースタグ
+      declaringResources: リソースの宣言
+      overridingPluginResources: プラグインリソースのオーバーライド
+      optimizingYourResources: リソースの最適化
+      debugging: デバッグ
+      preventingProcessingOfResources: リソース生成・変換処理を防ぐ
+      otherResourcesPlugins: リソース関連のプラグイン
+    sitemeshContentBlocks: Sitemeshコンテントブロック
+    makingChangesToADeployedApplication: デプロイされたアプリケーションへの変更
+    GSPDebugging: GSPデバッグ
+  taglibs:
+    title: タグライブラリ
+    taglibVariablesAndScopes: 変数とスコープ
+    simpleTags: 簡単なタグ
+    logicalTags: 制御タグ
+    iterativeTags: イテレートタグ
+    namespaces: タグネームスペース
+    usingJSPTagLibraries: JSPタグライブラリの使用
+    tagReturnValue: タグの戻り値
+  urlmappings:
+    title: URLマッピング
+    mappingToControllersAndActions: コントローラとアクションにマッピング
+    embeddedVariables: 埋込変数
+    mappingToViews: ビューへマッピング
+    mappingToResponseCodes: レスポンスコードへマッピング
+    mappingHTTP: HTTPメソッドへマッピング
+    mappingWildcards: マッピングワイルドカード
+    automaticLinkRewriting: 自動リンクリライト
+    applyingConstraints: 制約の適用
+    namedMappings: 名前付きURLマッピング
+  webflow:
+    title: Webフロー
+    startAndEndStates: 開始と終了のステート
+    actionStatesAndViewStates: アクションステートとビューステート
+    flowExecutionEvents: フロー実行イベント
+    flowScopes: フローのスコープ
+    dataBindingAndValidation: データバインディングとバリデーション
+    subflowsAndConversations: サブフローとの対話
+  filters:
+    title: フィルター
+    applyingFilters: フィルタの適用
+    filterTypes: フィルタの種類
+    filterVariablesAndScopes: 変数とスコープ
+    filterDependencies: フィルタ依存関係
+  ajax:
+    title: Ajax
+    ajaxSupport:
+      title: Ajax対応
+      remotingLinking: リモートリンク
+      updatingContent: コンテンツの更新
+      remoteFormSubmission: リモートフォーム送信
+      ajaxEvents: Ajaxイベント
+    ajaxWithPrototype: Prototypeを使用したAjax
+    ajaxWithDojo: Dojoを使用したAjax
+    ajaxWithGWT: GWTを使用したAjax
+    ajaxOnTheServer: Ajax時のサーバサイド
+  contentNegotiation: コンテントネゴシエーション
+validation:
+  title: バリデーション
+  constraints: 制約を宣言
+  validatingConstraints: 制約をバリデートする
+  validationOnTheClient: クライアントサイドバリデーション
+  validationAndInternationalization: バリデーションの国際化
+  validationNonDomainAndCommandObjectClasses: コマンドオブジェクト、ドメインクラス以外のバリデーション
+services:
+  title: サービスレイヤー
+  declarativeTransactions:
+    title: 断定的なトランザクション
+    transactionsRollbackAndTheSession: トランザクションロールバックとセッション
+  scopedServices: サービスのスコープ
+  dependencyInjectionServices: 依存注入とサービス
+  usingServicesFromJava: Javaからサービスを使う
+testing:
+  title: テスト
+  unitTesting:
+    title: Unitテスト
+    unitTestingControllers: コントローラのUnitテスト
+    unitTestingTagLibraries: タグライブラリのUnitテスト
+    unitTestingDomains: どめいんのUnitテスト
+    unitTestingFilters: フィルタのUnitテスト
+    unitTestingURLMappings: URLマッピングのUnitテスト
+    mockingCollaborators: モッキング・コラボレータ
+  integrationTesting: 統合テスト
+  functionalTesting: 機能テスト
+i18n:
+  title: 国際化
+  understandingMessageBundles: メッセージバンドルを理解する
+  changingLocales: ロケールの変更
+  readingMessages: メッセージ読込
+  scaffoldingAndI18n: スカッフォルドとi18n
+security:
+  title: セキュリティ
+  securingAgainstAttacks: 攻撃からの防御
+  codecs: エンコード・デコードオブジェクト
+  authentication: 認証
+  securityPlugins:
+    title: セキュリティプラグイン
+    springSecurity: Spring Security
+    shiro: Shiro
+plugins:
+  title: プラグイン
+  creatingAndInstallingPlugins: プラグインの作成とインストール
+  repositories: プラグインリポジトリ
+  understandingPluginStructure: プラグイン構造を理解する
+  providingBasicArtefacts: 基本アーティファクトの提供
+  evaluatingConventions: 規約の評価
+  hookingIntoBuildEvents: ビルドイベントフック
+  hookingIntoRuntimeConfiguration: ランタイム設定へのフック
+  addingDynamicMethodsAtRuntime: 起動時のダイナミックメソッド追加
+  participatingInAutoReloadEvents: 自動リロードイベントへの参加
+  understandingPluginLoadOrder: プラグインのロード順を理解する
+  binaryPlugins: バイナリープラグイン
+webServices:
+  title: Webサービス
+  REST: REST
+  SOAP: SOAP
+  RSSAndAtom: RSSとAtom
+spring:
+  title: GrailsとSpring
+  theUnderpinningsOfGrails: Grailsの土台
+  springdslAdditional: 追加ビーンを定義する
+  springdsl: ビーンDSLでSpringランタイム
+  theBeanBuilderDSLExplained: BeanBuilder DSLの解説
+  propertyPlaceholderConfiguration: プロパティプレースフォルダー設定
+  propertyOverrideConfiguration: プロパティオーバーライド設定
+hibernate:
+  title: GrailsとHibernate
+  usingHibernateXMLMappingFiles: Hibernate XMLマッピングの使用
+  mappingWithHibernateAnnotations: Hibernateアノテーションでのマッピング
+  addingConstraints: 制約の追加
+scaffolding: カッフォルド
+deployment: デプロイ

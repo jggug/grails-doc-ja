@@ -1,0 +1,128 @@
+h4. コントローラのアクションにメソッドを利用
+
+以前のクロージャで記述していたコントローラアクションをメソッドで記述可能になりました。これからはメソッド記述を推奨します。:
+
+{code}
+// メソッドのアクション
+def index() {
+
+}
+// クロージャのアクション
+def index = {
+
+}
+{code}
+
+h4. アクションに引数を指定してバインド
+
+フォームエレメントのname属性を、アクションメソッドの引数に指定する方法でのバインドが可能になりました。 次のようなフォームを例に:
+
+{code:xml}
+<g:form name="myForm" action="save">
+    <input name="name" />
+    <input name="age" />
+</g:form>
+{code}
+
+以下のように、それぞれを引数として定義、パラメータの型も自動で適した型に変換します:
+
+{code}
+def save(String name, int age) {
+    // remaining
+}
+{code}
+
+h4. 静的リソース抽象化
+
+JavaScript、CSS、画像などのリソースを管理、圧縮、キャッシュ、gzipを行う [静的リソース抽象化機能|guide:resources] が追加されました。
+
+h4. サーブレット3.0の非同期処理
+
+Grailsはサーブレット3.0をサポートしました。サーブレット3.0での機能、非同期処理が使用可能です:
+
+{code}
+def index() {
+    def ctx = startAsync()
+    ctx.start {
+        new Book(title:"The Stand").save()
+        render template:"books", model:[books:Book.list()]
+        ctx.complete()
+    }
+}
+{code}
+
+h4. リンク生成API
+
+全面的に使用可能なリンク生成API @LinkGenerator@ クラスが追加されました。コントローラのコンテキスト以外のどこからでも使用できます。例としてサービス、バックグラウンド処理、非同期タスク、リクエスト以外の場所でリンクが生成できます。
+
+{code}
+LinkGenerator grailsLinkGenerator
+
+def generateLink() {
+    grailsLinkGenerator.link(controller:"book", action:"list")
+}
+{code}
+
+h4. ページレンダリングAPI
+
+@LinkGenerator@ と同じく新規に追加されたAPI、 @PageRenderer@ は、Webリクエスト以外の場所で、GSPページがレンダリング可能です。例えば、Webサービス、スケジュールジョブなどで使用します。 @PageRenderer@ サービスはコントローラの @render@ メソッドと同じように使用します。
+
+{code}
+grails.gsp.PageRenderer groovyPageRenderer
+
+void welcomeUser(User user) {
+    def contents = groovyPageRenderer.render(view:"/emails/welcomeLetter", model:[user: user])
+    sendEmail {
+        to user.email
+        body contents
+    }
+}
+{code}
+
+@PageRenderer@ sサービスはGSPからHTMLを生成するのも可能です。
+
+{code}
+new File("/path/to/welcome.html").withWriter { w ->
+    groovyPageRenderer.renderTo(view:"/page/content", w)
+}
+{code}
+
+h4. フィルター除外機能
+
+フィルターでのコントローラ・アクション・URIの除外指定が実装されました。
+
+{code}
+
+filter1(actionExclude: 'log*') {
+    before = {
+        // …
+    }
+}
+filter2(controllerExclude: 'auth') {
+    before = {
+        // …
+    }
+}
+
+filter3(uriExclude: '/secure*') {
+    before = {
+        // …
+    }
+}
+{code}
+
+h4. パフォーマンスの向上
+
+再度最適化したGSPコンパイラでGSPのパフォーマンスはさらに向上しました。
+
+h4. HTML5スカッフォルド
+
+HTML5ベースのスカッフォールドUIになりました:
+
+!scaffolding-ui.png!
+
+h4. jQueryをデフォルトになりました
+
+jQueryプラグインがデフォルトのJavaScriptライブラリとしてGrailsアプリケーションにインストールされます。 下位互換として、Prototypeはプラグインとして提供しています。 Prototypeついてはプラグインのドキュメントを参考にしてください。 Prototype plugin|http://grails.org/plugin/prototype]
+
+
