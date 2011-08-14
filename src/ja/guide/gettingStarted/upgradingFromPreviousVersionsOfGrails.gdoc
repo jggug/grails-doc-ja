@@ -143,7 +143,7 @@ if (request.redirected) {
 
 h4. コンテントネゴシエーション
 
-Grails 2.0からコントローラのwithFormatメソッドは、リクエストのコンテントタイプ( @CONTENT_TYPE@ ヘッダ)を評価しなくなりました。これにかわって、レスポンスのコンテントタイプ( ACCEPT@ ヘッダまたはファイル拡張子)が排他的に処理を行います。これによって今までのアプリケーションの @withFormat@ を使用してリクエストからXMLを読み込む等のコードは動作しなくなります。
+Grails 2.0からコントローラのwithFormatメソッドは、リクエストのコンテントタイプ(@CONTENT_TYPE@ヘッダ)を評価しなくなりました。これにかわって、レスポンスのコンテントタイプ(@ACCEPT@ヘッダまたはファイル拡張子)が排他的に処理を行います。これによって今までのアプリケーションの@withFormat@を使用してリクエストからXMLを読み込む等のコードは動作しなくなります。
 
 {code:java}
 def processBook() {
@@ -201,39 +201,43 @@ h4. 非推奨クラスの除去
 
 h3. Grails 1.2.x からのアップグレード
 
-h4. Plugin Repositories
+h4. プラグイン・リポジトリ
 
-As of Grails 1.3, Grails no longer natively supports resolving plugins against secured SVN repositories. The plugin resolution mechanism in Grails 1.2 and below has been replaced by one built on [Ivy|http://ant.apache.org/ivy/], the upside of which is that you can now resolve Grails plugins against Maven repositories as well as regular Grails repositories.
+Grails 1.3では、認証付きSVNリポジトリ内のプラグイン解決に標準では対応しなくなりました。Grails 1.2以前のプラグイン解決の仕組みは、[Ivy|http://ant.apache.org/ivy/]をベースに構築された実装により、Grailsのライブラリと同等にMavenリポジトリを対象に、プラグイン解決の仕組みに変更されました。
 
-Ivy supports a much richer setter of repository resolvers for resolving plugins, including support for Webdav, HTTP, SSH and FTP. See the section on [resolvers|http://ant.apache.org/ivy/history/trunk/settings/resolvers.html] in the Ivy docs for all the available options and the section of [plugin repositories|guide:repositories] in the user guide which explains how to configure additional resolvers.
+Ivyでは、WebDAV, HTTP, SSHやFTPなど豊富なリポジトリ解決方法があります。利用可能なオプションについてはIvyのドキュメントの[リゾルバのセクション|http://ant.apache.org/ivy/history/trunk/settings/resolvers.html]を、追加のリゾルバの設定方法については、このユーザーガイドのプラグイン・リポジトリのセクションを参照してください。
 
-If you still need support for resolving plugins against secured SVN repositories then the [IvySvn|http://code.google.com/p/ivysvn/] project provides a set of resolvers for SVN repositories.
+認証付きSVNリポジトリ内に対してのプラグイン解決が必要な場合は、SVNリポジトリに対してのIvyリゾルバを提供している[IvySvn|http://code.google.com/p/ivysvn/]プロジェクトを参考にしてください。
 
 h3. Grails 1.1.x からのアップグレード
 
-h4. Plugin paths
+{warning}
+翻訳チームの判断により、Grails 1.1.xからの更新は翻訳を行いません。ご了承ください。
+{warning}
 
-In Grails 1.1.x typically a @pluginContextPath@ variable was used to establish paths to plugin resources. For example:
+h4. プラグインのパス
+
+Grails 1.1.xではプラグイン内のリソースを参照するために変数@pluginContextPath@が、以下のように使用されていました:
 
 {code}
 <g:resource dir="${pluginContextPath}/images" file="foo.jpg" />
 {code}
 
-In Grails 1.2 views have been made plugin aware and this is no longer necessary:
+Grails 1.2からはプラグイン認識されるため、この変数は不要になりました:
 
 {code}
 <g:resource dir="images" file="foo.jpg" />
 {code}
 
-Additionally the above example will no longer link to an application image from a plugin view. To do so change the above to:
+この変更により、上記の例ではプラグイン内のビューからアプリケーション本体の/imagesなどへのパスを生成しません。従って、アプリケーション本体へのパスを生成するためには、次のようにする必要があります:
 
 {code}
 <g:resource contextPath="" dir="images" file="foo.jpg" />
 {code}
 
-The same rules apply to the [javascript|tags] and [render|tags] tags.
+[javascript|tags]タグや[render|tags]タグも同様の記述ができます。
 
-h4. Tag and Body return values
+h4. タグとボディの戻り値
 
 Tags no longer return @java.lang.String@ instances but instead return a Grails @StreamCharBuffer@ instance. The @StreamCharBuffer@ class implements all the same methods as @String@ but doesn't extend @String@, so code like this will break:
 
@@ -253,7 +257,7 @@ if (foo instanceof CharSequence) {
 }
 {code}
 
-h4. New JSONBuilder
+h4. 新しいJSONBuilder
 
 There is a new version of @JSONBuilder@ which is semantically different from the one used in earlier versions of Grails. However, if your application depends on the older semantics you can still use the deprecated implementation by setting the following property to @true@ in Config.groovy:
 
@@ -261,7 +265,7 @@ There is a new version of @JSONBuilder@ which is semantically different from the
 grails.json.legacy.builder=true
 {code}
 
-h4. Validation on Flush
+h4. フラッシュでの検証
 
 Grails now executes validation routines when the underlying Hibernate session is flushed to ensure that no invalid objects are persisted. If one of your constraints (such as a custom validator) executes a query then this can cause an additional flush, resulting in a @StackOverflowError@. For example:
 
@@ -286,6 +290,10 @@ static constraints = {
 {code}
 
 h3. Grails 1.0.xからのアップグレード
+
+{warning}
+翻訳チームの判断により、Grails 1.0.xからの更新は翻訳を行いません。ご了承ください。
+{warning}
 
 h4. Groovy 1.6
 

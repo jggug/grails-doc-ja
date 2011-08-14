@@ -224,12 +224,12 @@ testing:
   title: テスト
   unitTesting:
     title: Unitテスト
-    unitTestingControllers: コントローラのUnitテスト
-    unitTestingTagLibraries: タグライブラリのUnitテスト
-    unitTestingDomains: どめいんのUnitテスト
-    unitTestingFilters: フィルタのUnitテスト
-    unitTestingURLMappings: URLマッピングのUnitテスト
-    mockingCollaborators: モッキング・コラボレータ
+    unitTestingControllers: コントローラUnitテスト
+    unitTestingTagLibraries: タグライブラリUnitテスト
+    unitTestingDomains: ドメインUnitテスト
+    unitTestingFilters: フィルタUnitテスト
+    unitTestingURLMappings: URLマッピングUnitテスト
+    mockingCollaborators: モッキングコラボレータ
   integrationTesting: 統合テスト
   functionalTesting: 機能テスト
 i18n:
@@ -270,7 +270,7 @@ spring:
   theUnderpinningsOfGrails: Grailsの土台
   springdslAdditional: 追加ビーンを定義する
   springdsl: ビーンDSLでSpringランタイム
-  theBeanBuilderDSLExplained: BeanBuilder DSLの解説
+  theBeanBuilderDSLExplained: ビーンビルダーDSLの解説
   propertyPlaceholderConfiguration: プロパティプレースフォルダー設定
   propertyOverrideConfiguration: プロパティオーバーライド設定
 hibernate:
@@ -278,5 +278,5 @@ hibernate:
   usingHibernateXMLMappingFiles: Hibernate XMLマッピングの使用
   mappingWithHibernateAnnotations: Hibernateアノテーションでのマッピング
   addingConstraints: 制約の追加
-scaffolding: カッフォルド
+scaffolding: スカッフォルド
 deployment: デプロイ
