@@ -2,7 +2,7 @@
 
 Rails,Django,TurboGearsといったダイナミックフレームワークはWebアプリケーションの考え方をよりモダンな方へ導いてくれました。Grailsは、Spring、Hibernateといった既に確立したJavaテクノロジーで、それらのダイナミックフレームワーク概念に基づいてJava環境でのWebアプリケーション開発の複雑さを軽減させます。
 
-Grailsは、多くのコア・テクノロジーによるWeb開発でのパズルような断片をプラグインで連携させることで解決を試みたフルスタックフレームワークです。以下の内容をすぐに利用できます。
+Grailsは、多くのコア・テクノロジーによるWeb開発でのパズルような断片をプラグインで連携させることで解決を試みたフルスタックフレームワークです。以下の内容をすぐに利用できます:
 
 * [Hibernate|http://www.hibernate.org]上に構築された、簡単に利用できるオブジェクト・リレーショナル・マッピング(ORM)レイヤ
 * 表現豊かなビューテクノロジーGroovy Server Pages (GSP)
@@ -11,6 +11,9 @@ Grailsは、多くのコア・テクノロジーによるWeb開発でのパズ�
 * リロード可能に設定された組込 "Tomcat":http://tomcat.apache.org
 * 組込 "Spring":http://www.springframework.org による依存注入
 * SpringのMessageSourceで実装された国際化(i18n)対応
-* Springフレームワークのトランザクション実装によるサービスレイヤのトランザクション
+* Springフレームワークのトランザクション概念によるサービスレイヤのトランザクション
+
 
 これら全ては、 "Groovy":http://groovy.codehaus.org と多くのDomain Specific Languages (DSL ドメイン特化言語)を活用して簡単に使用できるように実装されています。
+
+このドキュメントは、Grailsのスタートガイドと、GrailsでのWebアプリケーション構築を紹介します。
