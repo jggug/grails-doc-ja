@@ -1,17 +1,23 @@
-GrailsアプリケーションはWebアプリケーションアーカイブ（WARファイル）としてデプロイされます。Grailsにはアーカイブを作成するための[war|commandLine]コマンドがあります。
+GrailsアプリケーションはWebアプリケーションアーカイブ（WARファイル）としてデプロイされます。Grailsにはアーカイブを作成するための[war|commandLine]コマンドがあります:
 
 {code}
 grails war
 {code}
 
-これにより、Webコンテナにデプロイ可能なWARファイルがプロジェクトのルートに生成されます。
+This will produce a WAR file under the @target@ directory which can then be deployed as per your container's instructions.
+
+Unlike most scripts which default to the @development@ environment unless overridden, the @war@ command runs in the @production@ environment by default. You can override this like any script by specifying the environment name, for example:
+
+{code}
+grails dev war
+{code}
 
 {warning}
 Grailsを本番運用する際はWARをデプロイしてください。[run-app|commandLine]コマンドでの運用は基本的に自動リロードなどが設定されているため、パフォーマンスやスケーラビリティに影響します。
 {warning}
 
-Grailsをデプロイする場合は、@-server@オプションと十分なメモリを割り当てて、Webコンテナを動作させましょう。JVM起動オプションの良い設定は次のようになります。
+Grailsをデプロイする場合は、@-server@オプションと十分なメモリを割り当てて、Webコンテナを動作させましょう。JVM起動オプションの良い設定は次のようになります:
 
 {code}
--server -Xmx512M
+-server -Xmx512M -XX:MaxPermSize=256m
 {code}

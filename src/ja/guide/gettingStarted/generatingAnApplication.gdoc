@@ -1,6 +1,5 @@
-Grailsでは、アプリケーションのスケルトンを生成する[スカッフォールディング|guide:scaffolding]の機能を使用することにより、素早く開発することができます。Grailsにはアプリケーションのスケルトンを生成する[スカッフォールディング|guide:scaffolding]という機能があります。これをするには、コントローラと関連するビューを生成する[generate-all|commandLine]などを使用します。
+Grailsでは、アプリケーションのスケルトンを生成する[スカッフォールディング|guide:scaffolding]の機能を使用することにより、素早く開発することができます。Grailsにはアプリケーションのスケルトンを生成する[スカッフォールディング|guide:scaffolding]という機能があります。これをするには、[コントローラ|guide:controllers]と関連する[ビュー|guide:gsp]を生成する[generate-all|commandLine]などを使用します。
 
 {code}
 grails generate-all Book
 {code}
-

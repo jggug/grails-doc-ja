@@ -1,15 +1,7 @@
-Grailsの@create-*@コマンドは、自動的に@test/integration@ディレクトリに統合テストクラスのスケルトンを作成します。スケルトンのテストのロジックは各自で実装してください。詳細はテストのセクションを参照してください。テストを実行する場合は、[test-app|commandLine]コマンドを使用します。
+Grailsの@create-*@コマンドは、自動的にUnitテストまたは統合テストをそれぞれ@test/unit@また@test/integration@ディレクトリに生成します。スケルトンのテストのロジックは各自で実装してください。テストの詳細については[Testing|guide:testing]を参考にしてください。
+
+テストを実行する場合は、[test-app|commandLine]コマンドを使用します:
 
 {code}
 grails test-app
 {code}
-
-Grailsは[test-app|commandLine]コマンドのテスト実行を委譲できる@build.xml@も自動生成します。
-
-注） Grails1.3からは@integrate-with --ant@を実行して、@build.xml@を生成します。
-
-{code}
-ant test
-{code}
-
-これは、CruiseControlのような継続的インテグレーションプラットフォームの一部として、Grailsアプリケーションをビルドする必要がある場合に便利です。

@@ -31,6 +31,3 @@ grails integrate-with --textmate
 {code}
 mate .
 {code}
-
-
-

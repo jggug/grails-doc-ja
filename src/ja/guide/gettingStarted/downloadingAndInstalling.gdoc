@@ -1,4 +1,4 @@
-まず最初にGrailsをインストールすることから始めましょう。手順は次のようになります。
+まず最初にGrailsをインストールすることから始めましょう。手順は次のようになります:
 
 * Grailsを[ダウンロード|http://grails.org/Download]し、任意の場所にzipファイルを解凍します。
 * zipファイルを解凍した場所にGRAILS_HOME環境変数を設定します。
@@ -11,9 +11,5 @@
 ターミナルで@grails@と入力し実行することで下記のような出力がされれば、Grailsが正常に動作しています。
 
 bc.
-Welcome to Grails 1.0 - http://grails.org/
-Licensed under Apache Standard License 2.0
-Grails home is set to: /Developer/grails-1.0
-No script name specified. Use 'grails help' for more info
-
+Grails version: 2.0.0
 

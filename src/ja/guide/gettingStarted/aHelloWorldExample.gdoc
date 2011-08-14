@@ -5,24 +5,31 @@ grails create-controller hello
 
 このコマンドによって、@grails-app/controllers@ディレクトリ内に、@HelloController.groovy@という新しいコントローラ（詳細については[コントローラ|guide:controllers]のセクションを参照してください）が生成されます。
 
+{note}
+create-controllerスクリプトでパッケージが指定されなかった場合はGrailsが自動的にアプリケーション名をパッケージ名として使用します。デフォルト値はCongig.groovyに@grails.project.groupId@を指定することで変更可能です。
+{note}
+
 コントローラは、Webリクエストを処理します。"hello world!"を表示するには、次のように記述します。
 
 {code:java}
+package helloworld
+
 class HelloController {
-	def world = {
-		render "Hello World!"
-	}
-}                           
+
+    def world() {
+        render "Hello World!"
+    }
+}
 {code}
 
-作業は以上です。次に[run-app|commandLine]コマンドで、このアプリケーションを起動させましょう。
+作業は以上です。次に[run-app|commandLine]コマンドで、このアプリケーションを起動させましょう:
 
 bc.
 grails run-app
 
-これで8080番ポートでサーバを起動します。@http://localhost:8080/helloworld@をブラウザで見てみましょう。 
+これで8080番ポートでサーバを起動します。@http://localhost:8080/helloworld@をブラウザで見てみましょう。
 
-結果は次のスクリーンショットのようになります。
+結果は次のスクリーンショットのようになります:
 
 !intropage.png!
 

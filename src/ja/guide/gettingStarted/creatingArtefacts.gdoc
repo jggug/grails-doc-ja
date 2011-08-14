@@ -1,18 +1,22 @@
-Grailsには[コントローラ|guide:6.1 Controllers]や様々なアーティファクトを生成する[create-controller|commandLine]や[create-domain-class|commandLine]などのコマンドが存在します。
+Grailsには[コントローラ|guide:controllers]や様々なアーテファクトを生成する[create-controller|commandLine]や[create-domain-class|commandLine]などのコマンドが存在します。
 {note}
-これらは利便性のためだけにあり、IDEまたは好みのテキストエディタを使用してアーティファクトを作成することも簡単にできます。
+アーテファクト生成は便利機能です。IDEやテキストエディタを使用してもかまいません。
 {note}
-例えばアプリケーションの基礎を作成するためには、通常[ドメインモデル|guide:GORM]が必要になります。
+例として[ドメインモデル|guide:GORM]を生成するには:
 
 {code}
 grails create-domain-class book
 {code}
 
-このコマンドを実行すると、@grails-app/domain/Book.groovy@に以下のようなドメインクラスが作成されます。
+このコマンドを実行すると、@grails-app/domain/Book.groovy@に以下のようなドメインクラスが作成されます:
 
 {code}
-class Book {	
+class Book {
 }
 {code}
 
 他にも@create-*@コマンドがあります。詳しくはコマンドライン・リファレンス・ガイドを参照しましょう。
+
+{note}
+To decrease the amount of time it takes to run Grails scripts, use the [interactive|commandLine] mode.
+{note}
