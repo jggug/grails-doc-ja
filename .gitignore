@@ -3,3 +3,7 @@ bin/
 checkout/
 output/
 /local.properties
+build/
+.gradle/
+refactor.sh
+src/ja/_guide/

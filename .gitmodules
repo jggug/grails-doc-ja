@@ -1,3 +1,6 @@
 [submodule "original/grails-doc"]
 	path = original/grails-doc
 	url = https://github.com/grails/grails-doc.git
+[submodule "grails-doc"]
+	path = grails-doc
+	url = https://github.com/grails/grails-doc.git
