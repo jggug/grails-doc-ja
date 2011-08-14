@@ -3,7 +3,7 @@ h1. Setup & compile
 <pre>git clone git@github.com:jggug/grails-doc-ja.git
 cd grails-doc-ja
 git submodule init && git submodule update
-gradle -Ddisable.groovydocs=true :publishGuide -Dgrails.home=/works/experiment/grails_sources/grails-core
+gradle -Ddisable.groovydocs=true :publishGuide -Dgrails.home=/path_to_your_source/grails-core
 </pre>
 
 
