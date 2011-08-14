@@ -1,49 +1,38 @@
+h1. 目標
+
+* -現状公式ドキュメントの章・節での日本語ドキュメントを完成させる-
+* 2.0.xドキュメントをベースに翻訳
+* 12月までに90%完了目標
+
+h1. 進捗
+
+* プロジェクト更新。 *done*
+* 2.0系統でのコンパイルへ変更・実装。 *done*
+* 見出しを2.0系へ移植。 *done*
+
+h3. 1.3.x翻訳済み分から、2.0.xへの更新を含む進捗。
+
+# イントロダクション *(済み)*
+# はじめに *(済み)*
+# 設定
+# コマンドライン *tkでは完了* -> (TODO:)*2.0更新+gdoc化*
+# O/Rマッピング(GORM)
+# Webレイヤ *翻訳中* *tyamaエバノに2.0対象で翻訳中*
+# バリデーション
+# サービスレイヤー
+# テスト
+# 国際化
+# セキュリティ
+# プラグイン
+# Webサービス *(済み)*
+# GrailsとSpring
+# GrailsとHibernate
+# スカッフォルド
+# デプロイ
+# ref
+
 h1. ツール・インフラ
 
 * ソースコード https://github.com/jggug/grails-doc-ja
 * ML http://groups.google.com/group/grails-doc-ja
-* SPin http://beta.spinote.com/spin/project/show/gdocja
-* Chat http://www.ustream.tv/channel/jggug-mokumoku
 * Google翻訳キット http://translate.google.com/toolkit/list
-* 動作確認用Grailsアプリ - 未定
-
-h1. 進め方
-
-* 担当箇所を宣言する
-** 文章をまとめる
-** コード動作確認
-* 集会
-** 全体で内容確認
-** 全員でコードを試す
-
-h1. 目標
-
-* 現状公式ドキュメントの章・節での日本語ドキュメントを完成させる
-
-h1. 担当
-
-# イントロダクション - (済み)
-# はじめに - [~all] - (済み)
-# 設定
-# コマンドライン - [~fumokmm]
-# O/Rマッピング (GORM) - [~watabiki]
-# 5.1 クイックスタートガイド
-# 5.2 GORMでのドメインモデリング
-# 5.3 永続化の基礎
-# 5.4 GORMでクエリー
-# 5.5 高度なGORMの機能 - [~watabiki]
-# 5.6 プログラマチックトランザクション
-# 5.7 GORM と制約 
-# Webレイヤ - [~tama]
-# バリデーション
-# サービスレイヤー - [~touchez]
-# テスト - [~watabiki2]
-# 国際化 - [~osima]
-# セキュリティ - [~kiy0taka]
-# プラグイン - [~tyama]
-# Webサービス - [~baraki] - (済み)
-# GrailsとSpring - [~tyama]
-# GrailsとHibernate
-# スカッフォルド - [~mkawa]
-# デプロイ
-

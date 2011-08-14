@@ -1,13 +1,10 @@
-h2. How-to
+h1. Setup & compile
 
 <pre>git clone git@github.com:jggug/grails-doc-ja.git
 cd grails-doc-ja
 git submodule init && git submodule update
-ant dist-nojavadoc -Ddoc.lang=ja
-// or if you have grails sources
-ant dist-nojavadoc -Ddoc.lang=ja -Dgrails.home=./checkout/grails-src
+gradle -Ddisable.groovydocs=true :publishGuide -Dgrails.home=/works/experiment/grails_sources/grails-core
 </pre>
 
-h2. 翻訳ルールについて
 
-TODO 
+進捗等はgdocjp.textileを見てね。 (T.Yamamoto)
