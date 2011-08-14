@@ -60,11 +60,11 @@ task publishGuide(/*dependsOn:':grails-doc:publishGuide'*/){
       publisher.images = file("${projectDir}/grails-doc/resources/img")
       publisher.css = file("${projectDir}/grails-doc/resources/css")
       publisher.js = file("${projectDir}/grails-doc/resources/js")
-      publisher.style = file("${projectDir}/grails-doc/resources/style")
+      publisher.style = file("${projectDir}/resources/style")
       publisher.title = props.title
       publisher.version = props."grails.version"
-      publisher.version = publisher.version + langProp.props.translatorMessage
       publisher.authors = props.authors
+      publisher.authors = publisher.authors + langProp.props.translatorMessage
       publisher.copyright = props.copyright
       publisher.footer = props.footer
       publisher.logo = '<a href="http://grails.org" target="_blank"><img alt="Grails Logo" title="The Grails Framework" src="${path}/img/grails.png" border="0"/></a>'
