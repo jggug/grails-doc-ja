@@ -20,7 +20,7 @@ function addJsClass() {
     <ul>
         <li>
             <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
-                <a href="${path}/guide/index.html" class="button">Table of contents</a>
+                <a href="${path}/guide/index.html" class="button">目次</a>
 
                 <div id="nav-summary-childs" style="display:none;">
                     <% toc.children.eachWithIndex { ch, i -> %>
@@ -31,7 +31,7 @@ function addJsClass() {
             </div>
         </li>
         <li class="separator selected">
-            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">クイックリファレンス</a>
         </li>
     </ul>
 </div>
@@ -57,7 +57,7 @@ function addJsClass() {
                     <div class="toc-item prev-left"><a href="${path}/guide/${prev?.name?.encodeAsUrlPath()?.encodeAsHtml()}.html">&lt;&lt; <strong>${chapterNumber - 1}</strong><span>${prev?.title?.encodeAsHtml()}</span></a></div>
                 <% } %>
 
-                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">クイックリファレンス</a>)</span>
 
                 <% if(next){ %>
                     <div class="toc-item next-right"><a href="${path}/guide/${next?.name?.encodeAsUrlPath()?.encodeAsHtml()}.html"><strong>${chapterNumber + 1}</strong><span>${next?.title?.encodeAsHtml()}</span> >></a></div>
@@ -74,7 +74,7 @@ function addJsClass() {
 
                 <% if (sectionToc) { %>
                 <div id="table-of-content">
-                    <h2>Table of Contents</h2>
+                    <h2>目次</h2>
                     <%
                     sectionWriter = { lvl, section, prefix ->
                     %>
@@ -109,14 +109,14 @@ function addJsClass() {
         <td id="col2">
             <div class="local clearfix">
                 <div class="local-title">
-                    <a href="${path}/guide/index.html" target="mainFrame">Quick Reference</a>
-                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                    <a href="${path}/guide/index.html" target="mainFrame">クイックリファレンス</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">隠す</a>)</span>
                 </div>
                 <div class="menu">
                     <% for (cat in refMenu) { %>
                     <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">${cat.name.encodeAsHtml()}</h1><div class="menu-sub">
                         <% if (cat.usage.exists()) { %>
-                            <div class="menu-item"><a href="${path}/ref/${cat.name.encodeAsUrlPath().encodeAsHtml()}/Usage.html">Usage</a></div>
+                            <div class="menu-item"><a href="${path}/ref/${cat.name.encodeAsUrlPath().encodeAsHtml()}/Usage.html">使用方法</a></div>
                             <% } %>
                             <% for (txt in cat.sections) { %>
                             <div class="menu-item"><a href="${path}/ref/${cat.name.encodeAsUrlPath().encodeAsHtml()}/${txt.name[0..-6].encodeAsUrlPath().encodeAsHtml()}.html">${txt.name[0..-6].encodeAsHtml()}</a>
