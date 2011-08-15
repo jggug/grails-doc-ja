@@ -1,39 +1,65 @@
-Regular Grails plugins are packaged as zip files containing the full source of the plugin. This has some advantages in terms of being an open distribution system (anyone can see the source), in addition to avoiding problems with the source compatibility level used for compilation.
+{hidden}Regular Grails plugins are packaged as zip files containing the full source of the plugin. This has some advantages in terms of being an open distribution system (anyone can see the source), in addition to avoiding problems with the source compatibility level used for compilation.{hidden}
+通常のGrailsプラグインはソースコードがzipされたパッケージです。これはオープンソース配布してコンパイル時に互換性を調整したり、様々な問題を解決するには有利です。
 
-As of Grails 2.0 you can pre-compile Grails plugins into regular JAR files known as "binary plugins". This has several advantages (and some disadvantages as discussed in the advantages of source plugins above) including:
+{hidden}As of Grails 2.0 you can pre-compile Grails plugins into regular JAR files known as "binary plugins". This has several advantages (and some disadvantages as discussed in the advantages of source plugins above) including:{hidden}
+Grails 2.0から、プラグインを通常のJARファイルとしてプリコンパイルパッケージした、バイナリプラグインを生成配布することが可能になります。バイナリプラグインにすることで以下の利点があります。
 
+{hidden}
 * Binary plugins can be published as standard JAR files to a Maven repository
 * Binary plugins can be declared like any other JAR dependency
 * Commercial plugins are more viable since the source isn't published
 * IDEs have a better understanding since binary plugins are regular JAR files containing classes
+{hidden}
 
-h4. Packaging
+* Mavenリポジトリで通常のJARファイルで配布可能。
+* バイナリプラグインは他のJARと同じように依存管理が行える。
+* ソースコードを公開しない商用プラグインが可能
+* 通常のJARになることによって、IDE等の環境で扱いやすくなる
 
-To package a plugin in binary form you can use the package-plugin command and the @--binary@ flag:
+h4. パッケージング {hidden}Packaging {hidden}
+
+{hidden}To package a plugin in binary form you can use the package-plugin command and the @--binary@ flag:{hidden}
+バイナリープラグインをパッケージする際には、package-pluginコマンドに@\-\-binary@フラグを使用します
+
 
 {code}
 grails package-plugin --binary
 {code}
 
-Supported artefacts include:
+{hidden}Supported artefacts include:{hidden}
+含まれる成果物は:
 
+{hidden}
 * Grails artifact classes such as controllers, domain classes and so on
 * I18n Message bundles
 * GSP Views, layouts and templates
+{hidden}
 
-You can also specify the packaging in the plugin descriptor:
+* コントローラ、ドメイン等のGrailsのアーテファクトクラス
+* I18nメッセージファイル
+* GSPビュー、レイアウト、テンプレート
+
+{hidden}You can also specify the packaging in the plugin descriptor:{hidden}
+プラグインディスクリプタにフラグを記述することで、パッケージ時のコマンドフラグを省略できます。
+
 
 {code}
 def packaging = "binary"
 {code}
 
-in which case the packaging will default to binary.
+{hidden}in which case the packaging will default to binary.{hidden}
+上記例では、デフォルトでバイナリプラグインになります。
 
-h4. Using Binary Plugins
 
-The packaging process creates a JAR file in the @target@ directory of the plugin, for example @target/foo-plugin-0.1.jar@. There are two ways to incorporate a binary plugin into an application.
+h4. バイナリプラグイン使用方法 {hidden}Using Binary Plugins {hidden}
 
-One is simply placing the plugin JAR file in your application's @lib@ directory. The other is to publish the plugin JAR to a compatible Maven repository and declare it as a dependency in @grails-app/conf/BuildConfig.groovy@:
+{hidden}The packaging process creates a JAR file in the @target@ directory of the plugin, for example @target/foo-plugin-0.1.jar@. There are two ways to incorporate a binary plugin into an application.{hidden}
+パッケージを実行するとJARファイルはプラグインプロジェクトの@targrt@ディレクトリに生成されます。例として@target/foo-plugin-0.1.jar@ 。 バイナリプラグインを使用するには２つの方法があります。
+
+
+{hidden}One is simply placing the plugin JAR file in your application's @lib@ directory. The other is to publish the plugin JAR to a compatible Maven repository and declare it as a dependency in @grails-app/conf/BuildConfig.groovy@:{hidden}
+一つ目は単純に使用するアプリケーションの@lib@ディレクトリに配置。もう一つの方法は、Mavenリポジトリに配備して、@grails-app/conf/BuildConfig.groovy@に依存定義を行います。
+
 
 {code}
 dependencies {
@@ -42,5 +68,6 @@ dependencies {
 {code}
 
 {note}
-Since binary plugins are packaged as JAR files, they are declared as dependencies in the @dependencies@ block, _not_ in the @plugins@ block as you may be naturally inclined to do. The @plugins@ block is used for declaring traditional source plugins packaged as zip files
+{hidden}Since binary plugins are packaged as JAR files, they are declared as dependencies in the @dependencies@ block, _not_ in the @plugins@ block as you may be naturally inclined to do. The @plugins@ block is used for declaring traditional source plugins packaged as zip files {hidden}
+バイナリプラグインは依存定義を@dependencies@ブロックに記述します。@plugins@ブロックは今までのソースコードがzipされたプラグインで使用します。
 {note}
