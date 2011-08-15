@@ -73,7 +73,7 @@ Grails 2.0では、Hibernate 3.6を使用しています。
 
 h4. Bagコレクション
 
-You can now use Hibernate [Bag|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/collections.html]s for mapped collections to avoid the memory and performance issues of loading large collections to enforce @Set@ uniqueness or @List@ order.
+SetのユニークまたはListの順序必要としない場合でにおいて、大きなコレクションロードのメモリーとパフォーマンス問題を回避できるコレクションマッピング、Hibernate [Bag|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/collections.html]が使用できるようになりました。
 
 詳しくは [セット、リスト、マップ|guide:sets,ListsAndMaps] を参照してください。
 
