@@ -1,6 +1,8 @@
+apply plugin: "groovy"
 apply plugin: "base"
-archivesBaseName = "grails-docs-ja"
+archivesBaseName = "grails-doc-ja"
 outputDir = "${buildDir.path}/docs"
+checkOutDir = "${buildDir.path}/checkout"
 
 explicitGrailsHome = System.getProperty("grails.home")
 grailsHome = explicitGrailsHome ? file(explicitGrailsHome).absolutePath : "$checkOutDir/grails-src"
@@ -16,6 +18,9 @@ repositories {
 }
 
 dependencies {
+    compile "org.grails:grails-gdoc-engine:1.0-SNAPSHOT"
+    groovy 'org.codehaus.groovy:groovy:1.8.0'
+
     // Required while picking up grails-docs from dist dir.
     publish "org.grails:grails-gdoc-engine:1.0-SNAPSHOT", "org.codehaus.groovy:groovy:1.8.0"
 
@@ -34,6 +39,8 @@ task publishGuide(/*dependsOn:':grails-doc:publishGuide'*/){
        // Create a class loader for the publication stuff.
        def classpath = project.configurations.publish
        classpath = classpath.files.collect { it.toURI().toURL() }
+       //Add Macro JAR(this project)
+       classpath << file("${buildDir}/libs/grails-doc-ja.jar").toURI().toURL()
 
        // Add the grails-docs JAR.
        def distDir = file("${project.grailsHome}/dist")
@@ -80,6 +87,10 @@ task publishGuide(/*dependsOn:':grails-doc:publishGuide'*/){
 
       publisher.registerMacro(sourceMacro.newInstance(searchDirs))
 
+      //hidden macro
+      def hiddenMacro = publishClassLoader.loadClass("macros.HiddenMacro")
+      publisher.registerMacro(hiddenMacro.newInstance())
+
       // Radeox loads its bundles off the context class loader, which
       // unfortunately doesn't contain the grails-docs JAR. So, we
       // temporarily switch the DocPublisher class loader into the
@@ -93,8 +104,3 @@ task publishGuide(/*dependsOn:':grails-doc:publishGuide'*/){
       Thread.currentThread().contextClassLoader = oldClassLoader
    }
 }
-
-
-
-
-
