@@ -1,3 +1,5 @@
-A controller handles requests and creates or prepares the response. A controller can generate the response directly or delegate to a view. To create a controller, simply create a class whose name ends with @Controller@ in the @grails-app/controllers@ directory (in a subdirectory if it's in a package).
+{hidden}A controller handles requests and creates or prepares the response. A controller can generate the response directly or delegate to a view. To create a controller, simply create a class whose name ends with @Controller@ in the @grails-app/controllers@ directory (in a subdirectory if it's in a package).{hidden}
+コントローラはリクエストを処理してレスポンスの準備・作成を行います。コントローラはレスポンスをビューに委譲したり、直接返す事ができます。単純に@grails-app/controlers@ディレクトリに、クラス名称の最後を@Controller@にしたクラスを作成することで、コントローラを追加できます。(パッケージに入れる場合は、パッケージ名のサブディレクトリに作成します。)
 
-The default [URL Mapping|guide:urlmappings] configuration ensures that the first part of your controller name is mapped to a URI and each action defined within your controller maps to URIs within the controller name URI.
+{hidden}The default [URL Mapping|guide:urlmappings] configuration ensures that the first part of your controller name is mapped to a URI and each action defined within your controller maps to URIs within the controller name URI.{hidden}
+[URL マッピング|guide:urlmappings]のデフォルト設定では、Controllerの前に付けた名称がベースのURIにマップされ、コントローラに定義したそれぞれのアクション名称がコントローラ名称と繫がれてURIをマップします。

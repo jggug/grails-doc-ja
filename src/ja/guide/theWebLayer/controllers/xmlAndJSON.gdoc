@@ -1,8 +1,10 @@
-h4. Using the render method to output XML
+h4. renderメソッドでXMLを出力する {hidden}Using the render method to output XML {hidden}
 
-Grails supports a few different ways to produce XML and JSON responses. The first is the [render|controllers] method.
+{hidden}Grails supports a few different ways to produce XML and JSON responses. The first is the [render|controllers] method.{hidden}
+GrailsにはXMLとJSONを生成する複数の方法があります。はじめに[render|controllers]メソッド。
 
-The @render@ method can be passed a block of code to do mark-up building in XML:
+{hidden}The @render@ method can be passed a block of code to do mark-up building in XML:{hidden}
+@render@メソッドに、マークアップビルダーのコードブロックを渡してXML生成:
 
 {code}
 def list() {
@@ -19,7 +21,8 @@ def list() {
 }
 {code}
 
-The result of this code would be something like:
+{hidden}The result of this code would be something like:{hidden}
+このコードの結果は以下のようになります:
 
 {code:xml}
 <books>
@@ -28,7 +31,8 @@ The result of this code would be something like:
 </books>
 {code}
 
-Be careful to avoid naming conflicts when using mark-up building. For example this code would produce an error:
+{hidden}Be careful to avoid naming conflicts when using mark-up building. For example this code would produce an error:{hidden}
+マークアップビルダーを使用する際は、変数名称の衝突を回避する必要があります。例として次のコードはエラーになります:
 
 {code}
 def list() {
@@ -45,11 +49,13 @@ def list() {
 }
 {code}
 
-This is because there is local variable @books@ which Groovy attempts to invoke as a method.
+{hidden}This is because there is local variable @books@ which Groovy attempts to invoke as a method.{hidden}
+この例では、Groovyがローカル変数のbooksをメソッドとして実行してしまいます。
 
-h4. Using the render method to output JSON
+h4. renderメソッドでJSONを出力する {hidden}Using the render method to output JSON {hidden}
 
-The @render@ method can also be used to output JSON:
+{hidden}The @render@ method can also be used to output JSON:{hidden}
+JSONを出力する場合も@render@メソッドが使用できます:
 
 {code}
 def list() {
@@ -66,7 +72,8 @@ def list() {
 }
 {code}
 
-In this case the result would be something along the lines of:
+{hidden}In this case the result would be something along the lines of:{hidden}
+このコードの結果は以下のようになります:
 
 {code}
 [
@@ -75,25 +82,30 @@ In this case the result would be something along the lines of:
 ]
 {code}
 
-The same dangers with naming conflicts described above for XML also apply to JSON building.
+{hidden}The same dangers with naming conflicts described above for XML also apply to JSON building.{hidden}
+JSONビルダーもXMLと同じく、変数名称の衝突を回避する必要があります。
 
-h4. Automatic XML Marshalling
+h4. 自動XMLマーシャリング {hidden}Automatic XML Marshalling {hidden}
 
-Grails also supports automatic marshalling of [domain classes|guide:GORM] to XML using special converters.
+{hidden}Grails also supports automatic marshalling of [domain classes|guide:GORM] to XML using special converters.{hidden}
+Grailsでは[ドメインクラス|guide:GORM]から特別なコンバータを使用した自動マーシャリングをサポートしています。
 
-To start off with, import the @grails.converters@ package into your controller:
+{hidden}To start off with, import the @grails.converters@ package into your controller:{hidden}
+使用するには、@grails.converters@パッケージをインポートする必要があります:
 
 {code}
 import grails.converters.*
 {code}
 
-Now you can use the following highly readable syntax to automatically convert domain classes to XML:
+{hidden}Now you can use the following highly readable syntax to automatically convert domain classes to XML:{hidden}
+ドメインクラスをXMLに変換するのに、次のように見やすいシンタックスで記述できます:
 
 {code}
 render Book.list() as XML
 {code}
 
-The resulting output would look something like the following::
+{hidden}The resulting output would look something like the following::{hidden}
+この例では次のような結果を出力します:
 
 {code}
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -109,24 +121,28 @@ The resulting output would look something like the following::
 </list>
 {code}
 
-An alternative to using the converters is to use the [codecs|guide:codecs] feature of Grails. The codecs feature provides [encodeAsXML|guide:codecs] and [encodeAsJSON|guide:codecs] methods:
+{hidden}An alternative to using the converters is to use the [codecs|guide:codecs] feature of Grails. The codecs feature provides [encodeAsXML|guide:codecs] and [encodeAsJSON|guide:codecs] methods:{hidden}
+またconvertersを使用する別の方法としてGrailsの[codecs|guide:codecs]を使用することもできます。codecsでは、[encodeAsXML|guide:codecs]と[encodeAsJSON|guide:codecs]メソッドを提供しています:
 
 {code}
 def xml = Book.list().encodeAsXML()
 render xml
 {code}
 
-For more information on XML marshalling see the section on [REST|guide:REST]
+{hidden}For more information on XML marshalling see the section on [REST|guide:REST]{hidden}
+XMLマーシャリングの情報は[REST|guide:REST]のセクションも参照してください。
 
-h4. Automatic JSON Marshalling
+h4. 自動JSONマーシャリング {hidden}Automatic JSON Marshalling {hidden}
 
-Grails also supports automatic marshalling to JSON using the same mechanism. Simply substitute @XML@ with @JSON@:
+{hidden}Grails also supports automatic marshalling to JSON using the same mechanism. Simply substitute @XML@ with @JSON@:{hidden}
+Grailsでは@XML@と同じ仕組みで、@JSON@の自動マーシャリングもサポートしています。単純に先の@XML@を@JSON@にするだけです
 
 {code}
 render Book.list() as JSON
 {code}
 
-The resulting output would look something like the following:
+{hidden}The resulting output would look something like the following:{hidden}
+この例では次のような結果を出力します:
 
 {code}
 [
@@ -142,4 +158,5 @@ The resulting output would look something like the following:
  ]
 {code}
 
-Again as an alternative you can use the @encodeAsJSON@ to achieve the same effect.
+{hidden}Again as an alternative you can use the @encodeAsJSON@ to achieve the same effect.{hidden}
+もちろん、@encodeAsJSON@も同じ結果になります。

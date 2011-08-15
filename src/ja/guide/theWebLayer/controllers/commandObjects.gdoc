@@ -1,8 +1,11 @@
-Grails controllers support the concept of command objects. A command object is similar to a form bean in a framework like Struts, and they are useful for populating a subset of the properties needed to update a domain class. Or where there is no domain class required for the interaction, but you need features such as [data binding|guide:dataBinding] and [validation|guide:validation].
+{hidden}Grails controllers support the concept of command objects. A command object is similar to a form bean in a framework like Struts, and they are useful for populating a subset of the properties needed to update a domain class. Or where there is no domain class required for the interaction, but you need features such as [data binding|guide:dataBinding] and [validation|guide:validation].{hidden}
+Grailsのコマンドオブジェクトの設計概念をサポートしています。コマンドオブジェクトはStrutsでのフォームビーンと同じような物で、ドメインクラスで更新に必要なプロパティサブセットを収集するなどに使用すると便利です。または、[データバインディング|guide:dataBinding]と[バリデーション|guide:validation]を必要として、ドメインクラスを必要としない作用に使用します。
 
-h4. Declaring Command Objects
+h4. コマンドオブジェクトの宣言 {hidden}Declaring Command Objects {hidden}
 
-Command objects are typically declared in the same source file as a controller, directly below the controller class definition. For example:
+{hidden}Command objects are typically declared in the same source file as a controller, directly below the controller class definition. For example:{hidden}
+コマンドオブジェクトは通常使用するコントローラと同じファイルに宣言します。例として:
+
 
 {code:java}
 class UserController {
@@ -20,13 +23,17 @@ class LoginCommand {
 }
 {code}
 
-As this example shows, you can define [constraints|guide:constraints] in command objects just like in [domain classes|guide:GORM].
+{hidden}As this example shows, you can define [constraints|guide:constraints] in command objects just like in [domain classes|guide:GORM].{hidden}
+この例では、[ドメインクラス|guide:GORM]と同じ[constraints|guide:constraints](制約)も定義しています。
 
-h4. Using Command Objects
 
-To use command objects, controller actions may optionally specify any number of command object parameters. The parameter types must be supplied so that Grails knows what objects to create, populate and validate.
+h4. コマンドオブジェクトを使用する {hidden}Using Command Objects {hidden}
 
-Before the controller action is executed Grails will automatically create an instance of the command object class, populate its properties with by binding the request parameters, and validate the command object. For example:
+{hidden}To use command objects, controller actions may optionally specify any number of command object parameters. The parameter types must be supplied so that Grails knows what objects to create, populate and validate.{hidden}
+コマンドオブジェクトを使用する際に、コントローラアクションに複数のコマンドオブジェクトパラメータを明記することができます。Grailsにどのオブジェクトを使用して、収集、バリデートするかを知らせるために、パラメータの型は必ず指定しましょう。
+
+{hidden}Before the controller action is executed Grails will automatically create an instance of the command object class, populate its properties with by binding the request parameters, and validate the command object. For example:{hidden}
+コントローラアクションが実行される前に、Grailsがコマンドオブジェクトのインスタンスを生成して、リクエストパラメータをバインドして、必要なプロパティを収集しコマンドオブジェクトでバリデートします。例として:
 
 {code:java}
 class LoginController {
@@ -42,7 +49,8 @@ class LoginController {
 }
 {code}
 
-When using methods instead of Closures for actions, you can specify command objects in arguments:
+{hidden}When using methods instead of Closures for actions, you can specify command objects in arguments:{hidden}
+クロージャアクションでは無く、メソッドアクションの場合は引数として明記します:
 
 {code:java}
 class LoginController {
@@ -57,9 +65,11 @@ class LoginController {
 }
 {code}
 
-h4. Command Objects and Dependency Injection
+h4. コマンドオブジェクトと依存注入 {hidden}Command Objects and Dependency Injection {hidden}
 
-Command objects can participate in dependency injection. This is useful if your command object has some custom validation logic uses Grails [services|guide:services]:
+{hidden}Command objects can participate in dependency injection. This is useful if your command object has some custom validation logic uses Grails [services|guide:services]:{hidden}
+コマンドオブジェクトに依存注入をすることが可能です。Grailsの[サービス|guide:services]を使用したカスタムバリデーションなどを使用する際に便利です:
+
 
 {code}
 class LoginCommand {
@@ -77,4 +87,5 @@ class LoginCommand {
 }
 {code}
 
-In this example the command object interacts with the @loginService@ bean which is injected by name from the Spring @ApplicationContext@.
+{hidden}In this example the command object interacts with the @loginService@ bean which is injected by name from the Spring @ApplicationContext@.{hidden}
+この例では、@loginService@をSpringの@ApplicatinContext@から名前解決でコマンドオブジェクトに注入しています。

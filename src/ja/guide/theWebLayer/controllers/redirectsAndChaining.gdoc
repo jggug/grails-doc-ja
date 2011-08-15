@@ -1,6 +1,7 @@
-h4. Redirects
+h4. リダイレクト{hidden}Redirects{hidden}
 
-Actions can be redirected using the [redirect|controllers] controller method:
+{hidden}Actions can be redirected using the [redirect|controllers] controller method:{hidden}
+コントローラのメソッド、[redirect|controllers]を使用して、アクションをリダイレクトすることができます:
 
 {code}
 class OverviewController {
@@ -17,63 +18,75 @@ class OverviewController {
 }
 {code}
 
-Internally the [redirect|controllers] method uses the [HttpServletResponse|api:javax.servlet.http.HttpServletResponse] object's @sendRedirect@ method.
+{hidden}Internally the [redirect|controllers] method uses the [HttpServletResponse|api:javax.servlet.http.HttpServletResponse] object's @sendRedirect@ method.{hidden}
+[redirect|controllers]メソッドは内部的に[HttpServletResponse|api:javax.servlet.http.HttpServletResponse]オブジェクトの@sendRedirect@メソッドを使用しています。
 
-The @redirect@ method expects one of:
+{hidden}The @redirect@ method expects one of:{hidden}
+@redirect@メソッドでは以下のいずれかのように使用します:
 
-* Another closure within the same controller class:
+{hidden}* Another closure within the same controller class:{hidden}
+*同じコントローラ内のアクションクロージャ(プロパティで)の指定:
 
 {code}
 // Call the login action within the same class
 redirect(action: login)
 {code}
 
-* The name of an action (and controller name if the redirect isn't to an action in the current controller):
+{hidden}* The name of an action (and controller name if the redirect isn't to an action in the current controller):{hidden}
+* アクション名称でのしていと、別のコントローラのアクションの場合はコントローラの指定:
 
 {code}
 // Also redirects to the index action in the home controller
 redirect(controller: 'home', action: 'index')
 {code}
 
-*  A URI for a resource relative the application context path:
+{hidden}*  A URI for a resource relative the application context path:{hidden}
+* アプリケーションコンテキストパス内のリソースのURI:
 
 {code}
 // Redirect to an explicit URI
 redirect(uri: "/login.html")
 {code}
 
-* Or a full URL:
+{hidden}* Or a full URL:{hidden}
+* URLを全指定:
 
 {code}
 // Redirect to a URL
 redirect(url: "http://grails.org")
 {code}
 
-Parameters can optionally be passed from one action to the next using the @params@ argument of the method:
+{hidden}Parameters can optionally be passed from one action to the next using the @params@ argument of the method:{hidden}
+メソッドのparams引数をにパラメータを指定することで、アクションへのパラメータを渡せます:
 
 {code}
 redirect(action: 'myaction', params: [myparam: "myvalue"])
 {code}
 
-These parameters are made available through the [params|controllers] dynamic property that accesses request parameters. If a parameter is specified with the same name as a request parameter, the request parameter is overridden and the controller parameter is used.
+{hidden}These parameters are made available through the [params|controllers] dynamic property that accesses request parameters. If a parameter is specified with the same name as a request parameter, the request parameter is overridden and the controller parameter is used.{hidden}
+これらのパラメータは、アクセス時のリクエストパラメータの[params|controllers]プロパティから参照できるようになります。もしリクエストと同じパラメータを指定した場合は、パラメータは上書きされます。
 
-Since the @params@ object is a Map, you can use it to pass the current request parameters from one action to the next:
+{hidden}Since the @params@ object is a Map, you can use it to pass the current request parameters from one action to the next:{hidden}
+@params@オブジェクトはMapなので、以下のように、そのまま全てのリクエストパラメータを次のアクションに渡すことができます:
 
 {code}
 redirect(action: "next", params: params)
 {code}
 
-Finally, you can also include a fragment in the target URI:
+{hidden}Finally, you can also include a fragment in the target URI:{hidden}
+ターゲットURIに、フラグメントを含めることもできます:
 
 {code}
 redirect(controller: "test", action: "show", fragment: "profile")
 {code}
 
-which will (depending on the URL mappings) redirect to something like "/myapp/test/show#profile".
+{hidden}which will (depending on the URL mappings) redirect to something like "/myapp/test/show#profile".{hidden}
+この例では(URLマッピング定義によりますが)、リダイレクトは"/myapp/test/show#profile"になります。
 
-h4. Chaining
+h4. チェイニング {hidden}Chaining {hidden}
 
-Actions can also be chained. Chaining allows the model to be retained from one action to the next. For example calling the @first@ action in this action:
+{hidden}Actions can also be chained. Chaining allows the model to be retained from one action to the next. For example calling the @first@ action in this action:{hidden}
+アクションのチェインが可能です。チェインではアクションからアクションへのモデル参照が可能です。以下の例でアクション@first@を呼び出します:
 
 {code}
 class ExampleChainController {
@@ -92,13 +105,15 @@ class ExampleChainController {
 }
 {code}
 
-results in the model:
+{hidden}results in the model:{hidden}
+結果モデルは以下のようになります:
 
 {code}
 [one: 1, two: 2, three: 3]
 {code}
 
-The model can be accessed in subsequent controller actions in the chain using the @chainModel@ map. This dynamic property only exists in actions following the call to the @chain@ method:
+{hidden}The model can be accessed in subsequent controller actions in the chain using the @chainModel@ map. This dynamic property only exists in actions following the call to the @chain@ method:{hidden}
+途中でコントローラアクションからモデルにアクセスするには、chainModelマップを使用します。この動的プロパティはchainメソッドから呼ばれた時のみに存在します。
 
 {code}
 class ChainController {
@@ -110,7 +125,8 @@ class ChainController {
 }
 {code}
 
-Like the @redirect@ method you can also pass parameters to the @chain@ method:
+{hidden}Like the @redirect@ method you can also pass parameters to the @chain@ method:{hidden}
+@redirect@メソッドと同じように、@chain@メソッドにパラメータを渡すこともできます:
 
 {code}
 chain(action: "action1", model: [one: 1], params: [myparam: "param1"])

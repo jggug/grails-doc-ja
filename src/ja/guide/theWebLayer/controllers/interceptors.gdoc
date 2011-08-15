@@ -1,12 +1,15 @@
-Often it is useful to intercept processing based on either request, session or application state. This can be achieved with action interceptors. There are currently two types of interceptors: before and after.
+{hidden}Often it is useful to intercept processing based on either request, session or application state. This can be achieved with action interceptors. There are currently two types of interceptors: before and after.{hidden}
+リクエスト、セッションまたはアプリケーションで処理のインターセプトができると、たいへん役に立ちます。これはアクションインターセプターで達成できます。現在2種類のインターセプターbeforeとafterがあります。
 
 {note}
-If your interceptor is likely to apply to more than one controller, you are almost certainly better off writing a [Filter|guide:filters]. Filters can be applied to multiple controllers or URIs without the need to change the logic of each controller
+{hidden}If your interceptor is likely to apply to more than one controller, you are almost certainly better off writing a [Filter|guide:filters]. Filters can be applied to multiple controllers or URIs without the need to change the logic of each controller {hidden}
+複数のコントローラにインターセプターを反映させたい場合は、[Filter|guide:filters]を使用することをお勧めします。Filterは多数のコントローラまたはURIに、ロジックを追加すること無く反映できます。
 {note}
 
-h4. Before Interception
+h4. ビフォア・インターセプション{hidden}Before Interception {hidden}
 
-The @beforeInterceptor@ intercepts processing before the action is executed. If it returns @false@ then the intercepted action will not be executed. The interceptor can be defined for all actions in a controller as follows:
+{hidden}The @beforeInterceptor@ intercepts processing before the action is executed. If it returns @false@ then the intercepted action will not be executed. The interceptor can be defined for all actions in a controller as follows:{hidden}
+@beforeInterceptor@は、アクションが実行される前に処理の追加を行うことができます。@beforeInterceptor@で、@false@を返すとアクションは実行されません。コントローラ内の全てのアクションにインターセプターを定義するには以下のようにします。
 
 {code:java}
 def beforeInterceptor = {
@@ -14,7 +17,10 @@ def beforeInterceptor = {
 }
 {code}
 
-The above is declared inside the body of the controller definition.  It will be executed before all actions and does not interfere with processing. A common use case is very simplistic authentication:
+{hidden}The above is declared inside the body of the controller definition.  It will be executed before all actions and does not interfere with processing. A common use case is very simplistic authentication:{hidden}
+上記はコントローラ内部に設定します。全てのアクションの前に実行され処理を干渉することはありません。
+他によくある実装例としては簡単な認証などです:
+
 
 {code:java}
 def beforeInterceptor = [action: this.&auth, except: 'login']
@@ -32,11 +38,15 @@ def login() {
 }
 {code}
 
-The above code defines a method called @auth@. A private method is used so that it is not exposed as an action to the outside world. The @beforeInterceptor@ then defines an interceptor that is used on all actions _except_ the login action and it executes the @auth@ method. The @auth@ method is referenced using Groovy's method pointer syntax. Within the method it detects whether there is a user in the session, and if not it redirects to the @login@ action and returns @false@, causing the intercepted action to not be processed.
+{hidden}The above code defines a method called @auth@. A private method is used so that it is not exposed as an action to the outside world. The @beforeInterceptor@ then defines an interceptor that is used on all actions _except_ the login action and it executes the @auth@ method. The @auth@ method is referenced using Groovy's method pointer syntax. Within the method it detects whether there is a user in the session, and if not it redirects to the @login@ action and returns @false@, causing the intercepted action to not be processed.{hidden}
+上記の例では先ず、@auth@メソッドを定義します。外部にアクションとして認識されないように@private@メソッドにします。
+今回は、アクション名が@login@以外の全てのアクションで実行されるように、実行するメソッドをaction:に指定し、除外するアクション'login'を except:に指定して、@beforeInterceptor@を定義します。@auth@メソッドはGroovyのメソッドポインターシンタックスで指定します。これで、@auth@の処理によって、sessionにuser変数が見つからなかった場合は'login'アクションへリダイレクトして@false@を返しアクションを実行しないインターセプターが行えます。
 
-h4. After Interception
 
-Use the @afterInterceptor@ property to define an interceptor that is executed after an action:
+h4. アフター・インターセプション {hidden}After Interception {hidden}
+
+{hidden}Use the @afterInterceptor@ property to define an interceptor that is executed after an action:{hidden}
+@afterInterceptor@は、アクションが実行される後に処理の追加を行うことができます:
 
 {code:java}
 def afterInterceptor = { model ->
@@ -44,9 +54,11 @@ def afterInterceptor = { model ->
 }
 {code}
 
-The after interceptor takes the resulting model as an argument and can hence manipulate the model or response.
+{hidden}The after interceptor takes the resulting model as an argument and can hence manipulate the model or response.{hidden}
+アフター・インターセプターでは、処理結果のモデルを引数として取得して、モデルやレスポンスを操作することができます。
 
-An after interceptor may also modify the Spring MVC [ModelAndView|api:org.springframework.web.servlet.ModelAndView] object prior to rendering. In this case, the above example becomes:
+{hidden}An after interceptor may also modify the Spring MVC [ModelAndView|api:org.springframework.web.servlet.ModelAndView] object prior to rendering. In this case, the above example becomes:{hidden}
+レンダリング直前のSpring MVCの[ModelAndView|api:org.springframework.web.servlet.ModelAndView]も取得して変更することも可能です。以下のケースでは、前の例に追記すると:
 
 {code:java}
 def afterInterceptor = { model, modelAndView ->
@@ -56,23 +68,27 @@ def afterInterceptor = { model, modelAndView ->
 }
 {code}
 
-This allows the view to be changed based on the model returned by the current action. Note that the @modelAndView@ may be @null@ if the action being intercepted called @redirect@ or @render@.
+{hidden}This allows the view to be changed based on the model returned by the current action. Note that the @modelAndView@ may be @null@ if the action being intercepted called @redirect@ or @render@.{hidden}
+この例では返されたモデルの内容を元にビューを変更しています。インターセプトされた、アクションが@redirect@や@render@を呼び出している場合は、@modelANdView@は@null@になります。
 
-h4. Interception Conditions
+h4. インターセプションの条件指定 {hidden}Interception Conditions {hidden}
 
-Rails users will be familiar with the authentication example and how the 'except' condition was used when executing the interceptor (interceptors are called 'filters' in Rails; this terminology conflicts with Servlet filter terminology in Java):
+{hidden}Rails users will be familiar with the authentication example and how the 'except' condition was used when executing the interceptor (interceptors are called 'filters' in Rails; this terminology conflicts with Servlet filter terminology in Java):{hidden}
+'excepr'条件は、Railsユーザにとってインターセプターを使う時はお馴染みだと思います。(Railsではインターセプターはフィルターと呼ばれています。Javaでは用語的にサーブレットフィルターと衝突するのでインターセプターとしています)
 
 {code:java}
 def beforeInterceptor = [action: this.&auth, except: 'login']
 {code}
 
-This executes the interceptor for all actions except the specified action. A list of actions can also be defined as follows:
+{hidden}This executes the interceptor for all actions except the specified action. A list of actions can also be defined as follows:{hidden}
+上記の例では、exceptで指定したアクション以外でインターセプターを実行します。次のように、複数指定する場合はリストで指定します:
 
 {code:java}
 def beforeInterceptor = [action: this.&auth, except: ['login', 'register']]
 {code}
 
-The other supported condition is 'only', this executes the interceptor for only the specified action(s):
+{hidden}The other supported condition is 'only', this executes the interceptor for only the specified action(s):{hidden}
+指定したアクションのみでインターセプターを実行する場合は、'only'を使用します:
 
 {code:java}
 def beforeInterceptor = [action: this.&auth, only: ['secure']]

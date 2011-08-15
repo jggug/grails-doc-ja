@@ -1,26 +1,33 @@
-h3. Type Conversion Methods
+h3. 型変換メソッド {hidden}Type Conversion Methods {hidden}
 
-If you prefer to avoid the overhead of [Data Binding|guide:dataBinding] and simply want to convert incoming parameters (typically Strings) into another more appropriate type the [params|controllers] object has a number of convenience methods for each type:
+{hidden}If you prefer to avoid the overhead of [Data Binding|guide:dataBinding] and simply want to convert incoming parameters (typically Strings) into another more appropriate type the [params|controllers] object has a number of convenience methods for each type:{hidden}
+[データバインディング|guide:dataBinding]でのオーバーヘッドを避けたい場合や、受信したパラメータに対して、単純な型変換行いたい場合、 [params|controllers]オブジェクトには、型によって幾つかの便利なメソッドが有ります:
 
 {code}
 def total = params.int('total')
 {code}
 
-The above example uses the @int@ method, and there are also methods for @boolean@, @long@, @char@, @short@ and so on. Each of these methods is null-safe and safe from any parsing errors, so you don't have to perform any additional checks on the parameters.
+{hidden}The above example uses the @int@ method, and there are also methods for @boolean@, @long@, @char@, @short@ and so on. Each of these methods is null-safe and safe from any parsing errors, so you don't have to perform any additional checks on the parameters.{hidden}
+上記の例ではintメソッドを使用しています。ほかに、@boolean@,@long@,@char@,@short@等多数のメソッドがあります。これらのメソッドはnullセーフであり、パースエラーセーフなので、パラメータに対してのチェックを追加する必要がありません。
 
-Each of the conversion methods allows a default value to be passed as an optional second argument.  The default value will be returned if a corresponding entry cannot be found in the map or if an error occurs during the conversion.  Example:
+
+{hidden}Each of the conversion methods allows a default value to be passed as an optional second argument.  The default value will be returned if a corresponding entry cannot be found in the map or if an error occurs during the conversion.  Example:{hidden}
+型変換メソッドの第二引数にデフォルト値を設定することができます。一致する入力が無い場合や、型変換でエラーが起きた場合に指定したデフォルト値が返されます:
 
 {code}
 def total = params.int('total', 42)
 {code}
 
-These same type conversion methods are also available on the @attrs@ parameter of GSP tags.
+{hidden}These same type conversion methods are also available on the @attrs@ parameter of GSP tags.{hidden}
+GSPタグの@attrs@パラメータでも、同じ仕組みの型変換機能が使用できます。
 
-h3. Handling Multi Parameters
+h3. 複数の同一名称パラメータのハンドリング {hidden}Handling Multi Parameters {hidden}
 
-A common use case is dealing with multiple request parameters of the same name. For example you could get a query string such as @?name=Bob&name=Judy@.
+{hidden}A common use case is dealing with multiple request parameters of the same name. For example you could get a query string such as @?name=Bob&name=Judy@.{hidden}
+よくあるケースとして、リクエストパラメータ内の複数の同じ名称を扱う場合があります。クエリーの例として、@"?name=Bob&name=Judy"@等。
 
-In this case dealing with one parameter and dealing with many has different semantics since Groovy's iteration mechanics for @String@ iterate over each character. To avoid this problem the [params|controllers] object provides a @list@ method that always returns a list:
+{hidden}In this case dealing with one parameter and dealing with many has different semantics since Groovy's iteration mechanics for @String@ iterate over each character. To avoid this problem the [params|controllers] object provides a @list@ method that always returns a list:{hidden}
+パラメータに1つのみしか無い場合にイテレートしてしまうと、@String@の文字列が1文字ずつ参照されてしまいます。この問題を避けるために、[params|controllers]オブジェクトの@list@メソッドを使用することで毎回リストを返すことが可能です:
 
 {code}
 for (name in params.list('name')) {

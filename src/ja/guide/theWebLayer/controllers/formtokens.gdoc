@@ -1,10 +1,14 @@
-Grails has built-in support for handling duplicate form submissions using the "Synchronizer Token Pattern". To get started you define a token on the [form|tags] tag:
+{hidden}Grails has built-in support for handling duplicate form submissions using the "Synchronizer Token Pattern". To get started you define a token on the [form|tags] tag:{hidden}
+Grailsには、"同期トークンパターン"を使用した、フォーム二重送信ハンドリングをサポートしています。使用するには、先ずは[form|tags]タグにuseToken属性を指定します:
+
+
 
 {code:xml}
 <g:form useToken="true" ...>
 {code}
 
-Then in your controller code you can use the [withForm|controllers] method to handle valid and invalid requests:
+{hidden}Then in your controller code you can use the [withForm|controllers] method to handle valid and invalid requests:{hidden}
+そして、コントローラアクションで[withForm|controllers]メソッドを利用して、リクエストの有効・無効それぞれのコードを記述します:
 
 {code:java}
 withForm {
@@ -14,7 +18,9 @@ withForm {
 }
 {code}
 
-If you only provide the [withForm|controllers] method and not the chained @invalidToken@ method then by default Grails will store the invalid token in a @flash.invalidToken@ variable and redirect the request back to the original page. This can then be checked in the view:
+{hidden}If you only provide the [withForm|controllers] method and not the chained @invalidToken@ method then by default Grails will store the invalid token in a @flash.invalidToken@ variable and redirect the request back to the original page. This can then be checked in the view:{hidden}
+[withForm|controllers]メソッドのみを提供して@invalidToken@にチェインしなかった場合は、デフォルトでGrailsが無効トークンを@flash.invalidToken@に保持して、元のページにリクエストをリダイレクトします。これによってビューで以下のように確認できます:
+
 
 {code:xml}
 <g:if test="${flash.invalidToken}">
@@ -23,5 +29,6 @@ If you only provide the [withForm|controllers] method and not the chained @inval
 {code}
 
 {warning}
-The [withForm|controllers] tag makes use of the [session|controllers] and hence requires session affinity or clustered sessions if used in a cluster.
+{hidden}The [withForm|controllers] tag makes use of the [session|controllers] and hence requires session affinity or clustered sessions if used in a cluster.{hidden}
+[withForm|controllers]メソッドは[セッション|controllers]を使用するので、セッションの類似性またはクラスタで使用する場合はクラスタ化されたセッションが必要です。
 {warning}

@@ -1,18 +1,25 @@
-Grails support asynchronous request processing as provided by the Servlet 3.0 specification. To enable the async features you need to set your servlet target version to 3.0 in BuildConfig.groovy:
+{hidden}Grails support asynchronous request processing as provided by the Servlet 3.0 specification. To enable the async features you need to set your servlet target version to 3.0 in BuildConfig.groovy:{hidden}
+Servlet 3.0での非同期リクエスト処理をサポートしています。有効にするには、BuildConfig.groovy サーブレットバージョン指定を3.0に変更します。
+
 
 {code}
 grails.servlet.version = "3.0"
 {code}
 
-With that done ensure you do a clean re-compile as some async features are enabled at compile time.
+{hidden}With that done ensure you do a clean re-compile as some async features are enabled at compile time.{hidden}
+設定を変更したら、async機能がコンパイル時に有効にするために、クリーンしてリコンパイルしてください。
+
 
 {note}
-With a Servlet target version of 3.0 you can only deploy on Servlet 3.0 containers such as Tomcat 7 and above.
+{hidden}With a Servlet target version of 3.0 you can only deploy on Servlet 3.0 containers such as Tomcat 7 and above.{hidden}
+Servlet 3.0を指定した場合は、Servlet 3.0のみ対応でデプロイされるので、Servlet 3.0に対応したコンテナ(Tomcatの場合は7以上)で運用しましょう。
 {note}
 
-h4. Asynchronous Rendering
+h4. 非同期レンダリング {hidden}Asynchronous Rendering {hidden}
 
-You can render content (templates, binary data etc.) in an asynchronous manner by calling the @startAsync@ method which returns an instance of the Servlet 3.0 @AsyncContext@. Once you have a reference to the @AsyncContext@ you can use Grails' regular render method to render content:
+{hidden}You can render content (templates, binary data etc.) in an asynchronous manner by calling the @startAsync@ method which returns an instance of the Servlet 3.0 @AsyncContext@. Once you have a reference to the @AsyncContext@ you can use Grails' regular render method to render content:{hidden}
+Servlet 3.0 AsyncContextインスタンスを返す@startAsync@メソッドを呼び出すことで、非同期でコンテンツがレンダリング(コンテンツ、バイナリー等)できます。@AsyncContext@の参照をするだけで、あとは通常のGrailsでのrenderメソッドを使用してコンテンツをレンダリングできます。
+
 
 {code}
 def index() {
@@ -25,11 +32,15 @@ def index() {
 }
 {code}
 
-Note that you must call the @complete()@ method to terminate the connection. 
+{hidden}Note that you must call the @complete()@ method to terminate the connection. {hidden}
+コネクションを終了するには必ず@complete()@メソッドをコールしてください。
 
-h4. Resuming an Async Request
 
-You resume processing of an async request (for example to delegate to view rendering) by using the @dispatch@ method of the @AsyncContext@ class:
+h4. 非同期リクエストの再開 {hidden}Resuming an Async Request {hidden}
+
+{hidden}You resume processing of an async request (for example to delegate to view rendering) by using the @dispatch@ method of the @AsyncContext@ class:{hidden}
+非同期リクエストを再開するには、@AsyncContext@クラスの@dispatch()@メソッドを使用します。
+
 
 {code}
 def index() {

@@ -1,6 +1,7 @@
-h4. Programmatic File Uploads
+h4. プログラムによるファイルアップロード {hidden}Programmatic File Uploads {hidden}
 
-Grails supports file uploads using Spring's [MultipartHttpServletRequest|api:org.springframework.web.multipart.MultipartHttpServletRequest] interface. The first step for file uploading is to create a multipart form like this:
+{hidden}Grails supports file uploads using Spring's [MultipartHttpServletRequest|api:org.springframework.web.multipart.MultipartHttpServletRequest] interface. The first step for file uploading is to create a multipart form like this:{hidden}
+Grailsでは、Springの[MultipartHttpServletRequest|api:org.springframework.web.multipart.MultipartHttpServletRequest]インターフェイスを使用してファイルアップロードをサポートしています。ファイルアップロードを実装するには、先に次のようにフォームをマルチパートフォームにします:
 
 {code:xml}
 Upload Form: <br />
@@ -10,9 +11,11 @@ Upload Form: <br />
     </g:uploadForm>
 {code}
 
-The @uploadForm@ tag conveniently adds the @enctype="multipart/form-data"@ attribute to the standard @<g:form>@ tag.
+{hidden}The @uploadForm@ tag conveniently adds the @enctype="multipart/form-data"@ attribute to the standard @<g:form>@ tag.{hidden}
+@uploadForm@タグは、通常の@<g:form>@タグに、@enctype="multipart/form-data"@の属性を追加します。
 
-There are then a number of ways to handle the file upload. One is to work with the Spring [MultipartFile|api:org.springframework.web.multipart.MultipartFile] instance directly:
+{hidden}There are then a number of ways to handle the file upload. One is to work with the Spring [MultipartFile|api:org.springframework.web.multipart.MultipartFile] instance directly:{hidden}
+アップロードされたファイルを処理するには複数の方法があります。そのうちの一つはSpringの[MultipartFile|api:org.springframework.web.multipart.MultipartFile]インスタンスを直接操作する方法です:
 
 {code:java}
 def upload() {
@@ -28,11 +31,13 @@ def upload() {
 }
 {code}
 
-This is convenient for doing transfers to other destinations and manipulating the file directly as you can obtain an @InputStream@ and so on with the [MultipartFile|api:org.springframework.web.multipart.MultipartFile] interface.
+{hidden}This is convenient for doing transfers to other destinations and manipulating the file directly as you can obtain an @InputStream@ and so on with the [MultipartFile|api:org.springframework.web.multipart.MultipartFile] interface.{hidden}
+この[MultipartFile|api:org.springframework.web.multipart.MultipartFile]を使用すると、ファイルを別の場所に転送したり、@InputStream@を取得して直接ファイルを操作したりなど便利です。
 
-h4. File Uploads through Data Binding
+h4. データバインディング経由のファイルアップロード {hidden}File Uploads through Data Binding {hidden}
 
-File uploads can also be performed using data binding. Consider this @Image@ domain class:
+{hidden}File uploads can also be performed using data binding. Consider this @Image@ domain class:{hidden}
+データバインディングでファイルアップロードを処理する事ができます。@Image@というドメインクラスがあるとします:
 
 {code:java}
 class Image {
@@ -45,15 +50,18 @@ class Image {
 }
 {code}
 
-If you create an image using the @params@ object in the constructor as in the example below, Grails will automatically bind the file's contents as a @byte[]@ to the @myFile@ property:
+{hidden}If you create an image using the @params@ object in the constructor as in the example below, Grails will automatically bind the file's contents as a @byte[]@ to the @myFile@ property:{hidden}
+次の例のように、@params@をコンストラクタに渡してImageオブジェクトを生成すると、Grailsが自動的にファイルのコンテントを@myFile@プロパティに@byte\[\]@としてバインドします:
 
 {code:java}
 def img = new Image(params)
 {code}
 
-It's important that you set the [size|constraints] or [maxSize|constraints] constraints, otherwise your database may be created with a small column size that can't handle reasonably sized files. For example, both H2 and MySQL default to a blob size of 255 bytes for @byte[]@ properties.
+{hidden}It's important that you set the [size|constraints] or [maxSize|constraints] constraints, otherwise your database may be created with a small column size that can't handle reasonably sized files. For example, both H2 and MySQL default to a blob size of 255 bytes for @byte[]@ properties.{hidden}
+この場合、データベースカラムのサイズが小さいと処理できなくなるので、[size|constraints]または[maxSize|constraints]の制約を指定しましょう。例としてH2とMySQLは、@byte\[\]@プロパティで指定した場合のblobのデフォルトサイズが255バイトになります。
 
-It is also possible to set the contents of the file as a string by changing the type of the @myFile@ property on the image to a String type:
+{hidden}It is also possible to set the contents of the file as a string by changing the type of the @myFile@ property on the image to a String type:{hidden}
+テキストファイルなどの場合は、@myFile@プロパティの型をString型にすることで文字列にすることも可能です:
 
 {code:java}
 class Image {

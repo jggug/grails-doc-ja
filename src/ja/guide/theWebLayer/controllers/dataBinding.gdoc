@@ -1,10 +1,13 @@
-Data binding is the act of "binding" incoming request parameters onto the properties of an object or an entire graph of objects. Data binding should deal with all necessary type conversion since request parameters, which are typically delivered by a form submission, are always strings whilst the properties of a Groovy or Java object may well not be.
+{hidden}Data binding is the act of "binding" incoming request parameters onto the properties of an object or an entire graph of objects. Data binding should deal with all necessary type conversion since request parameters, which are typically delivered by a form submission, are always strings whilst the properties of a Groovy or Java object may well not be.{hidden}
+データバインディングとは、受信したリクエストパラメータを、オブジェクトのプロパティまたオブジェクト構造へ結合させる機能です。データバインディングでは、フォームから送信された文字列のリクエストパラメータを、必要な型への変換を行います。
 
-Grails uses [Spring|http://www.springframework.org]'s underlying data binding capability to perform data binding.
+{hidden}Grails uses [Spring|http://www.springframework.org]'s underlying data binding capability to perform data binding.{hidden}
+Grailsでは、[Spring|http://www.springframework.org]のデータバインディングを基礎にデータバインディングを行います。
 
-h4. Binding Request Data to the Model
+h4. モデルにリクエストデータをバインドする {hidden}Binding Request Data to the Model {hidden}
 
-There are two ways to bind request parameters onto the properties of a domain class. The first involves using a domain classes' Map constructor:
+{hidden}There are two ways to bind request parameters onto the properties of a domain class. The first involves using a domain classes' Map constructor:{hidden}
+リクエストパラメータをドメインクラスのプロパティへバインドする２通りの方法があります。１つめはドメインクラスのMapを指定するコンストラクタを使用します。
 
 {code:java}
 def save() {
@@ -13,13 +16,15 @@ def save() {
 }
 {code}
 
-The data binding happens within the code @new Book(params)@. By passing the [params|controllers] object to the domain class constructor Grails automatically recognizes that you are trying to bind from request parameters. So if we had an incoming request like:
+{hidden}The data binding happens within the code @new Book(params)@. By passing the [params|controllers] object to the domain class constructor Grails automatically recognizes that you are trying to bind from request parameters. So if we had an incoming request like:{hidden}
+この例での、 @new Book(params)@の部分でデータバインディングが実行されます。[params|controllers]オブジェクトをドメインクラスのコンストラクタに渡すことで、Grailsが自動にリクエストパラメータを認識してバインドします。例えば以下の例のようなリクエストを受信したとします。
 
 {code:java}
 /book/save?title=The%20Stand&author=Stephen%20King
 {code}
 
-Then the @title@ and @author@ request parameters would automatically be set on the domain class. You can use the [properties|domainClasses] property to perform data binding onto an existing instance:
+{hidden}Then the @title@ and @author@ request parameters would automatically be set on the domain class. You can use the [properties|domainClasses] property to perform data binding onto an existing instance:{hidden}
+リクエストパラメータの@title@と@author@が、自動的にドメインクラスへセットされます。もう一つの方法として、既存のドメインクラスインスタンスへデータバインディングを行う方法として、インスタンスの[properties|domainClasses]プロパティにparamsをセットする方法があります。
 
 {code:java}
 def save() {
@@ -29,33 +34,39 @@ def save() {
 }
 {code}
 
-This has the same effect as using the implicit constructor.
+{hidden}This has the same effect as using the implicit constructor.{hidden}
+上記の例で先ほどのコンストラクタと同じ結果となります。
 
-h4. Data binding and Single-ended Associations
+h4. シングルエンデッド・アソシエーション(単一終端関連)のデータバインディング {hidden}Data binding and Single-ended Associations {hidden}
 
-If you have a @one-to-one@ or @many-to-one@ association you can use Grails' data binding capability to update these relationships too. For example if you have an incoming request such as:
+{hidden}If you have a @one-to-one@ or @many-to-one@ association you can use Grails' data binding capability to update these relationships too. For example if you have an incoming request such as:{hidden}
+@one-to-one@または@many-to-one@などの関連も、Grailsデータバインディングの機能で更新可能です。例として次のようなリクエストを受信したとします:
 
 {code:java}
 /book/save?author.id=20
 {code}
 
-Grails will automatically detect the @.id@ suffix on the request parameter and look up the @Author@ instance for the given id when doing data binding such as:
+{hidden}Grails will automatically detect the @.id@ suffix on the request parameter and look up the @Author@ instance for the given id when doing data binding such as:{hidden}
+同じ方法で、Grailsがリクエストパラメータの@.id@接尾辞を自動認識して、与えられたidで該当する@Author@インスタンスを検索してデータバインディングを行います
 
 {code:java}
 def b = new Book(params)
 {code}
 
-An association property can be set to @null@ by passing the literal @String@ "null". For example:
+{hidden}An association property can be set to @null@ by passing the literal @String@ "null". For example:{hidden}
+次のように、関連のプロパティに文字列で"null"と指定することで@null@をセットする事ができます
 
 {code:java}
 /book/save?author.id=null
 {code}
 
-h4. Data Binding and Many-ended Associations
+h4. メニーエンデッド・アソシエーション(複数終端関連)のデータバインディング {hidden}Data Binding and Many-ended Associations {hidden}
 
-If you have a one-to-many or many-to-many association there are different techniques for data binding depending of the association type.
+{hidden}If you have a one-to-many or many-to-many association there are different techniques for data binding depending of the association type.{hidden}
+one-to-manyまたはmany-to-manyなどの関連には、それぞれの関連形式よって違ったデータバインディング方法があります。
 
-If you have a @Set@ based association (the default for a @hasMany@) then the simplest way to populate an association is to send a list of identifiers. For example consider the usage of @<g:select>@ below:
+{hidden}If you have a @Set@ based association (the default for a @hasMany@) then the simplest way to populate an association is to send a list of identifiers. For example consider the usage of @<g:select>@ below:{hidden}
+@Set@ベースの関連(@hasMany@でのデフォルト)で、簡単に関連を設定するには、idのリストを送る方法が有ります。以下の例は@<g:select>@を使用した方法です:
 
 {code:xml}
 <g:select name="books"
@@ -64,20 +75,25 @@ If you have a @Set@ based association (the default for a @hasMany@) then the sim
           value="${author?.books}" />
 {code}
 
-This produces a select box that lets you select multiple values. In this case if you submit the form Grails will automatically use the identifiers from the select box to populate the @books@ association.
+{hidden}This produces a select box that lets you select multiple values. In this case if you submit the form Grails will automatically use the identifiers from the select box to populate the @books@ association.{hidden}
+このタグでは複数選択のセレクトボックスが生成されます。この例でフォームを送信すると、Grailsが自動的にセレクトボックスで選択されたidを使用して、@books@の関連を設定します。
 
-However, if you have a scenario where you want to update the properties of the associated objects the this technique won't work. Instead you use the subscript operator:
+{hidden}However, if you have a scenario where you want to update the properties of the associated objects the this technique won't work. Instead you use the subscript operator:{hidden}
+ただしこの方法は、関連オブジェクトのプロパティを更新する場合は使用できません。代わりに添字演算子を使用します:
 
 {code:xml}
 <g:textField name="books[0].title" value="the Stand" />
 <g:textField name="books[1].title" value="the Shining" />
 {code}
 
-However, with @Set@ based association it is critical that you render the mark-up in the same order that you plan to do the update in. This is because a @Set@ has no concept of order, so although we're referring to @books[0]@ and @books[1]@ it is not guaranteed that the order of the association will be correct on the server side unless you apply some explicit sorting yourself.
+{hidden}However, with @Set@ based association it is critical that you render the mark-up in the same order that you plan to do the update in. This is because a @Set@ has no concept of order, so although we're referring to @books[0]@ and @books[1]@ it is not guaranteed that the order of the association will be correct on the server side unless you apply some explicit sorting yourself.{hidden}
+ただし、@Set@ベースの関連では、マークアップ(HTML)がレンダリングされた順序とは同じ順序で更新されない危険性あります。 これは@Set@には順序という概念がなく、@books\[0\]@や@books\[1\]@と指定したとしても、サーバサイドでの関連のソートを明快に指定しない限り、順序が保証されないことになるからです。
 
-This is not a problem if you use @List@ based associations, since a @List@ has a defined order and an index you can refer to. This is also true of @Map@ based associations.
+{hidden}This is not a problem if you use @List@ based associations, since a @List@ has a defined order and an index you can refer to. This is also true of @Map@ based associations.{hidden}
+@List@ベース関連の場合は、@List@の順序とインデックスを指定することができるので問題有りません。@Map@ベース関連も同じ事がいえます。
 
-Note also that if the association you are binding to has a size of two and you refer to an element that is outside the size of association:
+{hidden}Note also that if the association you are binding to has a size of two and you refer to an element that is outside the size of association:{hidden}
+さらに注意するポイントとして、バインドする関連が２個の物に、それより多い数の場合は:
 
 {code:xml}
 <g:textField name="books[0].title" value="the Stand" />
@@ -85,7 +101,8 @@ Note also that if the association you are binding to has a size of two and you r
 <g:textField name="books[2].title" value="Red Madder" />
 {code}
 
-Then Grails will automatically create a new instance for you at the defined position. If you "skipped" a few elements in the middle:
+{hidden}Then Grails will automatically create a new instance for you at the defined position. If you "skipped" a few elements in the middle:{hidden}
+Grailsが新たにインスタンスを指定したポジションに生成します。途中のいくつかのエレメントを飛ばした数値を指定した場合は:
 
 {code:xml}
 <g:textField name="books[0].title" value="the Stand" />
@@ -93,9 +110,11 @@ Then Grails will automatically create a new instance for you at the defined posi
 <g:textField name="books[5].title" value="Red Madder" />
 {code}
 
-Then Grails will automatically create instances in between. For example in the above case Grails will create 4 additional instances if the association being bound had a size of 2.
+{hidden}Then Grails will automatically create instances in between. For example in the above case Grails will create 4 additional instances if the association being bound had a size of 2.{hidden}
+Grailsが間のインスタンスも自動的に生成します。上記のケースでは関連が２個の場合は、４個のインスタンスが追加されます。
 
-You can bind existing instances of the associated type to a @List@ using the same @.id@ syntax as you would use with a single-ended association. For example:
+{hidden}You can bind existing instances of the associated type to a @List@ using the same @.id@ syntax as you would use with a single-ended association. For example:{hidden}
+既存のインスタンスを@List@関連でバインドするには、単一終端関連と同じように@.id@シンタックスを使用します。例として:
 
 {code:xml}
 <g:select name="books[0].id" from="${bookList}"
@@ -108,9 +127,11 @@ You can bind existing instances of the associated type to a @List@ using the sam
           value="${author?.books[2]?.id}" />
 {code}
 
-Would allow individual entries in the @books List@ to be selected separately.
+{hidden}Would allow individual entries in the @books List@ to be selected separately.{hidden}
+この例では、別々に選択して、@books List@の特定の場所にエントリを可能にします。
 
-Entries at particular indexes can be removed in the same way too. For example:
+{hidden}Entries at particular indexes can be removed in the same way too. For example:{hidden}
+同じ方法で、個々のインデックスからエントリの削除も可能です:
 
 {code:xml}
 <g:select name="books[0].id"
@@ -119,9 +140,11 @@ Entries at particular indexes can be removed in the same way too. For example:
           noSelection="['null': '']"/>
 {code}
 
-Will render a select box that will remove the association at @books[0]@ if the empty option is chosen.
+{hidden}Will render a select box that will remove the association at @books[0]@ if the empty option is chosen.{hidden}
+上記の例では、空のオプションを選択することで、@book\[0\]@の関連を削除します。
 
-Binding to a @Map@ property works the same way except that the list index in the parameter name is replaced by the map key:
+{hidden}Binding to a @Map@ property works the same way except that the list index in the parameter name is replaced by the map key:{hidden}
+リストのインデックス数値をパラメータ名称にすることで、マップのキーとして認識されるので、@Map@のプロパティも同じ方法で動作します:
 
 {code:xml}
 <g:select name="images[cover].id"
@@ -130,31 +153,36 @@ Binding to a @Map@ property works the same way except that the list index in the
           noSelection="['null': '']"/>
 {code}
 
-This would bind the selected image into the @Map@ property @images@ under a key of @"cover"@.
+{hidden}This would bind the selected image into the @Map@ property @images@ under a key of @"cover"@.{hidden}
+この例では、Mapプロパティimagesのキー"cover"に対してバインドされます。
 
-h4. Data binding with Multiple domain classes
+h4. 複数ドメインクラスでのデータバインディング {hidden}Data binding with Multiple domain classes {hidden}
 
-It is possible to bind data to multiple domain objects from the [params|controllers] object.
+{hidden}It is possible to bind data to multiple domain objects from the [params|controllers] object.{hidden}
+[params|controllers]オブジェクトから、複数のドメインオブジェクトへのデータのバインドが可能です。
 
-For example so you have an incoming request to:
+{hidden}For example so you have an incoming request to:{hidden}
+例として以下のようなリクエストがあったとします:
 
 {code:java}
  /book/save?book.title=The%20Stand&author.name=Stephen%20King
 {code}
 
-You'll notice the difference with the above request is that each parameter has a prefix such as @author.@ or @book.@ which is used to isolate which parameters belong to which type. Grails' @params@ object is like a multi-dimensional hash and you can index into it to isolate only a subset of the parameters to bind.
+{hidden}You'll notice the difference with the above request is that each parameter has a prefix such as @author.@ or @book.@ which is used to isolate which parameters belong to which type. Grails' @params@ object is like a multi-dimensional hash and you can index into it to isolate only a subset of the parameters to bind.{hidden}
+上記のリクエストでは、それぞれのパラメータに@author.@また@book.@という接頭辞が付いていて、どちらの型(ドメインクラス)に属するかを区別しています。Grailsの@params@オブジェクトは多次元ハッシュのようになっており、それぞれバインドするためのパラメータサブセットとして区別されて索引されます。
 
 {code:java}
 def b = new Book(params.book)
 {code}
 
-Notice how we use the prefix before the first dot of the @book.title@ parameter to isolate only parameters below this level to bind. We could do the same with an @Author@ domain class:
+{hidden}Notice how we use the prefix before the first dot of the @book.title@ parameter to isolate only parameters below this level to bind. We could do the same with an @Author@ domain class:{hidden}
+上記のように接頭辞bookをparams指定することで、ドメインクラスBookに対して、@book.title@パラメータだけが区別されてバインドされます。ドメインクラス@Author@も同じように指定します。
 
 {code:java}
 def a = new Author(params.author)
 {code}
 
-h4. Data Binding and Action Arguments
+h4. データバインディングとアクション引数{hidden}Data Binding and Action Arguments {hidden}
 
 Controller action arguments are subject to request parameter data binding.  There are 2 categories of controller action arguments.  The first category is command objects.  Complex types are treated as command objects.  See the [Command Objects|guide:commandObjects] section of the user guide for details.  The other category is basic object types.  Supported types are the 8 primitives, their corresponding type wrappers and [java.lang.String|api:java.lang.String].  The default behavior is to map request parameters to action arguments by name:
 
@@ -193,9 +221,11 @@ class AccountingController {
 {code}
 
 
-h4. Data binding and type conversion errors
+h4. 型変換エラーとデータバインディング {hidden}Data binding and type conversion errors {hidden}
 
-Sometimes when performing data binding it is not possible to convert a particular String into a particular target type. This results in a type conversion error. Grails will retain type conversion errors inside the [errors|domainClasses] property of a Grails domain class. For example:
+{hidden}Sometimes when performing data binding it is not possible to convert a particular String into a particular target type. This results in a type conversion error. Grails will retain type conversion errors inside the [errors|domainClasses] property of a Grails domain class. For example:{hidden}
+時折データバインディングの際に、特有の文字列を特有の型に変換できない場合があります。この場合の結果は型変換エラーとなります。Grailsではドメインインスタンスの[errors|domainClasses]プロパティで型変換エラーを保持します。例えば:
+
 
 {code:java}
 class Book {
@@ -204,13 +234,15 @@ class Book {
 }
 {code}
 
-Here we have a domain class @Book@ that uses the @java.net.URL@ class to represent URLs. Given an incoming request such as:
+{hidden}Here we have a domain class @Book@ that uses the @java.net.URL@ class to represent URLs. Given an incoming request such as:{hidden}
+ドメインクラス@Book@でURLを表すプロパティに@java.net.URL@クラスを使用したとします。次のようなリクエストを受信したとします:
 
 {code:java}
   /book/save?publisherURL=a-bad-url
 {code}
 
-it is not possible to bind the string @a-bad-url@ to the @publisherURL@ property as a type mismatch error occurs. You can check for these like this:
+{hidden}it is not possible to bind the string @a-bad-url@ to the @publisherURL@ property as a type mismatch error occurs. You can check for these like this:{hidden}
+型違いエラーが起きるため、文字列@a-bad-url@を@publisherURL@にバインドすることはできません。次のようにしてエラーを確認します:
 
 {code:java}
 def b = new Book(params)
@@ -221,21 +253,24 @@ if (b.hasErrors()) {
 }
 {code}
 
-Although we have not yet covered error codes (for more information see the section on [Validation|guide:validation]), for type conversion errors you would want a message from the @grails-app/i18n/messages.properties@ file to use for the error. You can use a generic error message handler such as:
+{hidden}Although we have not yet covered error codes (for more information see the section on [Validation|guide:validation]), for type conversion errors you would want a message from the @grails-app/i18n/messages.properties@ file to use for the error. You can use a generic error message handler such as:{hidden}
+この章までは、まだエラーコードの説明していませんが(詳しくは[Validation|guide:validation]を参照)、型変換エラーでは@grails-app/i18n/messages.properties@を使用してメッセージを返す事もあると思います。次のような一般的なメッセージハンドラーを使用することもできます
 
 {code:java}
 typeMismatch.java.net.URL=The field {0} is not a valid URL
 {code}
 
-Or a more specific one:
+{hidden}Or a more specific one:{hidden}
+また、さらに対象を特定する場合は:
 
 {code:java}
 typeMismatch.Book.publisherURL=The publisher URL you specified is not a valid URL
 {code}
 
-h4. Data Binding and Security concerns
+h4. データバインディングとセキュリティ考慮 {hidden}Data Binding and Security concerns {hidden}
 
-When batch updating properties from request parameters you need to be careful not to allow clients to bind malicious data to domain classes and be persisted in the database. You can limit what properties are bound to a given domain class using the subscript operator:
+{hidden}When batch updating properties from request parameters you need to be careful not to allow clients to bind malicious data to domain classes and be persisted in the database. You can limit what properties are bound to a given domain class using the subscript operator:{hidden}
+リクエストパラメータからのバッチ更新をする際は、クライアントからの悪意のあるデータを、ドメインクラスやデータベースへの永続化に反映させないように注意が必要です。添字演算子を使用してドメインクラスにバインドするプロパティを制限することができます。
 
 {code:java}
 def p = Person.get(1)
@@ -243,25 +278,30 @@ def p = Person.get(1)
 p.properties['firstName','lastName'] = params
 {code}
 
-In this case only the @firstName@ and @lastName@ properties will be bound.
+{hidden}In this case only the @firstName@ and @lastName@ properties will be bound.{hidden}
+上記の例では、@firstName@と@lastName@のみバインドされます。
 
-Another way to do this is is to use [Command Objects|guide:commandObjects] as the target of data binding instead of domain classes. Alternatively there is also the flexible [bindData|controllers] method.
+{hidden}Another way to do this is is to use [Command Objects|guide:commandObjects] as the target of data binding instead of domain classes. Alternatively there is also the flexible [bindData|controllers] method.{hidden}
+他には、データバインディングのターゲットをドメインクラスではなく[コマンドオブジェクト|guide:commandObjects]を利用する方法があります。あるいは柔軟な[bindData|controllers]メソッドを使用します。
 
-The @bindData@ method allows the same data binding capability, but to arbitrary objects:
+{hidden}The @bindData@ method allows the same data binding capability, but to arbitrary objects:{hidden}
+@bindData@メソッドは任意のオブジェクトにデータバインディングが可能です:
 
 {code:java}
 def p = new Person()
 bindData(p, params)
 {code}
 
-The @bindData@ method also lets you exclude certain parameters that you don't want updated:
+{hidden}The @bindData@ method also lets you exclude certain parameters that you don't want updated:{hidden}
+@bindData@メソッドでは、更新しないパラメータを除外する事が可能です:
 
 {code:java}
 def p = new Person()
 bindData(p, params, [exclude: 'dateOfBirth'])
 {code}
 
-Or include only certain properties:
+{hidden}Or include only certain properties:{hidden}
+または、指定したプロパティのみの更新も可能です:
 
 {code:java}
 def p = new Person()

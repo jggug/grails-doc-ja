@@ -1,18 +1,22 @@
-The previous section on on XML and JSON responses covered simplistic examples of rendering XML and JSON responses. Whilst the XML builder used by Grails is the standard "XmlSlurper":http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper found in Groovy, the JSON builder is a custom implementation specific to Grails.
+{hidden}The previous section on on XML and JSON responses covered simplistic examples of rendering XML and JSON responses. Whilst the XML builder used by Grails is the standard "XmlSlurper":http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper found in Groovy, the JSON builder is a custom implementation specific to Grails.{hidden}
+前のセクション「 XMLとJSONレスポンス」で単純なXMLとJSONのをレンダリングしてレスポンスする例を紹介しました。Grailsで使用してるXMLビルダーがGroovyの標準的な "XmlSlurper":http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper に対して、JSONビルダーに関してはGrails特有の実装になっています。
 
-h4. JSONBuilder and Grails versions
+h4. JSONBuilderとGrailsのバージョン {hidden}JSONBuilder and Grails versions {hidden}
 
-JSONBuilder behaves different depending on the version of Grails you use. For version below 1.2 the deprecated [grails.web.JSONBuilder|api:grails.web.JSONBuilder] class is used. This section covers the usage of the Grails 1.2 JSONBuilder
+{hidden}JSONBuilder behaves different depending on the version of Grails you use. For version below 1.2 the deprecated [grails.web.JSONBuilder|api:grails.web.JSONBuilder] class is used. This section covers the usage of the Grails 1.2 JSONBuilder {hidden}
+JSONBuilderの振る舞いは使用するGrailsのバージョンに依存します。1.2以前では現在非推奨となる[grails.web.JSONBuilder|api:grails.web.JSONBuilder]が使用されます。このセクションでは、Grails 1.2のJSONBuilderの説明をします。
 
-For backwards compatibility the old @JSONBuilder@ class is used with the @render@ method for older applications; to use the newer/better @JSONBuilder@ class set the following in @Config.groovy@:
+{hidden}For backwards compatibility the old @JSONBuilder@ class is used with the @render@ method for older applications; to use the newer/better @JSONBuilder@ class set the following in @Config.groovy@:{hidden}
+下位互換として、古いバージョンからメンテナンスしているアプリケーションのために、@render@メソッドで古い@JSONBuilder@を使用するようになっています。新しい良くなった@JSONBuilder@を使用するには@Config.groovy@に、次のような設定をします:
 
 {code}
 grails.json.legacy.builder = false
 {code}
 
-h4. Rendering Simple Objects
+h4. 単純なオブジェクトをレンダリング {hidden}Rendering Simple Objects {hidden}
 
-To render a simple JSON object just set properties within the context of the Closure:
+{hidden}To render a simple JSON object just set properties within the context of the Closure:{hidden}
+単純なJSONオブジェクトを生成するには、クロージャの中にプロパティをセットするだけです:
 
 {code}
 render(contentType: "text/json") {
@@ -20,15 +24,17 @@ render(contentType: "text/json") {
 }
 {code}
 
-The above will produce the JSON:
+{hidden}The above will produce the JSON:{hidden}
+上記の例では、このような結果が得られます:
 
 {code}
 {"hello":"world"}
 {code}
 
-h4. Rendering JSON Arrays
+h4. JSON配列レンダリング {hidden}Rendering JSON Arrays {hidden}
 
-To render a list of objects simple assign a list:
+{hidden}To render a list of objects simple assign a list:{hidden}
+オブジェクトのリストをレンダリングするには、変数に配列を指定するだけです:
 
 {code}
 render(contentType: "text/json") {
@@ -36,13 +42,15 @@ render(contentType: "text/json") {
 }
 {code}
 
-This will produce:
+{hidden}This will produce:{hidden}
+この例では以下を生成:
 
 {code}
 {"categories":["a","b","c"]}
 {code}
 
-You can also render lists of complex objects, for example:
+{hidden}You can also render lists of complex objects, for example:{hidden}
+複雑なオブジェクトのリストも可能です。例として:
 
 {code}
 render(contentType: "text/json") {
@@ -50,13 +58,15 @@ render(contentType: "text/json") {
 }
 {code}
 
-This will produce:
+{hidden}This will produce:{hidden}
+この例では以下を生成:
 
 {code}
 {"categories":[ {"a":"A"} , {"b":"B"}] }
 {code}
 
-Use the special @element@ method to return a list as the root:
+{hidden}Use the special @element@ method to return a list as the root:{hidden}
+@element@メソッドを使用することで、リストをルートとして返す事ができます:
 
 {code}
 render(contentType: "text/json") {
@@ -66,15 +76,17 @@ render(contentType: "text/json") {
 }
 {code}
 
-The above code produces:
+{hidden}The above code produces:{hidden}
+この例では以下を生成:
 
 {code}
 [1,2,3]
 {code}
 
-h4. Rendering Complex Objects
+h4. 複雑なオブジェクトのレンダリング {hidden}Rendering Complex Objects {hidden}
 
-Rendering complex objects can be done with Closures. For example:
+{hidden}Rendering complex objects can be done with Closures. For example:{hidden}
+より複雑なオブジェクトをクロージャでレンダリングできます。例として:
 
 {code}
 render(contentType: "text/json") {
@@ -86,15 +98,17 @@ render(contentType: "text/json") {
 }
 {code}
 
-The above will produce the JSON:
+{hidden}The above will produce the JSON:{hidden}
+この例では次のようなJSONを生成します:
 
 {code}
 {"categories":["a","b","c"],"title":"Hello JSON","information":{"pages":10}}
 {code}
 
-h4. Arrays of Complex Objects
+h4. 複雑なオブジェクトの配列 {hidden}Arrays of Complex Objects {hidden}
 
-As mentioned previously you can nest complex objects within arrays using Closures:
+{hidden}As mentioned previously you can nest complex objects within arrays using Closures:{hidden}
+前述したように、クロージャを使用してオブジェクトを配列にネストすることも可能です:
 
 {code}
 render(contentType: "text/json") {
@@ -102,7 +116,8 @@ render(contentType: "text/json") {
 }
 {code}
 
-You can use the @array@ method to build them up dynamically:
+{hidden}You can use the @array@ method to build them up dynamically:{hidden}
+@array@メソッドを使用して動的に生成する事もできます:
 
 {code}
 def results = Book.list()
@@ -115,9 +130,10 @@ render(contentType: "text/json") {
 }
 {code}
 
-h4. Direct JSONBuilder API Access
+h4. JSONBuilder APIに直接アクセスする {hidden}Direct JSONBuilder API Access {hidden}
 
-If you don't have access to the @render@ method, but still want to produce JSON you can use the API directly:
+{hidden}If you don't have access to the @render@ method, but still want to produce JSON you can use the API directly:{hidden}
+renderメソッドと関係の無い場所ではJSONを生成したい場合はAPIを直に使用できます:
 
 {code}
 def builder = new JSONBuilder()
