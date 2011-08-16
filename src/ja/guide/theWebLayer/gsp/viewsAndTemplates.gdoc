@@ -1,8 +1,10 @@
-Grails also has the concept of templates. These are useful for partitioning your views into maintainable chunks, and combined with [Layouts|guide:layouts] provide a highly re-usable mechanism for structured views.
+{hidden}Grails also has the concept of templates. These are useful for partitioning your views into maintainable chunks, and combined with [Layouts|guide:layouts] provide a highly re-usable mechanism for structured views.{hidden}
+Grailsもテンプレートの概念を持っています。ビューを管理しやすいかたまりに分類して[レイアウト|guide:layouts]機能で結合する際に活用できます。
 
-h4. Template Basics
+h4. テンプレートの基礎 {hidden}Template Basics {hidden}
 
-Grails uses the convention of placing an underscore before the name of a view to identify it as a template. For example, you might have a template that renders Books located at @grails-app/views/book/_bookTemplate.gsp@:
+{hidden}Grails uses the convention of placing an underscore before the name of a view to identify it as a template. For example, you might have a template that renders Books located at @grails-app/views/book/_bookTemplate.gsp@:{hidden}
+Grailsでは、アンダースコアがビュー名称の前にあるとテンプレートとして認識するルールがあります。例として、Bookコントローラからbookをレンダリングするテンプレートは@grails-app/views/books/@に @_bookTemplate.gsp@として配置:
 
 {code:xml}
 <div class="book" id="${book?.id}">
@@ -12,50 +14,58 @@ Grails uses the convention of placing an underscore before the name of a view to
 {code}
 
 Use the [render|tags] tag to render this template from one of the views in @grails-app/views/book@:
+@grails-app/views/book@の配置したビューで、テンプレートを使用するには、[render|tags]タグを使います:
 
 {code:xml}
 <g:render template="bookTemplate" model="[book: myBook]" />
 {code}
 
-Notice how we pass into a model to use using the @model@ attribute of the @render@ tag. If you have multiple @Book@ instances you can also render the template for each @Book@ using the render tag with a @collection@ attribute:
+{hidden}Notice how we pass into a model to use using the @model@ attribute of the @render@ tag. If you have multiple @Book@ instances you can also render the template for each @Book@ using the render tag with a @collection@ attribute:{hidden}
+この例のrenderタグのmodel属性を使用してモデルをテンプレートに渡している部分に注目してください。もし複数の@Book@インスタンスを使用して、それぞれの@Book@をテンプレートでレンダリングする場合は、以下のように@render@タグの@collection@属性にコレクションを指定します:
 
 {code:xml}
 <g:render template="bookTemplate" var="book" collection="${bookList}" />
 {code}
 
-h4. Shared Templates
+h4. テンプレートの共有 {hidden}Shared Templates {hidden}
 
-In the previous example we had a template that was specific to the @BookController@ and its views at @grails-app/views/book@. However, you may want to share templates across your application.
+{hidden}In the previous example we had a template that was specific to the @BookController@ and its views at @grails-app/views/book@. However, you may want to share templates across your application.{hidden}
+前の例では@BookController@と@grails-app/views/book@階層以下のビューを対象に説明しました。テンプレートはアプリケーション全体を通して使用したいと思います。
 
-In this case you can place them in the root views directory at grails-app/views or any subdirectory below that location, and then with the template attribute use an absolute location starting with @/@ instead of a relative location. For example if you had a template called @grails-app/views/shared/_mySharedTemplate.gsp@, you would reference it as:
+{hidden}In this case you can place them in the root views directory at grails-app/views or any subdirectory below that location, and then with the template attribute use an absolute location starting with @/@ instead of a relative location. For example if you had a template called @grails-app/views/shared/_mySharedTemplate.gsp@, you would reference it as:{hidden}
+このケースでは、ビューのルートディレクトリである grails-app/views、あるいはルートディレクトのサブディレクトリにテンプレートファイルを配置して、template属性には、@/(スラッシュ)@から始まる grails-app/viewsからの絶対パスで指定します。例として、テンプレートファイルが、@grails-app/views/shared/_mySharedTemplate.gsp@だとした場合は次のように指定します:
 
 {code:xml}
 <g:render template="/shared/mySharedTemplate" />
 {code}
 
-You can also use this technique to reference templates in any directory from any view or controller:
+{hidden}You can also use this technique to reference templates in any directory from any view or controller:{hidden}
+この方法では、どこにテンプレートが配置されていても、どのビューまたはコントローラからでもテンプレートが使用できます:
 
 {code:xml}
 <g:render template="/book/bookTemplate" model="[book: myBook]" />
 {code}
 
-h4. The Template Namespace
+h4. テンプレートネームスペース {hidden}The Template Namespace {hidden}
 
-Since templates are used so frequently there is template namespace, called @tmpl@, available that makes using templates easier. Consider for example the following usage pattern:
+{hidden}Since templates are used so frequently there is template namespace, called @tmpl@, available that makes using templates easier. Consider for example the following usage pattern:{hidden}
+テンプレートを多用する場合は、テンプレートを簡単に使用するための@tmpl@という名称の、テンプレートネームスペースが使用できます:
 
 {code:xml}
 <g:render template="bookTemplate" model="[book:myBook]" />
 {code}
 
 This can be expressed with the @tmpl@ namespace as follows:
+上記の例を@tmpl@ネームスペースで記述すると以下のようになります:
 
 {code:xml}
 <tmpl:bookTemplate book="${myBook}" />
 {code}
 
-h4. Templates in Controllers and Tag Libraries
+h4. コントローラとタグライブラリでのテンプレート {hidden}Templates in Controllers and Tag Libraries {hidden}
 
-You can also render templates from controllers using the [render|controllers] controller method. This is useful for [Ajax|guide:ajax] applications where you generate small HTML or data responses to partially update the current page instead of performing new request:
+{hidden}You can also render templates from controllers using the [render|controllers] controller method. This is useful for [Ajax|guide:ajax] applications where you generate small HTML or data responses to partially update the current page instead of performing new request:{hidden}
+コントローラの[render|controllers]メソッドを使用してコントローラでテンプレートをレンダリングすることもできます。[Ajax|guide:ajax]アプリケーションのように、ページ内の一部をHTMLのパーツやデータをレスポンスして更新する場合に有用です:
 
 {code:java}
 def bookData() {
@@ -64,7 +74,8 @@ def bookData() {
 }
 {code}
 
-The [render|controllers] controller method writes directly to the response, which is the most common behaviour. To instead obtain the result of template as a String you can use the [render|tags] tag:
+{hidden}The [render|controllers] controller method writes directly to the response, which is the most common behaviour. To instead obtain the result of template as a String you can use the [render|tags] tag:{hidden}
+通常の振る舞いですが、コントローラの[render|controllers]メソッドは直接結果をレスポンス出力します。文字列としてテンプレートの結果を取得する場合は、[render|tags]タグを使用できます。:
 
 {code:java}
 def bookData() {
@@ -74,4 +85,5 @@ def bookData() {
 }
 {code}
 
-Notice the usage of the @g@ namespace which tells Grails we want to use the [tag as method call|guide:tagsAsMethodCalls] instead of the [render|controllers] method.
+{hidden}Notice the usage of the @g@ namespace which tells Grails we want to use the [tag as method call|guide:tagsAsMethodCalls] instead of the [render|controllers] method.{hidden}
+ネームスペース@g@を使用することで[タグをメソッドとして使用|guide:tagsAsMethodCalls]するのか、コントローラの[render|controllers]メソッドなのかを区別しています。
