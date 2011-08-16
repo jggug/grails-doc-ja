@@ -1,4 +1,5 @@
-GSP also features tags to help you manage linking to controllers and actions. The [link|tags] tag lets you specify controller and action name pairing and it will automatically work out the link based on the [URL Mappings|guide:urlmappings], even if you change them! For example:
+{hidden}GSP also features tags to help you manage linking to controllers and actions. The [link|tags] tag lets you specify controller and action name pairing and it will automatically work out the link based on the [URL Mappings|guide:urlmappings], even if you change them! For example:{hidden}
+コントローラとアクションでのリンクを操作するGSPタグがあります。[link|tags]タグはコントローラとアクション名を指定するだけで[URLマッピング|guide:urlmappings]をベースとしたリンクを自動的に生成します([URLマッピング|guide:urlmappings]で変更をしても)。:
 
 {code:xml}
 <g:link action="show" id="1">Book 1</g:link>

@@ -1,40 +1,47 @@
-One major different between GSP tags and other tagging technologies is that GSP tags can be called as either regular tags or as method calls from [controllers|guide:controllers], [tag libraries|guide:taglibs] or GSP views.
+{hidden}One major different between GSP tags and other tagging technologies is that GSP tags can be called as either regular tags or as method calls from [controllers|guide:controllers], [tag libraries|guide:taglibs] or GSP views.{hidden}
+GSPタグと他のタグ技術との大きな違いは、通常のタグとしての利用だけではなく、[コントローラ|guide:controllers]、[タグライブラリ|guide:taglibs]またはGSPビューから、メソッドとして呼び出せるという点です。
 
-h4. Tags as method calls from GSPs
+h4. GSPでタグをメソッドとして使用する {hidden}Tags as method calls from GSPs {hidden}
 
-Tags return their results as a String-like object (a @StreamCharBuffer@ which has all of the same methods as String) instead of writing directly to the response when called as methods. For example:
+{hidden}Tags return their results as a String-like object (a @StreamCharBuffer@ which has all of the same methods as String) instead of writing directly to the response when called as methods. For example:{hidden}
+タグをメソッドとして使用すると、結果をレスポンスへ出力する代わりに、文字列のようなオブジェクトで返します(Stringと同じメソッドを持つ@StreamCharBuffer@)。:
 
 {code:xml}
 Static Resource: ${createLinkTo(dir: "images", file: "logo.jpg")}
 {code}
 
-This is particularly useful for using a tag within an attribute:
+{hidden}This is particularly useful for using a tag within an attribute:{hidden}
+タグの属性内に使用する際などに特に便利です:
 
 {code:xml}
 <img src="${createLinkTo(dir: 'images', file: 'logo.jpg')}" />
 {code}
 
-In view technologies that don't support this feature you have to nest tags within tags, which becomes messy quickly and often has an adverse effect of WYSWIG tools such as Dreamweaver that attempt to render the mark-up as it is not well-formed:
+{hidden}In view technologies that don't support this feature you have to nest tags within tags, which becomes messy quickly and often has an adverse effect of WYSWIG tools such as Dreamweaver that attempt to render the mark-up as it is not well-formed:{hidden}
+以下の例のように、このような機能をもたないタグ技術は、タグをネストしないといけません。これだとすぐにコードは乱雑になり、Dreamweaver等のツールでの表示が正常になりません:
 
 {code:xml}
 <img src="<g:createLinkTo dir="images" file="logo.jpg" />" />
 {code}
 
-h4. Tags as method calls from Controllers and Tag Libraries
+h4. コントローラとタグライブラリでタグをメソッドとして使用する {hidden}Tags as method calls from Controllers and Tag Libraries {hidden}
 
-You can also invoke tags from controllers and tag libraries. Tags within the default @g:@ [namespace|guide:namespaces] can be invoked without the prefix and a @StreamCharBuffer@ result is returned:
+{hidden}You can also invoke tags from controllers and tag libraries. Tags within the default @g:@ [namespace|guide:namespaces] can be invoked without the prefix and a @StreamCharBuffer@ result is returned:{hidden}
+コントローラとタブライブラリ(実装側)で、タグを呼び出す事が可能です。デフォルトの[ネームスペース|guide:namespaces]@g:@を持つタグは、接頭辞無しで呼び出す事で、結果に@StreamCharBuffer@を返します:
 
 {code:java}
 def imageLocation = createLinkTo(dir:"images", file:"logo.jpg").toString()
 {code}
 
-Prefix the namespace to avoid naming conflicts:
+{hidden}Prefix the namespace to avoid naming conflicts:{hidden}
+名前の衝突を避けるために、ネームスペースを接頭辞とする場合は:
 
 {code:java}
 def imageLocation = g.createLinkTo(dir:"images", file:"logo.jpg").toString()
 {code}
 
-For tags that use a [custom namespace|guide:namespaces], use that prefix for the method call. For example (from the [FCK Editor plugin|http://grails.org/plugin/fckeditor]):
+{hidden}For tags that use a [custom namespace|guide:namespaces], use that prefix for the method call. For example (from the [FCK Editor plugin|http://grails.org/plugin/fckeditor]):{hidden}
+カスタムネームスペースを使用しているタグの場合は、[カスタムネームスペース|guide:namespaces]を接頭辞として使います。[FCKエディタープラグイン|http://grails.org/plugin/fckeditor]を例とすると:
 
 {code:java}
 def editor = fckeditor.editor(name: "text", width: "100%", height: "400")

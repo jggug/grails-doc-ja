@@ -1,4 +1,5 @@
-If you have collections of objects you often need to sort and filter them. Use the [findAll|tags] and [grep|tags] tags for these tasks:
+{hidden}If you have collections of objects you often need to sort and filter them. Use the [findAll|tags] and [grep|tags] tags for these tasks:{hidden}
+オブジェクトのコレクションを扱う場合はソート、フィルタリングが必要になります。その場合は [findAll|tags]タグと[grep|tags]タグが活用できます:
 
 {code:xml}
 Stephen King's Books:
@@ -7,7 +8,8 @@ Stephen King's Books:
 </g:findAll>
 {code}
 
-The @expr@ attribute contains a Groovy expression that can be used as a filter. The [grep|tags] tag does a similar job, for example filtering by class:
+{hidden}The @expr@ attribute contains a Groovy expression that can be used as a filter. The [grep|tags] tag does a similar job, for example filtering by class:{hidden}
+フィルターとして使うGroovy式を@expr@属性に記述します。[grep|tags]タグも同じような動作をします。クラスでのフィルタリングを例とすると:
 
 {code:xml}
 <g:grep in="${books}" filter="NonFictionBooks.class">
@@ -15,7 +17,8 @@ The @expr@ attribute contains a Groovy expression that can be used as a filter. 
 </g:grep>
 {code}
 
-Or using a regular expression:
+{hidden}Or using a regular expression:{hidden}
+正規表現を使用した例:
 
 {code:xml}
 <g:grep in="${books.title}" filter="~/.*?Groovy.*?/">
@@ -23,4 +26,5 @@ Or using a regular expression:
 </g:grep>
 {code}
 
-The above example is also interesting due to its usage of GPath. GPath is an XPath-like language in Groovy. The @books@ variable is a collection of @Book@ instances. Since each @Book@ has a @title@, you can obtain a list of Book titles using the expression @books.title@. Groovy will auto-magically iterate the collection, obtain each title, and return a new list!
+{hidden}The above example is also interesting due to its usage of GPath. GPath is an XPath-like language in Groovy. The @books@ variable is a collection of @Book@ instances. Since each @Book@ has a @title@, you can obtain a list of Book titles using the expression @books.title@. Groovy will auto-magically iterate the collection, obtain each title, and return a new list!{hidden}
+上記の例ではGPathも使用方法も紹介されています。GPathはGroovyでのXpathのような言語です。変数@books@は@Book@インスタンスのコレクションです。全ての@Book@にプロパティ@title@が有る場合、@books.title@とすることで@Book@の@title@プロパティのリストを得られます。Groovyは自動的にコレクションを検索して全ての@title@を含んだリストを返してくれます。

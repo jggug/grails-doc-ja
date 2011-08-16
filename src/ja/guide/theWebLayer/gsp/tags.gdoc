@@ -1,16 +1,21 @@
-Now that the less attractive JSP heritage has been set aside, the following sections cover GSP's built-in tags, which are the preferred way to define GSP pages.
+{hidden}Now that the less attractive JSP heritage has been set aside, the following sections cover GSP's built-in tags, which are the preferred way to define GSP pages.{hidden}
+魅力の低い遺産JSPはさておき、このセクションではGSPの組込タグを、GSPページでどのように活用すると良いか解説していきます。
+
 
 {note}
-The section on [Tag Libraries|guide:taglibs] covers how to add your own custom tag libraries.
+{hidden}The section on [Tag Libraries|guide:taglibs] covers how to add your own custom tag libraries.{hidden}
+カスタムタグの追加などは、[タグライブラリ|guide:taglibs]のセクションで解説します。
 {note}
 
-All built-in GSP tags start with the prefix @g:@. Unlike JSP, you don't specify any tag library imports. If a tag starts with @g:@ it is automatically assumed to be a GSP tag. An example GSP tag would look like:
+{hidden}All built-in GSP tags start with the prefix @g:@. Unlike JSP, you don't specify any tag library imports. If a tag starts with @g:@ it is automatically assumed to be a GSP tag. An example GSP tag would look like:{hidden}
+全ての組込GSPタグは接頭辞@g:@で始まるタグです。JSPと違いタグライブラリのインポートが必要有りません。@g:@接頭辞のタグは自動的にGSPタグとして用いられます。例としてGSPタグの見ためは次のようになります:
 
 {code:xml}
 <g:example />
 {code}
 
-GSP tags can also have a body such as:
+{hidden}GSP tags can also have a body such as:{hidden}
+GSPタグの内容も記述できます:
 
 {code:xml}
 <g:example>
@@ -18,7 +23,8 @@ GSP tags can also have a body such as:
 </g:example>
 {code}
 
-Expressions can be passed into GSP tag attributes, if an expression is not used it will be assumed to be a String value:
+{hidden}Expressions can be passed into GSP tag attributes, if an expression is not used it will be assumed to be a String value:{hidden}
+GSPのタグ属性にエクスプレッションを記述できます。エクスプレッションを使用しない場合は文字列として値が用いられます。:
 
 {code:xml}
 <g:example attr="${new Date()}">
@@ -26,7 +32,8 @@ Expressions can be passed into GSP tag attributes, if an expression is not used 
 </g:example>
 {code}
 
-Maps can also be passed into GSP tag attributes, which are often used for a named parameter style syntax:
+{hidden}Maps can also be passed into GSP tag attributes, which are often used for a named parameter style syntax:{hidden}
+GSPのタグ属性に、ひんぱんに使用する名前付きパラメータ構文として、Map型を記述できます:
 
 {code:xml}
 <g:example attr="${new Date()}" attr2="[one:1, two:2, three:3]">
@@ -34,7 +41,8 @@ Maps can also be passed into GSP tag attributes, which are often used for a name
 </g:example>
 {code}
 
-Note that within the values of attributes you must use single quotes for Strings:
+{hidden}Note that within the values of attributes you must use single quotes for Strings:{hidden}
+属性内での、Mapの文字列値はシングルクォートを使用してください:
 
 {code:xml}
 <g:example attr="${new Date()}" attr2="[one:'one', two:'two']">
@@ -42,4 +50,5 @@ Note that within the values of attributes you must use single quotes for Strings
 </g:example>
 {code}
 
-With the basic syntax out the way, the next sections look at the tags that are built into Grails by default.
+{hidden}With the basic syntax out the way, the next sections look at the tags that are built into Grails by default.{hidden}
+ここまでで基本構文は全てです。次のセクションではどのようなタグがGrailsにデフォルトで組み込まれているか見ていきましょう。

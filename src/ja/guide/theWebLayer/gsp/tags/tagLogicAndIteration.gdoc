@@ -1,4 +1,5 @@
-GSP also supports logical and iterative tags out of the box. For logic there are [if|tags], [else|tags] and [elseif|tags] tags for use with branching:
+{hidden}GSP also supports logical and iterative tags out of the box. For logic there are [if|tags], [else|tags] and [elseif|tags] tags for use with branching:{hidden}
+GSPにはすぐに活用できるロジックタグとイテレーションタグがあります。ロジックタグは分岐に使用する[if|tags], [else|tags], [elseif|tags]です:
 
 {code:xml}
 <g:if test="${session.role == 'admin'}">
@@ -9,7 +10,8 @@ GSP also supports logical and iterative tags out of the box. For logic there are
 </g:else>
 {code}
 
-Use the [each|tags] and [while|tags] tags for iteration:
+{hidden}Use the [each|tags] and [while|tags] tags for iteration:{hidden}
+イテレーションには[each|tags]タグと[while|tags]タグを使用します:
 
 {code:xml}
 <g:each in="${[1,2,3]}" var="num">

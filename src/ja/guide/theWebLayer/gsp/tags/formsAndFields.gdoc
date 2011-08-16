@@ -1,35 +1,50 @@
-h4. Form Basics
+h4. フォームの基礎 {hidden}Form Basics {hidden}
 
-GSP supports many different tags for working with HTML forms and fields, the most basic of which is the [form|tags] tag. This is a controller/action aware version of the regular HTML form tag. The @url@ attribute lets you specify which controller and action to map to:
+{hidden}GSP supports many different tags for working with HTML forms and fields, the most basic of which is the [form|tags] tag. This is a controller/action aware version of the regular HTML form tag. The @url@ attribute lets you specify which controller and action to map to:{hidden}
+GSPではHTMLのフォームとフィールドに対応した様々なタグをサポートしています。フォーム・フィールドの基礎となるタグはformタグです。[form|tags]タグは、通常のHTML formタグが、コントローラ・アクションを意識してる版みたいな物です。次のように、@url@属性にマップでコントローラアクションを指定します:
 
 {code:xml}
 <g:form name="myForm" url="[controller:'book',action:'list']">...</g:form>
 {code}
 
-In this case we create a form called @myForm@ that submits to the @BookController@'s @list@ action. Beyond that all of the usual HTML attributes apply.
+{hidden}In this case we create a form called @myForm@ that submits to the @BookController@'s @list@ action. Beyond that all of the usual HTML attributes apply.{hidden}
+この例では、@myForm@という名称で、@BookController@の@list@アクションへ送信するフォームを生成します。通常のHTML属性はそのまま使用できます。
 
-h4. Form Fields
+h4. フォームフィールド {hidden}Form Fields {hidden}
 
-In addition to easy construction of forms, GSP supports custom tags for dealing with different types of fields, including:
+{hidden}In addition to easy construction of forms, GSP supports custom tags for dealing with different types of fields, including:{hidden}
+フォームを簡単に作成するために、GSPでは多数種類のフィールドタグをサポートしています:
 
+{hidden}
 * [textField|tags] - For input fields of type 'text'
 * [passwordField|tags] - For input fields of type 'password'
 * [checkBox|tags] - For input fields of type 'checkbox'
 * [radio|tags] - For input fields of type 'radio'
 * [hiddenField|tags] - For input fields of type 'hidden'
 * [select|tags] - For dealing with HTML select boxes
+{hidden}
 
-Each of these allows GSP expressions for the value:
+* [textField|tags] - 属性typeが'text'のinputタグ用
+* [passwordField|tags] -  属性typeが'password'のinputタグ用
+* [checkBox|tags] -  属性typeが'checkbox'のinputタグ用
+* [radio|tags] -  属性typeが'radio'のinputタグ用
+* [hiddenField|tags] -  属性typeが'hidden'のinputタグ用
+* [select|tags] - セレクトボックス用タグ
+
+{hidden}Each of these allows GSP expressions for the value:{hidden}
+value属性の値にGSPエクスプレッションを使用できます:
 
 {code:xml}
 <g:textField name="myField" value="${myValue}" />
 {code}
 
-GSP also contains extended helper versions of the above tags such as [radioGroup|tags] (for creating groups of [radio|tags] tags), [localeSelect|tags], [currencySelect|tags] and [timeZoneSelect|tags] (for selecting locales, currencies and time zones respectively).
+{hidden}GSP also contains extended helper versions of the above tags such as [radioGroup|tags] (for creating groups of [radio|tags] tags), [localeSelect|tags], [currencySelect|tags] and [timeZoneSelect|tags] (for selecting locales, currencies and time zones respectively).{hidden}
+そのほかに、これらのタグを拡張した、[radioGroup|tags]([radio|tags]タグのセットを作成)タグや、[localeSelect|tags]、[currencySelect|tags]、[timeZoneSelect|tags]等、それぞれ、ロケール、通貨、タイムゾーンに対応したタグもあります。
 
-h4. Multiple Submit Buttons
+h4. マルチ送信ボタン {hidden}Multiple Submit Buttons {hidden}
 
-The age old problem of dealing with multiple submit buttons is also handled elegantly with Grails using the [actionSubmit|tags] tag. It is just like a regular submit, but lets you specify an alternative action to submit to:
+{hidden}The age old problem of dealing with multiple submit buttons is also handled elegantly with Grails using the [actionSubmit|tags] tag. It is just like a regular submit, but lets you specify an alternative action to submit to:{hidden}
+Grailsでは、[actionSubmit|tags]タグを使用することで、マルチ送信ボタン対応は、すっきりと実装できます。単純な送信ボタンのように見えますが、action属性にアクションを指定すると、指定したアクションへフォームが送信されるようになります。
 
 {code:xml}
 <g:actionSubmit value="Some update label" action="update" />

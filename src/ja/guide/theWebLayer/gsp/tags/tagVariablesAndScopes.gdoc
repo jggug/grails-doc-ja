@@ -1,10 +1,12 @@
-Variables can be defined within a GSP using the [set|tags] tag:
+{hidden}Variables can be defined within a GSP using the [set|tags] tag:{hidden}
+GSPでは変数を[set|tags]タグで定義することができます:
 
 {code:xml}
 <g:set var="now" value="${new Date()}" />
 {code}
 
-Here we assign a variable called @now@ to the result of a GSP expression (which simply constructs a new @java.util.Date@ instance). You can also use the body of the @<g:set>@ tag to define a variable:
+{hidden}Here we assign a variable called @now@ to the result of a GSP expression (which simply constructs a new @java.util.Date@ instance). You can also use the body of the @<g:set>@ tag to define a variable:{hidden}
+この例では変数@now@にGSP表記の結果を割り当てています(単純に@java.util.Date@のインスタンスを生成しただけです)。@<g:set>@タグのタグ内容に記述して定義することもできます。:
 
 {code:xml}
 <g:set var="myHTML">
@@ -12,15 +14,24 @@ Here we assign a variable called @now@ to the result of a GSP expression (which 
 </g:set>
 {code}
 
-Variables can also be placed in one of the following scopes:
-
+{hidden}Variables can also be placed in one of the following scopes:{hidden}
+変数は以下のいずれかのスコープに定義することができます:
+{hidden}
 * @page@ - Scoped to the current page (default)
 * @request@ - Scoped to the current request
 * @flash@ - Placed within [flash|controllers] scope and hence available for the next request
 * @session@ - Scoped for the user session
 * @application@ - Application-wide scope.
+{hidden}
 
-To specify the scope, use the @scope@ attribute:
+* @page@ - (デフォルト)現在のページ
+* @request@ - 現在のリクエスト
+* @flash@ - [flash|controllers]スコープに配置され、次のリクエストまで。
+* @session@ - ユーザのセッション
+* @application@ - アプリケーション全体
+
+{hidden}To specify the scope, use the @scope@ attribute:{hidden}
+スコープの定義は、@scope@属性に指定します:
 
 {code:xml}
 <g:set var="now" value="${new Date()}" scope="request" />
