@@ -1,23 +1,37 @@
-h4. Viewing the generated source code
+h4. 生成されたソースコードを表示する {hidden}Viewing the generated source code {hidden}
 
+{hidden}
  * Adding "?showSource=true" or "&showSource=true" to the url shows the generated Groovy source code for the view instead of rendering it. It won't show the source code of included templates. This only works in development mode
  * The saving of all generated source code can be activated by setting the property "grails.views.gsp.keepgenerateddir" (in Config.groovy) . It must point to a directory that exists and is writable.
  * During "grails war" gsp pre-compilation, the generated source code is stored in grails.project.work.dir/gspcompile (usually in ~/.grails/(grails_version)/projects/(project name)/gspcompile).
+{hidden}
+ * URLに、 "?showSource=true" または、"&showSource=true"を追加するとページレンダリングの代わりに、ビュー用に生成されたGroovyコードが参照できます。但し含んだテンプレートのコードは含まれません。開発モードのみで動作します。
+ * Config.groovyにプロパティ"grails.views.gsp.keepgenerateddir"を指定すると生成ファイルが指定された場所に保存されます。
+ * "grails war"でのgspプリコンパイル時に、生成されたソースコードがgrails.project.work.dir/gspcompileに保存されます。(通常は~/.grails/(grails_version)/projects/(project name)/gspcompileです。)
 
-h4. Debugging GSP code with a debugger
+h4. デバッガでGSPコードをデバッグ {hidden}Debugging GSP code with a debugger {hidden}
 
+{hidden}
  * See "Debugging GSP in STS":http://contraptionsforprogramming.blogspot.com/2010/08/debuggable-gsps-in-springsource-tool.html
+{hidden}
 
-h4. Viewing information about templates used to render a single url
+* "Debugging GSP in STS":http://contraptionsforprogramming.blogspot.com/2010/08/debuggable-gsps-in-springsource-tool.html を参照
 
-GSP templates are reused in large web applications by using the @g:render@ taglib. Several small templates can be used to render a single page.
+h4. 使用されたテンプレートの情報を参照 {hidden}Viewing information about templates used to render a single url {hidden}
+
+{hidden}GSP templates are reused in large web applications by using the @g:render@ taglib. Several small templates can be used to render a single page.
 It might be hard to find out what GSP template actually renders the html seen in the result.
-The debug templates -feature adds html comments to the output. The comments contain debug information about gsp templates used to render the page.
+The debug templates -feature adds html comments to the output. The comments contain debug information about gsp templates used to render the page.{hidden}
+規模の大きいなWebアプリケーションでは、@g:render@タグを使用してGSPテンプレートは再利用されます。幾つかの小さなテンプレートが１つのページで使われる事もあります。どの部分でGSPテンプレートが実際にHTMLをレンダリングしたか探すのは大変だと思います。テンプレートデバッグ機能ではhtmlコメントでGSPテンプレートのデバッグ情報を提供します。
 
-Usage is simple: append "?debugTemplates" or "&debugTemplates" to the url and view the source of the result in your browser.
-"debugTemplates" is restricted to development mode. It won't work in production.
 
-Here is an example of comments added by debugTemplates :
+{hidden}Usage is simple: append "?debugTemplates" or "&debugTemplates" to the url and view the source of the result in your browser.
+"debugTemplates" is restricted to development mode. It won't work in production.{hidden}
+使用方法は簡単、URLに"?debugTemplates" または "&debugTemplates"を追加して表示されたページのソースを参照します。"debugTemplates"は開発モードのみで動作します。
+
+{hidden}Here is an example of comments added by debugTemplates :{hidden}
+debugTemplatesでは以下のようなコメントが追記されます:
+
 {code}
 <!-- GSP #2 START template: /home/.../views/_carousel.gsp
      precompiled: false lastmodified: ... -->
@@ -28,4 +42,5 @@ Here is an example of comments added by debugTemplates :
      rendering time: 115 ms -->
 {code}
 
-Each comment block has a unique id so that you can find the start & end of each template call.
+{hidden}Each comment block has a unique id so that you can find the start & end of each template call.{hidden}
+それぞれのコメントブロックには番号を持っていて、テンプレートの開始と終了を探し安くしてあります。
