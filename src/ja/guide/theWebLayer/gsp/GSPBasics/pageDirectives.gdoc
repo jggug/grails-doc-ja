@@ -1,12 +1,15 @@
-GSP also supports a few JSP-style page directives.
+{hidden}GSP also supports a few JSP-style page directives.{hidden}
+GSPはJSPのページディレクティブの一部をサポートしています。
 
-The import directive lets you import classes into the page. However, it is rarely needed due to Groovy's default imports and [GSP Tags|guide:tags]:
+{hidden}The import directive lets you import classes into the page. However, it is rarely needed due to Groovy's default imports and [GSP Tags|guide:tags]:{hidden}
+importディレクティブは、ページにクラスをインポートします。
 
 {code:xml}
 <%@ page import="java.awt.*" %>
 {code}
 
-GSP also supports the contentType directive:
+{hidden}GSP also supports the contentType directive:{hidden}
+contentTypeディレクティブもサポートしています。
 
 {code:xml}
 
@@ -14,4 +17,5 @@ GSP also supports the contentType directive:
 
 {code}
 
-The contentType directive allows using GSP to render other formats.
+{hidden}The contentType directive allows using GSP to render other formats.{hidden}
+contentTypeディレクティブはGSPを別のフォーマットを可能にします。

@@ -1,18 +1,24 @@
-Groovy Servers Pages (or GSP for short) is Grails' view technology. It is designed to be familiar for users of technologies such as ASP and JSP, but to be far more flexible and intuitive.
+{hidden}Groovy Servers Pages (or GSP for short) is Grails' view technology. It is designed to be familiar for users of technologies such as ASP and JSP, but to be far more flexible and intuitive.{hidden}
+Groovy Server Pages(GSPと略す)は、Grailsのビュー技術です。より柔軟で直感的であり、ASPやJSPのような技術に精通しているユーザ向けに設計されています。
 
-GSPs live in the @grails-app/views@ directory and are typically rendered automatically (by convention) or with the [render|controllers] method such as:
+
+{hidden}GSPs live in the @grails-app/views@ directory and are typically rendered automatically (by convention) or with the [render|controllers] method such as:{hidden}
+GSPは、grails-app/viewsディレクトリに配置されていて、通常は自動的(慣習によって)または、以下のように [render|controllers]メソッドで指定されてレンダリングされます。
 
 {code:java}
 render(view: "index")
 {code}
 
-A GSP is typically a mix of mark-up and GSP tags which aid in view rendering.
+{hidden}A GSP is typically a mix of mark-up and GSP tags which aid in view rendering.{hidden}
+GSPはマークアップとビューレンダリングを補助するGSPタグで内容が構成されています。
 
 {note}
-Although it is possible to have Groovy logic embedded in your GSP and doing this will be covered in this document, the practice is strongly discouraged. Mixing mark-up and code is a *bad* thing and most GSP pages contain no code and needn't do so.
+{hidden}Although it is possible to have Groovy logic embedded in your GSP and doing this will be covered in this document, the practice is strongly discouraged. Mixing mark-up and code is a *bad* thing and most GSP pages contain no code and needn't do so.{hidden}
+GroovyロジックをGSPに埋め込むことも可能ですが推奨しません。マークアップとコードが混在するのは良いことではありません。ほとんどのGSPではコードを持つべきで無く、そうする必要がありません。
 {note}
 
-A GSP typically has a "model" which is a set of variables that are used for view rendering. The model is passed to the GSP view from a controller. For example consider the following controller action:
+{hidden}A GSP typically has a "model" which is a set of variables that are used for view rendering. The model is passed to the GSP view from a controller. For example consider the following controller action:{hidden}
+GSPは通常ビューレンダリングに使用される変数のセットなどの"モデル"を持っています。モデルはコントローラからGSPビューげ渡されます。例として次のコントローラアクションを見てみましょう。
 
 {code:java}
 def show() {
@@ -20,7 +26,8 @@ def show() {
 }
 {code}
 
-This action will look up a @Book@ instance and create a model that contains a key called @book@. This key can then be referenced within the GSP view using the name @book@:
+{hidden}This action will look up a @Book@ instance and create a model that contains a key called @book@. This key can then be referenced within the GSP view using the name @book@:{hidden}
+このアクションは@Book@インスタンスを取り出して、@book@というキーでモデルを作成しています。GSPでは、このキー@book@が参照できます。
 
 {code}
 ${book.title}

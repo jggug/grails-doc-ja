@@ -1,17 +1,21 @@
-Within the @<% %>@ brackets you can declare variables:
+{hidden}Within the @<% %>@ brackets you can declare variables:{hidden}
+@<% %>@で変数を宣言できます。
 
 {code:xml}
 <% now = new Date() %>
 {code}
 
-and then access those variables later in the page:
+{hidden}and then access those variables later in the page:{hidden}
+宣言した変数はページ内でアクセスすることができます。
 
 {code:xml}
 <%=now%>
 {code}
 
-Within the scope of a GSP there are a number of pre-defined variables, including:
+{hidden}Within the scope of a GSP there are a number of pre-defined variables, including:{hidden}
+GSPには、初期定義されたスコープ変数がいくつか存在します。
 
+{hidden}
 * @application@ - The [javax.servlet.ServletContext|api:javax.servlet.ServletContext] instance
 * @applicationContext@ The Spring [ApplicationContext|api:org.springframework.context.ApplicationContext] instance
 * @flash@ - The [flash|controllers] object
@@ -22,3 +26,15 @@ Within the scope of a GSP there are a number of pre-defined variables, including
 * @response@ - The [HttpServletResponse|api:javax.servlet.http.HttpServletResponse] instance
 * @session@ - The [HttpSession|api:javax.servlet.http.HttpSession] instance
 * @webRequest@ - The [GrailsWebRequest|api:org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest] instance
+{hidden}
+
+* @application@ - [javax.servlet.ServletContext|api:javax.servlet.ServletContext]インスタンス 
+* @applicationContext@ - Spring [ApplicationContext|api:org.springframework.context.ApplicationContext]インスタンス
+* @flash@ - flash オブジェクト
+* @grailsApplication@ - [GrailsApplication|api:org.codehaus.groovy.grails.commons.GrailsApplication]インスタンス
+* @out@ - 出力ストリームを書き込むレスポンスライター
+* @params@ - [params|controllers]リクエストパラメータを取得するオブジェクト
+* @request@ - [HttpServletRequest|api:javax.servlet.http.HttpServletRequest]インスタンス
+* @response@ - [HttpServletResponse|api:javax.servlet.http.HttpServletResponse]インスタンス
+* @session@ - [HttpSession|api:javax.servlet.http.HttpSession]インスタンス
+* @webRequest@ - [GrailsWebRequest|api:org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest]インスタンス

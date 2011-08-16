@@ -1,6 +1,8 @@
-In the next view sections we'll go through the basics of GSP and what is available to you. First off let's cover some basic syntax that users of JSP and ASP should be familiar with.
+{hidden}In the next view sections we'll go through the basics of GSP and what is available to you. First off let's cover some basic syntax that users of JSP and ASP should be familiar with.{hidden}
+ここのセクションでは、GSPで何が可能かの基礎を見ていきましょう。先ずはじめにJSPやASPのユーザに親和性の高い基本的なシンタックスをカバーしていきます。
 
-GSP supports the usage of @<% %>@ scriptlet blocks to embed Groovy code (again this is discouraged):
+{hidden}GSP supports the usage of @<% %>@ scriptlet blocks to embed Groovy code (again this is discouraged):{hidden}
+GSPは、Groovyを記述できる、スクリプトレットブロック@<% %>@をサポートしています。(しつこいですが推奨しません)
 
 {code:xml}
 <html>
@@ -10,7 +12,8 @@ GSP supports the usage of @<% %>@ scriptlet blocks to embed Groovy code (again t
 </html>
 {code}
 
-You can also use the @<%= %>@ syntax to output values:
+{hidden}You can also use the @<%= %>@ syntax to output values:{hidden}
+もちろん@<%= %>@を使用して値を出力することもできます。
 
 {code:xml}
 <html>
@@ -20,7 +23,8 @@ You can also use the @<%= %>@ syntax to output values:
 </html>
 {code}
 
-GSP also supports JSP-style server-side comments (which are not rendered in the HTML response) as the following example demonstrates:
+{hidden}GSP also supports JSP-style server-side comments (which are not rendered in the HTML response) as the following example demonstrates:{hidden}
+次のようなJSPスタイルのサーバサイドコメント(HTMLに出力されない)もサポートされています。
 
 {code:xml}
 <html>

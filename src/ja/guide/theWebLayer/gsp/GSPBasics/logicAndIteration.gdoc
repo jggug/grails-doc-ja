@@ -1,4 +1,5 @@
-Using the @<% %>@ syntax you can embed loops and so on using this syntax:
+{hidden}Using the @<% %>@ syntax you can embed loops and so on using this syntax:{hidden}
+以下のように@<% %>@シンタックスを使ってループなどを記述できます。
 
 {code:xml}
 <html>
@@ -10,7 +11,8 @@ Using the @<% %>@ syntax you can embed loops and so on using this syntax:
 </html>
 {code}
 
-As well as logical branching:
+{hidden}As well as logical branching:{hidden}
+また他に分岐も
 
 {code:xml}
 <html>

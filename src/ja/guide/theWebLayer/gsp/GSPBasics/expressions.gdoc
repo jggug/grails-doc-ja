@@ -1,4 +1,6 @@
-In GSP the @<%= %>@ syntax introduced earlier is rarely used due to the support for GSP expressions. A GSP expression is similar to a JSP EL expression or a Groovy GString and takes the form @${expr}@:
+{hidden}In GSP the @<%= %>@ syntax introduced earlier is rarely used due to the support for GSP expressions. A GSP expression is similar to a JSP EL expression or a Groovy GString and takes the form @${expr}@:{hidden}
+GSPでは、先に紹介した@<%= %>@シンタックスは滅多に使用しません。代わりに、JSPの式言語(JSP EL)と同じような機能をもつGSP(Groovy)表記または、@${expr}@のようなGroovyのGStringを使用します。
+
 
 {code:xml}
 <html>
@@ -8,10 +10,12 @@ In GSP the @<%= %>@ syntax introduced earlier is rarely used due to the support 
 </html>
 {code}
 
-However, unlike JSP EL you can have any Groovy expression within the @${..}@ block. Variables within the @${..}@ block are *not* escaped by default, so any HTML in the variable's string is rendered directly to the page. To reduce the risk of Cross-site-scripting (XSS) attacks, you can enable automatic HTML escaping with the @grails.views.default.codec@ setting in @grails-app/conf/Config.groovy@:
+{hidden}However, unlike JSP EL you can have any Groovy expression within the @${..}@ block. Variables within the @${..}@ block are *not* escaped by default, so any HTML in the variable's string is rendered directly to the page. To reduce the risk of Cross-site-scripting (XSS) attacks, you can enable automatic HTML escaping with the @grails.views.default.codec@ setting in @grails-app/conf/Config.groovy@:{hidden}
+JSP式言語(JSP EL)と違い、Groovy表記は、@${…}@ブロックに記述します。@${…}@ブロックの変数はデフォルトではエスケープを行いません。したがって、HTML文字列が直接ページ内にレンダリングされます。これによって起こりうる、XSS(クロスサイトスクリプティング)をリスクを軽減するには、@grails-app/conf/Config.groovy@に@grails.views.default.codec@を設定します。
 
 {code:java}
 grails.views.default.codec='html'
 {code}
 
-Other possible values are 'none' (for no default encoding) and 'base64'.
+{hidden}Other possible values are 'none' (for no default encoding) and 'base64'.{hidden}
+他に設定可能な値は'none'(何も設定しない)と'base64'になります。
