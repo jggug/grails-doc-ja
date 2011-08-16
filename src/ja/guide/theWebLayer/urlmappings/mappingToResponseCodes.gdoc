@@ -1,4 +1,5 @@
-Grails also lets you map HTTP response codes to controllers, actions or views. Just use a method name that matches the response code you are interested in:
+{hidden}Grails also lets you map HTTP response codes to controllers, actions or views. Just use a method name that matches the response code you are interested in:{hidden}
+GrailsではHTTPレスポンスコードをコントローラ、アクション、ビューにマッピングすることができます。使用したいレスポンスコードをメソッド名に指定するだけです:
 
 {code:java}
 static mappings = {
@@ -8,7 +9,8 @@ static mappings = {
 }
 {code}
 
-Or you can specify custom error pages:
+{hidden}Or you can specify custom error pages:{hidden}
+カスタムエラーページを指定する場合は:
 
 {code:java}
 static mappings = {
@@ -18,9 +20,10 @@ static mappings = {
 }
 {code}
 
-h4. Declarative Error Handling
+h4. エラーハンドリング宣言 {hidden}Declarative Error Handling {hidden}
 
-In addition you can configure handlers for individual exceptions:
+{hidden}In addition you can configure handlers for individual exceptions:{hidden}
+特定の例外をのハンドラを定義することも可能です:
 
 {code:java}
 static mappings = {
@@ -36,9 +39,11 @@ static mappings = {
 }
 {code}
 
-With this configuration, an @IllegalArgumentException@ will be handled by the @illegalArgument@ action in @ErrorsController@, a @NullPointerException@ will be handled by the @nullPointer@ action, and a @MyException@ will be handled by the @customException@ action. Other exceptions will be handled by the catch-all rule and use the @/errors/serverError@ view.
+{hidden}With this configuration, an @IllegalArgumentException@ will be handled by the @illegalArgument@ action in @ErrorsController@, a @NullPointerException@ will be handled by the @nullPointer@ action, and a @MyException@ will be handled by the @customException@ action. Other exceptions will be handled by the catch-all rule and use the @/errors/serverError@ view.{hidden}
+この設定では、@IllegalArgumentException@は@ErrorsControlle@rの@illegalArgument@、@NullPointerException@は@nullPointer@アクション、@MyException@は@customException@アクションでそれぞれ処理されます。その他の例外がcatch-allルールでハンドルされビューに@/errors/serverError@を使用します。
 
-You can access the exception from your custom error handing view or controller action using the request's @exception@ attribute like so:
+{hidden}You can access the exception from your custom error handing view or controller action using the request's @exception@ attribute like so:{hidden}
+カスタムエラーハンドリングで、ビューまたは、コントローラアクションから例外を参照するには、requestインスタンスの@exception@を使用します:
 
 {code:java}
 class ErrorController {
@@ -50,5 +55,6 @@ class ErrorController {
 {code}
 
 {warning}
-If your error-handling controller action throws an exception as well, you'll end up with a @StackOverflowException@.
+{hidden}If your error-handling controller action throws an exception as well, you'll end up with a @StackOverflowException@.{hidden}
+エラーハンドリング用のコントローラアクションが例外を出した場合は、最終的に@StackOverflowException@になります。
 {warning}

@@ -1,4 +1,5 @@
-Grails' URL mappings mechanism also supports wildcard mappings. For example consider the following mapping:
+{hidden}Grails' URL mappings mechanism also supports wildcard mappings. For example consider the following mapping:{hidden}
+GrailsのURLマッピング機能ではワイルドカードもサポートしています。例として次ぎのマッピングに注目してください:
 
 {code:java}
 static mappings = {
@@ -6,7 +7,8 @@ static mappings = {
 }
 {code}
 
-This mapping will match all paths to images such as @/image/logo.jpg@. Of course you can achieve the same effect with a variable:
+{hidden}This mapping will match all paths to images such as @/image/logo.jpg@. Of course you can achieve the same effect with a variable:{hidden}
+このマッピングが@/image/logo.jpg@のような画像パスにマッチします。変数も使用可能です:
 
 {code:java}
 static mappings = {
@@ -14,7 +16,8 @@ static mappings = {
 }
 {code}
 
-However, you can also use double wildcards to match more than one level below:
+{hidden}However, you can also use double wildcards to match more than one level below:{hidden}
+ダブルワイルドカード使用すると1レベル下の階層までマッチします:
 
 {code:java}
 static mappings = {
@@ -22,7 +25,8 @@ static mappings = {
 }
 {code}
 
-In this cases the mapping will match @/image/logo.jpg@ as well as @/image/other/logo.jpg@. Even better you can use a double wildcard variable:
+{hidden}In this cases the mapping will match @/image/logo.jpg@ as well as @/image/other/logo.jpg@. Even better you can use a double wildcard variable:{hidden}
+このマッピング例では、@/image/logo.jpg@や、@/image/other/logo.jpg@にマッチします。ダブルワイルドカード変数も使用できます:
 
 {code:java}
 static mappings = {
@@ -31,14 +35,16 @@ static mappings = {
 }
 {code}
 
-In this case it will store the path matched by the wildcard inside a @name@ parameter obtainable from the [params|controllers] object:
+{hidden}In this case it will store the path matched by the wildcard inside a @name@ parameter obtainable from the [params|controllers] object:{hidden}
+この例では、@name@パラメータにマッチしたパスを[params|controllers]オブジェクトから取得できます:
 
 {code:java}
 def name = params.name
 println name // prints "logo" or "other/logo"
 {code}
 
-If you use wildcard URL mappings then you may want to exclude certain URIs from Grails' URL mapping process. To do this you can provide an @excludes@ setting inside the @UrlMappings.groovy@ class:
+{hidden}If you use wildcard URL mappings then you may want to exclude certain URIs from Grails' URL mapping process. To do this you can provide an @excludes@ setting inside the @UrlMappings.groovy@ class:{hidden}
+ワイルドカードURLマッピングを使用すると、一定のURIをURLマッピングでの除外も必要となります。@UrlMappings.groovy@クラスで、@excludes@を指定することで可能です:
 
 {code:java}
 class UrlMappings {
@@ -49,4 +55,5 @@ class UrlMappings {
 }
 {code}
 
-In this case Grails won't attempt to match any URIs that start with @/images@ or @/css@.
+{hidden}In this case Grails won't attempt to match any URIs that start with @/images@ or @/css@.{hidden}
+この例では、 @/images@また@/css@で始まるURIはURLマッピングから除外されます.

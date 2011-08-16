@@ -1,6 +1,7 @@
-h4. Simple Variables
+h4. 簡単な変数 {hidden}Simple Variables {hidden}
 
-The previous section demonstrated how to map simple URLs with concrete "tokens". In URL mapping speak tokens are the sequence of characters between each slash, '/'. A concrete token is one which is well defined such as as @/product@. However, in many circumstances you don't know what the value of a particular token will be until runtime. In this case you can use variable placeholders within the URL for example:
+{hidden}The previous section demonstrated how to map simple URLs with concrete "tokens". In URL mapping speak tokens are the sequence of characters between each slash, '/'. A concrete token is one which is well defined such as as @/product@. However, in many circumstances you don't know what the value of a particular token will be until runtime. In this case you can use variable placeholders within the URL for example:{hidden}
+前セクションでは、具体トークンURLを簡単にマップする方法を紹介しました。URLマッピングでのトークンとは"/"スラッシュの間にある文字列の事を指します。具体トークンは@/product@のように適切に指定できますが、状況によっては、ランタイム時にしか一部のトークンが予測できない場合があります。その場合は以下の例のように変数を指定できます:
 
 {code:java}
 static mappings = {
@@ -8,7 +9,8 @@ static mappings = {
 }
 {code}
 
-In this case by embedding a $id variable as the second token Grails will automatically map the second token into a parameter (available via the [params|controllers] object) called @id@. For example given the URL @/product/MacBook@, the following code will render "MacBook" to the response:
+{hidden}In this case by embedding a $id variable as the second token Grails will automatically map the second token into a parameter (available via the [params|controllers] object) called @id@. For example given the URL @/product/MacBook@, the following code will render "MacBook" to the response:{hidden}
+この例では、２つめのトークンとして変数$idを埋め込むことで、Grailsが自動的に２つめのトークンを名称が@id@のパラメータとしてマップします(このパラメータは[params|controllers]オブジェクトから取得できます)。例として、URL @/product/MacBook@へアクセスを行うと、次のコードでは、結果として"MacBook"をレスポンスします:
 
 {code:java}
 class ProductController {
@@ -16,7 +18,8 @@ class ProductController {
 }
 {code}
 
-You can of course construct more complex examples of mappings. For example the traditional blog URL format could be mapped as follows:
+{hidden}You can of course construct more complex examples of mappings. For example the traditional blog URL format could be mapped as follows:{hidden}
+もっと複雑なマッピングも作成できます。例としてブログのようなURLフォーマットを次のようにしてマッピングできます:
 
 {code:java}
 static mappings = {
@@ -24,17 +27,20 @@ static mappings = {
 }
 {code}
 
-The above mapping would let you do things like:
+{hidden}The above mapping would let you do things like:{hidden}
+このマッピングでは、以下のようなURLでアクセスを可能にします:
 
 {code:java}
 /graemerocher/2007/01/10/my_funky_blog_entry
 {code}
 
 The individual tokens in the URL would again be mapped into the [params|controllers] object with values available for @year@, @month@, @day@, @id@ and so on.
+URLの個々のトークンは[params|controllers]オブジェクトにマップされるため、変数@blog@, @year@, @month@, @day@, @id@として値を取得する事ができます。
 
-h4. Dynamic Controller and Action Names
+h4. 動的なコントローラ名とアクション名 {hidden}Dynamic Controller and Action Names {hidden}
 
-Variables can also be used to dynamically construct the controller and action name. In fact the default Grails URL mappings use this technique:
+{hidden}Variables can also be used to dynamically construct the controller and action name. In fact the default Grails URL mappings use this technique:{hidden}
+変数を使って動的にコントローラとアクション名を構成することができます。GrailsでのデフォルトURLマッピングはこの機能を使用しています:
 
 {code:java}
 static mappings = {
@@ -42,9 +48,11 @@ static mappings = {
 }
 {code}
 
-Here the name of the controller, action and id are implicitly obtained from the variables @controller@, @action@ and @id@ embedded within the URL.
+{hidden}Here the name of the controller, action and id are implicitly obtained from the variables @controller@, @action@ and @id@ embedded within the URL.{hidden}
+URLに指定された内容から、変数@controller@,@action@,@id@を取得して、コントローラ、アクション、idを確定します。
 
-You can also resolve the controller name and action name to execute dynamically using a closure:
+{hidden}You can also resolve the controller name and action name to execute dynamically using a closure:{hidden}
+コントローラ名の解決を変数で行い、クロージャを実行して動的にアクション名を解決することもできます:
 
 {code:java}
 static mappings = {
@@ -54,9 +62,10 @@ static mappings = {
 }
 {code}
 
-h4. Optional Variables
+h4. 省略可能な変数 {hidden}Optional Variables {hidden}
 
-Another characteristic of the default mapping is the ability to append a ? at the end of a variable to make it an optional token. In a further example this technique could be applied to the blog URL mapping to have more flexible linking:
+{hidden}Another characteristic of the default mapping is the ability to append a ? at the end of a variable to make it an optional token. In a further example this technique could be applied to the blog URL mapping to have more flexible linking:{hidden}
+変数の最後に ? を付加することで、変数を省略可能にすることが可能です。この仕組みを使用して、前述した例のブログURLマッピングをもっと柔軟にしてみましょう:
 
 {code:java}
 static mappings = {
@@ -64,7 +73,8 @@ static mappings = {
 }
 {code}
 
-With this mapping all of these URLs would match with only the relevant parameters being populated in the [params|controllers] object:
+{hidden}With this mapping all of these URLs would match with only the relevant parameters being populated in the [params|controllers] object:{hidden}
+この設定で以下のURL全てマッチします、そしてそれぞれの関係のあるパラメータのみを[params|controllers]オブジェクトに追加します:
 
 bc.
 /graemerocher/2007/01/10/my_funky_blog_entry
@@ -73,9 +83,10 @@ bc.
 /graemerocher/2007
 /graemerocher
 
-h4. Arbitrary Variables
+h4. 任意変数 {hidden}Arbitrary Variables {hidden}
 
-You can also pass arbitrary parameters from the URL mapping into the controller by just setting them in the block passed to the mapping:
+{hidden}You can also pass arbitrary parameters from the URL mapping into the controller by just setting them in the block passed to the mapping:{hidden}
+URLマッピングからコントローラへ、コードブロック内で設定した任意のパラメータを渡すことが可能です:
 
 {code:java}
 "/holiday/win" {
@@ -84,11 +95,13 @@ You can also pass arbitrary parameters from the URL mapping into the controller 
 }
 {code}
 
-This variables will be available within the [params|controllers] object passed to the controller.
+{hidden}This variables will be available within the [params|controllers] object passed to the controller.{hidden}
+変数は[params|controllers]オブジェクトから参照可能になります。
 
-h4. Dynamically Resolved Variables
+h4. 動的解決変数 {hidden}Dynamically Resolved Variables {hidden}
 
-The hard coded arbitrary variables are useful, but sometimes you need to calculate the name of the variable based on runtime factors. This is also possible by assigning a block to the variable name:
+{hidden}The hard coded arbitrary variables are useful, but sometimes you need to calculate the name of the variable based on runtime factors. This is also possible by assigning a block to the variable name:{hidden}
+任意の変数をURLマッピングに埋め込むのは便利ですが、時折状況に応じて変数の内容を演算したい場合があると思います。この場合コードブロックを変数に割り当てます。:
 
 {code:java}
 "/holiday/win" {
@@ -97,4 +110,5 @@ The hard coded arbitrary variables are useful, but sometimes you need to calcula
 }
 {code}
 
-In the above case the code within the blocks is resolved when the URL is actually matched and hence can be used in combination with all sorts of logic.
+{hidden}In the above case the code within the blocks is resolved when the URL is actually matched and hence can be used in combination with all sorts of logic.{hidden}
+URLが実際にマッチした時にコードブロックのロジックが実行されて変数の内容が解決されます。

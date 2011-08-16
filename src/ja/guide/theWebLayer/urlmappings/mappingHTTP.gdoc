@@ -1,6 +1,8 @@
-URL mappings can also be configured to map based on the HTTP method (GET, POST, PUT or DELETE). This is very useful for RESTful APIs and for restricting mappings based on HTTP method.
+{hidden}URL mappings can also be configured to map based on the HTTP method (GET, POST, PUT or DELETE). This is very useful for RESTful APIs and for restricting mappings based on HTTP method.{hidden}
+URLマッピングでは、HTTPメソッド(GET, POST, PUT, DELETE)へのマップを定義することができます。HTTPメソッドをベースに制限したり、RESTful API等に便利です。
 
-As an example the following mappings provide a RESTful API URL mappings for the @ProductController@:
+{hidden}As an example the following mappings provide a RESTful API URL mappings for the @ProductController@:{hidden}
+このマッピングの例では@ProductController@用にRESTful API URLマッピングを提供しています:
 
 {code:java}
 static mappings = {

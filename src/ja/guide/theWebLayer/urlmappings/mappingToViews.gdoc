@@ -1,4 +1,5 @@
-You can resolve a URL to a view without a controller or action involved. For example to map the root URL @/@ to a GSP at the location @grails-app/views/index.gsp@ you could use:
+{hidden}You can resolve a URL to a view without a controller or action involved. For example to map the root URL @/@ to a GSP at the location @grails-app/views/index.gsp@ you could use:{hidden}
+コントローラまたはアクションを含まずにビューへURLをマップできます。例としてルートURL @/@ を、@grails-app/views/index.gsp@にマッピングするには:
 
 {code:java}
 static mappings = {
@@ -6,7 +7,8 @@ static mappings = {
 }
 {code}
 
-Alternatively if you need a view that is specific to a given controller you could use:
+{hidden}Alternatively if you need a view that is specific to a given controller you could use:{hidden}
+あるいは、特定のコントローラにあるビューを指定する場合は:
 
 {code:java}
 static mappings = {

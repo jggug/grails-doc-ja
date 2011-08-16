@@ -1,6 +1,8 @@
-Another great feature of URL mappings is that they automatically customize the behaviour of the [link|tags] tag so that changing the mappings don't require you to go and change all of your links.
+{hidden}Another great feature of URL mappings is that they automatically customize the behaviour of the [link|tags] tag so that changing the mappings don't require you to go and change all of your links.{hidden}
+URLマッピングには、[link|tags]タグの振る舞いを自動的にカスタマイズ するという優れた機能が存在します。その機能のおかげでURLマッピングを変更しても、その都度リンクを変更しなくても良くなります。
 
-This is done through a URL re-writing technique that reverse engineers the links from the URL mappings. So given a mapping such as the blog one from an earlier section:
+{hidden}This is done through a URL re-writing technique that reverse engineers the links from the URL mappings. So given a mapping such as the blog one from an earlier section:{hidden}
+URLマッピングからリバースエンジニアリングによってURLをリライトするという仕組みで実装されています。前のセクションからのブログマッピングを例があるとします:
 
 {code:java}
 static mappings = {
@@ -8,7 +10,8 @@ static mappings = {
 }
 {code}
 
-If you use the link tag as follows:
+{hidden}If you use the link tag as follows:{hidden}
+以下のようにlinkタグを使用します:
 
 {code:xml}
 <g:link controller="blog" action="show"
@@ -22,7 +25,8 @@ If you use the link tag as follows:
 </g:link>
 {code}
 
-Grails will automatically re-write the URL in the correct format:
+{hidden}Grails will automatically re-write the URL in the correct format:{hidden}
+GrailsがURLを自動的にリライトします:
 
 {code:xml}
 <a href="/fred/2007">My Blog</a>

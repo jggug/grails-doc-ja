@@ -1,16 +1,19 @@
-To create a simple mapping simply use a relative URL as the method name and specify named parameters for the controller and action to map to:
+{hidden}To create a simple mapping simply use a relative URL as the method name and specify named parameters for the controller and action to map to:{hidden}
+簡単なマッピングは、相対URLをメソッド名とするメソッドに、マップ対象のコントローラとアクション名称を、名前付きパラメータ引数として作成します:
 
 {code:java}
 "/product"(controller: "product", action: "list")
 {code}
 
-In this case we've mapped the URL @/product@ to the @list@ action of the @ProductController@. Omit the action definition to map to the default action of the controller:
+{hidden}In this case we've mapped the URL @/product@ to the @list@ action of the @ProductController@. Omit the action definition to map to the default action of the controller:{hidden}
+この例ではURL @/product@は、@ProductController@の@list@アクションにマップ定義したことになります。アクションを省略すると、コントローラのデフォルトアクションにマップ定義できます:
 
 {code:java}
 "/product"(controller: "product")
 {code}
 
-An alternative syntax is to assign the controller and action to use within a block passed to the method:
+{hidden}An alternative syntax is to assign the controller and action to use within a block passed to the method:{hidden}
+他のシンタックスとして、コントローラとアクションを指定したコードブロックをメソッドに渡すこともできます:
 
 {code:java}
 "/product" {
@@ -19,10 +22,12 @@ An alternative syntax is to assign the controller and action to use within a blo
 }
 {code}
 
-Which syntax you use is largely dependent on personal preference. To rewrite one URI onto another explicit URI (rather than a controller/action pair) do something like this:
+{hidden}Which syntax you use is largely dependent on personal preference. To rewrite one URI onto another explicit URI (rather than a controller/action pair) do something like this:{hidden}
+どちらのシンタックスを使用するかは個人の選択に依存します。(コントローラ・アクションを指定するのでは無く)URIを明示的なURIへ書き換えする場合は:
 
 {code}
 "/hello"(uri: "/hello.dispatch")
 {code}
 
-Rewriting specific URIs is often useful when integrating with other frameworks.
+{hidden}Rewriting specific URIs is often useful when integrating with other frameworks.{hidden}
+特定のURIへの書き換えは、他のフレームワークと統合する場合に便利です。
