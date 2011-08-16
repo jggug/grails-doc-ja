@@ -31,6 +31,11 @@ h3. 1.3.x翻訳済み分から、2.0.xへの更新を含む進捗。
 # デプロイ
 # ref
 
+h1. Wiki編集ルール
+
+{hidden}マクロで、原文を囲む。例:{hidden}原文{hidden}
+※一部のファイルは既に消してしまった。
+
 h1. ツール・インフラ
 
 * ソースコード https://github.com/jggug/grails-doc-ja
