@@ -1,4 +1,5 @@
-You can also create logical tags where the body of the tag is only output once a set of conditions have been met. An example of this may be a set of security tags:
+{hidden}You can also create logical tags where the body of the tag is only output once a set of conditions have been met. An example of this may be a set of security tags:{hidden}
+条件に合ったときのみにタグ内容を出力する制御タグを作成できます。セキュリティタグを例とします:
 
 {code:java}
 def isAdmin = { attrs, body ->
@@ -9,7 +10,8 @@ def isAdmin = { attrs, body ->
 }
 {code}
 
-The tag above checks if the user is an administrator and only outputs the body content if he/she has the correct set of access privileges:
+{hidden}The tag above checks if the user is an administrator and only outputs the body content if he/she has the correct set of access privileges:{hidden}
+この例ではアクセスしたユーザをチェックして、管理者であった場合のみ内容を出力します:
 
 {code:xml}
 <g:isAdmin user="${myUser}">

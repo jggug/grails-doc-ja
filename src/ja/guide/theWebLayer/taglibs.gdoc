@@ -1,6 +1,8 @@
-Like "Java Server Pages":http://www.oracle.com/technetwork/java/javaee/jsp/index.html (JSP), GSP supports the concept of custom tag libraries. Unlike JSP, Grails' tag library mechanism is simple, elegant and completely reloadable at runtime.
+{hidden}Like "Java Server Pages":http://www.oracle.com/technetwork/java/javaee/jsp/index.html (JSP), GSP supports the concept of custom tag libraries. Unlike JSP, Grails' tag library mechanism is simple, elegant and completely reloadable at runtime.{hidden}
+"Java Server Pages":http://www.oracle.com/technetwork/java/javaee/jsp/index.html (JSP)のように、GSPでもカスタムタグライブラリをサポートしています。JSPと違いGrailsでのタグライブラリは単純簡潔です。
 
-Quite simply, to create a tag library create a Groovy class that ends with the convention @TagLib@ and place it within the @grails-app/taglib@ directory:
+{hidden}Quite simply, to create a tag library create a Groovy class that ends with the convention @TagLib@ and place it within the @grails-app/taglib@ directory:{hidden}
+タグライブラリを作成するには、@grails-app/taglib@ディレクトリに、名称の最後が@TagLib@となるGroovyクラスを作成します:
 
 {code:java}
 class SimpleTagLib {
@@ -8,7 +10,8 @@ class SimpleTagLib {
 }
 {code}
 
-Now to create a tag create a Closure property that takes two arguments: the tag attributes and the body content:
+{hidden}Now to create a tag create a Closure property that takes two arguments: the tag attributes and the body content:{hidden}
+タグライブラリクラスを作成したら、２つの引数(属性とタグ内容)を受け取るクロージャを追加してタグを作成します:
 
 {code:java}
 class SimpleTagLib {
@@ -19,6 +22,7 @@ class SimpleTagLib {
 {code}
 
 The @attrs@ argument is a Map of the attributes of the tag, whilst the @body@ argument is a Closure that returns the body content when invoked:
+引数@attrs@はタグ属性のMapです。引数@body@はタグ内容のコンテンツを呼び出すクロージャです:
 
 {code:java}
 class SimpleTagLib {
@@ -28,16 +32,19 @@ class SimpleTagLib {
 }
 {code}
 
-As demonstrated above there is an implicit @out@ variable that refers to the output @Writer@ which you can use to append content to the response. Then you can reference the tag inside your GSP; no imports are necessary:
+{hidden}As demonstrated above there is an implicit @out@ variable that refers to the output @Writer@ which you can use to append content to the response. Then you can reference the tag inside your GSP; no imports are necessary:{hidden}
+上記の例では、レスポンスを出力する@Writer@を参照する変数@out@に対してコンテンツを追加しています。ここまで作成したら、以下のように、GSPの中でタグをそのまま参照します。importは必要ありません。:
 
 {code:xml}
 <g:emoticon happy="true">Hi John</g:emoticon>
 {code}
 
 {note}
-To help IDEs like SpringSource Tool Suite (STS) and others autocomplete tag attributes, you should add Javadoc comments to your tag closures with @\@attr@ descriptions. Since taglibs use Groovy code it can be difficult to reliably detect all usable attributes.
+{hidden}To help IDEs like SpringSource Tool Suite (STS) and others autocomplete tag attributes, you should add Javadoc comments to your tag closures with @\@attr@ descriptions. Since taglibs use Groovy code it can be difficult to reliably detect all usable attributes.{hidden}
+タグリブはGroovyコードを使用しているため、タグで使用可能な属性全てを認識することは困難です。SpringSource Tool Suite (STS)等のIDEでの補完機能に対しての手助けとして、タグクロージャのJavadocコメント内に@\@attr@を含めましょう。
 
-For example:
+{hidden}For example:{hidden}
+例として:
 
 {code:java}
 class SimpleTagLib {
@@ -54,7 +61,8 @@ class SimpleTagLib {
 }
 {code}
 
-and any mandatory attributes should include the REQUIRED keyword, e.g.
+{hidden}and any mandatory attributes should include the REQUIRED keyword, e.g.{hidden}
+必須条件の属性には、キーワードREQUIREDを指定します。
 
 {code:java}
 class SimpleTagLib {

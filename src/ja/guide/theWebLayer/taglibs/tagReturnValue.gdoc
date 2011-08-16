@@ -1,11 +1,16 @@
-Since Grails 1.2, a tag library call returns an instance of @org.codehaus.groovy.grails.web.util.StreamCharBuffer@ class by default.
+{hidden}Since Grails 1.2, a tag library call returns an instance of @org.codehaus.groovy.grails.web.util.StreamCharBuffer@ class by default.
 This change improves performance by reducing object creation and optimizing buffering during request processing.
-In earlier Grails versions, a @java.lang.String@ instance was returned.
+In earlier Grails versions, a @java.lang.String@ instance was returned.{hidden}
+Grails 1.2以降、タグライブラリを呼び出すと、デフォルトでは@org.codehaus.groovy.grails.web.util.StreamCharBuffer@ クラスのインスタンスを返します。
+この実装でリクエスト処理時のバッファリング最適化や、オブジェクト生成の減少によりパフォーマンスの向上が行われました。
+それ以前のGrailsでは@java.lang.String@インスタンスを返します。
 
-Tag libraries can also return direct object values to the caller since Grails 1.2..
-Object returning tag names are listed in a static @returnObjectForTags@ property in the tag library class.
+{hidden}Tag libraries can also return direct object values to the caller since Grails 1.2..
+Object returning tag names are listed in a static @returnObjectForTags@ property in the tag library class.{hidden}
+さらに、Grails 1.2からは、タグライブラリから直接オブジェクトを返す事が可能です。オブジェクトを返すタグを定義するにはstatic @returnObjectForTags@プロパティにタグ名称をリストします。
 
-Example:
+{hidden}Example:{hidden}
+例:
 {code:java}
 class ObjectReturningTagLib {
     static namespace = "cms"

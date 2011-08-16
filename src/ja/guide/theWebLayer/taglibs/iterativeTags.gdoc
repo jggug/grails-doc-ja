@@ -1,4 +1,5 @@
-Iterative tags are easy too, since you can invoke the body multiple times:
+{hidden}Iterative tags are easy too, since you can invoke the body multiple times:{hidden}
+タグ内容を複数回実行するような、イテレートタグも簡単に作れます:
 
 {code:java}
 def repeat = { attrs, body ->
@@ -8,7 +9,8 @@ def repeat = { attrs, body ->
 }
 {code}
 
-In this example we check for a @times@ attribute and if it exists convert it to a number, then use Groovy's @times@ method to iterate the specified number of times:
+{hidden}In this example we check for a @times@ attribute and if it exists convert it to a number, then use Groovy's @times@ method to iterate the specified number of times:{hidden}
+この例では、属性@times@を有無や数値なのかを確認し、その数値でGroovyの@times@メソッドを実行して、与えられた数値の回数、実行内容を繰り返します:
 
 {code:xml}
 <g:repeat times="3">
@@ -16,13 +18,15 @@ In this example we check for a @times@ attribute and if it exists convert it to 
 </g:repeat>
 {code}
 
-Notice how in this example we use the implicit @it@ variable to refer to the current number. This works because when we invoked the body we passed in the current value inside the iteration:
+{hidden}Notice how in this example we use the implicit @it@ variable to refer to the current number. This works because when we invoked the body we passed in the current value inside the iteration:{hidden}
+ここでは、数値を参照した変数@it@の使い方を紹介しています。これはbody実行時にイテレーションの数値をbodyに渡すことで動作しています。:
 
 {code:java}
     out << body(num)
 {code}
 
-That value is then passed as the default variable @it@ to the tag. However, if you have nested tags this can lead to conflicts, so you should should instead name the variables that the body uses:
+{hidden}That value is then passed as the default variable @it@ to the tag. However, if you have nested tags this can lead to conflicts, so you should should instead name the variables that the body uses:{hidden}
+この値はタグ内の変数@it@に渡されます。ただしタグをネストした場合は名称の衝突が起きるため違う名称を指定できるようにする必要があります。:
 
 {code:java}
 def repeat = { attrs, body ->
@@ -33,17 +37,20 @@ def repeat = { attrs, body ->
 }
 {code}
 
-Here we check if there is a @var@ attribute and if there is use that as the name to pass into the body invocation on this line:
+{hidden}Here we check if there is a @var@ attribute and if there is use that as the name to pass into the body invocation on this line:{hidden}
+この例では、属性varが存在すれば、その値を名称として使用できるようにbodyに渡して実行します。
 
 {code:java}
     out << body((var):num)
 {code}
 
 {note}
-Note the usage of the parenthesis around the variable name. If you omit these Groovy assumes you are using a String key and not referring to the variable itself.
+{hidden}Note the usage of the parenthesis around the variable name. If you omit these Groovy assumes you are using a String key and not referring to the variable itself.{hidden}
+変数名パーレン使用時の注意点です。これを省略するとGroovyは文字列キーとして解釈してしまい変数として参照できません。
 {note}
 
-Now we can change the usage of the tag as follows:
+{hidden}Now we can change the usage of the tag as follows:{hidden}
+これで、以下のようにタグで使用できます:
 
 {code:xml}
 <g:repeat times="3" var="j">
@@ -51,4 +58,5 @@ Now we can change the usage of the tag as follows:
 </g:repeat>
 {code}
 
-Notice how we use the @var@ attribute to define the name of the variable @j@ and then we are able to reference that variable within the body of the tag.
+{hidden}Notice how we use the @var@ attribute to define the name of the variable @j@ and then we are able to reference that variable within the body of the tag.{hidden}
+こうすることで、@var@属性に指定した変数名@j@をタグ内部で変数として参照することができます。

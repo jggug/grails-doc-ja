@@ -1,16 +1,19 @@
-In addition to the simplified tag library mechanism provided by GSP, you can also use JSP tags from GSP. To do so simply declare the JSP to use with the @taglib@ directive:
+{hidden}In addition to the simplified tag library mechanism provided by GSP, you can also use JSP tags from GSP. To do so simply declare the JSP to use with the @taglib@ directive:{hidden}
+単純なタグライブラリ機能がGSPで提供されているのに加えて、GSPでは、JSPタグを使用することもできます。使用するには、@taglib@ディレクティブを定義します。
 
 {code:xml}
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 {code}
 
-Then you can use it like any other tag:
+{hidden}Then you can use it like any other tag:{hidden}
+他のタグと同じように使用できます:
 
 {code:xml}
 <fmt:formatNumber value="${10}" pattern=".00"/>
 {code}
 
-With the added bonus that you can invoke JSP tags like methods:
+{hidden}With the added bonus that you can invoke JSP tags like methods:{hidden}
+さらに追加として、JSPタグをメソッドとして実行可能です:
 
 {code:java}
 ${fmt.formatNumber(value:10, pattern:".00")}
