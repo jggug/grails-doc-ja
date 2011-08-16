@@ -1,6 +1,7 @@
-h4. Creating Layouts
+h4. レイアウトを作成する {hidden}Creating Layouts {hidden}
 
-Grails leverages [Sitemesh|http://www.opensymphony.com/sitemesh/], a decorator engine, to support view layouts. Layouts are located in the @grails-app/views/layouts@ directory. A typical layout can be seen below:
+{hidden}Grails leverages [Sitemesh|http://www.opensymphony.com/sitemesh/], a decorator engine, to support view layouts. Layouts are located in the @grails-app/views/layouts@ directory. A typical layout can be seen below:{hidden}
+Grailsはデコレータエンジン[Sitemesh|http://www.opensymphony.com/sitemesh/]の力を借りてビューレイアウトをサポートしています。レイアウトは@grails-app/views/layouts@ディレクトリに配置します。標準的なレイアウトは以下のようになります:
 
 {code:xml}
 <html>
@@ -18,17 +19,26 @@ Grails leverages [Sitemesh|http://www.opensymphony.com/sitemesh/], a decorator e
 </html>
 {code}
 
-The key elements are the [layoutHead|tags], [layoutTitle|tags] and [layoutBody|tags] tag invocations:
+{hidden}The key elements are the [layoutHead|tags], [layoutTitle|tags] and [layoutBody|tags] tag invocations:{hidden}
+鍵となるエレメントは、 [layoutHead|tags]、[layoutTitle|tags]、[layoutBody|tags]タグです:
 
+{hidden}
 * @layoutTitle@ - outputs the target page's title
 * @layoutHead@ - outputs the target page's head tag contents
 * @layoutBody@ - outputs the target page's body tag contents
+{hidden}
 
-The previous example also demonstrates the [pageProperty|tags] tag which can be used to inspect and return aspects of the target page.
+* @layoutTitle@ - ページのタイトルを出力
+* @layoutHead@ - ページのheadタグコンテントを出力
+* @layoutBody@ - ページのbodyタグコンテントを出力
 
-h4. Triggering Layouts
+{hidden}The previous example also demonstrates the [pageProperty|tags] tag which can be used to inspect and return aspects of the target page.{hidden}
+さらに前述した例では、指定した内容をターゲットページから精査して内容を返す[pageProperty|tags]タグの紹介しています。
 
-There are a few ways to trigger a layout. The simplest is to add a meta tag to the view:
+h4. レイアウトを反映させる {hidden}Triggering Layouts {hidden}
+
+{hidden}There are a few ways to trigger a layout. The simplest is to add a meta tag to the view:{hidden}
+レイアウトを反映させる幾つかの方法があります。簡単な方法は、ビューにmetaタグを追加するだけです:
 
 {code:xml}
 <html>
@@ -40,7 +50,8 @@ There are a few ways to trigger a layout. The simplest is to add a meta tag to t
 </html>
 {code}
 
-In this case a layout called @grails-app/views/layouts/main.gsp@ will be used to layout the page. If we were to use the layout from the previous section the output would resemble this:
+{hidden}In this case a layout called @grails-app/views/layouts/main.gsp@ will be used to layout the page. If we were to use the layout from the previous section the output would resemble this:{hidden}
+この例では、レイアウトの@grails-app/views/layouts/main.gsp@が呼び出されてページのレイアウトに使用されます。内容が先ほどのレイアウトの内奥であれば、以下のような出力が得られます:
 
 {code:xml}
 <html>
@@ -56,9 +67,10 @@ In this case a layout called @grails-app/views/layouts/main.gsp@ will be used to
 </html>
 {code}
 
-h4. Specifying A Layout In A Controller
+h4. コントローラでレイアウトを指定 {hidden}Specifying A Layout In A Controller {hidden}
 
-Another way to specify a layout is to specify the name of the layout by assigning a value to the "layout" property in a controller. For example, if you have a controller such as:
+{hidden}Another way to specify a layout is to specify the name of the layout by assigning a value to the "layout" property in a controller. For example, if you have a controller such as:{hidden}
+別の方法として、コントローラに"layout"プロパティの値としてレイアウトする事ができます。例として以下のようなコントローラがあるとしたら:
 
 {code:java}
 class BookController {
@@ -68,7 +80,9 @@ class BookController {
 }
 {code}
 
-You can create a layout called @grails-app/views/layouts/customer.gsp@ which will be applied to all views that the @BookController@ delegates to.  The value of the "layout" property may contain a directory structure relative to the @grails-app/views/layouts/@ directory.  For example:
+{hidden}You can create a layout called @grails-app/views/layouts/customer.gsp@ which will be applied to all views that the @BookController@ delegates to.  The value of the "layout" property may contain a directory structure relative to the @grails-app/views/layouts/@ directory.  For example:{hidden}
+@grails-app/views/layouts/customer.gspと@いうレイアウトファイルを作成すると、@BookController@に連動する全てのビューに反映します。
+"layout"プロパティの値は@grails-app/views/layouts/@ディレクトリが含まれます。例として:
 
 {code:java}
 class BookController {
@@ -79,10 +93,12 @@ class BookController {
 {code}
 
 Views rendered from that controller would be decorated with the @grails-app/views/layouts/custom/customer.gsp@ template.
+この例で、このコントローラのビューは、@grails-app/views/layouts/custom/customer.gsp@テンプレートでデコレートされます。
 
-h4. Layout by Convention
+h4. 慣習によるレイアウト {hidden}Layout by Convention {hidden}
 
-Another way to associate layouts is to use "layout by convention". For example, if you have this controller:
+{hidden}Another way to associate layouts is to use "layout by convention". For example, if you have this controller:{hidden}
+"慣習によるレイアウト"によってレイアウトと連動することが可能です。例として、次のようなコントローラがあるとします:
 
 {code:java}
 class BookController {
@@ -90,27 +106,34 @@ class BookController {
 }
 {code}
 
-You can create a layout called @grails-app/views/layouts/book.gsp@, which will be applied to all views that the @BookController@ delegates to.
+{hidden}You can create a layout called @grails-app/views/layouts/book.gsp@, which will be applied to all views that the @BookController@ delegates to.{hidden}
+@BookController@のビューに反映されるレイアウト@grails-app/views/layouts/book.gsp@を作成できます。
 
-Alternatively, you can create a layout called @grails-app/views/layouts/book/list.gsp@ which will only be applied to the @list@ action within the @BookController@.
+{hidden}Alternatively, you can create a layout called @grails-app/views/layouts/book/list.gsp@ which will only be applied to the @list@ action within the @BookController@.{hidden}
+あるいは、@BookController@のアクション@list@のみに反映するレイアウト@grails-app/views/layouts/book/list.gsp@を作成できます。
 
-If you have both the above mentioned layouts in place the layout specific to the action will take precedence when the list action is executed.
+{hidden}If you have both the above mentioned layouts in place the layout specific to the action will take precedence when the list action is executed.{hidden}
+両方のレイアウトが存在する場合は、アクションに指定したレイアウトが優先されます。
 
-If a layout may not be located using any of those conventions, the convention of last resort is to look for the application default layout which
+{hidden}If a layout may not be located using any of those conventions, the convention of last resort is to look for the application default layout which
 is @grails-app/views/layouts/application.gsp@.  The name of the application default layout may be changed by defining a property
-in @grails-app/conf/Config.groovy@ as follows:
+in @grails-app/conf/Config.groovy@ as follows:{hidden}
+もしこれらの慣習にあわせたレイアウトが存在しない場合は、最終的にデフォルトレイアウトの@grails-app/views/layouts/application.gsp@を探しに行きます。アプリケーションのデフォルトレイアウト名称は、次のプロパティを@grails-app/conf/Config.groovy@に定義することで変更が可能です。:
 
 {code:java}
 grails.sitemesh.default.layout = 'myLayoutName'
 {code}
 
-With that property in place, the application default layout will be @grails-app/views/layouts/myLayoutName.gsp@.
+{hidden}With that property in place, the application default layout will be @grails-app/views/layouts/myLayoutName.gsp@.{hidden}
+この例でのアプリケーションのデフォルトレイアウトは@grails-app/views/layouts/myLayoutName.gsp@になります。
 
-h4. Inline Layouts
+h4. インラインレイアウト {hidden}Inline Layouts {hidden}
 
-Grails' also supports Sitemesh's concept of inline layouts with the [applyLayout|tags] tag. This can be used to apply a layout to a template, URL or arbitrary section of content. This lets you even further modularize your view structure by "decorating" your template includes.
+{hidden}Grails' also supports Sitemesh's concept of inline layouts with the [applyLayout|tags] tag. This can be used to apply a layout to a template, URL or arbitrary section of content. This lets you even further modularize your view structure by "decorating" your template includes.{hidden}
+Grailsでは、[applyLayout|tags]タグを使用することでSitemeshのインラインレイアウトをサポートしています。インラインレイアウトでは、テンプレート、URL、任意のコンテントにレイアウトを使用することができます。
 
-Some examples of usage can be seen below:
+{hidden}Some examples of usage can be seen below:{hidden}
+例としては以下のようになります:
 
 {code:xml}
 <g:applyLayout name="myLayout" template="bookTemplate" collection="${books}" />
@@ -122,15 +145,17 @@ The content to apply a layout to
 </g:applyLayout>
 {code}
 
-h4. Server-Side Includes
+h4. サーバーサイドインクルード {hidden}Server-Side Includes {hidden}
 
-While the [applyLayout|tags] tag is useful for applying layouts to external content, if you simply want to include external content in the current page you use the [include|tags] tag:
+{hidden}While the [applyLayout|tags] tag is useful for applying layouts to external content, if you simply want to include external content in the current page you use the [include|tags] tag:{hidden}
+[applyLayout|tags]タグは、外部コンテントに対してレイアウトを反映させるのに便利ですが、単純に外部コンテンツを現在のページに含みたい場合は[include|tags]タグが使用できます。
 
 {code:xml}
 <g:include controller="book" action="list" />
 {code}
 
-You can even combine the [include|tags] tag and the [applyLayout|tags] tag for added flexibility:
+{hidden}You can even combine the [include|tags] tag and the [applyLayout|tags] tag for added flexibility:{hidden}
+柔軟な対応をするために、[applyLayout|tags]タグと[include|tags]タグを一緒に利用できます:
 
 {code:xml}
 <g:applyLayout name="myLayout">
@@ -138,10 +163,12 @@ You can even combine the [include|tags] tag and the [applyLayout|tags] tag for a
 </g:applyLayout>
 {code}
 
-Finally, you can also call the [include|tags] tag from a controller or tag library as a method:
+{hidden}Finally, you can also call the [include|tags] tag from a controller or tag library as a method:{hidden}
+もちろん、[include|tags]タグをメソッドとして、コントローラやタグライブラリで使用できます:
 
 {code:java}
 def content = include(controller:"book", action:"list")
 {code}
 
-The resulting content will be provided via the return value of the [include|tags] tag.
+{hidden}The resulting content will be provided via the return value of the [include|tags] tag.{hidden}
+コンテントの結果は、[include|tags]タグの返値で提供されます。

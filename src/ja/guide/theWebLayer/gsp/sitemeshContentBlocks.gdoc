@@ -1,24 +1,26 @@
-Although it is useful to decorate an entire page sometimes you may find the need to decorate independent sections of your site. To do this you can use content blocks. To get started, partition the page to be decorated using the @<content>@ tag:
+{hidden}Although it is useful to decorate an entire page sometimes you may find the need to decorate independent sections of your site. To do this you can use content blocks. To get started, partition the page to be decorated using the @<content>@ tag:{hidden}
+[レイアウト|layouts]で説明したSitemeshの内容は、サイト全体のページをデコレートするのに便利ですが、ページ内のブロック(パーツ)をデコレートする必要も有ると思います。この場合はコンテントブロックを使用します。コンテントブロックを使用するには@<content>@タグでページ内をブロック分割します。
 
 {code:xml}
 <content tag="navbar">
-... draw the navbar here...
+... ここにナビゲーションバーコンテンツ...
 </content>
 
 <content tag="header">
-... draw the header here...
+... ここにヘッダーコンテンツ...
 </content>
 
 <content tag="footer">
-... draw the footer here...
+... ここにフッターコンテンツ...
 </content>
 
 <content tag="body">
-... draw the body here...
+... ここにボディコンテンツ...
 </content>
 {code}
 
-Then within the layout you can reference these components and apply individual layouts to each:
+{hidden}Then within the layout you can reference these components and apply individual layouts to each:{hidden}
+そしてレイアウト側には、それぞれのコンポーネントの参照を配置します:
 
 {code:xml}
 <html>
