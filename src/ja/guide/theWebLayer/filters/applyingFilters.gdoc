@@ -1,4 +1,5 @@
-To create a filter create a class that ends with the convention @Filters@ in the @grails-app/conf@ directory. Within this class define a code block called @filters@ that contains the filter definitions:
+{hidden}To create a filter create a class that ends with the convention @Filters@ in the @grails-app/conf@ directory. Within this class define a code block called @filters@ that contains the filter definitions:{hidden}
+フィルタを作成するには、@grails-app/conf@ディレクトリに、名称が@Filters@で終わるクラスを作成します。このクラスにはフィルタを記述する、@filters@というコードブロックを定義します:
 
 {code:java}
 class ExampleFilters {
@@ -8,7 +9,8 @@ class ExampleFilters {
 }
 {code}
 
-Each filter you define within the @filters@ block has a name and a scope. The name is the method name and the scope is defined using named arguments. For example to define a filter that applies to all controllers and all actions you can use wildcards:
+{hidden}Each filter you define within the @filters@ block has a name and a scope. The name is the method name and the scope is defined using named arguments. For example to define a filter that applies to all controllers and all actions you can use wildcards:{hidden}
+@filters@ブロックに定義する各フィルタには、範囲と名称を持たせます。名称はメソッド名で、範囲は引数で定義します。例として、ワイルドカードを使用した全コントローラ・アクションに適用されるフィルタを定義します:
 
 {code:java}
 sampleFilter(controller:'*', action:'*') {
@@ -16,12 +18,19 @@ sampleFilter(controller:'*', action:'*') {
 }
 {code}
 
-The scope of the filter can be one of the following things:
+{hidden}The scope of the filter can be one of the following things:{hidden}
+フィルタの範囲は次のように指定できます:
 
+{hidden}
 * A controller and/or action name pairing with optional wildcards
 * A URI, with Ant path matching syntax
+{hidden}
+* 省略可能なワイルドカードを使用した、コントローラ名と(または)アクション名の組み合わせ。
+* Antパスマッチング書式のURI指定。
 
-Filter rule attributes:
+{hidden}Filter rule attributes:{hidden}
+フィルタルール属性:
+{hidden}
 * @controller@ - controller matching pattern, by default \* is replaced with .\* and a regex is compiled
 * @controllerExclude@ - controller exclusion pattern, by default \* is replaced with .\* and a regex is compiled
 * @action@ - action matching pattern, by default \* is replaced with .\* and a regex is compiled
@@ -31,54 +40,90 @@ Filter rule attributes:
 * @uriExclude@ - a uri pattern to exclude, expressed with as Ant style path (e.g. /book/\*\*)
 * @find@ (@true@/@false@) - rule matches with partial match (see @java.util.regex.Matcher.find()@)
 * @invert@ (@true@/@false@) - invert the rule (NOT rule)
+{hidden}
+* @controller@ - コントローラ対象のパターンマッチング, 既存値 \* で正規表現コンパイル時には .\*に置換されます。
+* @controllerExclude@ - 除外するコントローラのパターン, 既存値 \* で正規表現コンパイル時には .\*に置換されます。
+* @action@ - アクション対象のパターンマッチング, 既存値 \* で正規表現コンパイル時には .\*に置換されます。
+* @actionExclude@ - 除外するアクションのパターン, 既存値 \* で正規表現コンパイル時には .\*に置換されます。
+* @regex (true/false)@ - 正規表現の使用 ('\*' を '.\*'に置換しない指定)
+* @uri@ - URIマッチ, Antスタイルパス (e.g. /book/\*\*)
+* @uriExclude@ - 除外するURIパターン, Antスタイルパス (e.g. /book/\*\*)
+* @find (true/false)@ - 部分マッチ (@java.util.regex.Matcher.find()@を参照)
+* @invert (true/false)@ - ルールを逆にする 
 
-Some examples of filters include:
 
+{hidden}Some examples of filters include:{hidden}
+フィルタの例:
+{hidden}
 * All controllers and actions
+{hidden}
+* 全てのコントローラとアクション
 {code:java}
 all(controller: '*', action: '*') {
 
 }
 {code}
+{hidden}
 * Only for the @BookController@
+{hidden}
+* @BookController@のみ
 {code:java}
 justBook(controller: 'book', action: '*') {
 
 }
 {code}
+{hidden}
 * All controllers except the @BookController@
+{hidden}
+* @BookController@以外の全て
 {code:java}
 notBook(controller: 'book', invert: true) {
 
 }
 {code}
+{hidden}
 * All actions containing 'save' in the action name
+{hidden}
+* 'save'を名称に含めたアクション全て
 {code:java}
 saveInActionName(action: '*save*', find: true) {
 
 }
 {code}
+{hidden}
 * All actions starting with the letter 'b' except for actions beginning with the phrase 'bad*'
+{hidden}
+* "bad\*"を除外した、'b'で始まるアクション全て
 {code:java}
 actionBeginningWithBButNotBad(action: 'b*', actionExclude: 'bad*', find: true) {
 
 }
 {code}
+{hidden}
 * Applied to a URI space
+{hidden}
+* URIへ適用
 {code:java}
 someURIs(uri: '/book/**') {
 
 }
 {code}
+{hidden}
 * Applied to all URIs
+{hidden}
+* 全てのURIに適用
 {code:java}
 allURIs(uri: '/**') {
 
 }
 {code}
 
-In addition, the order in which you define the filters within the @filters@ code block dictates the order in which they are executed.  To control the order of execution between @Filters@ classes, you can use the @dependsOn@ property discussed in [filter dependencies|guide:filterDependencies] section.
+{hidden}In addition, the order in which you define the filters within the @filters@ code block dictates the order in which they are executed.  To control the order of execution between @Filters@ classes, you can use the @dependsOn@ property discussed in [filter dependencies|guide:filterDependencies] section.{hidden}
+@filters@コードブロックに定義した順序でフィルタは実行されます。@Filters@クラス間での実行を制御するには、[フィルタ依存|guide:filterDependencies]セクションで記載されている@dependsOn@プロパティが使用できます。
 
 {note}
+{hidden}
 Note: When exclude patterns are used they take precedence over the matching patterns.  For example, if action is 'b\*' and actionExclude is 'bad\*' then actions like 'best' and 'bien' will have that filter applied but actions like 'bad' and 'badlands' will not.
+{hidden}
+注意:除外パターンが使用された場合は除外マッチングパターンが優先されます。例として、アクションが'b\*' で、actionExcludeが'bad\*'の場合、'best','bien'等のアクションは適用されますが、'bad','badland'は適用されません。
 {note}

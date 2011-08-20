@@ -1,5 +1,7 @@
-Filters support all the common properties available to [controllers|guide:controllers] and [tag libraries|guide:taglibs], plus the application context:
+{hidden}Filters support all the common properties available to [controllers|guide:controllers] and [tag libraries|guide:taglibs], plus the application context:{hidden}
+フィルタでは、[コントローラ|guide:controllers]や[タグライブラリ|guide:taglibs]で利用できる共通のプロパティとアプリケーションコンテキストを参照できます:
 
+{hidden}
 * [request|controllers] - The HttpServletRequest object
 * [response|controllers] - The HttpServletResponse object
 * [session|controllers] - The HttpSession object
@@ -10,8 +12,25 @@ Filters support all the common properties available to [controllers|guide:contro
 * [controllerName|controllers] - The controller name that is being dispatched to
 * [grailsApplication|controllers] - The Grails application currently running
 * [applicationContext|api:org.springframework.context.ApplicationContext] - The ApplicationContext object
+{hidden}
+* [request|controllers] - HttpServletRequestオブジェクト
+* [response|controllers] - HttpServletResponseオブジェクト
+* [session|controllers] - HttpSessionオブジェクト
+* [servletContext|controllers] - ServletContextオブジェクト
+* [flash|controllers] - flashオブジェクト
+* [params|controllers] - リクエストパラメータオブジェクト
+* [actionName|controllers] - ディスパッチ対象のアクション名
+* [controllerName|controllers] - ディスパッチ対象のコントローラ名
+* [grailsApplication|controllers] - 起動中のGrailsアプリケーション 
+* [applicationContext|api:org.springframework.context.ApplicationContext] - ApplicationContextオブジェクト
 
-However, filters only support a subset of the methods available to controllers and tag libraries. These include:
 
+{hidden}However, filters only support a subset of the methods available to controllers and tag libraries. These include:{hidden}
+フィルタではコントローラやタグライブラリで使用できる一部のメソッドが使用できます:
+
+{hidden}
 * [redirect|controllers] - For redirects to other controllers and actions
 * [render|controllers] - For rendering custom responses
+{hidden}
+* [redirect|controllers] - 他のコントローラやアクションにリダイレクトを行う
+* [render|controllers] - カスタムレスポンスを返す。
