@@ -1,8 +1,10 @@
-Grails has built in support for [Content negotiation|http://en.wikipedia.org/wiki/Content_negotiation] using either the HTTP @Accept@ header, an explicit format request parameter or the extension of a mapped URI.
+{hidden}Grails has built in support for [Content negotiation|http://en.wikipedia.org/wiki/Content_negotiation] using either the HTTP @Accept@ header, an explicit format request parameter or the extension of a mapped URI.{hidden}
+Grailsには、明示的なフォーマットに対するリクエストのHTTP @Accept@ヘッダーまたはマップされたURIの拡張子での[コンテントネゴシエーション|http://en.wikipedia.org/wiki/Content_negotiation]に対応しています。
 
-h4. Configuring Mime Types
+h4. Mimeタイプの定義 {hidden}Configuring Mime Types{hidden}
 
-Before you can start dealing with content negotiation you need to tell Grails what content types you wish to support. By default Grails comes configured with a number of different content types within @grails-app/conf/Config.groovy@ using the @grails.mime.types@ setting:
+{hidden}Before you can start dealing with content negotiation you need to tell Grails what content types you wish to support. By default Grails comes configured with a number of different content types within @grails-app/conf/Config.groovy@ using the @grails.mime.types@ setting: {hidden}
+コンテントネゴシエーションの処理を行うには、どのコンテントタイプをサポートするかをGrailsに教える必要があります。@grails-app/conf/Config.groovy@の@grails.mime.types@設定に幾つかのコンテントタイプがデフォルトで定義されています:
 
 {code:java}
 grails.mime.types = [ xml: ['text/xml', 'application/xml'],
@@ -18,36 +20,42 @@ grails.mime.types = [ xml: ['text/xml', 'application/xml'],
                     ]
 {code}
 
-The above bit of configuration allows Grails to detect to format of a request containing either the 'text/xml' or 'application/xml' media types as simply 'xml'. You can add your own types by simply adding new entries into the map.
+{hidden}The above bit of configuration allows Grails to detect to format of a request containing either the 'text/xml' or 'application/xml' media types as simply 'xml'. You can add your own types by simply adding new entries into the map.{hidden}
+この設定の一部を説明すると、'text/xml'または'application/xml'を含むリクエストは単純にコンテントタイプ'xml'としてGrailsが検出するのを可能にします。独自のタイプを追加するには単純にマップにタイプを追加するだけです。
 
-h4. Content Negotiation using the Accept header
+h4. Acceptヘッダーを使用したコンテントネゴシエーション {hidden}Content Negotiation using the Accept header {hidden}
 
-Every incoming HTTP request has a special [Accept|http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html] header that defines what media types (or mime types) a client can "accept". In older browsers this is typically:
+{hidden}Every incoming HTTP request has a special [Accept|http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html] header that defines what media types (or mime types) a client can "accept". In older browsers this is typically:{hidden}
+全てのHTTPリクエストは、クライアントが受け入れ可能な、メディア(mimeタイプ)を定義した、[Accept|http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html]ヘッダーを持っています。古いブラウザの場合は通常以下のようになります:
 
 {code:java}
 */*
 {code}
 
-Which simply means anything. However, on newer browser something all together more useful is sent such as (an example of a Firefox @Accept@ header):
+{hidden}Which simply means anything. However, on newer browser something all together more useful is sent such as (an example of a Firefox @Accept@ header):{hidden}
+これは単純に何でも可能という意味です。最新のブラウザではもっと便利になっており次のような内容を送信します(FireFoxの@Accept@ヘッダーを例として):
 
 {code}
 text/xml, application/xml, application/xhtml+xml, text/html;q=0.9,
 text/plain;q=0.8, image/png, */*;q=0.5
 {code}
 
-Grails parses this incoming format and adds a @property@ to the [response|servletAPI] object that outlines the preferred response format. For the above example the following assertion would pass:
+{hidden}Grails parses this incoming format and adds a @property@ to the [response|servletAPI] object that outlines the preferred response format. For the above example the following assertion would pass:{hidden}
+Grailsではこの入ってきたフォーマットをパースして、レスポンスフォーマットを選択するための@property@を[response|servletAPI]オブジェクトに追加します。上記の例では以下のアサーションが通ります:
 
 {code:java}
 assert 'html' == response.format
 {code}
 
-Why? The @text/html@ media type has the highest "quality" rating of 0.9, therefore is the highest priority. If you have an older browser as mentioned previously the result is slightly different:
+{hidden}Why? The @text/html@ media type has the highest "quality" rating of 0.9, therefore is the highest priority. If you have an older browser as mentioned previously the result is slightly different:{hidden}
+何故でしょう？ メディアタイプ@text/html@は、レートでは0.9という高い"特質"を持っているので、優先度が高いからです。先の例で紹介した古いブラウザの場合は少し違います:
 
 {code:java}
 assert 'all' == response.format
 {code}
 
-In this case 'all' possible formats are accepted by the client. To deal with different kinds of requests from [Controllers|guide:controllers] you can use the [withFormat|controllers] method that acts as kind of a switch statement:
+{hidden}In this case 'all' possible formats are accepted by the client. To deal with different kinds of requests from [Controllers|guide:controllers] you can use the [withFormat|controllers] method that acts as kind of a switch statement:{hidden}
+このケースの'all'はどのクライアントでも受け入れられます。様々な種類のリクエストを[コントローラ|guide:controllers]で分別するには、switch文のように動作する[withFormat|controllers]メソッドを使用します:
 
 {code:java}
 import grails.converters.XML
@@ -65,19 +73,24 @@ class BookController {
 }
 {code}
 
-If the preferred format is @html@ then Grails will execute the @html()@ call only. This causes Grails to look for a view called either @grails-app/views/books/list.html.gsp@ or @grails-app/views/books/list.gsp@. If the format is @xml@ then the closure will be invoked and an XML response rendered.
+{hidden}If the preferred format is @html@ then Grails will execute the @html()@ call only. This causes Grails to look for a view called either @grails-app/views/books/list.html.gsp@ or @grails-app/views/books/list.gsp@. If the format is @xml@ then the closure will be invoked and an XML response rendered.{hidden}
+優先されたフォーマットが@html@の場合Grailsはhtml()のみを実行します。この場合Grailsは、@grails-app/views/books/list.html.gsp@また @grails-app/views/books/list.gsp@のどちらかのビューを探しに行きます。
 
-How do we handle the "all" format? Simply order the content-types within your @withFormat@ block so that whichever one you want executed comes first. So in the above example, "all" will trigger the @html@ handler.
+{hidden}How do we handle the "all" format? Simply order the content-types within your @withFormat@ block so that whichever one you want executed comes first. So in the above example, "all" will trigger the @html@ handler.{hidden}
+ではどのようにフォーマットの"all"を判別するのでしょう？単純に@withFormat@ブロックのコンテントタイプの順番を指定して一番最初に実行される物を決めます。上記の例では、"all"を受け取った場合は、@html@ハンドラを実行します。
 
 {note}
-When using [withFormat|controllers] make sure it is the last call in your controller action as the return value of the @withFormat@ method is used by the action to dictate what happens next.
+{hidden}When using [withFormat|controllers] make sure it is the last call in your controller action as the return value of the @withFormat@ method is used by the action to dictate what happens next.{hidden}
+[withFormat|controllers]を使用する場合は、@withFormat@での返値がコントローラアクションで最終の返値となります。
 {note}
 
-h4. Request format vs. Response format
+h4. リクエストフォーマット vs レスポンスフォーマット {hidden}Request format vs. Response format {hidden}
 
-As of Grails 2.0, there is a separate notion of the _request_ format and the _response_ format. The request format is dictated by the @CONTENT_TYPE@ header and is typically used to detect if the incoming request can be parsed into XML or JSON, whilst the response format uses the file extension, format parameter or ACCEPT header to attempt to deliver an appropriate response to the client.
+{hidden}As of Grails 2.0, there is a separate notion of the _request_ format and the _response_ format. The request format is dictated by the @CONTENT_TYPE@ header and is typically used to detect if the incoming request can be parsed into XML or JSON, whilst the response format uses the file extension, format parameter or ACCEPT header to attempt to deliver an appropriate response to the client.{hidden}
+Grails 2.0からの対応で、リクエストフォーマットとレスポンスフォーマットでは分離して認識するようになりました。リクエストフォーマットは、@CONTENT_TYPE@ヘッダの指定で入ってくるリクエストを認識してXMLまたJSON等に分類します。レスポンスフォーマットでは、ファイル拡張子、フォーマットパラメータまたはACCEPTヘッダを認識して適したレスポンスをクライアントに返します。
 
-The [withFormat|controllers] available on controllers deals specifically with the response format. If you wish to add logic that deals with the request format then you can do so using a separate @withFormat@ method available on the request:
+{hidden}The [withFormat|controllers] available on controllers deals specifically with the response format. If you wish to add logic that deals with the request format then you can do so using a separate @withFormat@ method available on the request:{hidden}
+コントローラでの[withFormat|controllers]はレスポンスフォーマット専用となります。リクエストフォーマットでロジックを記述する場合は、requestオブジェクトの@withFormat@メソッドを使用します:
 
 {code:java}
 request.withFormat {
@@ -90,15 +103,17 @@ request.withFormat {
 }
 {code}
 
-h4. Content Negotiation with the format Request Parameter
+h4. リクエストパラメータformatでのコンテントネゴシエーション {hidden}Content Negotiation with the format Request Parameter {hidden}
 
-If fiddling with request headers if not your favorite activity you can override the format used by specifying a @format@ request parameter:
+{hidden}If fiddling with request headers if not your favorite activity you can override the format used by specifying a @format@ request parameter:{hidden}
+リクエストヘッダを参照した方法を行いたく無い場合は、フォーマットを指定するために、リクエストパラメータの@format@が使用できます:
 
 {code:java}
 /book/list?format=xml
 {code}
 
-You can also define this parameter in the [URL Mappings|guide:urlmappings] definition:
+{hidden}You can also define this parameter in the [URL Mappings|guide:urlmappings] definition:{hidden}
+このパラメータは[URLマッピング|guide:urlmappings]でも定義できます:
 
 {code:java}
 "/book/list"(controller:"book", action:"list") {
@@ -106,23 +121,26 @@ You can also define this parameter in the [URL Mappings|guide:urlmappings] defin
 }
 {code}
 
-h4. Content Negotiation with URI Extensions
+h4. URI拡張子でのコンテントネゴシエーション {hidden}Content Negotiation with URI Extensions {hidden}
 
-Grails also supports content negotiation using URI extensions. For example given the following URI:
+{hidden}Grails also supports content negotiation using URI extensions. For example given the following URI:{hidden}
+URI拡張子でのコンテントネゴシエーションにも対応しています。例として次のようなURIがあるとします:
 
 {code:java}
 /book/list.xml
 {code}
 
-Grails will remove the extension and map it to @/book/list@ instead whilst simultaneously setting the content format to @xml@ based on this extension. This behaviour is enabled by default, so if you wish to turn it off, you must set the @grails.mime.file.extensions@ property in @grails-app/conf/Config.groovy@ to @false@:
+{hidden}Grails will remove the extension and map it to @/book/list@ instead whilst simultaneously setting the content format to @xml@ based on this extension. This behaviour is enabled by default, so if you wish to turn it off, you must set the @grails.mime.file.extensions@ property in @grails-app/conf/Config.groovy@ to @false@:{hidden}
+Grailsが拡張子を外して、@xml@としてフォーマットをセットして@/book/list@にマップします。この振る舞いはデフォルトで使用可能です。この機能を外したい場合は@grails-app/conf/Config.groovy@の@grails.mime.file.extensions@プロパティを@false@に指定します:
 
 {code:java}
 grails.mime.file.extensions = false
 {code}
 
-h4. Testing Content Negotiation
+h4. コンテントネゴシエーションをテスト {hidden}Testing Content Negotiation {hidden}
 
-To test content negotiation in a unit or integration test (see the section on [Testing|guide:testing]) you can either manipulate the incoming request headers:
+{hidden}To test content negotiation in a unit or integration test (see the section on [Testing|guide:testing]) you can either manipulate the incoming request headers:{hidden}
+Unitテストまたは統合テスト([テスト|guide:testing]のセクションを参照)でコンテントネゴシエーションをテストする際に、入ってくるリクエストヘッダを操作することができます:
 
 {code:java}
 void testJavascriptOutput() {
@@ -135,7 +153,8 @@ void testJavascriptOutput() {
 }
 {code}
 
-Or you can set the format parameter to achieve a similar effect:
+{hidden}Or you can set the format parameter to achieve a similar effect:{hidden}
+または、formatパラメータをセットすることが可能です:
 
 {code:java}
 void testJavascriptOutput() {

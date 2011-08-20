@@ -1,4 +1,5 @@
-Specific JavaScript can be called if certain events occur, all the events start with the "on" prefix and let you give feedback to the user where appropriate, or take other action:
+{hidden}Specific JavaScript can be called if certain events occur, all the events start with the "on" prefix and let you give feedback to the user where appropriate, or take other action:{hidden}
+指定したJavaScriptを、イベントが発生した際にコールすることができます。全てのイベントは接頭辞"on"で指定します:
 
 {code:xml}
 <g:remoteLink action="show"
@@ -8,8 +9,10 @@ Specific JavaScript can be called if certain events occur, all the events start 
               onComplete="hideProgress()">Show Book 1</g:remoteLink>
 {code}
 
-The above code will execute the "showProgress()" function which may show a progress bar or whatever is appropriate. Other events include:
+{hidden}The above code will execute the "showProgress()" function which may show a progress bar or whatever is appropriate. Other events include:{hidden}
+上記のコードでは、実行されると、ロード時に指定した"showProgress()"ファンクションがプログレスバーを表示する等ファンクションの実装に対応した動作を行います。他に以下のイベントが使用可能です:
 
+{hidden}
 * @onSuccess@  - The JavaScript function to call if successful
 * @onFailure@  - The JavaScript function to call if the call failed
 * @on_ERROR_CODE@  - The JavaScript function to call to handle specified error codes (eg on404="alert('not found!')")
@@ -17,8 +20,17 @@ The above code will execute the "showProgress()" function which may show a progr
 * @onLoading@  - The JavaScript function to call when the remote function is loading the response
 * @onLoaded@  - The JavaScript function to call when the remote function is completed loading the response
 * @onComplete@  - The JavaScript function to call when the remote function is complete, including any updates
+{hidden}
+* @onSuccess@ - 成功した時に呼び出すJavaScriptファンクション
+* @onFailure@ - 失敗した時に呼び出すJavaScriptファンクション
+* @on_ERROR_CODE@ - 指定したエラーコードを取得したら呼び出すJavaScriptファンクション (eg on404="alert('not found!')")
+* @onUninitialized@ - Ajaxエンジンの初期化に失敗したときに呼び出すJavaScriptファンクション
+* @onLoading@ - レスポンスを読み込み中に呼び出すJavaScriptファンクション
+* @onLoaded@ - レスポンスの読み込み完了時に呼び出すJavaScriptファンクション
+* @onComplete@ - リモートファンクションが完全に完了(更新を含む)したら呼び出すJavaScriptファンクション
 
-If you need a reference to the @XmlHttpRequest@ object you can use the implicit event parameter @e@ to obtain it:
+{hidden}If you need a reference to the @XmlHttpRequest@ object you can use the implicit event parameter @e@ to obtain it:{hidden}
+@XmlHttpRequest@オブジェクトを参照する場合は、以下のように、@e@等のイベントパラメータ使用して取得します:
 
 {code:xml}
 <g:javascript>

@@ -1,22 +1,38 @@
-Grails 2.0 integrates with the [Resources plugin|http://grails.org/plugin/resources] to provide sophisticated static resource management. This plugin is installed by default in new Grails applications.
+{hidden}Grails 2.0 integrates with the [Resources plugin|http://grails.org/plugin/resources] to provide sophisticated static resource management. This plugin is installed by default in new Grails applications.{hidden}
+ 2.0から、洗練された静的リソース管理を提供する[Resourcesプラグイン|http://grails.org/plugin/resources]を統合しています。このプラグインはデフォルトで新規Grailsアプリケーションにインストールされます。
 
-The basic way to include a link to a static resource in your application is to use the [resource|tags] tag. This simple approach creates a URI pointing to the file.
+{hidden}The basic way to include a link to a static resource in your application is to use the [resource|tags] tag. This simple approach creates a URI pointing to the file.{hidden}
+静的リソースのリンクを含む場合、通常[resource|tags]タグを使用します。これはURIでファイルを指定する簡単なアプローチになります。
 
-However modern applications with dependencies on multiple JavaScript and CSS libraries and frameworks (as well as dependencies on multiple Grails plugins) require something more powerful.
+{hidden}However modern applications with dependencies on multiple JavaScript and CSS libraries and frameworks (as well as dependencies on multiple Grails plugins) require something more powerful.{hidden}
+しかし近頃のアプリケーションは、様々なJavaScriptやCSSライブラリやフレームワークに依存しており、もっとパワフルな方法が必要となります。
 
-The issues that the Resources framework tackles are:
 
+{hidden}The issues that the Resources framework tackles are:{hidden}
+Resourceフレームワークの取り組んだ課題:
+{hidden}
 * Web application performance tuning is difficult
 * Correct ordering of resources, and deferred inclusion of JavaScript
 * Resources that depend on others that must be loaded first
 * The need for a standard way to expose static resources in plugins and applications
 * The need for an extensible processing chain to optimize resources
 * Preventing multiple inclusion of the same resource
+{hidden}
+* Webアプリケーションのパフォーマンスチューニングが難しい
+* リソースの配置順と、JavaScriptの置き忘れ
+* 先に読み込む必要のある依存関係のあるリソース
+* プラグインやアプリケーションでの、静的リソースを表示する方法の標準化が必要
+* リソースの最適化を行うための拡張可能な連鎖行程が必要
+* 同じリソースの多重配置を防ぐ
 
-The plugin achieves this by introducing new artefacts and processing the resources using the server's local file system.
+{hidden}The plugin achieves this by introducing new artefacts and processing the resources using the server's local file system.{hidden}
+プラグインでアーテファクトの提供と、サーバのローカルファイルシステムを使用して処理をすることで、これらを達成しています。
 
-It adds artefacts for declaring resources, for declaring "mappers" that can process resources, and a servlet filter to serve processed resources.
+{hidden}It adds artefacts for declaring resources, for declaring "mappers" that can process resources, and a servlet filter to serve processed resources.{hidden}
+プラグインは、リソースを宣言するためのアーテファクト、リソースを処理する"マッパー"、処理されたリソースを提供するサーブレットフィルタを追加します。
 
-What you get is an incredibly advanced resource system that enables you to easily create highly optimized web applications that run the same in development and in production.
+{hidden}What you get is an incredibly advanced resource system that enables you to easily create highly optimized web applications that run the same in development and in production.{hidden}
+信じられないほど上級のリソースシステムが、簡単に高度に最適化されたWebアプリケーション作成をdevelpoment,productionモード共に可能とします。
 
-The Resources plugin documentation provides a more detailed overview of the [concepts|http://grails-plugins.github.com/grails-resources/] which will be beneficial when reading the following guide.
+{hidden}The Resources plugin documentation provides a more detailed overview of the [concepts|http://grails-plugins.github.com/grails-resources/] which will be beneficial when reading the following guide.{hidden}
+リソースプラグインの[ドキュメント|http://grails-plugins.github.com/grails-resources/]では、さらに詳細な内容を提供しています。

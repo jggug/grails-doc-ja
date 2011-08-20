@@ -1,4 +1,5 @@
-An HTML form can also be submitted asynchronously in one of two ways. Firstly using the [formRemote|tags] tag which expects similar attributes to those for the [remoteLink|tags] tag:
+{hidden}An HTML form can also be submitted asynchronously in one of two ways. Firstly using the [formRemote|tags] tag which expects similar attributes to those for the [remoteLink|tags] tag:{hidden}
+HTMLフォームを非同期で送信することができます。[remoteLink|tags]タグと同じような属性を使用できる[formRemote|tags]タグを使用する例です:
 
 {code:xml}
 <g:formRemote url="[controller: 'book', action: 'delete']"
@@ -8,7 +9,8 @@ An HTML form can also be submitted asynchronously in one of two ways. Firstly us
 </g:formRemote >
 {code}
 
-Or alternatively you can use the [submitToRemote|tags] tag to create a submit button. This allows some buttons to submit remotely and some not depending on the action:
+{hidden}Or alternatively you can use the [submitToRemote|tags] tag to create a submit button. This allows some buttons to submit remotely and some not depending on the action:{hidden}
+他の方法として、[submitToRemote|tags]タグを使用して送信ボタンを作成します。このボタンで非同期送信ボタンを可能として、アクションに依存させなくできます:
 
 {code:xml}
 <form action="delete">

@@ -1,7 +1,10 @@
-Remote content can be loaded in a number of ways, the most commons way is through the [remoteLink|tags] tag. This tag allows the creation of HTML anchor tags that perform an asynchronous request and optionally set the response in an element. The simplest way to create a remote link is as follows:
+{hidden}Remote content can be loaded in a number of ways, the most commons way is through the [remoteLink|tags] tag. This tag allows the creation of HTML anchor tags that perform an asynchronous request and optionally set the response in an element. The simplest way to create a remote link is as follows:{hidden}
+多くの方法でリモートコンテントをロードすることが可能ですが、一般的な方法として[remoteLink|tags]タグを使用します。
+このタグは、非同期リクエストと結果をエレメントにセット(省略可能)するHTMLアンカータグを生成します。リモートリンクタグを作成する簡単な例は次のようになります:
 
 {code:xml}
 <g:remoteLink action="delete" id="1">Delete Book</g:remoteLink>
 {code}
 
-The above link sends an asynchronous request to the @delete@ action of the current controller with an id of @1@.
+{hidden}The above link sends an asynchronous request to the @delete@ action of the current controller with an id of @1@.{hidden}
+上記の例で生成されたタグは、id:1をリクエストパラメータとして@delete@アクションに非同期リクエストを送信します。

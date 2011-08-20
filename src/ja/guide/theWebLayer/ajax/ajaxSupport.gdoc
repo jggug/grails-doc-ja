@@ -1,12 +1,17 @@
+{hidden}
 By default Grails ships with the "jQuery":http://jquery.com/ library, but through the [Plugin system|guide:plugins] provides support for other frameworks such as [Prototype|http://www.prototypejs.org/], [Dojo:http://dojotoolkit.org/], [Yahoo UI:http://developer.yahoo.com/yui/] and the [Google Web Toolkit|http://code.google.com/webtoolkit/].
+{hidden}
+Grailsはデフォルトで "jQuery":http://jquery.com/ を使用しています。他のライブラリ、[Prototype|http://www.prototypejs.org/]、 [Dojo|http://dojotoolkit.org/]、 [Yahoo UI|http://developer.yahoo.com/yui/]、 [Google Web Toolkit|http://code.google.com/webtoolkit/]等もプラグインで提供しています。
 
-This section covers Grails' support for Ajax in general. To get started, add this line to the @<head>@ tag of your page:
+{hidden}This section covers Grails' support for Ajax in general. To get started, add this line to the @<head>@ tag of your page:{hidden}
+このセクションでは全般的なAjax対応の説明をします。先ずはじめに、ページの@<head>@タグ内に以下を追加します:
 
 {code:xml}
 <g:javascript library="jquery" />
 {code}
 
-You can replace @jQuery@ with any other library supplied by a plugin you have installed. This works because of Grails' support for adaptive tag libraries. Thanks to Grails' plugin system there is support for a number of different Ajax libraries including (but not limited to):
+{hidden}You can replace @jQuery@ with any other library supplied by a plugin you have installed. This works because of Grails' support for adaptive tag libraries. Thanks to Grails' plugin system there is support for a number of different Ajax libraries including (but not limited to):{hidden}
+プラグインで提供された他のライブラリを使用する際は、@jquery@の部分を入れ換えます。これはGrailsの適用性のあるタグライブラリで可能にしています。Grailsのプラグインには、次の様々なAjaxライブラリが存在します(これは一部です):
 
 * jQuery
 * Prototype

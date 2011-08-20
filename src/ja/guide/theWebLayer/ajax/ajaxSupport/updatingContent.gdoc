@@ -1,4 +1,5 @@
-This is great, but usually you provide feedback to the user about what happened:
+{hidden}This is great, but usually you provide feedback to the user about what happened:{hidden}
+先ほどの例で非同期送信を行いましたが、通常ユーザへ何が行われたかのフィードバックを提供する必要があります:
 
 {code:java}
 def delete() {
@@ -8,7 +9,8 @@ def delete() {
 }
 {code}
 
-GSP code:
+{hidden}GSP code:{hidden}
+GSPコード:
 
 {code:xml}
 <div id="message"></div>
@@ -17,7 +19,9 @@ Delete Book
 </g:remoteLink>
 {code}
 
-The above example will call the action and set the contents of the @message@ @div@ to the response in this case @"Book 1 was deleted"@. This is done by the @update@ attribute on the tag, which can also take a Map to indicate what should be updated on failure:
+{hidden}The above example will call the action and set the contents of the @message@ @div@ to the response in this case @"Book 1 was deleted"@. This is done by the @update@ attribute on the tag, which can also take a Map to indicate what should be updated on failure:{hidden}
+この例では対象のアクションをコールしてレスポンスを@messege@のidをもった@div@エレメントの内容を@"Book 1 was deleted"@に更新します。この更新動作は、タグの@update@属性で対象を指定しています。さらにMapを使用して更新失敗時の表示先も指定できます:
+
 
 {code:xml}
 <div id="message"></div>
@@ -28,4 +32,5 @@ Delete Book
 </g:remoteLink>
 {code}
 
-Here the @error@ div will be updated if the request failed.
+{hidden}Here the @error@ div will be updated if the request failed.{hidden}
+この例ではリクエストに失敗すると、@error@のIDをもつdivタグ内が更新されます。
