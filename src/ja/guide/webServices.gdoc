@@ -1,1 +1,4 @@
+{hidden}
+Web services are all about providing a web API onto your web application and are typically implemented in either [REST|http://en.wikipedia.org/wiki/Representational_State_Transfer] or "SOAP":http://en.wikipedia.org/wiki/SOAP.
+{hidden}
 WebサービスはWebアプリケーションにWeb APIを提供するものであり、通常は[SOAP|http://ja.wikipedia.org/wiki/SOAP_(プロトコル)]または[REST|http://ja.wikipedia.org/wiki/Representational_State_Transfer]で実装されています。

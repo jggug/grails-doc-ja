@@ -1,9 +1,16 @@
+{hidden}There are several plugins that add SOAP support to Grails depending on your preferred approach. For Contract First SOAP services there is a [Spring WS|http://grails.org/plugin/springws] plugin, whilst if you want to generate a SOAP API from Grails services there are several plugins that do this including:{hidden}
 GrailsにはSOAPのサポートを追加するプラグインがいくつかあります。コントラクトファーストのSOAP向けには[Spring WS|http://grails.org/plugin/springws]プラグインがあり、GrailsサービスからSOAP APIを生成したいのであれば以下のようなプラグインがあります。
 
+{hidden}
+* "CXF":http://grails.org/plugin/cxf/ plugin which uses the "CXF":http://cxf.apache.org/ SOAP stack
+* "Axis2":http://grails.org/plugin/axis2 plugin which uses "Axis2":http://ws.apache.org/axis2/
+* "Metro":https://jax-ws-commons.dev.java.net/grails/ plugin which uses the "Metro":https://jax-ws-commons.dev.java.net/grails/ framework (and can also be used for [Contract First|http://docs.codehaus.org/pages/viewpage.action?pageId=88342530])
+{hidden}
 * "CXF":http://grails.org/plugin/cxf/ プラグインは、"CXF":http://cxf.apache.org/ SOAPスタックを使用します。
 * "Axis2":http://grails.org/plugin/axis2 プラグインは、"Axis2":http://ws.apache.org/axis2/ を使用します。
 * "Metro":https://jax-ws-commons.dev.java.net/grails/ プラグインは、"Metro":https://jax-ws-commons.dev.java.net/grails/ フレームワークを使用します。（[コントラクトファースト|http://docs.codehaus.org/pages/viewpage.action?pageId=88342530]向けに使用することもできます。）
 
+{hidden}Most of the SOAP integrations integrate with Grails [services|guide:services] via the @exposes@ static property. This example is taken from the CXF plugin:{hidden}
 ほとんどのSOAP系プラグインはGrailsの[サービス|guide:services]に@expose@プロパティを定義することによって、SOAPを統合することが可能です。下記はCXFプラグインの例です:
 
 {code:java}
@@ -17,6 +24,8 @@ class BookService {
 }
 {code}
 
+{hidden}The WSDL can then be accessed at the location: @http://127.0.0.1:8080/your_grails_app/services/book?wsdl@{hidden}
 WSDLには次のようなロケーションでアクセスすることができます。 @http://127.0.0.1:8080/your_grails_app/services/book?wsdl@
 
+{hidden}For more information on the CXF plugin refer to [the documentation|http://grails.org/plugin/cxf] on the wiki.{hidden}
 CXFプラグインについてもっと知りたい方は、[ドキュメント|http://grails.org/plugin/cxf]を参照しましょう。

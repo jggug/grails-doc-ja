@@ -1,9 +1,12 @@
+{hidden}REST is not really a technology in itself, but more an architectural pattern. REST is very simple and just involves using plain XML or JSON as a communication medium, combined with URL patterns that are "representational" of the underlying system, and HTTP methods such as GET, PUT, POST and DELETE.{hidden}
 RESTは本来SOAPのようなプロトコルではなく、アーキテクチャスタイルです。RESTは非常に単純です。簡素なXMLやJSONを通信媒体に用いて、基本的なシステムとGET、PUT、POSTおよびDELETEといったHTTPメソッドを「表現する」URLパターンを組み合わせています。
 
+{hidden}Each HTTP method maps to an action type. For example GET for retrieving data, PUT for creating data, POST for updating and so on. In this sense REST fits quite well with [CRUD|guide:scaffolding].{hidden}
 それぞれのHTTPメソッドは異なるアクションにマップします。例えば、GETはデータ検索、PUTはデータ作成、POSTは更新などとマップします。このため、RESTは[CRUD|guide:scaffolding]と非常によく適合します。
 
-h4. URLパターン
+h4. URLパターン {hidden}URL patterns{hidden}
 
+{hidden}The first step to implementing REST with Grails is to provide RESTful [URL mappings|guide:urlmappings]:{hidden}
 GrailsでRESTを実装する１つ目のやり方として、以下のようにRESTfulな[URLマッピング|guide:urlmappings]を提供する方法があります。
 
 {code:java}
@@ -12,6 +15,7 @@ static mappings = {
 }
 {code}
 
+{hidden}This maps the URI @/product@ onto a @ProductController@. Each HTTP method such as GET, PUT, POST and DELETE map to unique actions within the controller as outlined by the table below:{hidden}
 この例では、@/product@というURIを@ProductController@に紐付けます。GET、PUT、POSTおよびDELETEといった各HTTPメソッドは、下表に示したようにコントローラ内の一意のアクションに紐付きます。
 
 {table}
@@ -22,8 +26,10 @@ static mappings = {
 @DELETE@   | @delete@
 {table}
 
+{hidden}In addition, Grails provides automatic XML or JSON marshalling for you.{hidden}
 さらにGrailsではXMLまたJSONでの自動マーシャリングも提供しています。
 
+{hidden}You can alter how HTTP methods are handled by using URL Mappings to [map to HTTP methods|guide:mappingHTTP]:{hidden}
 [HTTPメソッドをマップ|guide:mappingHTTP]する仕組みを使用して、URLマッピングをHTTPメソッドにハンドルすることが可能です:
 
 {code:java}
@@ -32,6 +38,7 @@ static mappings = {
 }
 {code}
 
+{hidden}However, unlike the @resource@ argument used previously, in this case Grails will not provide automatic XML or JSON marshalling unless you specify the @parseRequest@ argument:{hidden}
 ただし、この場合は、先の@resource@と違い、@parseRequest@変数をURLマッピングに指定しないと、XMLやJSONのマーシャリングを自動的には行いません:
 
 {code:java}
@@ -40,8 +47,9 @@ static mappings = {
 }
 {code}
 
-h4. HTTPメソッド
+h4. HTTPメソッド {hidden}HTTP Methods{hidden}
 
+{hidden}In the previous section you saw how you can easily define URL mappings that map specific HTTP methods onto specific controller actions. Writing a REST client that then sends a specific HTTP method is then easy (example in Groovy's HTTPBuilder module):{hidden}
 前のセクションでは、特定のHTTPメソッドを特定のコントローラのアクションにマップするURLマッピングが、どれほど簡単に定義できるかを見ました。特定のHTTPメソッドを送信するRESTクライアントを作成するのも簡単です。（GroovyのHTTPBuilderモジュールの例）:
 
 {code}
@@ -60,7 +68,8 @@ def http = new HTTPBuilder("http://localhost:8080/amazon")
  }
 {code}
 
-通常のブラウザから@GET@または@POST@以外のメソッドの要求を発行するためには、Grailsの援助が必要となります。[フォーム|tags]を定義する時に、@DELETE@のような別のメソッドを指定できます。
+{hidden}Issuing a request with a method other than @GET@ or @POST@ from a regular browser is not possible without some help from Grails. When defining a [form|tags] you can specify an alternative method such as @DELETE@:{hidden}
+通常のブラウザから@GET@または@POST@以外のメソッドの要求を発行するためには、Grailsの援助が必要となります。フォーム([form|tags])を定義する時に、@DELETE@のような別のメソッドを指定できます。
 
 {code}
 <g:form controller="book" method="DELETE">
@@ -68,10 +77,12 @@ def http = new HTTPBuilder("http://localhost:8080/amazon")
 </g:form>
 {code}
 
+{hidden}Grails will send a hidden parameter called @_method@, which will be used as the request's HTTP method. Another alternative for changing the method for non-browser clients is to use the @X-HTTP-Method-Override@ to specify the alternative method name.{hidden}
 Grailsは@_method@というhiddenパラメータを送信し、これをHTTPメソッドの要求として使用します。ブラウザ以外のクライアントでメソッドを変更するためには、@X-HTTP-Method-Override@を使用して代替メソッド名を指定します。
 
-h4. XMLマーシャリング - 読み取り
+h4. XMLマーシャリング - 読み取り {hidden}XML Marshalling - Reading{hidden}
 
+{hidden}The controller can use Grails' [XML marshalling|guide:xmlAndJSON] support to implement the GET method:{hidden}
 Grailsの[XMLマーシャリングの機能|guide:xmlAndJSON]をコントローラで使用して、GETメソッドの実装できます。
 
 {code:java}
@@ -92,10 +103,12 @@ class ProductController {
 }
 {code}
 
+{hidden}If there is an @id@ we search for the @Product@ by name and return it, otherwise we return all Products. This way if we go to @/products@ we get all products, otherwise if we go to @/product/MacBook@ we only get a MacBook.{hidden}
 この例では、検索した内容が存在した場合はその@Product@を返し、無い場合は全てを返します。この方法で、@/product@にアクセスすると全リストが返り、@/product/MacBook@等指定して存在した場合は、その@Product@を返します。
 
-h4. XMLマーシャリング - 更新
+h4. XMLマーシャリング - 更新 {hidden}XML Marshalling - Updating{hidden}
 
+{hidden}To support updates such as @PUT@ and @POST@ you can use the [params|controllers] object which Grails enhances with the ability to read an incoming XML packet. Given an incoming XML packet of:{hidden}
 @PUT@および@POSTの@ような更新をサポートするには、Grailsの[params|controllers]オブジェクトを利用してXMLを読み取ることができます。次のようなXMLを受信したとします。
 
 {code:xml}
@@ -108,6 +121,7 @@ h4. XMLマーシャリング - 更新
 </product>
 {code}
 
+{hidden}you can read this XML packet using the same techniques described in the [Data Binding|guide:dataBinding] section, using the [params|controllers] object:{hidden}
 このXMLを読み込むには、[データバインディング|guide:dataBinding]の章に記述された内容と同じく、[params|controllers]オブジェクトから取得することができます:
 
 {code:java}
@@ -123,25 +137,31 @@ def save() {
 }
 {code}
 
+{hidden}In this example by indexing into the @params@ object using the @product@ key we can automatically create and bind the XML using the @Product@ constructor. An interesting aspect of the line:{hidden}
 この例では、@params@オブジェクトから@product@キーを使用して取得し、@Product@クラスのコンストラクタに渡すことで自動的にバインドします:
 
 {code:java}
 def p = new Product(params.product)
 {code}
 
+{hidden}is that it requires no code changes to deal with a form submission that submits form data, or an XML request, or a JSON request.{hidden}
 興味深い点は、JSONリクエストまたはXMLリクエストの対応は、通常のフォーム送信の対応とそれほど変わりがないということです。
 
 {note}
+{hidden}If you require different responses to different clients (REST, HTML etc.) you can use [content negotation|guide:contentNegotiation]{hidden}
 異なったクライアント（REST、HTMLなど）に対する異なった応答が必要な場合は、[コンテントネゴシエーション|guide:contentNegotiation]を使用することができます。
 {note}
 
+{hidden}The @Product@ object is then saved and rendered as XML, otherwise an error message is produced using Grails' [validation|guide:validation] capabilities in the form:{hidden}
 @Product@オブジェクトが保存され、XMLとしてレンダリングされます。問題が起きた場合は、Grailsの[バリデーション|guide:validation]機能によってエラーメッセージが返信されます。
+
 {code:xml}
 <error>
    <message>The property 'title' of class 'Person' must be specified</message>
 </error>
 {code}
 
-h4.  JAX-RSでのREST
+h4. JAX-RSでのREST {hidden}REST with JAX-RS{hidden}
 
+{hidden}There also is a [JAX-RS Plugin|http://grails.org/plugin/jaxrs] which can be used to build web services based on the Java API for RESTful Web Services ([JSR 311: JAX-RS|http://jcp.org/en/jsr/summary?id=311]).{hidden}
 RESTful Webサービス用のJava APIをベースとしたRESTを、[JAX-RSプラグイン|http://grails.org/plugin/jaxrs]構築することも可能です。  ([JSR 311: JAX-RS|http://jcp.org/en/jsr/summary?id=311])

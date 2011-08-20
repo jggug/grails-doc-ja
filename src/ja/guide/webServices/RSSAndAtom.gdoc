@@ -1,3 +1,4 @@
+{hidden}No direct support is provided for RSS or Atom within Grails. You could construct RSS or ATOM feeds with the [render|controllers] method's XML capability. There is however a "Feeds plugin":http://grails.org/plugin/feeds available for Grails that provides a RSS and Atom builder using the popular "ROME":https://rome.dev.java.net/ library. An example of its usage can be seen below:{hidden}
 RSSやAtomについては、Grailsへの直接的な機能は提供されていません。[render|controllers]メソッドのXML機能を使用して、RSSやATOMのフィードを構築することができます。他に、"ROME":https://rome.dev.java.net/ ライブラリを使用してRSSとAtomビルダを提供した"Feedsプラグイン":http://grails.org/plugin/feeds もあります。その使用例を以下に示します。
 
 {code:java}
