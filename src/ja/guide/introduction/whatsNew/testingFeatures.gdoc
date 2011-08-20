@@ -1,11 +1,13 @@
-h4. 新Unitテストのコンソール出力
+h4. 新Unitテストのコンソール出力 {hidden}New Unit Testing Console Output{hidden}
 
+{hidden}Test output from the test-app command has been improved:{hidden}
 test-app実行時のテストコンソール出力が向上しました:
 
 !test-output.png!
 
-h4. 新しいUnitテストAPI
+h4. 新しいUnitテストAPI {hidden}New Unit Testing API{hidden}
 
+{hidden}There is a new unit testing API based on mixins that supports JUnit 3, 4 and Spock style tests (with Spock 0.6 and above). Example:{hidden}
 JUnit3,4,Spock(Spock 0.6以上)のテストに対応した、Mixinsベースの新しUnitテストAPIが追加されました:
 
 {code:java}
@@ -22,16 +24,20 @@ class SimpleControllerTests  {
 }
 {code}
 
+{hidden}The [documentation on testing|guide:testing] has also been re-written around this new framework.{hidden}
 テストのドキュメントが、この新しいフレームワークのために書き直されました。詳細は [テストのドキュメント|guide:testing] を参照してください。
 
-h4. GORMのUnitテスト
+h4. GORMのUnitテスト {hidden}Unit Testing GORM{hidden}
 
+{hidden}A new in-memory GORM implementation is present that supports many more features of the GORM API making unit testing of criteria queries, named queries and other previously unsupported methods possible.{hidden}
 メモリ上で動作するGORM実装により、今までにサポートされていなかった、クライテリアクエリ、名前付きクエリなど、様々なGORM APIのテストがUnitテストで可能になりました。
 
-h4. インタラクティブモードで快速なUnitテストを
+h4. インタラクティブモードで快速なUnitテストを {hidden}Faster Unit Testing with Interactive Mode{hidden}
 
+{hidden}The new interactive mode (activated by typing 'grails') greatly improves the execution time of running unit and integration tests.{hidden}
 'grails'と入力するだけで実行できるインタラクティブモードでのUnitテスト・統合テストの実行速度が向上しました。
 
-h4. Unit Test スカッフォルド
+h4. Unit Test スカッフォルド {hidden}Unit Test Scaffolding{hidden}
 
+{hidden}A unit test is now generated for scaffolded controllers{hidden}
 スカッフォルドされたコントローラのUnitテストが生成されるようになりました。

@@ -1,1 +1,2 @@
+{hidden}This section covers the new features that are present in 2.0 and is broken down into sections covering the build system, core APIs, the web tier, persistence enhancements and improvements in testing. Note there are many more small enhancements and improvements, these sections just cover some of the highlights.{hidden}
 このセクションでは、現在2.0に存在する新機能、ビルドシステム、コアAPI、Web階層、永続化関連の強化等に分類し掘り下げて紹介します。他にも向上、強化した内容が多数ありますが、ここではハイライト的に紹介してます。

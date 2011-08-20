@@ -1,5 +1,6 @@
-h4. コントローラのアクションにメソッドを利用
+h4. コントローラのアクションにメソッドを利用 {hidden}Controller Actions as Methods{hidden}
 
+{hidden}It is now possible to define controller actions as methods instead of using closures as in previous versions of Grails. In fact this is now the preferred way of expressing an action. For example:{hidden}
 以前のクロージャで記述していたコントローラアクションをメソッドで記述可能になりました。これからはメソッド記述を推奨します。:
 
 {code}
@@ -13,8 +14,9 @@ def index = {
 }
 {code}
 
-h4. アクションに引数を指定してバインド
+h4. アクションに引数を指定してバインド {hidden}Binding Primitive Method Action Arguments{hidden}
 
+{hidden}It is now possible to bind form parameters to action arguments where the name of the form element matches the argument name. For example given the following form:{hidden}
 フォームエレメントのname属性を、アクションメソッドの引数に指定する方法でのバインドが可能になりました。 次のようなフォームを例に:
 
 {code:xml}
@@ -24,6 +26,7 @@ h4. アクションに引数を指定してバインド
 </g:form>
 {code}
 
+{hidden}You can define an action that declares arguments for each input and automatically converts the parameters to the appropriate type:{hidden}
 以下のように、それぞれを引数として定義、パラメータの型も自動で適した型に変換します:
 
 {code}
@@ -32,12 +35,14 @@ def save(String name, int age) {
 }
 {code}
 
-h4. 静的リソース抽象化
+h4. 静的リソース抽象化 {hidden}Static Resource Abstraction{hidden}
 
+{hidden}A new [static resource abstraction|guide:resources] is included that allows declarative handling of JavaScript, CSS and image resources including automatic ordering, compression, caching and gzip handling.{hidden}
 JavaScript、CSS、画像などのリソースを管理、圧縮、キャッシュ、gzipを行う [静的リソース抽象化機能|guide:resources] が追加されました。
 
-h4. サーブレット3.0の非同期処理
+h4. サーブレット3.0の非同期処理 {hidden}Servlet 3.0 Async Features{hidden}
 
+{hidden}Grails now supports Servlet 3.0 including the Asynchronous programming model defined by the specification:{hidden}
 Grailsはサーブレット3.0をサポートしました。サーブレット3.0での機能、非同期処理が使用可能です:
 
 {code}
@@ -51,8 +56,9 @@ def index() {
 }
 {code}
 
-h4. リンク生成API
+h4. リンク生成API {hidden}Link Generation API{hidden}
 
+{hidden}A general purpose @LinkGenerator@ class is now available that is usable anywhere within a Grails application and not just within the context of a controller. For example if you need to generate links in a service or an asynchronous background job outside the scope of a request:{hidden}
 全面的に使用可能なリンク生成API @LinkGenerator@ クラスが追加されました。コントローラのコンテキスト以外のどこからでも使用できます。例としてサービス、バックグラウンド処理、非同期タスク、リクエスト以外の場所でリンクが生成できます。
 
 {code}
@@ -63,8 +69,9 @@ def generateLink() {
 }
 {code}
 
-h4. ページレンダリングAPI
+h4. ページレンダリングAPI {hidden}Page Rendering API{hidden}
 
+{hidden}Like the @LinkGenerator@ the new @PageRenderer@ can be used to render GSP pages outside the scope of a web request, such as in a scheduled job or web service. The @PageRenderer@ class features a very similar API to the @render@ method found within controllers:{hidden}
 @LinkGenerator@ と同じく新規に追加されたAPI、 @PageRenderer@ は、Webリクエスト以外の場所で、GSPページがレンダリング可能です。例えば、Webサービス、スケジュールジョブなどで使用します。 @PageRenderer@ サービスはコントローラの @render@ メソッドと同じように使用します。
 
 {code}
@@ -79,6 +86,7 @@ void welcomeUser(User user) {
 }
 {code}
 
+{hidden}The @PageRenderer@ service also allows you to pre-process GSPs into HTML templates:{hidden}
 @PageRenderer@ sサービスはGSPからHTMLを生成するのも可能です。
 
 {code}
@@ -87,8 +95,9 @@ new File("/path/to/welcome.html").withWriter { w ->
 }
 {code}
 
-h4. フィルター除外機能
+h4. フィルター除外機能 {hidden}Filter Exclusions{hidden}
 
+{hidden}Filters may now express controller, action and uri exclusions to offer more options for expressing to which requests a particular filter should be applied.{hidden}
 フィルターでのコントローラ・アクション・URIの除外指定が実装されました。
 
 {code}
@@ -111,18 +120,19 @@ filter3(uriExclude: '/secure*') {
 }
 {code}
 
-h4. パフォーマンスの向上
+h4. パフォーマンスの向上 {hidden}Performance Improvements{hidden}
 
+{hidden}Performance of GSP page rendering has once again been improved by optimizing the GSP compiler to inline method calls where possible.{hidden}
 再度最適化したGSPコンパイラでGSPのパフォーマンスはさらに向上しました。
 
-h4. HTML5スカッフォルド
+h4. HTML5スカッフォルド {hidden}HTML5 Scaffolding{hidden}
 
+{hidden}There is a new HTML5-based scaffolding UI:{hidden}
 HTML5ベースのスカッフォールドUIになりました:
 
 !scaffolding-ui.png!
 
-h4. jQueryをデフォルトになりました
+h4. jQueryをデフォルトになりました {hidden}jQuery by Default{hidden}
 
+{hidden}The jQuery plugin is now the default JavaScript library installed into a Grails application. For backwards compatibility a [Prototype plugin|http://grails.org/plugin/prototype] is available. Refer to the [documentation|http://grails.org/plugin/prototype] on the Prototype plugin for installation instructions.{hidden}
 jQueryプラグインがデフォルトのJavaScriptライブラリとしてGrailsアプリケーションにインストールされます。 下位互換として、Prototypeはプラグインとして提供しています。 Prototypeついてはプラグインのドキュメントを参考にしてください。 Prototype plugin|http://grails.org/plugin/prototype]
-
-

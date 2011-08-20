@@ -1,9 +1,11 @@
-h4. GORM API
+h4. GORM API {hidden}The GORM API{hidden}
 
+{hidden}The GORM API has been formalized into a set of classes (@GormStaticApi@, @GormInstanceApi@ and @GormValidationApi@) that get statically wired into every domain class at the byte code level. The result is better code completion for IDEs, better integration with Java and the potential for more GORM implementations for other types of data stores.{hidden}
 GORM APIは、 @GormStaticApi@ 、 @GormInstanceApi@ 、 @GormValidationApi@ というクラスに置き換えられたことによって、全てのドメインのバイトコードレベルに注入されます。この実装でIDEでのコード補完、Javaとの統合、様々なデータストアへのGORM実装への可能性が向上しました。
 
-h4. 新findOrCreateとfindOrSaveメソッド
+h4. 新findOrCreateとfindOrSaveメソッド {hidden}New findOrCreate and findOrSave Methods{hidden}
 
+{hidden}Domain classes have support for the findOrCreateWhere, findOrSaveWhere, findOrCreateBy and findOrSaveBy query methods which behave just like findWhere and findBy methods except that they should never return null. If a matching instance cannot be found in the database then a new instance is created, populated with values represented in the query parameters and returned. In the case of findOrSaveWhere and findOrSaveBy, the instance is saved before being returned.{hidden}
 ドメインクラスに、findWhereやfindByメソッドに似た、nullを返さない、findOrCreateWhere, findOrSaveWhere, findOrCreateBy, findOrSaveByのクエリーをサポートしました。実行結果にインスタンスが見つからない場合は、指定された値で、新規にインスタンスを作成して返します。findOrSaveWhereとfindOrSaveByの場合はインスタンスを保存してからインスタンスを返します。
 
 {code}
@@ -13,8 +15,9 @@ def book = Book.findOrCreateByAuthorAndTitle('Daniel Suarez', 'Daemon')
 def book = Book.findOrSaveByAuthorAndTitle('Daniel Suarez', 'Daemon')
 {code}
 
-h4. 抽象クラス継承のサポート
+h4. 抽象クラス継承のサポート {hidden}Abstract Inheritance{hidden}
 
+{hidden}GORM now supports abstract inheritance trees which means you can define queries and associations linking to abstract classes:{hidden}
 GORMが抽象クラス継承階層をサポートしました。これによって、関連リンクやクエリ等を抽象クラスに定義することができます:
 
 {code}
@@ -36,8 +39,9 @@ class Account {
 def allMedia = Media.list()
 {code}
 
-h4. 複数データソースサポート
+h4. 複数データソースサポート {hidden}Multiple Data Sources Support{hidden}
 
+{hidden}It is now possible to define multiple datasources in @DataSource.groovy@ and declare one or more datasources a particular domain uses by default:{hidden}
 DataSource.groovyに複数データソースの定義が可能になり、特定のドメインに複数のデータソースが設定できます:
 
 {code}
@@ -51,29 +55,36 @@ class ZipCode {
 }
 {code}
 
+{hidden}If multiple datasources are specified for a domain then you can use the name of a particular datasource as a namespace in front of any regular GORM method:{hidden}
 複数のデータソースを定義したドメインでは、GORMメソッドの前にネームスペースとしてデータソース名を定義することで特定した実行が可能です:
 
 {code}
 def zipCode = ZipCode.auditing.get(42)
 {code}
 
+{hidden}For more information see the section on [Multiple Data Sources|guide:multipleDatasources] in the user guide.{hidden}
 詳しくは [複数データソース|guide:multipleDatasources] を参照してください。
 
-h4. データベースマイグレーション
+h4. データベースマイグレーション {hidden}Database Migrations{hidden}
 
+{hidden}A new [database migration plugin|http://grails.org/plugin/database-migration] has been designed and built for Grails 2.0 allowing you to apply migrations to your database, rollback changes and diff your domain model with the current state of the database.{hidden}
 データベースマイグレーションを行うプラグインが、Grails 2.0用にデザイン構築されました。現行の状況との違いや、変更のロールバックがデータベースマイグレーションで可能になります。 [database migration plugin|http://grails.org/plugin/database-migration]
 
-h4. データベースリバースエンジニアリング
+h4. データベースリバースエンジニアリング {hidden}Database Reverse Engineering{hidden}
 
+{hidden}A new [database reverse engineering|http://www.grails.org/plugin/db-reverse-engineer] plugin has been designed and built for Grails 2.0 that allows you to generate a domain model from an existing database schema.{hidden}
 データベースリバースエンジニアリングを行うプラグインが、Grails 2.0用にデザイン構築されました。既存のデータベーススキーマからドメインクラスを生成可能とします。 [database reverse engineering|http://www.grails.org/plugin/db-reverse-engineer]
 
-h4. Hibernate 3.6
+h4. Hibernate 3.6 {hidden}Hibernate 3.6{hidden}
 
+{hidden}Grails 2.0 is now built on Hibernate 3.6{hidden}
 Grails 2.0では、Hibernate 3.6を使用しています。
 
-h4. Bagコレクション
+h4. Bagコレクション {hidden}Bag Collections{hidden}
 
+{hidden}You can now use Hibernate [Bag|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/collections.html]s for mapped collections to avoid the memory and performance issues of loading large collections to enforce @Set@ uniqueness or @List@ order.{hidden}
 SetのユニークまたはListの順序必要としない場合でにおいて、大きなコレクションロードのメモリーとパフォーマンス問題を回避できるコレクションマッピング、Hibernate [Bag|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/collections.html]が使用できるようになりました。
 
+{hidden}For more information see the section on [Sets, Lists and Maps|guide:sets,ListsAndMaps] in the user guide.{hidden}
 詳しくは [セット、リスト、マップ|guide:sets,ListsAndMaps] を参照してください。
 

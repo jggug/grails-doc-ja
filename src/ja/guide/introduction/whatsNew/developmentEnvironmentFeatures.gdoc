@@ -1,36 +1,44 @@
-h4. インタラクティブモードとコンソールの強化
+h4. インタラクティブモードとコンソールの強化 {hidden}Interactive Mode and Console Enhancements {hidden}
 
+{hidden}Grails 2.0 features brand new console output that is more concise and user friendly to consume. An example of the new output when running tests can be seen below:{hidden}
 Grails 2.0では、より簡潔でユーザフレンドリな、新コンソール出力を実装しました。以下の例はテストを実行した内容です。
 
 !test-output.png!
 
+{hidden}In general Grails makes its best effort to display update information on a single line and only present the information that is crucial. This means that while in previous versions of Grails the [war|commandLine] command produced many lines of output, in Grails 2.0 only 1 line of output is produced:{hidden}
 コマンド実行の際に、重要な情報のみ１行を更新表示するようになりました。例えば、以前のバージョンまでは、warコマンドを実行すると大量のログが表示されていましたが、2.0からは1行だけで表示されます。
 
 !war-output.png!
 
+{hidden}In addition simply typing 'grails' at the command line activates the new interactive mode which features TAB completion, command history and keeps the JVM running to ensure commands execute much quicker than otherwise{hidden}
 さらに、単にgrailsコマンドをコンソールで実行するだけで、新しいインタラクティブモードが開始され、JVMが起動したままとなりコマンドが迅速に実行でき、タブ補完、コマンド履歴も使用できます。
 
 !interactive-output.png!
 
+{hidden}For more information on the new features of the console refer to the section of the user guide that covers the [console and interactive mode|guide:interactiveMode].{hidden}
 詳しい情報は、ユーザガイドのコンソールとインタラクティブモードを参照してください。 [インタラクティブモード|guide:interactiveMode].
 
-h4. リロードエージェント
+h4. リロードエージェント {hidden}Reloading Agent{hidden}
 
+{hidden}Grails 2.0 reloading mechanism no longer uses class loaders, but instead uses a JVM agent to reload changes to class files. This results in greatly improved reliability when reloading changes and also ensures that the class files stored in disk remain consistent with the class files loaded in memory, which reduces the need to run the [clean|commandLine] command.{hidden}
 Grails 2.0からのリロード機能は、クラスローダを使用せずJVMエージェントを使用してクラスファイルのリロードを行います。その結果、変更保存されたクラスが確実にメモリにロードされようになり、変更時のリロードが大いに向上しました。今までより、cleanコマンドの実行回数を減らすことができます。
 
-h4. 新テストレポートとドキュメントテンプレート
+h4. 新テストレポートとドキュメントテンプレート {hidden}New Test Report and Documentation Templates{hidden}
 
+{hidden}There are new templates for displaying test results that are clearer and more user friendly than the previous reports:{hidden}
 以前のレポートよりクリーンでユーザフレンドリーなテストリポートテンプレートに変更されました:
 
 !test-template.png!
 
+{hidden}In addition, the Grails documentation engine has received a facelift with a new template for presenting Grails application and plugin documentation:{hidden}
 さらに、アプリケーションやプラグインで使用する、Grailsドキュメントエンジンのテンプレートもリニューアルされました:
 
 !doc-template.png!
 
+{hidden}See the section on the [documentation engine|guide:docengine] for more usage info.{hidden}
 詳細はドキュメントエンジンのセクションを参照してください。 [プロジェクト・ドキュメント|guide:docengine]
 
-h4. Use a TOC for Project Docs
+h4. プロジェクトドキュメントでの目次 {hidden}Use a TOC for Project Docs{hidden}
 
 The old documentation engine relied on you putting section numbers into the gdoc filenames. Although convenient, this effectively made it difficult to restructure your user guide by inserting new chapters and sections. In addition, any such restructuring or renaming of section titles resulted in breaking changes to the URLs.
 
@@ -38,12 +46,14 @@ You can now use logical names for your gdoc files and define the structure and s
 
 Grails 2.0 even provides a [migrate-docs|commandLine] command to aid you in migrating existing gdoc user guides.
 
-h4. エラーレポートと分析表示の強化
+h4. エラーレポートと分析表示の強化 {hidden}Enhanced Error Reporting and Diagnosis{hidden}
 
+{hidden}Error reporting and problem diagnosis has been greatly improved with a new errors view that analyses stack traces and recursively displays problem areas in your code:{hidden}
 スタックトレース分析、コード内の位置表示など、エラーレポートと分析表示が向上しました:
 
 !errors-view.png!
 
+{hidden}In addition stack trace filtering has been further enhanced to display only relevant trace information:{hidden}
 そして、さらにスタックトレースフィルターが強化され、関係のあるトレースのみが表示されるようになりました:
 
 {code}
@@ -56,26 +66,36 @@ h4. エラーレポートと分析表示の強化
 ^   662 | run . . . .  in Thread.java
 {code}
 
-h4. H2データベースとDBコンソール
+h4. H2データベースとDBコンソール {hidden}H2 Database and Console{hidden}
 
+{hidden}Grails 2.0 now uses the H2 database instead of HSQLDB, and enables the H2 database console in development mode (at the URI /dbconsole) so that the in-memory database can be easily queried from the browser:{hidden}
 Grails 2.0では、今までのHSQLDBに代わりH2データベースを使用します。H2データベース付属のコンソール機能を開発モードで有効にしています。(URI /dbconsoleで表示可能) メモリ動作のデータベースでも簡単にブラウザからクエリ実行することができます:
 
 !h2-console.png!
 
-h4. プラグイン使用数等のトラッキング機能
+h4. プラグイン使用数等のトラッキング機能 {hidden}Plugin Usage Tracking{hidden}
 
+{hidden}To enhance community awareness of the most popular plugins an opt-in plugin usage tracking system has been included where users can participate in providing feedback to the plugin community on which plugins are most popular.{hidden}
 どのプラグインが人気があるのか等の情報を収集する。プラグイン使用レポートを収集する機能が実装されました。今後のプラグインサポートや、人気の無いプラグインの今後の努力などに役立てます。
 
+{hidden}This will help drive the roadmap and increase support of key plugins while reducing the need to support older or less popular plugins thus helping plugin development teams focus their efforts.{hidden}
+下位互換の対応を減らしている主なプラグインや、人気の無いプラグイン等の開発者が成果を確認して、今後のサポート向上とロードマップの進行を手助けになります。
 
-h4. 依存管理機能改善
+h4. 依存管理機能改善 {hidden}Dependency Resolution Improvements{hidden}
 
+{hidden}There are numerous improvements to dependency resolution handling via Ivy including:{hidden}
 Ivyでハンドリングされている依存管理機能に多くの改善をしました:
 
+{hidden}
+* Grails now makes a best effort to cache the previous resolve and avoid resolving again unless you change @BuildConfig.groovy@.
+* Plugins dependencies now appear in the dependency report generated by @grails dependency-report@
+* Plugins published with the release plugin now publish their transitive plugin dependencies in the generated POM which are later resolved.
+* It is now possible to customize the ivy cache directory via @BuildConfig.groovy@
+{hidden}
 * Grailsは、 @BuildConfig.groovy@ を変更しない限り前回の依存解決した内容を再解決させないように前回の内容をキャッシュするようになりました。
 * プラグイン依存関係も @grails dependency-report@ のレポートに現れるようになりました。
 * release-plugin で発行されたプラグインは、推移的なプラグイン依存をPOMに発行するようになりました。
 * ivyキャッシュ用ディレクトリを @BuildConfig.groovy@ で変更できます。
-
 
 {code}
 grails.project.dependency.resolution = {
@@ -83,6 +103,7 @@ grails.project.dependency.resolution = {
 }
 {code}
 
+{hidden}* It is now possible to completely disable resolution from inherited repositories (repositories defined by other plugins):{hidden}
 * リポジトリの引継を完全に無効にできます(他のプラグインで定義されている場合等):
 
 {code}
@@ -96,6 +117,7 @@ grails.project.dependency.resolution = {
 }
 {code}
 
+{hidden}* It is now possible to easily disable checksum validation errors:{hidden}
 * チェックサムを無効にできます:
 
 {code}
