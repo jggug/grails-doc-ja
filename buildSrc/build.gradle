@@ -1,0 +1,11 @@
+apply plugin: "groovy"
+
+repositories {
+    mavenRepo urls: "http://repo.grails.org/grails/core"
+    mavenCentral()
+}
+
+dependencies {
+    groovy 'org.codehaus.groovy:groovy:1.8.0'
+    groovy "org.grails:grails-gdoc-engine:1.0.1"
+}
