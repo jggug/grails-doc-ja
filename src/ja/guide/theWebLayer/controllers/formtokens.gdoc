@@ -30,5 +30,5 @@ withForm {
 
 {warning}
 {hidden}The [withForm|controllers] tag makes use of the [session|controllers] and hence requires session affinity or clustered sessions if used in a cluster.{hidden}
-[withForm|controllers]メソッドは[セッション|controllers]を使用するので、セッションの類似性またはクラスタで使用する場合はクラスタ化されたセッションが必要です。
+[withForm|controllers]メソッドはセッション([session|controllers])を使用するので、セッションの類似性またはクラスタで使用する場合はクラスタ化されたセッションが必要です。
 {warning}
