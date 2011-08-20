@@ -18,29 +18,54 @@ repositories {
 }
 
 dependencies {
-    // Required while picking up grails-docs from dist dir.
     publish "org.grails:grails-gdoc-engine:1.0-SNAPSHOT", "org.codehaus.groovy:groovy:1.8.0"
 
     publish "org.slf4j:slf4j-log4j12:1.5.8",
             "org.xhtmlrenderer:core-renderer:R8",
             "org.yaml:snakeyaml:1.8"
 }
+task apiDocs(type: GradleBuild) {
+    def deps = [":grails-docs:install"]
+    if (!System.getProperty("disable.groovydocs")) {
+        deps << 'groovydoc'
+    }
+    tasks = deps
+    buildFile = "${project.grailsHome}/build.gradle"
+}
+task copyApiDocs(type: Copy) {
+    from "${project.grailsHome}/doc/api"
+    into "${outputDir}/api"
+}
 
+task createPublishClassLoader << {
+    // Create a class loader for the publication stuff.
+    def classpath = project.configurations.publish
+    classpath = classpath.files.collect { it.toURI().toURL() }
 
-task publishGuide(/*dependsOn:':grails-doc:publishGuide'*/){
+    // Add the grails-docs JAR.
+    def distDir = project.file("${project.grailsHome}/dist")
+    def grailsDocJars = distDir.listFiles({ dir, name -> name ==~ /grails-docs-.*\.jar/ } as FilenameFilter)
+    if (grailsDocJars.size() > 1) {
+        log.error "Found multiple grails-doc JARs in ${distDir}"
+        return 1
+    }
+    else if (grailsDocJars.size() == 0) {
+        log.error "No grails-doc JAR found in ${distDir}"
+        return 2
+    }
+
+    classpath << grailsDocJars[0].toURI().toURL()
+    project.publishClassLoader = new URLClassLoader(
+            classpath as URL[],
+            buildscript.classLoader)
+}
+
+task publishGuide(dependsOn:['apiDocs','copyApiDocs','createPublishClassLoader']){
    sourceDir = projectDir.path + "/src/ja"
    targetDir = outputDir
    workDir = buildDir
    
    doLast {
-       // Create a class loader for the publication stuff.
-       def classpath = project.configurations.publish
-       classpath = classpath.files.collect { it.toURI().toURL() }
-
-       // Add the grails-docs JAR.
-       def distDir = file("${project.grailsHome}/dist")
-       classpath << distDir.listFiles({ dir, name -> name ==~ /grails-docs-.*\.jar/ } as FilenameFilter)[0].toURI().toURL()
-       project.publishClassLoader = new URLClassLoader(classpath as URL[], buildscript.classLoader)
 
       def props = new Properties()
       new File("${projectDir}/grails-doc/resources/doc.properties").withInputStream {input ->
