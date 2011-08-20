@@ -1,18 +1,28 @@
-h4. Scope Basics
+h4. スコープの基礎 {hidden}Scope Basics{hidden}
 
-You'll notice from previous examples that we used a special object called @flow@ to store objects within "flow scope". Grails flows have five different scopes you can utilize:
+{hidden}You'll notice from previous examples that we used a special object called @flow@ to store objects within "flow scope". Grails flows have five different scopes you can utilize:{hidden}
+先ほどの例で、"フロー範囲で有効な"オブジェクトを蓄積する、@flow@という特殊なオブジェクトを使用しました。Grailsフローでは５つのスコープが利用できます:
 
+{hidden}
 * @request@ - Stores an object for the scope of the current request
 * @flash@ - Stores the object for the current and next request only
 * @flow@ - Stores objects for the scope of the flow, removing them when the flow reaches an end state
 * @conversation@ - Stores objects for the scope of the conversation including the root flow and nested subflows
 * @session@ - Stores objects in the user's session
+{hidden}
+* request - 現在のリクエスト範囲のオブジェクトを蓄積
+* flash - 現在と次までが有効範囲のオブジェクトを蓄積
+* flow - フロー範囲で有効なオブジェクトを蓄積。フローが終了ステートに到達したら削除されます。
+* conversation - ルートフローやサブフローを含む範囲での対話でのオブジェクトを蓄積
+* session - ユーザのセッションへオブジェクトを蓄積
 
 {note}
-Grails service classes can be automatically scoped to a web flow scope. See the documentation on [Services|guide:services] for more information.
+{hidden}Grails service classes can be automatically scoped to a web flow scope. See the documentation on [Services|guide:services] for more information.{hidden}
+Grailsサービスクラスは自動的にflowスコープになります。詳しくは[サービス|guide:services]を参照してください。
 {note}
 
-Returning a model Map from an action will automatically result in the model being placed in flow scope. For example, using a transition action, you can place objects within @flow@ scope as follows:
+{hidden}Returning a model Map from an action will automatically result in the model being placed in flow scope. For example, using a transition action, you can place objects within @flow@ scope as follows:{hidden}
+アクションからモデルMapを返すと自動的に結果にあるモデルがflowスコープに配置されます。例としてトランジションアクションで次のように@flow@スコープにオブジェクトを配置できます:
 
 {code:java}
 enterPersonalDetails {
@@ -22,14 +32,21 @@ enterPersonalDetails {
    on("return").to "showCart"
 }{code}
 
-Be aware that a new request is always created for each state, so an object placed in request scope in an action state (for example) will not be available in a subsequent view state. Use one of the other scopes to pass objects from one state to another. Also note that Web Flow:
+{hidden}Be aware that a new request is always created for each state, so an object placed in request scope in an action state (for example) will not be available in a subsequent view state. Use one of the other scopes to pass objects from one state to another. Also note that Web Flow:{hidden}
+それぞれのステートごとに新しいrequestスコープができます、(例えば)アクションステートのrequestスコープに配置したオブジェクトは次のビューステートでは使用できません。他のステートにオブジェクトを渡す場合は別のスコープを使いましょう。さらにWebフローでは:
 
+{hidden}
 # Moves objects from flash scope to request scope upon transition between states;
 # Merges objects from the flow and conversation scopes into the view model before rendering (so you shouldn't include a scope prefix when referencing these objects within a view, e.g. GSP pages).
+{hidden}
+# ステート間のトランジションでオブジェクトをflashスコープからrequestスコープへ移動します。
+# 描写する前に、flowとconversationスコープのオブジェクトをビューモデルにマージします。(GSPページ等のビューでオブジェクトを参照する際はスコープ接頭辞を含まないでください)
 
-h4. Flow Scopes and Serialization
 
-When placing objects in @flash@, @flow@ or @conversation@ scope they must implement @java.io.Serializable@ or an exception will be thrown. This has an impact on [domain classes|guide:GORM] in that domain classes are typically placed within a scope so that they can be rendered in a view. For example consider the following domain class:
+h4. フロースコープとシリアライズ {hidden}Flow Scopes and Serialization{hidden}
+
+{hidden}When placing objects in @flash@, @flow@ or @conversation@ scope they must implement @java.io.Serializable@ or an exception will be thrown. This has an impact on [domain classes|guide:GORM] in that domain classes are typically placed within a scope so that they can be rendered in a view. For example consider the following domain class:{hidden}
+@flash@、@flow@また@conversation@スコープに配置するオブジェクトは、必ず@java.io.Serializable@を継承してください。継承しない場合は例外を投げます。[ドメインクラス|guide:GORM]は通常スコープに配置されビューの描写に使用するので影響を受けます。例として次のようなドメインクラスがあるとします:
 
 {code:java}
 class Book {
@@ -37,7 +54,8 @@ class Book {
 }
 {code}
 
-To place an instance of the @Book@ class in a flow scope you will need to modify it as follows:
+{hidden}To place an instance of the @Book@ class in a flow scope you will need to modify it as follows:{hidden}
+@Book@のインスタンスをflowスコープで使用する場合は次のようにします:
 
 {code:java}
 class Book implements Serializable {
@@ -45,7 +63,8 @@ class Book implements Serializable {
 }
 {code}
 
-This also impacts associations and closures you declare within a domain class. For example consider this:
+{hidden}This also impacts associations and closures you declare within a domain class. For example consider this:{hidden}
+ドメインクラスに関連するクラスやクロージャにも影響があります。次のようになっていたとします:
 
 {code:java}
 class Book implements Serializable {
@@ -54,7 +73,8 @@ class Book implements Serializable {
 }
 {code}
 
-Here if the @Author@ association is not @Serializable@ you will also get an error. This also impacts closures used in [GORM events|guide:eventsAutoTimestamping] such as @onLoad@, @onSave@ and so on. The following domain class will cause an error if an instance is placed in a flow scope:
+{hidden}Here if the @Author@ association is not @Serializable@ you will also get an error. This also impacts closures used in [GORM events|guide:eventsAutoTimestamping] such as @onLoad@, @onSave@ and so on. The following domain class will cause an error if an instance is placed in a flow scope:{hidden}
+関連する@Author@が@Serializable@では無い場合はエラーとなります。@onLoad@や@onSave@等の[GORMイベント|guide:eventsAutoTimestamping]のクロージャにも影響があります。次のドメインクラスをflowスコープに配置するとエラーとなります:
 
 {code:java}
 class Book implements Serializable {
@@ -67,7 +87,8 @@ class Book implements Serializable {
 }
 {code}
 
-The reason is that the assigned block on the @onLoad@ event cannot be serialized. To get around this you should declare all events as @transient@:
+{hidden}The reason is that the assigned block on the @onLoad@ event cannot be serialized. To get around this you should declare all events as @transient@:{hidden}
+理由はアサインされた@onLoad@イベントのブロックがシリアライズされないからです。これを対応させるにはイベントに@transient@を指定します:
 
 {code:java}
 class Book implements Serializable {
@@ -80,7 +101,8 @@ class Book implements Serializable {
 }
 {code}
 
-or as methods:
+{hidden}or as methods:{hidden}
+またはメソッドにします:
 
 {code:java}
 class Book implements Serializable {

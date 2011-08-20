@@ -1,6 +1,7 @@
-h4. View states
+h4. ビューステート {hidden}View states{hidden}
 
-A view state is a one that doesn't define an @action@ or a @redirect@. So for example this is a view state:
+{hidden}A view state is a one that doesn't define an @action@ or a @redirect@. So for example this is a view state:{hidden}
+@action@また@ridairect@を定義していないものがビューステートです。この例がビューステートになります:
 
 {code:java}
 enterPersonalDetails {
@@ -8,7 +9,9 @@ enterPersonalDetails {
    on("return").to "showCart"
 }{code}
 
-It will look for a view called @grails-app/views/book/shoppingCart/enterPersonalDetails.gsp@ by default. Note that the @enterPersonalDetails@ state defines two events: @submit@ and @return@. The view is responsible for [triggering|guide:flowExecutionEvents] these events. Use the @render@ method to change the view to be rendered:
+{hidden}It will look for a view called @grails-app/views/book/shoppingCart/enterPersonalDetails.gsp@ by default. Note that the @enterPersonalDetails@ state defines two events: @submit@ and @return@. The view is responsible for [triggering|guide:flowExecutionEvents] these events. Use the @render@ method to change the view to be rendered:
+{hidden}
+デフォルトでは、ビューファイル@grails-app/views/book/shoppingCart/enterPersonalDetails.gsp@を使用します。@enterPersonalDetails@ステートは、@submit@と@return@という２つのイベントを定義しています。これらのイベントはビューで[トリガー|guide:flowExecutionEvents]する必要があります。@render@メソッドを使用して描写するビューを変更することが可能です:
 
 {code:java}
 enterPersonalDetails {
@@ -18,7 +21,8 @@ enterPersonalDetails {
 }
 {code}
 
-Now it will look for @grails-app/views/book/shoppingCart/enterDetailsView.gsp@. Start the @view@ parameter with a / to use a shared view:
+{hidden}Now it will look for @grails-app/views/book/shoppingCart/enterDetailsView.gsp@. Start the @view@ parameter with a / to use a shared view:{hidden}
+この例で@grails-app/views/book/shoppingCart/enterDetailsView.gsp@を参照するようになります。@view@のパラメータに / を使用して共有ビューを使用できます:
 
 {code:java}
 enterPersonalDetails {
@@ -28,11 +32,13 @@ enterPersonalDetails {
 }
 {code}
 
-Now it will look for @grails-app/views/shared/enterDetailsView.gsp@
+{hidden}Now it will look for @grails-app/views/shared/enterDetailsView.gsp@ {hidden}
+この例で@grails-app/views/shared/enterDetailsView.gsp@を参照するようになります。
 
-h4. Action States
+h4. アクションステート {hidden}Action States{hidden}
 
-An action state is a state that executes code but does not render a view. The result of the action is used to dictate flow transition. To create an action state you define an action to to be executed. This is done by calling the @action@ method and passing it a block of code to be executed:
+{hidden}An action state is a state that executes code but does not render a view. The result of the action is used to dictate flow transition. To create an action state you define an action to to be executed. This is done by calling the @action@ method and passing it a block of code to be executed:{hidden}
+アクションステートはコードを実行してビューをレンダリングしないステートです。アクションの結果は指示されたフロートランジションで使用されます。@action@メソッドに実行したいコードブロックを渡してアクションステートを実装します:
 
 {code:java}
 listBooks {
@@ -44,17 +50,21 @@ listBooks {
 }
 {code}
 
-As you can see an action looks very similar to a controller action and in fact you can reuse controller actions if you want. If the action successfully returns with no errors the @success@ event will be triggered. In this case since we return a Map, which is regarded as the "model" and is automatically placed in [flow scope|guide:flowScopes].
+{hidden}As you can see an action looks very similar to a controller action and in fact you can reuse controller actions if you want. If the action successfully returns with no errors the @success@ event will be triggered. In this case since we return a Map, which is regarded as the "model" and is automatically placed in [flow scope|guide:flowScopes].{hidden}
+ご覧の通りアクションはコントローラアクションに似ています。もちろん必要であればコントローラアクションを再利用することもできます。アクションが正常に終了したら@success@イベントがトリガーされます。この例では、モデルと見なしたMapを返して自動的に[flowスコープ|guide:flowScopes]に配置されます。
 
-In addition, in the above example we also use an exception handler to deal with errors on the line:
+{hidden}In addition, in the above example we also use an exception handler to deal with errors on the line:{hidden}
+加えて、上記の例では、エラーを取り扱う例外ハンドラも使用しています:
 
 {code:java}
 on(Exception).to "handleError"
 {code}
 
-This makes the flow transition to a state called @handleError@ in the case of an exception.
+{hidden}This makes the flow transition to a state called @handleError@ in the case of an exception.{hidden}
+例外時に@handleError@というステートにフローが移行します。
 
-You can write more complex actions that interact with the flow request context:
+{hidden}You can write more complex actions that interact with the flow request context:{hidden}
+フローリクエストコンテキストとやりとりをする複雑なアクションを記述できます:
 
 {code:java}
 processPurchaseOrder {
@@ -76,11 +86,13 @@ processPurchaseOrder {
     on("success").to "displayInvoice"
 }{code}
 
-Here is a more complex action that gathers all the information accumulated from the flow scope and creates an @Order@ object. It then returns the order as the model. The important thing to note here is the interaction with the request context and "flow scope".
+{hidden}Here is a more complex action that gathers all the information accumulated from the flow scope and creates an @Order@ object. It then returns the order as the model. The important thing to note here is the interaction with the request context and "flow scope".{hidden}
+この例では、アクションで、flowスコープから収集した情報から@Order@オブジェクトを生成しています。そして生成後オーダーをモデルで返しています。ここで重要なのはリクエストコンテキストと"flowスコープ"のやりとりです。
 
-h4. Transition Actions
+h4. アクションのトランジション {hidden}Transition Actions{hidden}
 
-Another form of action is what is known as a _transition_ action. A transition action is executed directly prior to state transition once an [event|guide:flowExecutionEvents] has been triggered. A simple example of a transition action can be seen below:
+{hidden}Another form of action is what is known as a _transition_ action. A transition action is executed directly prior to state transition once an [event|guide:flowExecutionEvents] has been triggered. A simple example of a transition action can be seen below:{hidden}
+他の形式のアクションとしてトランジションアクションがあります。トランジションアクションは、[イベント|guide:flowExecutionEvents]がトリガーされたら、トランジションステートで直接優先的に実行されます:
 
 {code:java}
 enterPersonalDetails {
@@ -91,4 +103,5 @@ enterPersonalDetails {
 }
 {code}
 
-Notice how we pass a block of the code to @submit@ event that simply logs the transition. Transition states are very useful for [data binding and validation|guide:dataBindingAndValidation], which is covered in a later section.
+{hidden}Notice how we pass a block of the code to @submit@ event that simply logs the transition. Transition states are very useful for [data binding and validation|guide:dataBindingAndValidation], which is covered in a later section.{hidden}
+この例では、@submit@イベントにコードブロックを渡してトランジションのログを実行しています。この後に解説をする、[データバインディングとバリデーション|guide:dataBindingAndValidation]で、このトランジションステートが便利に活用できます。

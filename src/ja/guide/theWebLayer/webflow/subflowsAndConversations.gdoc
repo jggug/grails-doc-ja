@@ -1,4 +1,5 @@
-Grails' Web Flow integration also supports subflows. A subflow is like a flow within a flow. For example take this search flow:
+{hidden}Grails' Web Flow integration also supports subflows. A subflow is like a flow within a flow. For example take this search flow:{hidden}
+GrailsのWebフローはサブフローにも対応しています。サブフローはフォローの中にあるフローです。この検索フローを例とします:
 
 {code:java}
 def searchFlow() {
@@ -26,12 +27,16 @@ def searchFlow() {
     displayNoMoreResults()
 }{code}
 
-It references a subflow in the @extendedSearch@ state. The controller parameter is optional if the subflow is defined in the same controller as the calling flow.
+{hidden}It references a subflow in the @extendedSearch@ state. The controller parameter is optional if the subflow is defined in the same controller as the calling flow.{hidden}
+この例では@extendedSearch@ステートで中にサブフローを参照しています。サブフローが同じコントローラで呼ばれる場合は、コントローラを指定するパラメータは省略可能です。
+
 {note}
-Prior to 1.3.5, the previous subflow call would look like @subflow(extendedSearchFlow)@, with the requirement that the name of the subflow state be the same as the called subflow (minus @Flow@). This way of calling a subflow is deprecated and only supported for backward compatibility.
+{hidden}Prior to 1.3.5, the previous subflow call would look like @subflow(extendedSearchFlow)@, with the requirement that the name of the subflow state be the same as the called subflow (minus @Flow@). This way of calling a subflow is deprecated and only supported for backward compatibility.{hidden}
+1.3.5以前、サブフローは、@subflow(extendedSearchFlow)@のように呼び出しました。この方法は非推奨となっており、下位互換のために対応はしています。
 {note}
 
-The subflow is another flow entirely:
+{hidden}The subflow is another flow entirely:{hidden}
+サブフローは完全に別のフローです:
 
 {code:java}
 def extendedSearchFlow() {
@@ -52,7 +57,8 @@ def extendedSearchFlow() {
     noResults()
 }{code}
 
-Notice how it places the @extendedResults@ in conversation scope. This scope differs to flow scope as it lets you share state that spans the whole conversation not just the flow. Also notice that the end state (either @moreResults@ or @noResults@ of the subflow triggers the events in the main flow:
+{hidden}Notice how it places the @extendedResults@ in conversation scope. This scope differs to flow scope as it lets you share state that spans the whole conversation not just the flow. Also notice that the end state (either @moreResults@ or @noResults@ of the subflow triggers the events in the main flow:{hidden}
+conversationスコープの@extendedResults@の位置に注目してください。このスコープはflowスコープと違い、flowの間だけで無く、全ての対話にかけてステートを共有できます。さらに終了ステートに注目してください。サブフローはサブフロー内とメインフローのイベントをトリガーできます:
 
 {code:java}
 extendedSearch {

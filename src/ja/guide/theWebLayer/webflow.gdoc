@@ -1,18 +1,25 @@
-h4. Overview
+h4. 概要 {hidden}Overview{hidden}
 
-Grails supports the creation of web flows built on the "Spring Web Flow":http://www.springsource.org/webflow project. A web flow is a conversation that spans multiple requests and retains state for the scope of the flow. A web flow also has a defined start and end state.
+{hidden}Grails supports the creation of web flows built on the "Spring Web Flow":http://www.springsource.org/webflow project. A web flow is a conversation that spans multiple requests and retains state for the scope of the flow. A web flow also has a defined start and end state.{hidden}
+Grailsでは、"Spring Web Flow":http://www.springsource.org/webflow をベースにしたWebフローをサポートしています。Webフローとは、処理範囲での複数のリクエストと保有するステート間の対話です。Webフローでは明示された開始と終了ステートも持っています。
 
-Web flows don't require an HTTP session, but instead store their state in a serialized form, which is then restored using a flow execution key that Grails passes around as a request parameter. This makes flows far more scalable than other forms of stateful application that use the HttpSession and its inherit memory and clustering concerns.
+{hidden}Web flows don't require an HTTP session, but instead store their state in a serialized form, which is then restored using a flow execution key that Grails passes around as a request parameter. This makes flows far more scalable than other forms of stateful application that use the HttpSession and its inherit memory and clustering concerns.{hidden}
+WebフローにはHTTP sessionは必要有りません。代わりに、リクエストパラメータでGrailsが持ち回る、フローエクスキュージョンキーを使用した連載形式でステートを保持しています。この方式はメモリ継承やクラスタリング問題のあるHttpSessionを使用したステートフルアプリケーションの形式よりもフローをスケーラブルにします。
 
-Web flow is essentially an advanced state machine that manages the "flow" of execution from one state to the next. Since the state is managed for you, you don't have to be concerned with ensuring that users enter an action in the middle of some multi step flow, as web flow manages that for you. This makes web flow perfect for use cases such as shopping carts, hotel booking and any application that has multi page work flows.
+{hidden}Web flow is essentially an advanced state machine that manages the "flow" of execution from one state to the next. Since the state is managed for you, you don't have to be concerned with ensuring that users enter an action in the middle of some multi step flow, as web flow manages that for you. This makes web flow perfect for use cases such as shopping carts, hotel booking and any application that has multi page work flows.{hidden}
+Webフローは本質的には、"フロー"の実行のステートの流れを管理する上級ステートマシーンです。
+ステートが管理されると、Webフローが管理してくれるので、ユーザがフロー途中のアクションから入ってくる場合どうするか等を気にしなくても良くなります。これによりショッピングカート、ホテル予約などの複数ページにまたがるワークフローを持つアプリケーションにWebフローがよく合うと言う事です。
+
 
 {note}
-From Grails 1.2 onwards Webflow is no longer in Grails core, so you must install the Webflow plugin to use this feature: @grails install-plugin webflow@
+{hidden}From Grails 1.2 onwards Webflow is no longer in Grails core, so you must install the Webflow plugin to use this feature: @grails install-plugin webflow@{hidden}
+Grails 1.2からWebフローはGrailsのコア機能では無くなりました。この機能を使用するには、*Webフロープラグインをインストールする必要があります*: @grails install-plugin webflow@
 {note}
 
-h4. Creating a Flow
+h4. フローの作成 {hidden}Creating a Flow{hidden}
 
-To create a flow create a regular Grails controller and add an action that ends with the convention @Flow@. For example:
+{hidden}To create a flow create a regular Grails controller and add an action that ends with the convention @Flow@. For example:{hidden}
+フローを作成するには、名称が@Flow@で終わるアクションをGrailsの通常にコントローラに作成します。例として:
 
 {code:java}
 class BookController {
@@ -27,4 +34,5 @@ class BookController {
 }
 {code}
 
-Notice when redirecting or referring to the flow as an action we omit the @Flow@ suffix. In other words the name of the action of the above flow is @shoppingCart@.
+{hidden}Notice when redirecting or referring to the flow as an action we omit the @Flow@ suffix. In other words the name of the action of the above flow is @shoppingCart@. {hidden}
+フローをアクションとしてリダイレクトまたは参照をするには、接尾辞の@Flow@を省略します。言い換えれば上記のフローのアクション名は@shoppingCart@となります。
