@@ -203,7 +203,7 @@ theWebLayer:
     ajaxWithPrototype: Prototypeを使用したAjax
     ajaxWithDojo: Dojoを使用したAjax
     ajaxWithGWT: GWTを使用したAjax
-    ajaxOnTheServer: Ajax時のサーバサイド
+    ajaxOnTheServer: Ajax使用時のサーバサイド
   contentNegotiation: コンテントネゴシエーション
 validation:
   title: バリデーション
