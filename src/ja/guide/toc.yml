@@ -259,6 +259,10 @@ plugins:
   addingDynamicMethodsAtRuntime: 起動時のダイナミックメソッド追加
   participatingInAutoReloadEvents: 自動リロードイベントへの参加
   understandingPluginLoadOrder: プラグインのロード順を理解する
+  artefactApi:
+    title: アーテファクトAPI
+    queryingArtefacts: 使用可能なアーテファクトを探す
+    customArtefacts: アーテファクト型の追加
   binaryPlugins: バイナリープラグイン
 webServices:
   title: Webサービス
