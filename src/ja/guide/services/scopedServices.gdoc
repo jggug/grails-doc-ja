@@ -1,7 +1,18 @@
-By default, access to service methods is not synchronised, so nothing prevents concurrent execution of those methods. In fact, because the service is a singleton and may be used concurrently, you should be very careful about storing state in a service. Or take the easy (and better) road and never store state in a service.
+{hidden}By default, access to service methods is not synchronised, so nothing prevents concurrent execution of those methods. In fact, because the service is a singleton and may be used concurrently, you should be very careful about storing state in a service. Or take the easy (and better) road and never store state in a service.{hidden}
+デフォルトでは、サービスが持つメソッドへのアクセスは同期されないので、サービスが持つメソッドの同時実行を防ぐことはできません。実際には、サービスはシングルトンで同時に使用することが出来るため、サービスに状態を格納する場合は注意が必要です。簡単な(そしてより良い)方法は、サービスに状態を決して格納しないことです。
 
-You can change this behaviour by placing a service in a particular scope. The supported scopes are:
+{hidden}You can change this behaviour by placing a service in a particular scope. The supported scopes are:{hidden}
+特定のスコープにサービスを置くことで、この振る舞いを変えることができます。サポートされているスコープは次のとおりです：
 
+{hidden}
+* @prototype@ - A new service is created every time it is injected into another class
+* @request@ - A new service will be created per request
+* @flash@ - A new service will be created for the current and next request only
+* @flow@ - In web flows the service will exist for the scope of the flow
+* @conversation@ - In web flows the service will exist for the scope of the conversation. ie a root flow and its sub flows
+* @session@ - A service is created for the scope of a user session
+* @singleton@ (default) - Only one instance of the service ever exists
+{hidden}
 * @prototype@ - クラスへの注入時にサービスが生成される
 * @request@ - リクエスト毎にサービスが生成される
 * @flash@ - 現在とその次のリクエスト用にサービスが生成される
@@ -11,11 +22,12 @@ You can change this behaviour by placing a service in a particular scope. The su
 * @singleton@ (デフォルト) - サービスが1つのみ生成される
 
 {note}
-If your service is @flash@, @flow@ or @conversation@ scoped it must implement @java.io.Serializable@ and can only be used in the context of a [Web Flow|guide:webflow]
+{hidden}If your service is @flash@, @flow@ or @conversation@ scoped it must implement @java.io.Serializable@ and can only be used in the context of a [Web Flow|guide:webflow]{hidden}
+サービスのスコープが@flash@、@flow@あるいは@conversation@の場合、java.io.Serializableを実装する必要があり、[Webフロー|guide:webflow]のコンテキストの中でだけ使うことができます。
 {note}
 
-To enable one of the scopes, add a static scope property to your class whose value is one of the above, for example
-
+{hidden}To enable one of the scopes, add a static scope property to your class whose value is one of the above, for example {hidden}
+スコープのいずれかを有効にするには、クラスにstaticのscopeプロパティを追加し、プロパティの値を上記のいずれかにします:
 {code:java}
 static scope = "flow"
 {code}

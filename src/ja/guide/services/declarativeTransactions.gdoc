@@ -1,8 +1,10 @@
-h3. Default Declarative Transactions
+h3. デフォルトの宣言的トランザクション {hidden}Default Declarative Transactions {hidden}
 
-Services are typically involved with coordinating logic between [domain classes|guide:GORM], and hence often involved with persistence that spans large operations. Given the nature of services, they frequently require transactional behaviour. You can use programmatic transactions with the [withTransaction|domainClasses] method, however this is repetitive and doesn't fully leverage the power of Spring's underlying transaction abstraction.
+{hidden}Services are typically involved with coordinating logic between [domain classes|guide:GORM], and hence often involved with persistence that spans large operations. Given the nature of services, they frequently require transactional behaviour. You can use programmatic transactions with the [withTransaction|domainClasses] method, however this is repetitive and doesn't fully leverage the power of Spring's underlying transaction abstraction.{hidden}
+サービスは、典型的には[ドメインクラス|guide:GORM]間の調整的なロジックに関わりますが、それゆえしばしば大規模な操作に渡る永続性に関わります。頻繁にトランザクションの振る舞いを必要とするサービスの性質を考えてください。もちろん[withTransaction|domainClasses]メソッドを使ってプログラム的なトランザクションを行うことができますが、これは同じことを何度も繰り返すことになり、Springが持つ基本的なトランザクション抽象化の恩恵を十分活用することができません。
 
-Services enable transaction demarcation, which is a declarative way of defining which methods are to be made transactional. All services are transactional by default. To disable this set the @transactional@ property to @false@:
+{hidden}Services enable transaction demarcation, which is a declarative way of defining which methods are to be made transactional. All services are transactional by default. To disable this set the @transactional@ property to @false@:{hidden}
+サービスは、トランザクション境界を使用することができ、サービス内のすべてのメソッドをトランザクションにすると宣言する宣言方法です。すべてのサービスは、デフォルトでトランザクション境界が可能です、不可にするには@transactional@プロパティに@false@を設定します:
 
 {code:java}
 class CountryService {
@@ -10,28 +12,33 @@ class CountryService {
 }
 {code}
 
-You may also set this property to @true@ to make it clear that the service is intentionally transactional.
+{hidden}You may also set this property to @true@ to make it clear that the service is intentionally transactional.{hidden}
+サービスが意図的にトランザクションであるということを明確にするために、このプロパティにtrueを設定することもできます。
 
 {warning}
-Warning: [dependency injection|guide:dependencyInjectionServices] is the *only* way that declarative transactions work. You will not get a transactional service if you use the @new@ operator such as @new BookService()@
+{hidden}Warning: [dependency injection|guide:dependencyInjectionServices] is the *only* way that declarative transactions work. You will not get a transactional service if you use the @new@ operator such as @new BookService()@{hidden}
+警告：[依存性の注入|guide:dependencyInjectionServices]は、宣言的トランザクションが機能する唯一の方法です。@new BookService()@のように@new@演算子を使用した場合、トランザクションなサービスを取得するできません。
 {warning}
 
-The result is that all methods are wrapped in a transaction and automatic rollback occurs if a method throws a runtime exception (i.e. one that extends @RuntimeException@) or an @Error@. The propagation level of the transaction is by default set to [PROPAGATION_REQUIRED|http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/TransactionDefinition.html#PROPAGATION_REQUIRED].
+{hidden}The result is that all methods are wrapped in a transaction and automatic rollback occurs if a method throws a runtime exception (i.e. one that extends @RuntimeException@) or an @Error@. The propagation level of the transaction is by default set to [PROPAGATION_REQUIRED|http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/TransactionDefinition.html#PROPAGATION_REQUIRED].{hidden}
+その結果、すべてのメソッドがトランザクションでラップされ、例外がメソッドからスローされると、トランザクションは自動的にロールバックされます。トランザクションの伝播レベルは、デフォルトで[PROPAGATION_REQUIRED|http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/TransactionDefinition.html#PROPAGATION_REQUIRED]が設定されます。
 
 {warning}
 Checked exceptions do *not* roll back transactions. Even though Groovy blurs the distinction between checked and unchecked exceptions, Spring isn't aware of this and its default behaviour is used, so it's important to understand the distinction between checked and unchecked exceptions.
 {warning}
 
-h3. Custom Transaction Configuration
+h3. カスタムトランザクションの設定 {hidden}Custom Transaction Configuration {hidden}
 
-Grails also fully supports Spring's @Transactional@ annotation for cases where you need more fine-grained control over transactions at a per-method level or need specify an alternative propagation level.
+{hidden}Grails also fully supports Spring's @Transactional@ annotation for cases where you need more fine-grained control over transactions at a per-method level or need specify an alternative propagation level.{hidden}
+メソッド単位のレベルでトランザクションのよりきめの細かいコントロールを必要とする場合や、別のトランザクション伝播レベルを指定する必要がある場合、GrailsはSpringの@Transactional@アノテーションもフルサポートしています:
 
 {note}
-Annotating a service method with @Transactional@ disables the default Grails transactional behavior for that service (in the same way that adding @transactional=false@ does) so if you use any annotations you must annotate all methods that require transactions.
+{hidden}Annotating a service method with @Transactional@ disables the default Grails transactional behavior for that service (in the same way that adding @transactional=false@ does) so if you use any annotations you must annotate all methods that require transactions.{hidden}
+@Transactional@アノテーションをメソッドに指定すると、デフォルトの書式(@transactional=false@での定義)でのトランザクションは無効になります。アノテーションを使用する場合は、トランザクションが必要な全てのメソッドに定義する必要があります。
 {note}
 
-In this example @listBooks@ uses a read-only transaction, @updateBook@ uses a default read-write transaction, and @deleteBook@ is not transactional (probably not a good idea given its name).
-
+{hidden}In this example @listBooks@ uses a read-only transaction, @updateBook@ uses a default read-write transaction, and @deleteBook@ is not transactional (probably not a good idea given its name).{hidden}
+この例では@listBooks@がread-onlyトランザクションを使用、@updateBook@がデフォルトのread-writeトランザクションを使用、@deleteBook@にはトランザクションは指定されていません(このメソッドの名前的に良くはありませんが)。
 {code}
 import org.springframework.transaction.annotation.Transactional
 
@@ -53,7 +60,8 @@ class BookService {
 }
 {code}
 
-You can also annotate the class to define the default transaction behavior for the whole service, and then override that default per-method. For example, this service is equivalent to one that has no annotations (since the default is implicitly @transactional=true@):
+{hidden}You can also annotate the class to define the default transaction behavior for the whole service, and then override that default per-method. For example, this service is equivalent to one that has no annotations (since the default is implicitly @transactional=true@):{hidden}
+クラスにアノテーションを指定することで、サービス全体にデフォルトトランザクションを指定して、さらにそれぞれのメソッドでオーバーライドすることができます。例として、このサービスはアノテーションを使用していない物と同等になります(@transactional=true@がデフォルトなので):
 
 {code}
 import org.springframework.transaction.annotation.Transactional
@@ -75,7 +83,8 @@ class BookService {
 }
 {code}
 
-This version defaults to all methods being read-write transactional (due to the class-level annotation), but the @listBooks@ method overrides this to use a read-only transaction:
+{hidden}This version defaults to all methods being read-write transactional (due to the class-level annotation), but the @listBooks@ method overrides this to use a read-only transaction:{hidden}
+オーバーライドした、read-onlyトランザクションの@listBooks@メソッド以外の、全メソッドがread-writeトランザクションになります(クラスレベルのアノテーションの定義によって)。
 
 {code}
 import org.springframework.transaction.annotation.Transactional
@@ -98,8 +107,11 @@ class BookService {
 }
 {code}
 
-Although @updateBook@ and @deleteBook@ aren't annotated in this example, they inherit the configuration from the class-level annotation.
+{hidden}Although @updateBook@ and @deleteBook@ aren't annotated in this example, they inherit the configuration from the class-level annotation.{hidden}
+@updateBook@と@deleteBook@はアノテーション指定されていませんが、クラスレベルアノテーションの定義が受け継がれます。
 
-For more information refer to the section of the Spring user guide on [Using \@Transactional|http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/transaction.html#transaction-declarative-annotations].
+{hidden}For more information refer to the section of the Spring user guide on [Using \@Transactional|http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/transaction.html#transaction-declarative-annotations]. {hidden}
+さらなる情報はSpringユーザガイドの[トランザクション|http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/transaction.html#transaction-declarative-annotations]セクションを参照してください。
 
-Unlike Spring you do not need any prior configuration to use @Transactional@; just specify the annotation as needed and Grails will detect them up automatically.
+{hidden}Unlike Spring you do not need any prior configuration to use @Transactional@; just specify the annotation as needed and Grails will detect them up automatically.{hidden}
+Springと違い@Transactional@を使用するための特別な定義は必要有りません。必要なアノテーションを記述すればGrailsが自動的に認識します。

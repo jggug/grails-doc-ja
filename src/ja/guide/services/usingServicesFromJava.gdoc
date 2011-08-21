@@ -1,4 +1,5 @@
-One of the powerful things about services is that since they encapsulate re-usable logic, you can use them from other classes, including Java classes. There are a couple of ways you can reuse a service from Java. The simplest way is to move your service into a package within the @grails-app/services@ directory. The reason this is important is that it is not possible to import classes into Java from the default package (the package used when no package declaration is present). So for example the @BookService@ below cannot be used from Java as it stands:
+{hidden}One of the powerful things about services is that since they encapsulate re-usable logic, you can use them from other classes, including Java classes. There are a couple of ways you can reuse a service from Java. The simplest way is to move your service into a package within the @grails-app/services@ directory. The reason this is important is that it is not possible to import classes into Java from the default package (the package used when no package declaration is present). So for example the @BookService@ below cannot be used from Java as it stands:{hidden}
+サービスについての強力な事の一つは、サービスは再利用可能なロジックをカプセル化するため、Javaのクラスを含む他のクラスからサービスを使用することができるということです。Javaからサービスを再利用する方法はいくつかあります。最も簡単な方法は、@grails-app/services@ディレクトリ下で、パッケージの中にサービスを移動することです。これが重要な手順である理由は、デフォルトパッケージ(パッケージの宣言がない場合に使用されるパッケージ)からJavaにクラスをインポートできないからです。したがって、たとえば以下の@BookService@は、そのままではJavaから使用できません:
 
 {code:java}
 class BookService {
@@ -8,7 +9,8 @@ class BookService {
 }
 {code}
 
-However, this can be rectified by placing this class in a package, by moving the class into a sub directory such as @grails-app/services/bookstore@ and then modifying the package declaration:
+{hidden}However, this can be rectified by placing this class in a package, by moving the class into a sub directory such as @grails-app/services/bookstore@ and then modifying the package declaration:{hidden}
+しかし、このクラスをパッケージの中に置き、@grails-app/services/bookstore@といったサブディレクトリの中にクラスを移動し、パッケージ宣言を修正することで、是正できます:
 
 {code:java}
 package bookstore
@@ -20,7 +22,8 @@ class BookService {
 }
 {code}
 
-An alternative to packages is to instead have an interface within a package that the service implements:
+{hidden}An alternative to packages is to instead have an interface within a package that the service implements:{hidden}
+パッケージに代わる別の方法として、パッケージ内のインターフェイスをサービスが実装することです:
 
 {code:java}
 package bookstore
@@ -30,7 +33,8 @@ interface BookStore {
 }
 {code}
 
-And then the service:
+{hidden}And then the service:{hidden}
+そしてサービスは:
 
 {code:java}
 class BookService implements bookstore.BookStore {
@@ -40,9 +44,11 @@ class BookService implements bookstore.BookStore {
 }
 {code}
 
-This latter technique is arguably cleaner, as the Java side only has a reference to the interface and not to the implementation class (although it's always a good idea to use packages). Either way, the goal of this exercise to enable Java to statically resolve the class (or interface) to use, at compile time.
+{hidden}This latter technique is arguably cleaner, as the Java side only has a reference to the interface and not to the implementation class (although it's always a good idea to use packages). Either way, the goal of this exercise to enable Java to statically resolve the class (or interface) to use, at compile time.{hidden}
+この後者の方法の方が、間違いなくクリーンです。Java側は、実装クラスではなくインタフェースへの参照を持てばよいからです。いずれにせよ、この実行の目的は、Javaがコンパイル時に使用するクラス(またはインターフェイス)を静的に解決できるようにすることです。
 
-Now that this is done you can create a Java class within the @src/java@ directory and add a setter that uses the type and the name of the bean in Spring:
+{hidden}Now that this is done you can create a Java class within the @src/java@ directory and add a setter that uses the type and the name of the bean in Spring:{hidden}
+これで、@src/java@ディレクトリのパッケージにJavaクラスを作ることができ、Springビーンの型と名前を使うセッターを提供することができます:
 
 {code:java}
 // src/java/bookstore/BookConsumer.java
@@ -59,7 +65,8 @@ public class BookConsumer {
 }
 {code}
 
-Once this is done you can configure the Java class as a Spring bean in @grails-app/conf/spring/resources.xml@ (for more information see the section on [Grails and Spring|guide:spring]):
+{hidden}Once this is done you can configure the Java class as a Spring bean in @grails-app/conf/spring/resources.xml@ (for more information see the section on [Grails and Spring|guide:spring]):{hidden}
+一度こうすることで、@grails-app/conf/spring/resources.xml@の中にSpringビーンとしてJavaクラスを設定することができます(詳細は、[GrailsとSpring|guide:spring]セクションを参照してください)
 
 {code:xml}
 <bean id="bookConsumer" class="bookstore.BookConsumer">
@@ -67,7 +74,8 @@ Once this is done you can configure the Java class as a Spring bean in @grails-a
 </bean>
 {code}
 
-or in @grails-app/conf/spring/resources.groovy@:
+{hidden}or in @grails-app/conf/spring/resources.groovy@:{hidden}
+または、 @grails-app/conf/spring/resources.groovy@に:
 
 {code:java}
 import bookstore.BookConsumer

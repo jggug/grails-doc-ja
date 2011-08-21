@@ -1,20 +1,25 @@
-Grails defines the notion of a service layer. The Grails team discourages the embedding of core application logic inside controllers, as it does not promote reuse and a clean separation of concerns.
+{hidden}Grails defines the notion of a service layer. The Grails team discourages the embedding of core application logic inside controllers, as it does not promote reuse and a clean separation of concerns.{hidden}
+Grailsではサービスレイヤの概念を持っています。再利用や関心事の明確な分離を妨げるといった理由から、Grailsチームは、コントローラ内にアプリケーションのコアロジックを持ち込まないことを推奨します。
 
-Services in Grails are the place to put the majority of the logic in your application, leaving controllers responsible for handling request flow with redirects and so on.
+{hidden}Services in Grails are the place to put the majority of the logic in your application, leaving controllers responsible for handling request flow with redirects and so on.{hidden}
+Grailsのサービスは、アプリケーション・ロジックの大部分を置く場所と考えられます。コントローラには、リダイレクトなどを介してリクエストの流れを処理する、といった責務が残ります。
 
-h4. Creating a Service
+h4. サービスを作成する {hidden}Creating a Service {hidden}
 
-You can create a Grails service by running the [create-service|commandLine] command from the root of your project in a terminal window:
+{hidden}You can create a Grails service by running the [create-service|commandLine] command from the root of your project in a terminal window:{hidden}
+ターミナルウィンドウで、プロジェクトのルートから[create-service|commandLine]コマンドを実行すると、Grailsのサービスを作成することができます:
 
 {code:java}
 grails create-service helloworld.simple
 {code}
 
 {note}
-If no package is specified with the create-service script, Grails automatically uses the application name as the package name.
+{hidden}If no package is specified with the create-service script, Grails automatically uses the application name as the package name.{hidden}
+create-serviceスクリプト実行した際にパッケージ名を指定しなかった場合は、アプリケーション名をパッケージ名として使用します。
 {note}
 
-The above example will create a service at the location @grails-app/services/helloworld/SimpleService.groovy@. A service's name ends with the convention @Service@, other than that a service is a plain Groovy class:
+{hidden}The above example will create a service at the location @grails-app/services/helloworld/SimpleService.groovy@. A service's name ends with the convention @Service@, other than that a service is a plain Groovy class:{hidden}
+上記の例では、@grails-app/services/helloworld/SimpleService.groovy@というサービスが作成されます。サービスの名前は、規約で@Service@で終わることになっており、作成されるサービスは、普通のGroovyクラスです
 
 {code:java}
 package helloworld
