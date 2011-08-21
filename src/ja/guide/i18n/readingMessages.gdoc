@@ -1,32 +1,37 @@
-h4. Reading Messages in the View
+h4. ビュー内でのメッセージ読み込み {hidden}Reading Messages in the View {hidden}
 
-The most common place that you need messages is inside the view. Use the [message|tags] tag for this:
+{hidden}The most common place that you need messages is inside the view. Use the [message|tags] tag for this:{hidden}
+メッセージを使うもっとも一般的な場所はビューの中です。ビューでメッセージを取得するには単に[message|tags]タグを使います。
 
 {code:xml}
 <g:message code="my.localized.content" />
 {code}
 
-As long as you have a key in your @messages.properties@ (with appropriate locale suffix) such as the one below then Grails will look up the message:
+{hidden}As long as you have a key in your @messages.properties@ (with appropriate locale suffix) such as the one below then Grails will look up the message:{hidden}
+以下のようなキーが@messages.properties@(妥当なロケール接尾辞が付いている)に有る場合、Grailsがメッセージを取得できます:
 
 {code:java}
 my.localized.content=Hola, Me llamo John. Hoy es domingo.
 {code}
 
-Messages can also include arguments, for example:
+{hidden}Messages can also include arguments, for example:{hidden}
+メッセージは引数を含めることも可能です。例として:
 
 {code:xml}
 <g:message code="my.localized.content" args="${ ['Juan', 'lunes'] }" />
 {code}
 
-The message declaration specifies positional parameters which are dynamically specified:
+{hidden}The message declaration specifies positional parameters which are dynamically specified:{hidden}
+位置パラメータがメッセージに指定されていると動的に設定されます:
 
 {code:java}
 my.localized.content=Hola, Me llamo {0}. Hoy es {1}.
 {code}
 
-h4. Reading Messages in Controllers and Tag Libraries
+h4. コントローラとタグライブラリ内でのメッセージ読み込み {hidden}Reading Messages in Controllers and Tag Libraries {hidden}
 
-It's simple to read messages in a controller since you can invoke tags as methods:
+{hidden}It's simple to read messages in a controller since you can invoke tags as methods:{hidden}
+コントローラでメッセージを読み込む場合はタグをメソッドとして実行します:
 
 {code:java}
 def show() {
@@ -34,7 +39,8 @@ def show() {
 }
 {code}
 
-The same technique can be used in [tag libraries|guide:taglibs], but if your tag library uses a custom [namespace|guide:namespaces] then you must prefix the call with @g.@:
+{hidden}The same technique can be used in [tag libraries|guide:taglibs], but if your tag library uses a custom [namespace|guide:namespaces] then you must prefix the call with @g.@:{hidden}
+[タグライブラリ|guide:taglibs]でも同じ方法が使用できます。タグライブラリがカスタム[ネームスペース|guide:namespaces]を使用している場合は必ず接頭辞@g.@を使用します:
 
 {code:java}
 def myTag = { attrs, body ->

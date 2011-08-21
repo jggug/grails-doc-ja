@@ -1,6 +1,8 @@
-Now that you have an idea of locales, to use them in Grails you create message bundle file containing the different languages that you wish to render. Message bundles in Grails are located inside the @grails-app/i18n@ directory and are simple Java properties files.
+{hidden}Now that you have an idea of locales, to use them in Grails you create message bundle file containing the different languages that you wish to render. Message bundles in Grails are located inside the @grails-app/i18n@ directory and are simple Java properties files.{hidden}
+複数ロケールの表示に対応するには、それぞれの言語ごと複数のメッセージバンドルを用意します。メッセージバンドルはシンプルなJavaのプロパティファイルとして@grails-app/i18n@ディレクトリに配置します。
 
-Each bundle starts with the name @messages@ by convention and ends with the locale. Grails ships with several message bundles for a whole range of languages within the @grails-app/i18n@ directory. For example:
+{hidden}Each bundle starts with the name @messages@ by convention and ends with the locale. Grails ships with several message bundles for a whole range of languages within the @grails-app/i18n@ directory. For example:{hidden}
+各メッセージバンドルファイル名は@messages@からはじまり、ロケール名称で終わります。Grailsでは幾つかの言語のメッセージバンドルを@grails-app/i18n@ディレクトリに同梱しています。例として:
 
 {code:java}
 messages.properties
@@ -11,4 +13,6 @@ messages_fr.properties
 ...
 {code}
 
-By default Grails looks in @messages.properties@ for messages unless the user has specified a locale. You can create your own message bundle by simply creating a new properties file that ends with the locale you are interested. For example @messages_en_GB.properties@ for British English.
+{hidden}By default Grails looks in @messages.properties@ for messages unless the user has specified a locale. You can create your own message bundle by simply creating a new properties file that ends with the locale you are interested. For example @messages_en_GB.properties@ for British English.{hidden}
+ユーザがロケールを指定していない場合、デフォルトで@messages.properties@を参照します。
+独自のメッセージバンドルを作成するには、末尾がロケールのプロパティファイルを新規に作成します。たとえば、@messages_ja_JP.properties@とすれば日本国+日本語になります。

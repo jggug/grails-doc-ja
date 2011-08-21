@@ -1,1 +1,2 @@
-Grails [scaffolding|guide:scaffolding] templates for controllers and views are fully i18n-aware. The GSPs use the [message|tags] tag for labels, buttons etc. and controller @flash@ messages use i18n to resolve locale-specific messages.
+{hidden}Grails [scaffolding|guide:scaffolding] templates for controllers and views are fully i18n-aware. The GSPs use the [message|tags] tag for labels, buttons etc. and controller @flash@ messages use i18n to resolve locale-specific messages.{hidden}
+Grailsの[スカッフォルド|guide:scaffolding]テンプレートでのコントローラとビューはi18nに完全対応しています。GSPはラベルやボタンなどに[message|tags]タグを使用し、コントローラは@flash@メッセージを使用して国際化にロケール対応メッセージを使用しています。
