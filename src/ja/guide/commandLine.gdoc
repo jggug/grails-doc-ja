@@ -1,25 +1,32 @@
+{hidden}
 Grails' command line system is built on [Gant|http://gant.codehaus.org/] - a simple Groovy wrapper around [Apache Ant|http://ant.apache.org].
+{hidden}
+Grailsのコマンドラインシステムは[Gant|http://gant.codehaus.org/](シンプルな[Apache Ant|http://ant.apache.org]のGroovyによるラッパー)によって構築されています。
 
-However, Grails takes it further through the use of convention and the @grails@ command. When you type:
+{hidden}However, Grails takes it further through the use of convention and the @grails@ command. When you type:{hidden}
+Grailsでは@grails@コマンドを使用し、Gantとは少し違った実行方法になります。
 
 {code}
 grails [command name]
 {code}
 
-Grails searches in the following directories for Gant scripts to execute:
+{hidden}Grails searches in the following directories for Gant scripts to execute:{hidden}
+このように入力した場合、GrailsはGantスクリプトを実行するために以下のディレクトリを探しに行きます。
 
 * @USER_HOME/.grails/scripts@
 * @PROJECT_HOME/scripts@
 * @PROJECT_HOME/plugins/*/scripts@
 * @GRAILS_HOME/scripts@
 
-Grails will also convert command names that are in lower case form such as run-app into camel case. So typing
+{hidden}Grails will also convert command names that are in lower case form such as run-app into camel case. So typing {hidden}
+Grailsは "run-app" のような小文字のコマンドをキャメルケースに変換して探します。なので次のように入力すると:
 
 {code}
 grails run-app
 {code}
 
-Results in a search for the following files:
+{hidden}Results in a search for the following files:{hidden}
+結果、以下のファイルを検索するよう指定したことになります。
 
 * @USER_HOME/.grails/scripts/RunApp.groovy@
 * @PROJECT_HOME/scripts/RunApp.groovy@
@@ -27,17 +34,21 @@ Results in a search for the following files:
 * @GLOBAL_PLUGINS_HOME/*/scripts/RunApp.groovy@
 * @GRAILS_HOME/scripts/RunApp.groovy@
 
-If multiple matches are found Grails will give you a choice of which one to execute.
+{hidden}If multiple matches are found Grails will give you a choice of which one to execute.{hidden}
+もし、複数の結果が見つかった場合はGrailsはどれを実行するかの選択肢を提示してきます。
 
-When Grails executes a Gant script, it invokes the "default" target defined in that script. If there is no default, Grails will quit with an error.
+{hidden}When Grails executes a Gant script, it invokes the "default" target defined in that script. If there is no default, Grails will quit with an error.{hidden}
+GrailsがGantスクリプトを実行するとき、デフォルトとして設定されたターゲットを起動します。デフォルト指定（setDefaultTarget(main)など）がない場合、Grailsはエラーで終了します。
 
-To get a list of all commands and some help about the available commands type:
+{hidden}To get a list of all commands and some help about the available commands type:{hidden}
+実行可能なコマンドのヘルプとリストを表示したい場合は以下を入力します:
 
 {code}
 grails help
 {code}
 
-which outputs usage instructions and the list of commands Grails is aware of:
+{hidden}which outputs usage instructions and the list of commands Grails is aware of:{hidden}
+このように入力すると、Grailsが認識しているコマンドのリストと使用方法が出力されます:
 
 {code}
 Usage (optionals marked with *):
@@ -56,7 +67,8 @@ grails compile
 {code}
 
 {note}
-Refer to the Command Line reference in the Quick Reference menu of the reference guide for more information about individual commands
+{hidden}Refer to the Command Line reference in the Quick Reference menu of the reference guide for more information about individual commands {hidden}
+左メニューにある個別のコマンドラインリファレンス情報も参照して下さい。
 {note}
 
 It's often useful to provide custom arguments to the JVM when running Grails commands, in particular with @run-app@ where you may for example want to set a higher maximum heap size. The Grails command will use any JVM options provided in the general @JAVA_OPTS@ environment variable, but you can also specify a Grails-specific environment variable too:

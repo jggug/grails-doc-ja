@@ -1,10 +1,14 @@
-Grails is most definitely an opinionated framework and it prefers convention to configuration, but this doesn't mean you _can't_ configure it. In this section, we look at how you can influence and modify the standard Grails build.
+{hidden}Grails is most definitely an opinionated framework and it prefers convention to configuration, but this doesn't mean you _can't_ configure it. In this section, we look at how you can influence and modify the standard Grails build.{hidden}
+Grailsは確かにものすごく固執したフレームワークであり、設定よりも規約という方式を主張していますが、それは様々な設定をできないという意味ではありません。このセクションでは、どのようにGrailsの標準的なビルドをカスタマイズする方法を解説します。
 
-h3. The defaults
+h3. 初期値 {hidden}The defaults {hidden}
 
-The core of the Grails build configuration is the @grails.util.BuildSettings@ class, which contains quite a bit of useful information. It controls where classes are compiled to, what dependencies the application has, and other such settings.
+{hidden}The core of the Grails build configuration is the @grails.util.BuildSettings@ class, which contains quite a bit of useful information. It controls where classes are compiled to, what dependencies the application has, and other such settings.{hidden}
+ビルド設定の中心部分は、ビルド時に有用な情報が含まれている @grails.util.BuildSettings@クラスです。このクラスは、どこにコンパイルされるのか、アプリケーションが何に依存関係を持っているのか、どのような設定を保持しているのか、を制御します。
 
-Here is a selection of the configuration options and their default values:
+{hidden}Here is a selection of the configuration options and their default values:{hidden}
+設定オプションと初期値は以下のようになります:
+{hidden}
 {table}
 *Property* | *Config option* | *Default value*
 grailsWorkDir | grails.work.dir | $USER_HOME/.grails/<grailsVersion>
@@ -17,8 +21,23 @@ projectPluginsDir | grails.project.plugins.dir | <projectWorkDir>/plugins
 globalPluginsDir | grails.global.plugins.dir | <grailsWorkDir>/global-plugins
 verboseCompile | grails.project.compile.verbose | @false@
 {table}
+{hidden}
+{table}
+*プロパティ* | *設定オプション* | *初期値*
+grailsWorkDir | grails.work.dir | $USER_HOME/.grails/<grailsVersion>
+projectWorkDir | grails.project.work.dir | <grailsWorkDir>/projects/<baseDirName>
+classesDir | grails.project.class.dir | <projectWorkDir>/classes
+testClassesDir | grails.project.test.class.dir | <projectWorkDir>/test-classes
+testReportsDir | grails.project.test.reports.dir | <projectWorkDir>/test/reports
+resourcesDir | grails.project.resource.dir | <projectWorkDir>/resources
+projectPluginsDir | grails.project.plugins.dir | <projectWorkDir>/plugins
+globalPluginsDir | grails.global.plugins.dir | <grailsWorkDir>/global-plugins
+verboseCompile | grails.project.compile.verbose | @false@
+{table}
 
-The @BuildSettings@ class has some other properties too, but they should be treated as read-only:
+{hidden}The @BuildSettings@ class has some other properties too, but they should be treated as read-only:{hidden}
+@BuildSettings@クラスは、他にもいくつかの読み取り専用のプロパティを持っています:
+{hidden}
 {table}
 *Property* | *Description*
 baseDir | The location of the project.
@@ -30,27 +49,47 @@ compileDependencies | A list of compile-time project dependencies as @File@ inst
 testDependencies | A list of test-time project dependencies as @File@ instances.
 runtimeDependencies | A list of runtime-time project dependencies as @File@ instances.
 {table}
+{hidden}
 
-Of course, these properties aren't much good if you can't get hold of them. Fortunately that's easy to do: an instance of @BuildSettings@ is available to your scripts as the @grailsSettings@ script variable. You can also access it from your code by using the @grails.util.BuildSettingsHolder@ class, but this isn't recommended.
+{table}
+*プロパティ* | *説明*
+baseDir | プロジェクトの場所。
+userHome | ユーザーのホームディレクトリ。
+grailsHome | 使用中のGrailsのインストール先（@null@の場合あり）。
+grailsVersion | プロジェクトで使用されているGrailsのバージョン。
+grailsEnv | 現在のGrails環境。
+compileDependencies | コンパイル時のプロジェクト依存関係のFileインスタンスのリスト。
+testDependencies | テスト時のプロジェクト依存関係のFileインスタンスのリスト。
+runtimeDependencies | 実行時のプロジェクト依存関係のFileインスタンスのリスト。
+{table}
 
-h3. Overriding the defaults
+{hidden}Of course, these properties aren't much good if you can't get hold of them. Fortunately that's easy to do: an instance of @BuildSettings@ is available to your scripts as the @grailsSettings@ script variable. You can also access it from your code by using the @grails.util.BuildSettingsHolder@ class, but this isn't recommended.{hidden}
+もちろんこれらのプロパティがぴったり合うとは限りません。幸いなことに、@BuildSettings@のインスタンスの@grailsSettingspスクリプト変数を介して利用可能です。他のコードからも@grails.util.BuildSettingsHolder@クラスを使用してアクセスすることができます。でもこれは推奨されません。
 
-All of the properties in the first table can be overridden by a system property or a configuration option - simply use the "config option" name. For example, to change the project working directory, you could either run this command:
+h3. 初期値を上書きする {hidden}Overriding the defaults {hidden}
+
+{hidden}All of the properties in the first table can be overridden by a system property or a configuration option - simply use the "config option" name. For example, to change the project working directory, you could either run this command:{hidden}
+1つめの表内のすべてのプロパティは、システムプロパティや設定オプションで上書きすることができます。たとえば、プロジェクトの作業ディレクトリ(projectWorkDir)を変更するには、このようにコマンドを実行することができます:
 {code}
 grails -Dgrails.project.work.dir=work compile
 {code}
-or add this option to your @grails-app/conf/BuildConfig.groovy@ file:
+{hidden}or add this option to your @grails-app/conf/BuildConfig.groovy@ file:{hidden}
+@grails-app/conf/BuildConfig.groovy@に記述します:
 {code}
 grails.project.work.dir = "work"
 {code}
-Note that the default values take account of the property values they depend on, so setting the project working directory like this would also relocate the compiled classes, test classes, resources, and plugins.
+{hidden}Note that the default values take account of the property values they depend on, so setting the project working directory like this would also relocate the compiled classes, test classes, resources, and plugins.{hidden}
+注意点として、プロパティが依存しているプロパティのデフォルト値にも影響するので、このようにプロジェクトの作業ディレクトリを設定すると、コンパイルされたクラス、テストクラス、リソース、およびプラグインの場所を変更することにもなります。
 
-What happens if you use both a system property and a configuration option? Then the system property wins because it takes precedence over the @BuildConfig.groovy@ file, which in turn takes precedence over the default values.
+{hidden}What happens if you use both a system property and a configuration option? Then the system property wins because it takes precedence over the @BuildConfig.groovy@ file, which in turn takes precedence over the default values.{hidden}
+システムプロパティと設定オプションの両方を指定した場合、システムプロパティは@BuildConfig.groovy@ファイルの設定よりも優先順位が高いので、システムプロパティの値が設定されます。
 
-The @BuildConfig.groovy@ file is a sibling of @grails-app/conf/Config.groovy@ - the former contains options that only affect the build, whereas the latter contains those that affect the application at runtime. It's not limited to the options in the first table either: you will find build configuration options dotted around the documentation, such as ones for specifying the port that the embedded servlet container runs on or for determining what files get packaged in the WAR file.
+{hidden}The @BuildConfig.groovy@ file is a sibling of @grails-app/conf/Config.groovy@ - the former contains options that only affect the build, whereas the latter contains those that affect the application at runtime. It's not limited to the options in the first table either: you will find build configuration options dotted around the documentation, such as ones for specifying the port that the embedded servlet container runs on or for determining what files get packaged in the WAR file.{hidden}
+@BuildConfig.groovy@ファイルは、@grails-app/conf/Config.groovy@と兄妹関係にあります。前者は、ビルド時にのみ影響を及ぼすオプションを含んでいるのに対して、後者はアプリケーションの実行時に影響を与えるオプションを含んでいます。設定オプションは、1つめの表で示したオプション以外にも、サーブレットコンテナを動かすポート指定や、WARファイルにどのファイルを格納するかを決定する指定など、他にも指定可能なビルド設定が存在します。
 
-h3. Available build settings
+h3. 使用可能なビルド設定 {hidden}Available build settings {hidden}
 
+{hidden}
 {table}
  Name | Description
  grails.server.port.http | Port to run the embedded servlet container on ("run-app" and "run-war"). Integer.
@@ -65,3 +104,20 @@ h3. Available build settings
  grails.war.resources | A closure that takes the location of the staging directory as its first argument. You can use any Ant tasks to do anything you like. It is typically used to remove files from the staging directory before that directory is jar'd up into a WAR.
  grails.project.web.xml | The location to generate Grails' web.xml to
 {table}
+{hidden}
+
+{table}
+ 名前 | 説明
+ grails.server.port.http | 組み込みのサーブレットコンテナを実行するポート番号。（"run-app" と "run-war"）
+ grails.server.port.https | HTTPS用の組み込みのサーブレットコンテナを実行するポート番号。（"run-app \-\-https"と"run-war \-\-https"）
+ grails.config.base.webXml | アプリケーションで使用するカスタムのweb.xmlファイルへのパス。（web.xmlテンプレートを使用しない場合）
+ grails.compiler.dependencies | コンパイラのクラスパスに依存関係を追加する。"fileset()"を含んでいるクロージャに設定。
+ grails.testing.patterns | テストに含まれるファイルを制御するためのAntパスのパターンリスト。パターンは、次のgrails.testing.nameSuffixに設定されているテストケースのサフィックス以外。
+ grails.testing.nameSuffix | デフォルトでは、テストは"Tests"のサフィックスが設定されていますが、好きなようにオプション設定を変更することができます。
+ grails.project.war.file | 生成されるWARファイルの名称（拡張子を含む）のファイルパス。例として、"target/my-app.war" 等。
+ grails.war.dependencies | WARファイルの"WEB-INF/lib"階層に含む内容を、クロージャ内の"fileset()"でコントロール。
+ grails.war.copyToWebApp | WARのルートディレクトリ階層に含む内容を、クロージャ内の"fileset()"でコントロール。
+ grails.war.resources | 最初の引数としてステージングディレクトリの場所を受け取れるクロージャを指定。クロージャ内でAntタスクを使用することで、WAR化される前にステージングディレクトリの内容を変更する事ができます。
+ grails.project.web.xml | Grailsがweb.xmlを生成する場所の指定。
+{table}
+

@@ -1,19 +1,30 @@
-Grails provides the ability to hook into scripting events. These are events triggered during execution of Grails target and plugin scripts.
+{hidden}Grails provides the ability to hook into scripting events. These are events triggered during execution of Grails target and plugin scripts.{hidden}
+Grailsはスクリプトのイベントフックを提供しています。イベントフックとは、Grailsターゲット実行時やプラグインスクリプト実行時に発行されるイベントを取得して処理を行うことができる機能です。
 
-The mechanism is deliberately simple and loosely specified. The list of possible events is not fixed in any way, so it is possible to hook into events triggered by plugin scripts, for which there is no equivalent event in the core target scripts.
+{hidden}The mechanism is deliberately simple and loosely specified. The list of possible events is not fixed in any way, so it is possible to hook into events triggered by plugin scripts, for which there is no equivalent event in the core target scripts.{hidden}
+仕組みはわざと単純でゆるく明記できるようになっています。起こりうるイベントは予測できないからです。なので、コアターゲットと同等のイベントが無い場合はプラグインスクリプトからトリガーされたイベントにフックする事も可能です。
 
-h4. Defining event handlers
+h4. イベントハンドラを定義する {hidden}Defining event handlers {hidden}
 
-Event handlers are defined in scripts called @_Events.groovy@. Grails searches for these scripts in the following locations:
+{hidden}Event handlers are defined in scripts called @_Events.groovy@. Grails searches for these scripts in the following locations:{hidden}
+イベントハンドラは@_Events.groovy@という名称のスクリプトで定義します。Grailsは次の場所からスクリプトを検索します:
 
+{hidden}
 * @USER_HOME/.grails/scripts@ - user-specific event handlers
 * @PROJECT_HOME/scripts@ - applicaton-specific event handlers
 * @PLUGINS_HOME/*/scripts@ - plugin-specific event handlers
 * @GLOBAL_PLUGINS_HOME/*/scripts@ - event handlers provided by global plugins
+{hidden}
+* @USER_HOME/.grails/scripts@ - ユーザー固有のイベントハンドラ
+* @PROJECT_HOME/scripts@ - アプリケーション固有のイベントハンドラ
+* @PLUGINS_HOME/*/scripts@ - プラグイン固有のイベントハンドラ
+* @GLOBAL_PLUGINS_HOME/*/scripts@ - グローバルプラグインによって提供されているイベントハンドラ
 
-Whenever an event is fired, _all_ the registered handlers for that event are executed. Note that the registration of handlers is performed automatically by Grails, so you just need to declare them in the relevant @_Events.groovy@ file.
+{hidden}Whenever an event is fired, _all_ the registered handlers for that event are executed. Note that the registration of handlers is performed automatically by Grails, so you just need to declare them in the relevant @_Events.groovy@ file.{hidden}
+イベントが発生するたびに登録されている _すべての_ ハンドラが実行されます。ハンドラの登録はGrailsによって自動的に行われることに注意してください。なので、必要な作業は関連する@_Events.groovy@ファイルにそれらを宣言するだけです。
 
-Event handlers are blocks defined in @_Events.groovy@, with a name beginning with "event". The following example can be put in your /scripts directory to demonstrate the feature:
+{hidden}Event handlers are blocks defined in @_Events.groovy@, with a name beginning with "event". The following example can be put in your /scripts directory to demonstrate the feature:{hidden}
+イベントハンドラは _Events.groovy で定義されている名前が "event" で始まっているブロックです。次の例のように@_Events.groovy@を記述して、/scripts ディレクトリに配置することによって、イベントハンドラを実装することができます:
 
 {code}
 eventCreatedArtefact = { type, name ->
@@ -29,14 +40,20 @@ eventStatusFinal = { msg ->
 }
 {code}
 
-You can see here the three handlers @eventCreatedArtefact@, @eventStatusUpdate@, @eventStatusFinal@. Grails provides some standard events, which are documented in the command line reference guide. For example the [compile|commandLine] command fires the following events:
-
+{hidden}You can see here the three handlers @eventCreatedArtefact@, @eventStatusUpdate@, @eventStatusFinal@. Grails provides some standard events, which are documented in the command line reference guide. For example the [compile|commandLine] command fires the following events:{hidden}
+ここでは三つのハンドラが指定されています。@eventCreatedArtefact@、@eventStatusUpdate@、@eventStatusFinal@。Grailsはいくつかの標準的なイベントを提供しています。詳細はコマンドラインリファレンスガイドを参照してください。たとえば、 [compile|commandLine]コマンドは、次のようなイベントを発行させます。
+{hidden}
 * @CompileStart@  - Called when compilation starts, passing the kind of compile - source or tests
 * @CompileEnd@ - Called when compilation is finished, passing the kind of compile - source or tests
+{hidden}
+* @CompileStart@ - sourceまたはtestsコンパイル開始時に発行されます。
+* @CompileEnd@ - sourceまたはtestsコンパイル終了時に発行されます。
 
-h4. Triggering events
 
-To trigger an event simply include the Init.groovy script and call the event() closure:
+h4. イベントトリガー {hidden}Triggering events {hidden}
+
+{hidden}To trigger an event simply include the Init.groovy script and call the event() closure:{hidden}
+イベントを発行するには _GrailsEvents.groovy スクリプトをインクルードしてevent()クロージャを使用します:
 
 {code}
 includeTargets << grailsScript("_GrailsEvents")
@@ -44,10 +61,12 @@ includeTargets << grailsScript("_GrailsEvents")
 event("StatusFinal", ["Super duper plugin action complete!"])
 {code}
 
-h4. Common Events
+h4. 共通イベント {hidden}Common Events {hidden}
 
-Below is a table of some of the common events that can be leveraged:
+{hidden}Below is a table of some of the common events that can be leveraged:{hidden}
+以下はいくつかの利用可能な共通イベントの一覧です:
 
+{hidden}
 {table}
 Event | Parameters | Description
  StatusUpdate | message | Passed a string indicating current script status/progress
@@ -64,3 +83,22 @@ Event | Parameters | Description
  SetClasspath | rootLoader | Called during classpath initialization so plugins can augment the classpath with rootLoader.addURL(...). Note that this augments the classpath *after* event scripts are loaded so you cannot use this to load a class that your event script needs to import, although you can do this if you load the class by name.
  PackagingEnd | none | Called at the end of packaging (which is called prior to the Tomcat server being started and after web.xml is generated)
 {table}
+{hidden}
+
+{table}
+イベント | パラメータ | 説明
+ StatusUpdate | message | 実行されているスクリプトのステータス、進捗メッセージを知らせる
+ StatusError | message | 実行されているスクリプトのエラーメッセージを 知らせる
+ StatusFinal | message | スクリプトの終了時に最終メッセージを知らせる。 スクリプトによっては完全終了時ではなく、コマ ンドの終了時に動作する
+ CreatedArtefact | artefactType,artefactName | create-xxxxなどのアーティファクト生成スクリプトが、アーティファクトの生成完了時にアーティ ファクトタイプとアーティファクト名を知らせる
+ CreatedFile | fileName | ファイルがスクリプトによって生成されたときに ファイル名を知らせる
+ Exiting | returnCode | スクリプトが正常に終了したときに終了コードを 知らせる
+ PluginInstalled | pluginName | プラグインのインストールが終了した後にプラグイン 名を知らせる
+ CompileStart | kind | コンパイル開始時にコンパイルする種類(source または tests)を知らせる
+ CompileEnd | kind | コンパイル終了時にコンパイルした種類(source または tests)を知らせる
+ DocStart | kind | ドキュメント生成時に、どのドキュメント生成(javadoc または groovydoc)が開始するかを知らせる
+ DocEnd | kind | ドキュメント生成完了時に、どのドキュメント生成(javadoc または groovydoc)が完了したかを知らせる
+ SetClasspath | rootLoader | クラスパス初期化中にGrailsRootLoader が渡されるので、「rootLoader.addURL( ... )」でクラスをGrailsRootLoader に追加できる
+ PackagingEnd | none | Grailsアプリケーションのパッケージング完了時 (web.xml生成後、Tomcatサーバ起動前)に呼び出される
+{table}
+

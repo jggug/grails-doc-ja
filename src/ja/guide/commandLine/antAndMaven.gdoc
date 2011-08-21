@@ -1,37 +1,52 @@
-If all the other projects in your team or company are built using a standard build tool such as Ant or Maven, you become the black sheep of the family when you use the Grails command line to build your application. Fortunately, you can easily integrate the Grails build system into the main build tools in use today (well, the ones in use in Java projects at least).
+{hidden}If all the other projects in your team or company are built using a standard build tool such as Ant or Maven, you become the black sheep of the family when you use the Grails command line to build your application. Fortunately, you can easily integrate the Grails build system into the main build tools in use today (well, the ones in use in Java projects at least).{hidden}
+もし、あなたのプロジェクトチームや会社でAntやMavenなどのような標準的なビルドツールを利用している場合は、アプリケーションをビルドする時にGrailsのコマンドラインを使っていると一家の厄介者にされてしまいます。幸いなことに、Grailsビルドシステムは今日使われている主なビルドツールに簡単に統合することができます。（少なくともJavaプロジェクトで使用されているものへ）
 
-h3. Ant Integration
+h3. Antへの統合 {hidden}Ant Integration {hidden}
 
-When you create a Grails application with the [create-app|commandLine] command, Grails doesn't automatically create an Ant @build.xml@ file but you can generate one with the [integrate-with|commandLine] command:
+{hidden}When you create a Grails application with the [create-app|commandLine] command, Grails doesn't automatically create an Ant @build.xml@ file but you can generate one with the [integrate-with|commandLine] command:{hidden}
+[create-app|commandLine]コマンドでGrailsアプリケーションを作成した際に、Grailsは自動的にはApache Antの@build.xml@を生成しません。[integrate-with|commandLine]コマンドを使用して生成することが可能です。
 
 bc.
 grails integrate-with --ant
 
-This creates a @build.xml@ file containing the following targets:
-
+{hidden}This creates a @build.xml@ file containing the following targets:{hidden}
+作成された@build.xml@ファイルには、次のターゲットが含まれています:
+{hidden}
 * @clean@ - Cleans the Grails application
 * @compile@ - Compiles your application's source code
 * @test@ - Runs the unit tests
 * @run@ - Equivalent to "grails run-app"
 * @war@ - Creates a WAR file
 * @deploy@ - Empty by default, but can be used to implement automatic deployment
+{hidden}
+* @clean@ - Grailsアプリケーションをクリーンします。
+* @compile@ - アプリケーションのソースコードをコンパイルします。
+* @test@ - Unitテストを実行します。
+* @run@ - Grailsの"run-app"コマンド相当を実行します。
+* @war@ - WARファイルを作成します。
+* @deploy@ - デフォルトでは空ですが、自動配備を実装することができます。
 
-Each of these can be run by Ant, for example:
+{hidden}Each of these can be run by Ant, for example:{hidden}
+これらは例えば、以下のようなAntコマンドで実行できます。
 
 {code:java}
 ant war
 {code}
 
-The build file is configured to use "Apache Ivy":http://ant.apache.org/ivy/ for dependency management, which means that it will automatically download all the requisite Grails JAR files and other dependencies on demand. You don't even have to install Grails locally to use it! That makes it particularly useful for continuous integration systems such as [CruiseControl|http://cruisecontrol.sourceforge.net/] or [Jenkins|http://jenkins-ci.org/].
+{hidden}The build file is configured to use "Apache Ivy":http://ant.apache.org/ivy/ for dependency management, which means that it will automatically download all the requisite Grails JAR files and other dependencies on demand. You don't even have to install Grails locally to use it! That makes it particularly useful for continuous integration systems such as [CruiseControl|http://cruisecontrol.sourceforge.net/] or [Jenkins|http://jenkins-ci.org/].{hidden}
+ビルドファイルは "Apache Ivy":http://ant.apache.org/ivy/ をの依存性管理を使う準備ができています。必要に応じてGrailsが利用したり、またはそれ以外で利用される依存関係のあるJARファイルを自動的にダウンロードしてくることができるということです。それを使うにはローカルにGrailsをインストールする必要すらありません！[CruiseControl|http://cruisecontrol.sourceforge.net/]や[Jenkins|http://jenkins-ci.org/]のような継続的インテグレーションツールを使う場合、特に便利でしょう。
 
-It uses the Grails [Ant task|api:grails.ant.GrailsTask] to hook into the existing Grails build system. The task lets you run any Grails script that's available, not just the ones used by the generated build file. To use the task, you must first declare it:
+{hidden}It uses the Grails [Ant task|api:grails.ant.GrailsTask] to hook into the existing Grails build system. The task lets you run any Grails script that's available, not just the ones used by the generated build file. To use the task, you must first declare it:{hidden}
+これはGrailsの[Antタスク|api:grails.ant.GrailsTask]を既存のGrailsビルドシステムにフックします。タスクは、Grailsの生成されたビルドファイル以外の利用可能なスクリプトの実行を許可されています。タスクを使用するには、まずこう宣言します。
 {code}
 <taskdef name="grailsTask"
          classname="grails.ant.GrailsTask"
          classpathref="grails.classpath"/>
 {code}
 
-This raises the question: what should be in "grails.classpath"? The task itself is in the "grails-bootstrap" JAR artifact, so that needs to be on the classpath at least. You should also include the "groovy-all" JAR. With the task defined, you just need to use it! The following table shows you what attributes are available:
+{hidden}This raises the question: what should be in "grails.classpath"? The task itself is in the "grails-bootstrap" JAR artifact, so that needs to be on the classpath at least. You should also include the "groovy-all" JAR. With the task defined, you just need to use it! The following table shows you what attributes are available:{hidden}
+ここで疑問が生じます。どれが"grails.classpath"でしょうか。タスク自体は"grails-bootstrap"JARの一部です。なので、少なくともクラスパス上にある必要があります。また、"groovy-all" JARを含める必要があります。タスク宣言ではこれらを仕使用する必要があります！次の表は、どんな属性が利用可能かを示しています。
+{hidden}
 {table}
  Attribute | Description | Required
  home | The location of the Grails installation directory to use for the build. | Yes, unless classpath is specified.
@@ -41,37 +56,61 @@ This raises the question: what should be in "grails.classpath"? The task itself 
  environment | The Grails environment to run the script in. | No. Defaults to the script default.
  includeRuntimeClasspath | Advanced setting: adds the application's runtime classpath to the build classpath if true. | No. Defaults to @true@.
 {table}
+{hidden}
 
-The task also supports the following nested elements, all of which are standard Ant path structures:
+{table}
+ 属性 | 説明 | 必須
+ home | ビルドに使用するGrailsのインストールディレクトリの場所。 | パスが指定されている場合を除き必須です。
+ classpathref | Grailsがロードする基点となるクラスパス。"grails-bootstrap"を含めなければなりません。また、"grails-scripts"を含めるべきです。 | @home@が設定されていなかったり、@classpath@要素を使う場合は必須です。
+ script | Grailsスクリプトの実行名。例えば "TestApp"。 | 必須です。
+ args | スクリプトに渡す引数。例えば "-unix -xml"。 | 必須ではありません。デフォルトは "" です。
+ environment | スクリプト実行時のGrails環境変数。 | 必須ではありません。デフォルトはスクリプトのデフォルトになります。
+ includeRuntimeClasspath | 高度な設定です。 trueの場合、アプリケーション実行時クラスパスをクラスパスに追加します。  | 必須ではありません。 デフォルトは@true@です。
+{table}
 
+{hidden}The task also supports the following nested elements, all of which are standard Ant path structures:{hidden}
+タスクネスト要素をサポートします。こられの全ては標準的なAntの構造となっています。
+
+{hidden}
 * @classpath@ - The build classpath (used to load Gant and the Grails scripts).
 * @compileClasspath@ - Classpath used to compile the application's classes.
 * @runtimeClasspath@ - Classpath used to run the application and package the WAR. Typically includes everything in @compileClasspath.
 * @testClasspath@ - Classpath used to compile and run the tests. Typically includes everything in @runtimeClasspath@.
+{hidden}
+* @classpath@ - ビルド時のクラスパス。（GantとGrailsスクリプトロード時に使用）
+* @compileClasspath@ - アプリケーションコンパイル時のクラスパス。
+* @runtimeClasspath@ - アプリケーションとWARパッケージ実行時のクラスパス。通常@compileClasspath@に全てが含まれます。
+* @testClasspath@ - コンパイル時と、テスト実行時のクラスパス。通常@runtimeClasspath@に全てが含まれます。
 
-How you populate these paths is up to you. If you use the @home@ attribute and put your own dependencies in the @lib@ directory, then you don't even need to use any of them. For an example of their use, take a look at the generated Ant build file for new apps.
+{hidden}How you populate these paths is up to you. If you use the @home@ attribute and put your own dependencies in the @lib@ directory, then you don't even need to use any of them. For an example of their use, take a look at the generated Ant build file for new apps.{hidden}
+どうやってパスを追加するかはあなた次第です。もし、@home@を利用しており、自分自身の依存関係を@lib@ディレクトリに設定している場合は、これらを使う必要はありません。こららの利用例としては、生成された新しいアプリケーションのAntビルドファイルを見てみましょう。
 
-h3. Maven Integration
+h3. Mavenの統合 {hidden}Maven Integration{hidden}
 
-Grails provides integration with "Maven 2":http://maven.apache.org with a Maven plugin. The current Maven plugin is based on but supersedes the version created by [Octo|http://forge.octo.com/], who did a great job with the original.
+{hidden}Grails provides integration with "Maven 2":http://maven.apache.org with a Maven plugin. The current Maven plugin is based on but supersedes the version created by [Octo|http://forge.octo.com/], who did a great job with the original.{hidden}
+GrailsはMavenプラグインを介して Maven 2":http://maven.apache.org との統合を提供しています。現在のMavenプラグインもこれを基礎としいますが、偉業を成し遂げた[Octo|http://forge.octo.com/]のバージョンに取って代わります。
 
-h4. Preparation
+h4. 準備 {hidden}Preparation {hidden}
 
-In order to use the new plugin, all you need is Maven 2 installed and set up. This is because *you no longer need to install Grails separately to use it with Maven!*
+{hidden}In order to use the new plugin, all you need is Maven 2 installed and set up. This is because *you no longer need to install Grails separately to use it with Maven!* {hidden}
+新しいプラグインを使用するのに必要なことは、Maven2をインストールし設定することです。なぜなら、*Grailsを別途インストールする必要はないからです！*
 
 {note}
-The Maven 2 integration for Grails has been designed and tested for Maven 2.0.9 and above. It will not work with earlier versions.
+{hidden}The Maven 2 integration for Grails has been designed and tested for Maven 2.0.9 and above. It will not work with earlier versions.{hidden}
+GrailsのMaven2統合は、Maven 2.0.9以上を対象として設計・テストされています。それ以前のバージョンでは動作しません。
 {note}
 
 {note}
-The default mvn setup DOES NOT supply sufficient memory to run the Grails environment. We recommend that you add the following environment variable setting to prevent poor performance:
+{hidden}The default mvn setup DOES NOT supply sufficient memory to run the Grails environment. We recommend that you add the following environment variable setting to prevent poor performance:{hidden}
+既定のmvnコマンド設定ではGrails環境で実行するための十分なメモリを供給できません。パフォーマンス低下を防止するため、次の環境変数を追加することをお勧めします:
 
 @export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=256"@
 {note}
 
-h4. Creating a Grails Maven Project
+h4. GrailsのMavenのプロジェクトを作成する {hidden}Creating a Grails Maven Project {hidden}
 
-To create a Mavenized Grails project simply run the following command:
+{hidden}To create a Mavenized Grails project simply run the following command:{hidden}
+Maven化されたGrailsプロジェクトを作成するには、単に以下のコマンドを実行します:
 
 {code}
 mvn archetype:generate -DarchetypeGroupId=org.grails \\\
@@ -80,8 +119,10 @@ mvn archetype:generate -DarchetypeGroupId=org.grails \\\
     -DgroupId=example -DartifactId=my-app
 {code}
 
-Choose whichever grails version, group ID and artifact ID you want for your application, but everything else must be as written. This will create a new Maven project with a POM and a couple of other files. What you won't see is anything that looks like a Grails application. So, the next step is to create the project structure that you're used to.
-But first, to set target JDK to Java 6, do that now. Open my-app/pom.xml and change
+{hidden}Choose whichever grails version, group ID and artifact ID you want for your application, but everything else must be as written. This will create a new Maven project with a POM and a couple of other files. What you won't see is anything that looks like a Grails application. So, the next step is to create the project structure that you're used to.{hidden}
+アプリケーションで使用するGrailsバージョン、グループID、アーティファクトIDを指定するだけで必要な内容が書き込まれます。このコマンドで新規にMavenプロジェクトのPOMと他のファイルが生成されます。生成された内容を見るとGrailsアプリケーションで必要なものが見つかりません。次のステップでいつも通りの物が出来上がります。
+{hidden}But first, to set target JDK to Java 6, do that now. Open my-app/pom.xml and change {hidden}
+はじめに、ターゲットJDKをJava 6にセットします。my-app/pom.xmlを開いて、次のように変更します:
 {code}
 <plugin>
   <artifactId>maven-compiler-plugin</artifactId>
@@ -91,7 +132,8 @@ But first, to set target JDK to Java 6, do that now. Open my-app/pom.xml and cha
   </configuration>
 </plugin>
 {code}
-to
+{hidden}to {hidden}
+上記を、以下のように変更します。
 {code}
 <plugin>
   <artifactId>maven-compiler-plugin</artifactId>
@@ -102,7 +144,8 @@ to
 </plugin>
 {code}
 
-Then you're ready to create the project structure:
+{hidden}Then you're ready to create the project structure:{hidden}
+これでプロジェクト構造を作成する環境が整いました。
 
 {code}
 cd my-app
@@ -110,7 +153,8 @@ mvn initialize
 {code}
 
 {note}
-if you see a message similar to this:
+{hidden}if you see a message similar to this:{hidden}
+以下のようなメッセージが出る場合:
 
 {code}
 Resolving plugin JAR dependencies ...
@@ -119,26 +163,32 @@ Resolving plugin JAR dependencies ...
         module not found: org.hibernate#hibernate-core;3.3.1.GA
 {code}
 
-you need to add the plugins manually to application.properties:
+{hidden}you need to add the plugins manually to application.properties:{hidden}
+application.properties に手動でプラグインを追加する必要があります:
 
 {code}
 plugins.hibernate=2.0.0
 plugins.tomcat=2.0.0
 {code}
 
-then run
+{hidden}then run {hidden}
+そして実行します。
 
 {code}
 mvn compile
 {code}
 
-and the hibernate and tomcat plugins will be installed.
+{hidden}and the hibernate and tomcat plugins will be installed.{hidden}
+これで、hibernateとtomcatプラグインがインストールされます。
 {note}
 
-Now you have a Grails application all ready to go. The plugin integrates into the standard build cycle, so you can use the standard Maven phases to build and package your app:  @mvn clean@ ,  @mvn compile@ ,  @mvn test@ ,  @mvn package@ , @mvn install@ .
+{hidden}Now you have a Grails application all ready to go. The plugin integrates into the standard build cycle, so you can use the standard Maven phases to build and package your app:  @mvn clean@ ,  @mvn compile@ ,  @mvn test@ ,  @mvn package@ , @mvn install@ .{hidden}
+これで、Grailsアプリケーションのすべての準備が整いました。プラグインは標準ビルドサイクルに統合され、Mavenの標準的なアプリケーションのビルドやパッケージングのフェーズで利用できるようになります: @mvn clean@、@mvn compile@、@mvn test@、@mvn package@、@mvn install@。
 
-You can also use some of the Grails commands that have been wrapped as Maven goals:
+{hidden}You can also use some of the Grails commands that have been wrapped as Maven goals:{hidden}
+また、MavenのゴールとしてラッピングされたGrailsコマンドを使うこともできるようになっています:
 
+{hidden}
 * @grails:create-controller@ - Calls the [create-controller|commandLine] command
 * @grails:create-domain-class@ - Calls the [create-domain-class|commandLine] command
 * @grails:create-integration-test@ - Calls the [create-integration-test|commandLine] command
@@ -157,24 +207,52 @@ You can also use some of the Grails commands that have been wrapped as Maven goa
 * @grails:package@ - Calls the [package|commandLine] command
 * @grails:run-app@ - Calls the [run-app|commandLine] command
 * @grails:uninstall-plugin@ - Calls the [uninstall-plugin|commandLine] command
+{hidden}
 
-For a complete, up to date list, run @mvn grails:help@
+* @grails:create-controller@ - [create-controller|commandLine]コマンドを呼び出します。
+* @grails:create-domain-class@ - [create-domain-class|commandLine]コマンドを呼び出します。
+* @grails:create-integration-test@ - [create-integration-test|commandLine]コマンドを呼び出します。
+* @grails:create-pom@ - 既存のGrailsプロジェクト用に新しいMavenのPOMファイルを作成します。
+* @grails:create-script@ - [create-script|commandLine]コマンドを呼び出します。
+* @grails:create-service@ - [create-service|commandLine]コマンドを呼び出します。
+* @grails:create-taglib@ - [create-tag-lib|commandLine]コマンドを呼び出します。
+* @grails:create-unit-test@ - [create-unit-test|commandLine]コマンドを呼び出します。
+* @grails:exec@ - 任意のGrailsのコマンドラインスクリプトを呼び出します。スクリプトを実行する任意のGrailsのコマンドライン
+* @grails:generate-all@ - [generate-all|commandLine]コマンドを呼び出します。
+* @grails:generate-controller@  - [generate-controller|commandLine]コマンドを呼び出します。
+* @grails:generate-views@ - [generate-views|commandLine]コマンドを呼び出します。
+* @grails:install-plugin@ - [install-plugin|commandLine]コマンドを呼び出します。
+* @grails:install-templates@ - [install-templates|commandLine]コマンドを呼び出します。
+* @grails:list-plugins@ - [list-plugins|commandLine]コマンドを呼び出します。
+* @grails:package@ - [package|commandLine]コマンドを呼び出します。
+* @grails:run-app@ - [run-app|commandLine]コマンドを呼び出します。
+* @grails:uninstall-plugin@ - [uninstall-plugin|commandLine]コマンドを呼び出します。
 
-h4. Mavenizing an existing project
 
-Creating a new project is great way to start, but what if you already have one? You don't want to create a new project and then copy the contents of the old one over. The solution is to create a POM for the existing project using this Maven command (substitute the version number with the grails version of your existing project):
+{hidden}For a complete, up to date list, run @mvn grails:help@ {hidden}
+完全なリストは@mvn grails:help@で確認して下さい。
+
+h4. 既存プロジェクトをMaven化する {hidden}Mavenizing an existing project {hidden}
+
+{hidden}Creating a new project is great way to start, but what if you already have one? You don't want to create a new project and then copy the contents of the old one over. The solution is to create a POM for the existing project using this Maven command (substitute the version number with the grails version of your existing project):{hidden}
+新しく始めるには、プロジェクトを新規作成するのが最善の方法ですが、既にプロジェクトが存在する場合はどうしたらいいでしょうか？新しくプロジェクトを作成したくないし、内容を上書きコピーもしたくないでしょう。解決策は以下のMavenコマンドを使用して既存プロジェクトにPOMファイルを作ることです。（バージョン番号は既存のGrailsプロジェクトのバージョンで置き換えて下さい）
+
 {code}
 mvn org.grails:grails-maven-plugin:1.3.2:create-pom -DgroupId=com.mycompany
 {code}
-When this command has finished, you can immediately start using the standard phases, such as @mvn package@. Note that you have to specify a group ID when creating the POM.
+{hidden}When this command has finished, you can immediately start using the standard phases, such as @mvn package@. Note that you have to specify a group ID when creating the POM.{hidden}
+コマンドが完了したら、すぐにmvn packageのような標準フェーズで使い始めることができます。POMファイルを作成する際はグループIDを指定する必要があることに注意してください。
 
-You may also want to set target JDK to Java 6; see above.
+{hidden}You may also want to set target JDK to Java 6; see above.{hidden}
+また、対象JDKバージョンをJDK6に設定したい場合は、上記を参照して下さい。
 
-h4. Adding Grails commands to phases
+h4. Grailsコマンドをフェーズに追加する {hidden}Adding Grails commands to phases {hidden}
 
-The standard POM created for you by Grails already attaches the appropriate core Grails commands to their corresponding build phases, so "compile" goes in the "compile" phase and "war" goes in the "package" phase. That doesn't help though when you want to attach a plugin's command to a particular phase. The classic example is functional tests. How do you make sure that your functional tests (using which ever plugin you have decided on) are run during the "integration-test" phase?
+{hidden}The standard POM created for you by Grails already attaches the appropriate core Grails commands to their corresponding build phases, so "compile" goes in the "compile" phase and "war" goes in the "package" phase. That doesn't help though when you want to attach a plugin's command to a particular phase. The classic example is functional tests. How do you make sure that your functional tests (using which ever plugin you have decided on) are run during the "integration-test" phase?{hidden}
+Grailsが作成した標準のPOMファイルは、Grailsのビルドフェーズに対応したコアコマンドに適切に付属しています。"compile" は "compile"フェーズに、"war" は "package"フェーズに。特定のフェーズにプラグインコマンドを付属させたい場合には役立ちません。古典的な例は、機能テストです。どうやって機能テストが統合テストフェーズの間に（あなた使用しているどんなプラグインを使った場合でも）実行されるのかを確かめるのでしょうか？
 
-Fear not: all things are possible. In this case, you can associate the command to a phase using an extra "execution" block:
+{hidden}Fear not: all things are possible. In this case, you can associate the command to a phase using an extra "execution" block:{hidden}
+恐れる必要はありません、すべて可能です。この場合には、"execution"ブロックを追加してフェーズに関連付けることができます。
 {code:xml}
 <plugin>
     <groupId>org.grails</groupId>
@@ -202,28 +280,34 @@ Fear not: all things are possible. In this case, you can associate the command t
 </plugin>
 {code}
 
-This also demonstrates the @grails:exec@ goal, which can be used to run any Grails command. Simply pass the name of the command as the @command@ system property, and optionally specify the arguments with the @args@ property:
+{hidden}This also demonstrates the @grails:exec@ goal, which can be used to run any Grails command. Simply pass the name of the command as the @command@ system property, and optionally specify the arguments with the @args@ property:{hidden}
+またこれは @grails:exec@ goal の実演にもなっています。Grailsのどんなコマンドも実行できるのです。単にコマンド名を渡す@command@システムプロパティと、オプションで引数を渡す@args@プロパティがあります:
+
 {code}
 mvn grails:exec -Dcommand=create-webtest -Dargs=Book
 {code}
 
-h4. Debugging a Grails Maven Project
+h4. GrailsのMavenプロジェクトのデバッグ {hidden}Debugging a Grails Maven Project {hidden}
 
-Maven can be launched in debug mode using the "mvnDebug" command. To launch your Grails application in debug, simply run:
+{hidden}Maven can be launched in debug mode using the "mvnDebug" command. To launch your Grails application in debug, simply run:{hidden}
+Mavenは "mvnDebug" コマンドを使用して、デバッグモードで起動することができます。デバッグでGrailsアプリケーションを起動するには、単純に以下のコマンドを実行します:
 
 {code}
 mvnDebug grails:run-app
 {code}
 
-The process will be suspended on startup and listening for a debugger on port 8000.
+{hidden}The process will be suspended on startup and listening for a debugger on port 8000.{hidden}
+プロセスは起動時に停止して、デバッガをポート8000上で待ち受けます。
 
-If you need more control of the debugger, this can be specified using the MAVEN_OPTS environment variable, and launch Maven with the default "mvn" command:
+{hidden}If you need more control of the debugger, this can be specified using the MAVEN_OPTS environment variable, and launch Maven with the default "mvn" command:{hidden}
+デバッガのより詳細に制御する必要がある場合は、環境変数のMAVEN_OPTSを指定して標準の "mvn" コマンドを使用してMavenを起動させます。
 
 {code}
 MAVEN_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
 mvn grails:run-app
 {code}
 
-h4. Raising issues
+h4. 問題提起 {hidden}Raising issues {hidden}
 
-If you come across any problems with the Maven integration, please raise a JIRA issue as a sub-task of [GRAILS-3547|http://jira.codehaus.org/browse/GRAILS-3547].
+{hidden}If you come across any problems with the Maven integration, please raise a JIRA issue as a sub-task of [GRAILS-3547|http://jira.codehaus.org/browse/GRAILS-3547].{hidden}
+Maven統合を使っている際になにか問題に直面した場合、[GRAILS-3547|http://jira.codehaus.org/browse/GRAILS-3547]のJIRAにサブタスクとして問題を提起して下さい。

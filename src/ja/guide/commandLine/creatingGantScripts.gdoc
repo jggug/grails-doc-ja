@@ -1,10 +1,12 @@
-You can create your own Gant scripts by running the [create-script|commandLine] command from the root of your project. For example the following command:
+{hidden}You can create your own Gant scripts by running the [create-script|commandLine] command from the root of your project. For example the following command:{hidden}
+プロジェクトのルートディレクトリで[create-script|commandLine]コマンドを実行することにより、自分でGantスクリプトを作成することができます。例えば以下のようなコマンドです:
 
 {code}
 grails create-script compile-sources
 {code}
 
-Will create a script called @scripts/CompileSources.groovy@. A Gant script itself is similar to a regular Groovy script except that it supports the concept of "targets" and dependencies between them:
+{hidden}Will create a script called @scripts/CompileSources.groovy@. A Gant script itself is similar to a regular Groovy script except that it supports the concept of "targets" and dependencies between them:{hidden}
+このコマンドにより@scripts/CompileSources.groovy@というスクリプトが作成されます。Gantスクリプト自身は通常のGroovyスクリプトと似ていますが、ターゲットという概念とそれぞれのターゲットの依存関係をサポートしています。
 
 {code:title=scripts/CompileSources.groovy}
 target(default:"The default target is the one that gets executed by Grails") {
@@ -21,16 +23,22 @@ target(compile:"Compile some sources") {
 }
 {code}
 
+{hidden}
 As demonstrated in the script above, there is an implicit @ant@ variable (an instance of @groovy.util.AntBuilder@) that allows access to the [Apache Ant API|http://ant.apache.org/manual/index.html].
+{hidden}
+上記で示したスクリプトのように、暗黙的な変数のantは[Apache Ant API|http://ant.apache.org/manual/index.html]を使うことができます。
 {note}
-In previous versions of Grails (1.0.3 and below), the variable was @Ant@, i.e. with a capital first letter.
+{hidden}In previous versions of Grails (1.0.3 and below), the variable was @Ant@, i.e. with a capital first letter.{hidden}
+前バージョンのGrails(1.0.3以前)では、変数名はAntのように大文字始まりでした。
 {note}
 
-You can also "depend" on other targets using the @depends@ method demonstrated in the @default@ target above.
+{hidden}You can also "depend" on other targets using the @depends@ method demonstrated in the @default@ target above.{hidden}
+また、上記のdefaultターゲットで示したように、@depends@メソッドを使って他のターゲットに 依存させることができます。
 
-h3. The default target
+h3. デフォルトターゲット {hidden}The default target {hidden}
 
-In the example above, we specified a target with the explicit name "default". This is one way of defining the default target for a script. An alternative approach is to use the @setDefaultTarget()@ method:
+{hidden}In the example above, we specified a target with the explicit name "default". This is one way of defining the default target for a script. An alternative approach is to use the @setDefaultTarget()@ method:{hidden}
+上記の例では"default"と明示的にターゲットを指定しました。これは、スクリプトでデフォルトターゲットを定義する方法の一つです。（最新のバージョンでは使用できません）代わりに@setDefaultTarget()@メソッドを使用することもできます。
 
 {code:title=scripts/CompileSources.groovy}
 target("clean-compile": "Performs a clean compilation on the app source") {
@@ -49,6 +57,8 @@ target(compile:"Compile some sources") {
 setDefaultTarget("clean-compile")
 {code}
 
-This lets you call the default target directly from other scripts if you wish. Also, although we have put the call to @setDefaultTarget()@ at the end of the script in this example, it can go anywhere as long as it comes _after_ the target it refers to ("clean-compile" in this case).
+{hidden}This lets you call the default target directly from other scripts if you wish. Also, although we have put the call to @setDefaultTarget()@ at the end of the script in this example, it can go anywhere as long as it comes _after_ the target it refers to ("clean-compile" in this case).{hidden}
+こうすることで、他のスクリプトのターゲットを直接デフォルトターゲットに指定できます。@setDefaultTarget()@は、対象のターゲット(今回の場合は "clean-compile")の後であればどこにでも書くことができます。
 
-Which approach is better? To be honest, you can use whichever you prefer - there don't seem to be any major advantages in either case. One thing we would say is that if you want to allow other scripts to call your "default" target, you should move it into a shared script that doesn't have a default target at all. We'll talk some more about this in the next section.
+{hidden}Which approach is better? To be honest, you can use whichever you prefer - there don't seem to be any major advantages in either case. One thing we would say is that if you want to allow other scripts to call your "default" target, you should move it into a shared script that doesn't have a default target at all. We'll talk some more about this in the next section.{hidden}
+どちらのアプローチが良いのでしょうか？正直なところ、あなたは好みで使い分けて使用することができます。どちらの場合も、王道の利点があるわけではありません。一つ言えることは、他のスクリプトからデフォルトターゲットを呼び出せるようにしたい場合は、デフォルトターゲットを持っていない共有スクリプトにそれを移動する必要があるということです。これについては次のセクションでも詳しく説明します。
