@@ -1,5 +1,7 @@
-Grails 2.0 features an interactive mode which makes command execution faster since the JVM doesn't have to be restarted for each command. To use interactive mode simple type 'grails' from the root of any projects and use TAB completion to get a list of available commands. See the screenshot below for an example:
+{hidden}Grails 2.0 features an interactive mode which makes command execution faster since the JVM doesn't have to be restarted for each command. To use interactive mode simple type 'grails' from the root of any projects and use TAB completion to get a list of available commands. See the screenshot below for an example:{hidden}
+Grails 2.0では、コマンドの起動を速くするために、コマンド毎にJVMに再起動が必要無いインタラクティブモードを提供しています。インタラクティブモードを使用するには、プロジェクトルートで単に'grails'と入力するだけです。使用可能なコマンドをタブ補完することもできます。例としてスクリーンショットを参照してください:
 
 !interactive-output.png!
 
-For more information on the capabilities of interactive mode refer to the section on [Interactive Mode|guide:interactiveMode] in the user guide.
+{hidden}For more information on the capabilities of interactive mode refer to the section on [Interactive Mode|guide:interactiveMode] in the user guide.{hidden}
+さらなるインタラクティブモードの能力と情報に関しては、ユーザガイドの[インタラクティブモード|guide:interactiveMode]セクションを参照してください。
