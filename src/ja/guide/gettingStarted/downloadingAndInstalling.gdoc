@@ -1,4 +1,15 @@
+{hidden}The first step to getting up and running with Grails is to install the distribution. To do so follow these steps:{hidden}
 まず最初にGrailsをインストールすることから始めましょう。手順は次のようになります:
+
+{hidden}
+* "Download":http://grails.org/Download a binary distribution of Grails and extract the resulting zip file to a location of your choice
+* Set the GRAILS_HOME environment variable to the location where you extracted the zip
+** On Unix/Linux based systems this is typically a matter of adding something like the following @export GRAILS_HOME=/path/to/grails@ to your profile
+** On Windows this is typically a matter of setting an environment variable under @My Computer/Advanced/Environment Variables@
+* Then add the @bin@ directory to your @PATH@ variable:
+** On Unix/Linux based systems this can be done by adding @export PATH="$PATH:$GRAILS_HOME/bin"@ to your profile
+** On Windows this is done by modifying the @Path@ environment variable under @My Computer/Advanced/Environment Variables@
+{hidden}
 
 * Grailsを[ダウンロード|http://grails.org/Download]し、任意の場所にzipファイルを解凍します。
 * zipファイルを解凍した場所にGRAILS_HOME環境変数を設定します。
@@ -8,7 +19,8 @@
 ** Unix/Linuxベースのシステムでは、このように設定します。@export PATH="$PATH:$GRAILS_HOME/bin"@
 ** Windowsでは、マイコンピュータ＞詳細＞環境変数の@Path@に%GRAILS_HOME%\binを追加します。
 
-ターミナルで@grails@と入力し実行することで下記のような出力がされれば、Grailsが正常に動作しています。
+{hidden}If Grails is working correctly you should now be able to type @grails -version@ in the terminal window and see output similar to this:{hidden}
+ターミナルで@grails@と入力し実行することで下記のような出力がされれば、Grailsが正常に動作しています:
 
 bc.
 Grails version: 2.0.0

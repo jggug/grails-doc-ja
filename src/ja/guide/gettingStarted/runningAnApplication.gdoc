@@ -1,13 +1,16 @@
+{hidden}Grails applications can be run with the built in Tomcat server using the [run-app|commandLine] command which will load a server on port 8080 by default:{hidden}
 Grailsアプリケーションは、[run-app|commandLine]コマンドを使用することで組み込みTomcatで実行することができます。デフォルトポートは8080番です。
 
 {code}
 grails run-app
 {code}
 
+{hidden}You can specify a different port by using the @server.port@ argument:{hidden}
 起動オプションに@server.port@を指定して別のポートで起動することもできます。
 
 {code}
 grails -Dserver.port=8090 run-app
 {code}
 
+{hidden}More information on the [run-app|commandLine] command can be found in the reference guide.{hidden}
 [run-app|commandLine]コマンドの詳細は、リファレンスガイドを参照してください。

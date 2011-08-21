@@ -1,14 +1,18 @@
+{hidden}To implement the typical "hello world!" example run the [create-controller|commandLine] command:{hidden}
 単純な"Hello World！"を実装してみましょう。最初に[create-controller|commandLine]コマンドを実行します。
 
 bc.
 grails create-controller hello  
 
+{hidden}This will create a new controller (Refer to the section on [Controllers|guide:controllers] for more information) in the @grails-app/controllers@ directory called @helloworld/HelloController.groovy@.{hidden}
 このコマンドによって、@grails-app/controllers@ディレクトリ内に、@HelloController.groovy@という新しいコントローラ（詳細については[コントローラ|guide:controllers]のセクションを参照してください）が生成されます。
 
 {note}
+{hidden}If no package is specified with create-controller script, Grails automatically uses the application name as the package name. This default is configurable with the @grails.project.groupId@ attribute in Config.groovy.{hidden}
 create-controllerスクリプトでパッケージが指定されなかった場合はGrailsが自動的にアプリケーション名をパッケージ名として使用します。デフォルト値はCongig.groovyに@grails.project.groupId@を指定することで変更可能です。
 {note}
 
+{hidden}Controllers are capable of dealing with web requests and to fulfil the "hello world!" use case our implementation needs to look like the following:{hidden}
 コントローラは、Webリクエストを処理します。"hello world!"を表示するには、次のように記述します。
 
 {code:java}
@@ -22,16 +26,20 @@ class HelloController {
 }
 {code}
 
+{hidden}Job done. Now start-up the container with another new command called [run-app|commandLine]:{hidden}
 作業は以上です。次に[run-app|commandLine]コマンドで、このアプリケーションを起動させましょう:
 
 bc.
 grails run-app
 
+{hidden}This will start-up a server on port 8080 and you should now be able to access your application with the URL: @http://localhost:8080/helloworld@ {hidden}
 これで8080番ポートでサーバを起動します。@http://localhost:8080/helloworld@をブラウザで見てみましょう。
 
+{hidden}The result will look something like the following screenshot:{hidden}
 結果は次のスクリーンショットのようになります:
 
 !intropage.png!
 
+{hidden}This is the Grails intro page which is rendered by the @web-app/index.gsp@ file. You will note it has a detected the presence of your controller and clicking on the link to our controller we can see the text "Hello World!" printed to the browser window.{hidden}
 これは@grails-app/views/index.gsp@ファイルによってレンダリングされたアプリケーションの初期画面です。画面にはコントローラへのリンクが表示されています。このリンクをクリックすることで、画面に"Hello World！"が表示されます。
 

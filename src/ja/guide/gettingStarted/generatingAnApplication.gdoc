@@ -1,3 +1,4 @@
+{hidden}To get started quickly with Grails it is often useful to use a feature called [Scaffolding|guide:scaffolding] to generate the skeleton of an application. To do this use one of the @generate-*@ commands such as [generate-all|commandLine], which will generate a [controller|guide:controllers] (and its unit test) and the associated [views|guide:gsp]:{hidden}
 Grailsでは、アプリケーションのスケルトンを生成する[スカッフォールディング|guide:scaffolding]の機能を使用することにより、素早く開発することができます。Grailsにはアプリケーションのスケルトンを生成する[スカッフォールディング|guide:scaffolding]という機能があります。これをするには、[コントローラ|guide:controllers]と関連する[ビュー|guide:gsp]を生成する[generate-all|commandLine]などを使用します。
 
 {code}

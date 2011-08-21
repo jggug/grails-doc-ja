@@ -1,11 +1,14 @@
+{hidden}Although the Grails development team have tried to keep breakages to a minimum there are a number of items to consider when upgrading a Grails 1.0.x, 1.1.x, 1.2.x, or 1.3.x applications to Grails 2.0. The major changes are described in detail below.{hidden}
 Grails開発チームではできる限りの下位互換を心がけていますが、Grails 2.0へ更新する際に、下位バージョンから考慮しなくてはならない内容が幾つか存在します。大きな変更点を以下にまとめます。
 
-h3. Grails 1.3.xからのアップグレード
+h3. Grails 1.3.xからのアップグレード {hidden}Upgrading from Grails 1.3.x{hidden}
 
-h4. HSQLDBからH2へ変更
+h4. HSQLDBからH2へ変更 {hidden}HSQLDB Has Been Replaced With H2 {hidden}
 
+{hidden}HSQLDB is still bundled with Grails but is not configured as a default runtime dependency.  Upgrade options include replacing HSQLDB references in DataSource.groovy with H2 references or adding HSQLDB as a runtime dependency for the application.{hidden}
 HSQLDBは現在もGrailsにバンドルされていますが、デフォルトでは依存定義されていません。アップグレードした場合はDataSource.groovyのHSQLDB定義をH2に変更するか、依存管理にHSQLDBを追加する必要があります。
 
+{hidden}If you want to run an application with different versions of Grails, it's simplest to add HSQLDB as a runtime dependency, which you can do in BuildConfig.groovy:{hidden}
 もしアプリケーションを他のバージョンのGrailsと平行して動作させたい場合は、単純にBuildConfig.groovyの依存定義にHSQLDBを追加しましょう:
 
 {code:java}
@@ -25,6 +28,7 @@ grails.project.dependency.resolution = {
 }
 {code}
 
+{hidden}A default DataSource.groovy which is compatible with H2 looks like this:{hidden}
 H2データベースへ変更する場合は、以下を参考にして、DataSource.groovyを変更してください:
 
 {code:java}
@@ -56,6 +60,7 @@ environments {
 }
 {code}
 
+{hidden}Another significant difference between H2 and HSQLDB is in the handling of @byte\[]@ domain class properties. HSQLDB's default BLOB size is large and so you typically don't need to specify a maximum size. But H2 defaults to a maximum size of 255 bytes! If you store images in the database, the saves are likely to fail because of this. The easy fix is to add a @maxSize@ constraint to the @byte\[]@ property:{hidden}
 他にH2とHSQLDBの重大な違いは、ドメインクラスのプロパティで定義した 　@byte\[]@ の扱いです。HSQLDBでのBLOBのデフォルトサイズは、大きいので大抵最大サイズを定義する必要が無かったかと思います。H2では最大サイズの初期値が255バイトになっているので、調整する必要があります。調整するには、 制約の @maxSize@ を　@byte\[]@ のプロパティに定義するだけです。
 
 {code:java}
@@ -68,10 +73,12 @@ class MyDomain {
 }
 {code}
 
+{hidden}This constraint influences schema generation, so in the above example H2 will have the @data@ column set to @BINARY(2097152)@ by Hibernate.{hidden}
 上記の制約定義でスキーマ生成を変更します。この例では、dataカラムは、　@BINARY(2097152)@ としてHibernateがセットします。
 
-h4. 抽象クラスの継承が変更になります
+h4. 抽象クラスの継承が変更になります {hidden}Abstract Inheritance Changes{hidden}
 
+{hidden}In previous versions of Grails abstract classes in @grails-app/domain@ were not treated as persistent. This is no longer the case and has a significant impact on upgrading your application. For example consider the following domain model in a Grails 1.3.x application:{hidden}
 以前のバージョンで、 @grails-app/domain@ に存在する抽象クラスは、永続化対象として扱われませんでした。今後は違うため、アプリケーション更新には重大な影響を与えます。例として以下のようなドメインモデルをGrails-1.3.xで持っていたとします。
 
 {code:java}
@@ -83,20 +90,36 @@ class Book extends Sellable {
 }
 {code}
 
+{hidden}In Grails 1.3.x you would get a BOOK table and the properties from the @Sellable@ class would be stored within the @BOOK@ table. However, in Grails 1.4.x you will get  @SELLABLE@ table and the default table-per-hierarchy inheritance rules apply with all properties of the @Book@ stored in the @SELLABLE@ table.{hidden}
 Grails 1.3.xの場合は、 @BOOK@ テーブルが生成され、BOOKテーブルに @Sellable@ クラスのプロパティも含まれました。Grails 2.0からは、デフォルトのtable-per-hierarchy (クラス階層ごとのテーブル)継承ルールで、 @BOOK@ クラスの全てのプロパティが含まれた @SELLABLE@ テーブルが生成されます。
 
+{hidden}You have two options when upgrading in this scenario:{hidden}
 これを更新するには２つの方法があります:
 
+{hidden}
+# Move the abstract @Sellable@ class into the src/groovy package. If the @Sellable@ class is in the @src/groovy@ directory it will no longer be regarded a persistent
+# Use the "database migration":http://grails.org/plugin/database-migration plugin to apply the appropriate changes to the database (typically renaming the table to the root abstract class of the inheritance tree)
+{hidden}
 # 抽象クラス @Sellable@ をsrc/groovyに移動する。src/groovyに移動すれば永続化対象のクラスとしては認識しません。
 # "データベースマイグレーションプラグイン":http://grails.org/plugin/database-migration を使用して、データベースに適した変更を行う。(通常はルート抽象クラスのテーブル名称に変更すれば良いです。)
 
-h4. クライテリアクエリのデフォルトがINNER JOINになります
+h4. クライテリアクエリのデフォルトがINNER JOINになります {hidden}Criteria Queries Default to INNER JOIN{hidden}
 
+{hidden}The previous default of LEFT JOIN for criteria queries across associations is now INNER JOIN.{hidden}
 今まではLEFT JOINがデフォルトでした。これからはINNER JOINになります。
 
-h4. ログでの慣習変更
+h4. ログでの慣習変更 {hidden}Logging By Convention Changes{hidden}
 
+{hidden}The packages that you should use for Grails artifacts have mostly changed. In particular:{hidden}
 Grailsアーテファクトのパッケージのほぼ全てが変更になりました:
+
+{hidden}
+* @service@ -> @services@
+* @controller@ -> @controllers@
+* @tagLib@ -> @taglib@ (case change)
+* @bootstrap@ -> @conf@
+* @dataSource@ -> @conf@
+{hidden}
 
 * @service@ -> @services@
 * @controller@ -> @controllers@
@@ -104,23 +127,29 @@ Grailsアーテファクトのパッケージのほぼ全てが変更になり�
 * @bootstrap@ -> @conf@
 * @dataSource@ -> @conf@
 
+{hidden}You can find out more about logging by convention in the [main part|guide:logging] of the user guide, under "Configuring loggers". This change is a side-effect of injecting the @log@ property into artefacts at compile time.{hidden}
 ログの詳細については、 [ユーザガイド|guide:logging] を参考にしてください。 
 
-h4. PrototypeからjQueryに変更
+h4. PrototypeからjQueryに変更 {hidden}jQuery Replaces Prototype{hidden}
 
+{hidden}The Protoype Javascript library has been removed from Grails core and now new Grails applications have the jQuery plugin configured by default. This will only impact you if you are using Prototype with the adaptive AJAX tags in your application, e.g. <g:remoteLink/> etc, because those tags will break as soon as you upgrade.{hidden}
 JavascriptライブラリPrototypeはGrailsのコアから削除されました。今後はjQueryがデフォルトとして定義されます。この変更では、ProtoypeベースのAJAXライブラリを使用してる場合に影響を受けます。例えば<g:remoteLink/>などは、アップデートをしたら直ちに影響を受けます。
+
+{hidden}To resolve this issue, simply install the [Prototype plugin|http://grails.org/plugin/prototype] in your application. You can also remove the prototype files from your @web-app/js/prototype@ directory if you want.{hidden}
 この問題は [Prototypeプラグイン|http://grails.org/plugin/prototype] をインストールすることで解決できます。Prototypeはプラグイン内から参照するようになるので、不用になるweb-app/js/prototypeディレクトリは削除できます。
 
-h4. Access Control and Resources
+h4. リソースとアクセスコントロール {hidden}Access Control and Resources {hidden}
 
 The Resources plugin is a great new feature of Grails, but you do need to be aware that it adds an extra URL at @/static@. If you have access control in your application, this may mean that the static resources require an authenticated user to load them! Make sure your access rules take account of the @/static@ URL.
 
-h4. コントローラのパブリックメソッド
+h4. コントローラのパブリックメソッド {hidden}Controller Public Methods {hidden}
 
+{hidden}As of Grails 2.0, public methods of controllers are now treated as actions in addition to actions defined as traditional Closures. If you were relying on the use of methods for privacy controls or as helper methods then this could result in unexpected behavior. To resolve this issue you should mark all methods of your application that are not to be exposed as actions as @private@ methods.{hidden}
 Grails 2.0からは、今までのクロージャに加えて、コントローラのパブリックメソッドもアクションとして扱われるようになりました。もし補助機能や内部機能としてメソッドを使用している場合は必ずメソッドを @private@ にしてください。
 
-h4. リダイレクトメソッド
+h4. リダイレクトメソッド {hidden}The redirect Method{hidden}
 
+{hidden}The [redirect|controllers] method no longer commits the response. The result of this is code that relies of this behavior will break in 1.4. For example:{hidden}
 リダイレクト [redirect|controllers] メソッドがレスポンスを返さなくなります。以下のコードは1.4では動作しなくなります:
 
 {code:java}
@@ -130,6 +159,7 @@ if (response.committed) {
 }
 {code}
 
+{hidden}In this case in Grails 1.3.x and below the @response.committed@ property would return true and the @if@ block will execute. In Grails 1.4 this is no longer the case and you should instead use the new @isRedirected()@ method of the @request@ object:{hidden}
 このケースが1.3.xの場合では、 @response.committed@ プロパティがtrueを返すため @if@ ブロックが実行されます。Grails 1.4では、同等の動きをしないため、代わりに @request@ インスタンスの @isRedirected()@ メソッドを使用します。
 
 {code:java}
@@ -139,10 +169,12 @@ if (request.redirected) {
 }
 {code}
 
+{hidden}Another side-effect of the changes to the redirect method is that it now always uses the @grails.serverURL@ configuration option if it's set. Previous versions of Grails included default values for all the environments, but when upgrading to Grails 2.0 those values more often than not break redirection. So, we recommend you remove the development and test settings for @grails.serverURL@ or replace them with something appropriate for your application.{hidden}
 他のリダイレクトメソッドへの変更による副作用は、 @grails.serverURL@ が設定されていれば常に使用するという点です。以前のバージョンのGrailsではデフォルトの値を保持していました、Grails 2.0に更新するとそれらを参照するために問題が発生します。したがって、test、developmentの定義から @grails.serverURL@ を外すか、妥当な値に設定することを推奨します。
 
-h4. コンテントネゴシエーション
+h4. コンテントネゴシエーション {hidden}Content Negotiation{hidden}
 
+{hidden}As of Grails 2.0 the [withFormat|controllers] method of controllers no longer takes into account the request content type (dictated by the @CONTENT_TYPE@ header), but instead deals exclusively with the response content type (dictated by the @ACCEPT@ header or file extension). This means that if your application has code that relies on reading XML from the request using @withFormat@ this will no longer work:{hidden}
 Grails 2.0からコントローラのwithFormatメソッドは、リクエストのコンテントタイプ(@CONTENT_TYPE@ヘッダ)を評価しなくなりました。これにかわって、レスポンスのコンテントタイプ(@ACCEPT@ヘッダまたはファイル拡張子)が排他的に処理を行います。これによって今までのアプリケーションの@withFormat@を使用してリクエストからXMLを読み込む等のコードは動作しなくなります。
 
 {code:java}
@@ -158,6 +190,7 @@ def processBook() {
 }
 {code}
 
+{hidden}Instead you use the @withFormat@ method provided on the @request@ object:{hidden}
 @withFormat@ の代わりに、 @request@ オブジェクトで提供されているwithFormatメソッドを使用できます:
 
 {code:java}
@@ -173,10 +206,12 @@ def processBook() {
 }
 {code}
 
-h4. コマンドライン出力
+h4. コマンドライン出力 {hidden}Command Line Output{hidden}
 
+{hidden}Ant output is now hidden by default to keep the noise in the terminal to a minimum. That means if you use @ant.echo@ in your scripts to communicate messages to the user, we recommend switching to an alternative mechanism.{hidden}
 ターミナルの表示を最小にするためにAnt出力は表示されなくなりました。これによりスクリプトでの出力としての @ant.echo@ からのメッセージは表示されなくなります。それに変わる方法に変更することをお勧めします。
 
+{hidden}For status related messages, you can use the event system:{hidden}
 ステータス表示には、イベントの仕組みが使用できます:
 
 {code:java}
@@ -185,61 +220,75 @@ event "StatusFinal",  ["Some message"]
 event "StatusError",  ["Some message"]
 {code}
 
+{hidden}For more control you can use the @grailsConsole@ script variable, which gives you access to an instance of [GrailsConsole|api:grails.build.logging.GrailsConsole]. In particular, you can log information messages with @log()@ or @info()@, errors and warnings with @error()@ and @warning()@, and request user input with @userInput()@.{hidden}
 さらなる制御として、api:grails.build.logging.GrailsConsoleインスタンスにアクセスするスクリプト変数  GrailsConsole|api:grails.build.logging.GrailsConsole] を使用することもできます。特に情報のログをとるための、 @log()@ 、 @info()@ 、エラーや警告用に @error()@ 、 @warning()@ を使用したり、ユーザからの入力を要求する場合は @userInput()@ を使用できます。
 
-h4. 基盤となるAPIの更新
+h4. 基盤となるAPIの更新 {hidden}Updated Underlying APIs{hidden}
 
+{hidden}Grails 2.0 contains updated dependencies including Servlet 3.0, Tomcat 7, Spring 3.1, Hibernate 3.6 and Groovy 1.8. This means that certain plugins and applications that that depend on earlier versions of these APIs may no longer work. For example the Servlet 3.0 @HttpServletRequest@ interface includes new methods, so if a plugin implements this interface for Servlet 2.5 but not for Servlet 3.0 then said plugin will break. The same can be said of any Spring interface.{hidden}
 Grails 2.0では、Servlet 3.0、Tomcat 7、Spring 3.1、Hibernate 3.6、Groovy 1.8などのライブラリを更新しました。以前のバージョンのプラグインなどでこれらのライブラリに依存がある場合動作しなくなります。例としてServlet 3.0の @HttpServletRequest@ インターフェイスは新しい物を多く含んでいます。この逆もあり得るので、Servlet 2.5のインターフェイスで実装され、Servlet 3.0に存在しない機能を持っているプラグインは動作しません。もちろんこの事はSpringなど他のライブラリにも同じ事が言えます。注意しましょう。
 
-h4. release-pluginコマンド除去 
+h4. release-pluginコマンド除去 {hidden}Removal of release-plugin{hidden}
 
+{hidden}
+The built in @release-plugin@ command for releases plugins to the central Grails plugin repository has been removed. The new "release":http://grails.org/plugin/release plugin should be used instead which provides an equivalent @publish-plugin@ command.
+{hidden}
 プラグインを公式リポジトリに発行するコマンド @release-plugin@ が除去されました。新たに "リリースプラグイン":http://grails.org/plugin/release を使用して同じ意味を持つ  @publish-plugin@ コマンドを使用してください。
 
-h4. 非推奨クラスの除去
+h4. 非推奨クラスの除去 {hidden}Removal of Deprecated Classes{hidden}
 
+{hidden}The following deprecated classes have been removed: @grails.web.JsonBuilder@, @grails.web.OpenRicoBuilder@{hidden}
 次のクラスが除去されました。 @grails.web.JsonBuilder@ , @grails.web.OpenRicoBuilder@
 
-h3. Grails 1.2.x からのアップグレード
+h3. Grails 1.2.x からのアップグレード {hidden}Upgrading from Grails 1.2.x{hidden}
 
-h4. プラグイン・リポジトリ
+h4. プラグイン・リポジトリ {hidden}Plugin Repositories{hidden}
 
+{hidden}As of Grails 1.3, Grails no longer natively supports resolving plugins against secured SVN repositories. The plugin resolution mechanism in Grails 1.2 and below has been replaced by one built on [Ivy|http://ant.apache.org/ivy/], the upside of which is that you can now resolve Grails plugins against Maven repositories as well as regular Grails repositories.{hidden}
 Grails 1.3では、認証付きSVNリポジトリ内のプラグイン解決に標準では対応しなくなりました。Grails 1.2以前のプラグイン解決の仕組みは、[Ivy|http://ant.apache.org/ivy/]をベースに構築された実装により、Grailsのライブラリと同等にMavenリポジトリを対象に、プラグイン解決の仕組みに変更されました。
 
+{hidden}Ivy supports a much richer setter of repository resolvers for resolving plugins, including support for Webdav, HTTP, SSH and FTP. See the section on [resolvers|http://ant.apache.org/ivy/history/trunk/settings/resolvers.html] in the Ivy docs for all the available options and the section of [plugin repositories|guide:repositories] in the user guide which explains how to configure additional resolvers.{hidden}
 Ivyでは、WebDAV, HTTP, SSHやFTPなど豊富なリポジトリ解決方法があります。利用可能なオプションについてはIvyのドキュメントの[リゾルバのセクション|http://ant.apache.org/ivy/history/trunk/settings/resolvers.html]を、追加のリゾルバの設定方法については、このユーザーガイドのプラグイン・リポジトリのセクションを参照してください。
 
+{hidden}If you still need support for resolving plugins against secured SVN repositories then the [IvySvn|http://code.google.com/p/ivysvn/] project provides a set of resolvers for SVN repositories.{hidden}
 認証付きSVNリポジトリ内に対してのプラグイン解決が必要な場合は、SVNリポジトリに対してのIvyリゾルバを提供している[IvySvn|http://code.google.com/p/ivysvn/]プロジェクトを参考にしてください。
 
-h3. Grails 1.1.x からのアップグレード
+h3. Grails 1.1.x からのアップグレード {hidden}Upgrading from Grails 1.1.x{hidden}
 
 {warning}
 翻訳チームの判断により、Grails 1.1.xからの更新は翻訳を行いません。ご了承ください。
 {warning}
 
-h4. プラグインのパス
+h4. プラグインのパス {hidden}Plugin paths{hidden}
 
+{hidden}In Grails 1.1.x typically a @pluginContextPath@ variable was used to establish paths to plugin resources. For example:{hidden}
 Grails 1.1.xではプラグイン内のリソースを参照するために変数@pluginContextPath@が、以下のように使用されていました:
 
 {code}
 <g:resource dir="${pluginContextPath}/images" file="foo.jpg" />
 {code}
 
+{hidden}In Grails 1.2 views have been made plugin aware and this is no longer necessary:{hidden}
 Grails 1.2からはプラグイン認識されるため、この変数は不要になりました:
 
 {code}
 <g:resource dir="images" file="foo.jpg" />
 {code}
 
+{hidden}Additionally the above example will no longer link to an application image from a plugin view. To do so change the above to:{hidden}
 この変更により、上記の例ではプラグイン内のビューからアプリケーション本体の/imagesなどへのパスを生成しません。従って、アプリケーション本体へのパスを生成するためには、次のようにする必要があります:
 
 {code}
 <g:resource contextPath="" dir="images" file="foo.jpg" />
 {code}
 
+{hidden}The same rules apply to the [javascript|tags] and [render|tags] tags.{hidden}
 [javascript|tags]タグや[render|tags]タグも同様の記述ができます。
 
-h4. タグとボディの戻り値
+h4. タグとボディの戻り値 {hidden}Tag and Body return values{hidden}
 
-Tags no longer return @java.lang.String@ instances but instead return a Grails @StreamCharBuffer@ instance. The @StreamCharBuffer@ class implements all the same methods as @String@ but doesn't extend @String@, so code like this will break:
+{hidden}Tags no longer return @java.lang.String@ instances but instead return a Grails @StreamCharBuffer@ instance. The @StreamCharBuffer@ class implements all the same methods as @String@ but doesn't extend @String@, so code like this will break:{hidden}
+タグは@java.lang.String@インスタンスを返さず、そ代わりに@StreamCharBuffer@インスタンスを返します。@StreamCharBuffer@クラスは、@String@と同じメソッドを実装していますが、このようなコードの場合は破綻します:
 
 {code}
 def foo = body()
@@ -248,7 +297,8 @@ if (foo instanceof String) {
 }
 {code}
 
-In these cases you should check for the @java.lang.CharSequence@ interface, which both @String@ and @StreamCharBuffer@ implement:
+{hidden}In these cases you should check for the @java.lang.CharSequence@ interface, which both @String@ and @StreamCharBuffer@ implement:{hidden}
+この場合、@String@と@StreamCharBuffer@の両方が実装している@java.lang.CharSequence@インタフェースを使用します:
 
 {code}
 def foo = body()
@@ -257,7 +307,7 @@ if (foo instanceof CharSequence) {
 }
 {code}
 
-h4. 新しいJSONBuilder
+h4. 新しいJSONBuilder {hidden}New JSONBuilder{hidden}
 
 There is a new version of @JSONBuilder@ which is semantically different from the one used in earlier versions of Grails. However, if your application depends on the older semantics you can still use the deprecated implementation by setting the following property to @true@ in Config.groovy:
 
@@ -265,7 +315,7 @@ There is a new version of @JSONBuilder@ which is semantically different from the
 grails.json.legacy.builder=true
 {code}
 
-h4. フラッシュでの検証
+h4. フラッシュでのバリデーション {hidden}Validation on Flush{hidden}
 
 Grails now executes validation routines when the underlying Hibernate session is flushed to ensure that no invalid objects are persisted. If one of your constraints (such as a custom validator) executes a query then this can cause an additional flush, resulting in a @StackOverflowError@. For example:
 
@@ -289,7 +339,7 @@ static constraints = {
 }
 {code}
 
-h3. Grails 1.0.xからのアップグレード
+h3. Grails 1.0.xからのアップグレード {hidden}Upgrading from Grails 1.0.x{hidden}
 
 {warning}
 翻訳チームの判断により、Grails 1.0.xからの更新は翻訳を行いません。ご了承ください。

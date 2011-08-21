@@ -1,3 +1,4 @@
+{hidden}Grails runs on any container that supports Servlet 2.5 and above and is known to work on the following specific container products:{hidden}
 GrailsはServlet 2.5をサポートする任意のWebコンテナで動作します。次の製品で動作することが確認されています。
 
 * Tomcat 7
@@ -18,4 +19,5 @@ GrailsはServlet 2.5をサポートする任意のWebコンテナで動作しま
 * Oracle Weblogic 10
 * Oracle Weblogic 9
 
+{hidden}Some containers have bugs however, which in most cases can be worked around. A [list of known deployment issues|http://grails.org/Deployment] can be found on the Grails wiki.{hidden}
 一部のWebコンテナにはバグがありますが、ほとんどの場合では回避することができます。[既知の開発時における課題の一覧|http://grails.org/Deployment]は、GrailsのWikiにあります。

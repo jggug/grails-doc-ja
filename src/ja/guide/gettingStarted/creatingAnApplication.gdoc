@@ -1,14 +1,17 @@
+{hidden}To create a Grails application you first need to familiarize yourself with the usage of the @grails@ command which is used in the following manner:{hidden}
 Grailsアプリケーションを作成する前に、基本的な@grails@コマンドの使用法に慣れておきましょう。
 
 {code}
 grails [コマンド名]
 {code}
 
+{hidden}Run [create-app|commandLine] to create an application:{hidden}
 アプリケーションを作成するコマンドは[create-app|commandLine]です。
 
 bc.
 grails create-app helloworld
 
+{hidden}This will create a new directory inside the current one that contains the project. Navigate to this directory in your console:{hidden}
 このコマンドを実行することにより、現在のディレクトリ内にプロジェクトが含まれる新しいディレクトリが作成されます。コンソールで、このディレクトリに移動してください。
 
 bc.

@@ -1,13 +1,17 @@
+{hidden}Grails ships with a few convenience targets such as [create-controller|commandLine], [create-domain-class|commandLine] and so on that will create [Controllers|guide:controllers] and different artefact types for you.{hidden}
 Grailsには[コントローラ|guide:controllers]や様々なアーテファクトを生成する[create-controller|commandLine]や[create-domain-class|commandLine]などのコマンドが存在します。
 {note}
+{hidden}These are just for your convenience and you can just as easily use an IDE or your favourite text editor.{hidden}
 アーテファクト生成は便利機能です。IDEやテキストエディタを使用してもかまいません。
 {note}
+{hidden}For example to create the basis of an application you typically need a [domain model|guide:GORM]:{hidden}
 例として[ドメインモデル|guide:GORM]を生成するには:
 
 {code}
 grails create-domain-class book
 {code}
 
+{hidden}This will result in the creation of a domain class at @grails-app/domain/Book.groovy@ such as:{hidden}
 このコマンドを実行すると、@grails-app/domain/Book.groovy@に以下のようなドメインクラスが作成されます:
 
 {code}
@@ -15,8 +19,10 @@ class Book {
 }
 {code}
 
+{hidden}There are many such @create-*@ commands that can be explored in the command line reference guide.{hidden}
 他にも@create-*@コマンドがあります。詳しくはコマンドライン・リファレンス・ガイドを参照しましょう。
 
 {note}
-To decrease the amount of time it takes to run Grails scripts, use the [interactive|commandLine] mode.
+{hidden}To decrease the amount of time it takes to run Grails scripts, use the [interactive|commandLine] mode.{hidden}
+[interactive|commandLine]モードを使用することでGrailsスクリプトの起動時間を減らすことができます。
 {note}

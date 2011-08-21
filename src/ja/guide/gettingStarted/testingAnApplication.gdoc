@@ -1,5 +1,7 @@
+{hidden}The @create-*@ commands in Grails automatically create unit or integration tests for you within the @test/unit@ or @test/integration@ directory. It is of course up to you to populate these tests with valid test logic, information on which can be found in the section on [Testing|guide:testing].{hidden}
 Grailsの@create-*@コマンドは、自動的にUnitテストまたは統合テストをそれぞれ@test/unit@また@test/integration@ディレクトリに生成します。スケルトンのテストのロジックは各自で実装してください。テストの詳細については[Testing|guide:testing]を参考にしてください。
 
+{hidden}To execute tests you run the [test-app|commandLine] command as follows:{hidden}
 テストを実行する場合は、[test-app|commandLine]コマンドを使用します:
 
 {code}

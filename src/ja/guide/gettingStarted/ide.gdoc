@@ -1,32 +1,39 @@
 h4. IntelliJ IDEA
 
+{hidden}[IntelliJ IDEA|http://www.jetbrains.com/idea] and the [JetGroovy|http://www.jetbrains.net/confluence/display/GRVY/Groovy+Home] plugin offer good support for Groovy and Grails developers. Refer to the section on [Groovy and Grails|http://www.jetbrains.com/idea/features/groovy_grails.html] support on the JetBrains website for a feature overview.{hidden}
 [IntelliJ IDEA|http://www.jetbrains.com/idea]と[JetGroovy|http://www.jetbrains.net/confluence/display/GRVY/Groovy+Home]プラグインは、Groovy＆Grailsの開発者に十分な機能を提供します。機能概要については、JetBrainsのウェブサイトの[Groovy and Grails|http://www.jetbrains.com/idea/features/groovy_grails.html]を参照してください。
 
+{hidden}To integrate Grails with IntelliJ run the following command to generate appropriate project files:{hidden}
 Grails 1.2でIntelliJの設定をするには、次のコマンドを実行してIntelliJ用のプロジェクトファイルを生成します。
 
 {code}
 grails integrate-with --intellij
 {code}
 
-h4. NetBeans 
-
-他にも良好なオープンソースのIDEとしてSunのNetBeansがあります。NetBeansはGroovy/Grailsプラグインで自動的にGrailsプロジェクトを認識します。また、IDEでのGrailsアプリケーションの実行、コード補完、SunのGlassfishサーバとの連携などの機能も提供しています。機能概要については、NetBeansチームによって記述されたGrails公式サイト上の[NetBeans Integration|http://www.grails.org/NetBeans+Integration]ガイドを参照してください。
-
 h4. Eclipse
 
+{hidden}We recommend that users of "Eclipse":http://www.eclipse.org/ looking to develop Grails application take a look at [SpringSource Tool Suite|http://www.springsource.com/products/sts], which offers built in support for Grails including automatic classpath management, a GSP editor and quick access to Grails commands. See the [STS Integration|http://www.grails.org/STS+Integration] page for an overview.{hidden}
 "Eclipse":http://www.eclipse.org/ ユーザーがGrailsアプリケーションの開発をする際は、[SpringSource Tool Suite|http://www.springsource.com/products/sts]を探して取得することをお勧めします。それは自動クラスパス管理機能、GSPエディタやGrailsコマンドへの迅速なアクセス機能を含んだGrailsのためのサポートが組み込まれて提供されています。概要については、[STS Integration|http://www.grails.org/STS+Integration]のページを参照してください。
+
+h4. NetBeans 
+
+{hidden}NetBeans provides a Groovy/Grails plugin that automatically recognizes Grails projects and provides the ability to run Grails applications in the IDE, code completion and integration with the Glassfish server. For an overview of features see the [NetBeans Integration|http://www.grails.org/NetBeans+Integration] guide on the Grails website which was written by the NetBeans team.{hidden}
+他にも良好なオープンソースのIDEとしてSunのNetBeansがあります。NetBeansはGroovy/Grailsプラグインで自動的にGrailsプロジェクトを認識します。また、IDEでのGrailsアプリケーションの実行、コード補完、SunのGlassfishサーバとの連携などの機能も提供しています。機能概要については、NetBeansチームによって記述されたGrails公式サイト上の[NetBeans Integration|http://www.grails.org/NetBeans+Integration]ガイドを参照してください。
 
 h4. TextMate
 
+{hidden}Since Grails' focus is on simplicity it is often possible to utilize more simple editors and "TextMate":http://macromates.com/ on the Mac has an excellent Groovy/Grails bundle available from the [Texmate bundles SVN|http://wiki.macromates.com/Main/SubversionCheckout].{hidden}
 単純さに焦点があたっているGrailsは、より単純なエディタやを利用することはしばしば可能です。そしてMac上の "TextMate":http://macromates.com/ は[TextmateにバンドルされたSVN|http://wiki.macromates.com/Main/SubversionCheckout]から優秀なGroovy/Grailsバンドルを利用可能です。
 
-Grails 1.2でTextMateの設定をするには、次のコマンドを実行してTextMate用のプロジェクトファイルを生成します。
+{hidden}To integrate Grails with TextMate run the following command to generate appropriate project files:{hidden}
+GrailsでTextMateの設定をするには、次のコマンドを実行してTextMate用のプロジェクトファイルを生成します。
 
 {code}
 grails integrate-with --textmate
 {code}
 
-またTextMateはプロジェクトのルートから次のコマンドを発行することによりコマンドラインと統合し、任意のプロジェクトを簡単に開くことができます。
+{hidden}Alternatively TextMate can easily open any project with its command line integration by issuing the following command from the root of your project:{hidden}
+またTextMateはプロジェクトのルートから次のコマンドを発行することによりコマンドラインと統合し、任意のプロジェクトを簡単に開くことができます:
 
 {code}
 mate .
