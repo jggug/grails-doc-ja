@@ -153,7 +153,7 @@ def p = new Product(params.product)
 {note}
 
 {hidden}The @Product@ object is then saved and rendered as XML, otherwise an error message is produced using Grails' [validation|guide:validation] capabilities in the form:{hidden}
-@Product@オブジェクトが保存され、XMLとしてレンダリングされます。問題が起きた場合は、Grailsの[バリデーション|guide:validation]機能によってエラーメッセージが返信されます。
+@Product@オブジェクトが保存され、XMLとして描写されます。問題が起きた場合は、Grailsの[バリデーション|guide:validation]機能によってエラーメッセージが返信されます。
 
 {code:xml}
 <error>

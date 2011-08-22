@@ -1,5 +1,5 @@
 {hidden}The previous section on on XML and JSON responses covered simplistic examples of rendering XML and JSON responses. Whilst the XML builder used by Grails is the standard "XmlSlurper":http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper found in Groovy, the JSON builder is a custom implementation specific to Grails.{hidden}
-前のセクション「 XMLとJSONレスポンス」で単純なXMLとJSONのをレンダリングしてレスポンスする例を紹介しました。Grailsで使用してるXMLビルダーがGroovyの標準的な "XmlSlurper":http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper に対して、JSONビルダーに関してはGrails特有の実装になっています。
+前のセクション「 XMLとJSONレスポンス」で単純なXMLとJSONのを描写してレスポンスする例を紹介しました。Grailsで使用してるXMLビルダーがGroovyの標準的な "XmlSlurper":http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper に対して、JSONビルダーに関してはGrails特有の実装になっています。
 
 h4. JSONBuilderとGrailsのバージョン {hidden}JSONBuilder and Grails versions {hidden}
 
@@ -13,7 +13,7 @@ JSONBuilderの振る舞いは使用するGrailsのバージョンに依存しま
 grails.json.legacy.builder = false
 {code}
 
-h4. 単純なオブジェクトをレンダリング {hidden}Rendering Simple Objects {hidden}
+h4. 単純なオブジェクトを描写 {hidden}Rendering Simple Objects {hidden}
 
 {hidden}To render a simple JSON object just set properties within the context of the Closure:{hidden}
 単純なJSONオブジェクトを生成するには、クロージャの中にプロパティをセットするだけです:
@@ -31,10 +31,10 @@ render(contentType: "text/json") {
 {"hello":"world"}
 {code}
 
-h4. JSON配列レンダリング {hidden}Rendering JSON Arrays {hidden}
+h4. JSON配列描写 {hidden}Rendering JSON Arrays {hidden}
 
 {hidden}To render a list of objects simple assign a list:{hidden}
-オブジェクトのリストをレンダリングするには、変数に配列を指定するだけです:
+オブジェクトのリストを描写するには、変数に配列を指定するだけです:
 
 {code}
 render(contentType: "text/json") {
@@ -83,10 +83,10 @@ render(contentType: "text/json") {
 [1,2,3]
 {code}
 
-h4. 複雑なオブジェクトのレンダリング {hidden}Rendering Complex Objects {hidden}
+h4. 複雑なオブジェクトの描写 {hidden}Rendering Complex Objects {hidden}
 
 {hidden}Rendering complex objects can be done with Closures. For example:{hidden}
-より複雑なオブジェクトをクロージャでレンダリングできます。例として:
+より複雑なオブジェクトをクロージャで描写できます。例として:
 
 {code}
 render(contentType: "text/json") {

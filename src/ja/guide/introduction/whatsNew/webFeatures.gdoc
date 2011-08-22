@@ -72,7 +72,7 @@ def generateLink() {
 h4. ページレンダリングAPI {hidden}Page Rendering API{hidden}
 
 {hidden}Like the @LinkGenerator@ the new @PageRenderer@ can be used to render GSP pages outside the scope of a web request, such as in a scheduled job or web service. The @PageRenderer@ class features a very similar API to the @render@ method found within controllers:{hidden}
-@LinkGenerator@ と同じく新規に追加されたAPI、 @PageRenderer@ は、Webリクエスト以外の場所で、GSPページがレンダリング可能です。例えば、Webサービス、スケジュールジョブなどで使用します。 @PageRenderer@ サービスはコントローラの @render@ メソッドと同じように使用します。
+@LinkGenerator@ と同じく新規に追加されたAPI、 @PageRenderer@ は、Webリクエスト以外の場所で、GSPページが描写可能です。例えば、Webサービス、スケジュールジョブなどで使用します。 @PageRenderer@ サービスはコントローラの @render@ メソッドと同じように使用します。
 
 {code}
 grails.gsp.PageRenderer groovyPageRenderer

@@ -26,7 +26,7 @@ class BookController {
 通常のコントローラアクションと違い、ビューファイルはフロー名称のディレクトリに配置された物にマッチします:@grails-app/views/book/shoppingCart@
 
 {hidden}The @shoppingCart@ flow also has two possible end states. The first is @displayCatalogue@ which performs an external redirect to another controller and action, thus exiting the flow. The second is @displayInvoice@ which is an end state as it has no events at all and will simply render a view called @grails-app/views/book/shoppingCart/displayInvoice.gsp@ whilst ending the flow at the same time. {hidden}
-この@shoppingCart@フローには、２つの終了ステートがあります。一つ目のステートは、外部のコントローラアクションにリダイレクトしてフローから出る@displayCatalogue@。二つ目のステートは、何もイベント処理が無く単純に、ビューの@grails-app/views/book/shoppingCart/displayInvoice.gsp@をレンダリングして同時にフローを終了する、@displayInvoice@です。
+この@shoppingCart@フローには、２つの終了ステートがあります。一つ目のステートは、外部のコントローラアクションにリダイレクトしてフローから出る@displayCatalogue@。二つ目のステートは、何もイベント処理が無く単純に、ビューの@grails-app/views/book/shoppingCart/displayInvoice.gsp@を描写して同時にフローを終了する、@displayInvoice@です。
 
 {hidden}Once a flow has ended it can only be resumed from the start state, in this case @showCart@, and not from any other state.{hidden}
 フローが終了したら、開始フローのみから再開できます。この例では@showCart@になります。

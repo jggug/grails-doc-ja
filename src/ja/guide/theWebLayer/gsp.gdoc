@@ -3,14 +3,14 @@ Groovy Server Pages(GSPと略す)は、Grailsのビュー技術です。より�
 
 
 {hidden}GSPs live in the @grails-app/views@ directory and are typically rendered automatically (by convention) or with the [render|controllers] method such as:{hidden}
-GSPは、grails-app/viewsディレクトリに配置されていて、通常は自動的(慣習によって)または、以下のように [render|controllers]メソッドで指定されてレンダリングされます。
+GSPは、grails-app/viewsディレクトリに配置されていて、通常は自動的(慣習によって)または、以下のように[render|controllers]メソッドで描写します。
 
 {code:java}
 render(view: "index")
 {code}
 
 {hidden}A GSP is typically a mix of mark-up and GSP tags which aid in view rendering.{hidden}
-GSPはマークアップとビューレンダリングを補助するGSPタグで内容が構成されています。
+GSPはマークアップとビュー描写を補助するGSPタグで内容が構成されています。
 
 {note}
 {hidden}Although it is possible to have Groovy logic embedded in your GSP and doing this will be covered in this document, the practice is strongly discouraged. Mixing mark-up and code is a *bad* thing and most GSP pages contain no code and needn't do so.{hidden}
@@ -18,7 +18,7 @@ GroovyロジックをGSPに埋め込むことも可能ですが推奨しませ�
 {note}
 
 {hidden}A GSP typically has a "model" which is a set of variables that are used for view rendering. The model is passed to the GSP view from a controller. For example consider the following controller action:{hidden}
-GSPは通常ビューレンダリングに使用される変数のセットなどの"モデル"を持っています。モデルはコントローラからGSPビューげ渡されます。例として次のコントローラアクションを見てみましょう。
+GSPは通常ビュー描写に使用される変数のセットなどの"モデル"を持っています。モデルはコントローラからGSPビューげ渡されます。例として次のコントローラアクションを見てみましょう。
 
 {code:java}
 def show() {

@@ -7,8 +7,8 @@
 * @afterView@ - Executed after view rendering.  Takes an Exception as an argument which will be non-@null@ if an exception occurs during processing. Note: this Closure is called before the layout is applied.
 {hidden}
 * @before@ - アクションの前に実行されます。@false@を返す事で、その後に実行されるフィルタとアクションは実行されません。
-* @after@ - アクションの後に実行されます。最初の引数に、ビューレンダリング前に変更可能なビューモデルが渡されます。
-* @afterView@ - ビューレンダリング後に実行されます。実行時に例外が発生した場合は@non-null@なExceptionが引数として渡されます。このクロージャはレイアウトが適用される前に実行されます。
+* @after@ - アクションの後に実行されます。最初の引数に、ビュー描写前に変更可能なビューモデルが渡されます。
+* @afterView@ - ビュー描写後に実行されます。実行時に例外が発生した場合は@non-null@なExceptionが引数として渡されます。このクロージャはレイアウトが適用される前に実行されます。
 
 
 {hidden}For example to fulfill the common simplistic authentication use case you could define a filter as follows:{hidden}

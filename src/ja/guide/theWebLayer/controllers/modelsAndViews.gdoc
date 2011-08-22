@@ -1,7 +1,7 @@
 h4. モデルを返す
 
 {hidden}A model is a Map that the view uses when rendering. The keys within that Map correspond to variable names accessible by the view. There are a couple of ways to return a model. First, you can explicitly return a Map instance:{hidden}
-モデルはビューをレンダリングする際に使用するMapインスタンスです。ビュー内でMapのキーに一致する変数名が使用できます。モデルを返すには、数種類の方法があります。先ずはじめにMapインスタンスを明示的に返す方法です。
+モデルはビューを描写する際に使用するMapインスタンスです。ビュー内でMapのキーに一致する変数名が使用できます。モデルを返すには、数種類の方法があります。先ずはじめにMapインスタンスを明示的に返す方法です。
 
 {code:java}
 def show() {
@@ -76,7 +76,7 @@ class BookController {
 {code}
 
 {hidden}To render a different view, use the [render|controllers] method:{hidden}
-別のビューをレンダリングする場合は、[render|controllers]メソッドで指定します。
+別のビューを描写する場合は、[render|controllers]メソッドで指定します。
 
 {code:java}
 def show() {
@@ -86,7 +86,7 @@ def show() {
 {code}
 
 {hidden}In this case Grails will attempt to render a view at the location @grails-app/views/book/display.gsp@. Notice that Grails automatically qualifies the view location with the @book@ directory of the @grails-app/views@ directory. This is convenient, but to access shared views you need instead you can use an absolute path instead of a relative one:{hidden}
-上記の例では、@grails-app/views/book/display.gsp@のレンダリングを試みます。注目する場所はGrailsは自動的にコントローラが@book@であれば、@grails-app/views@ディレクトリの@book@ディレクトリを、指定しなくても取得する所です。これは便利なのですが、ビューを共有する場合は、パスを指定する必要があります。
+上記の例では、@grails-app/views/book/display.gsp@の描写を試みます。注目する場所はGrailsは自動的にコントローラが@book@であれば、@grails-app/views@ディレクトリの@book@ディレクトリを、指定しなくても取得する所です。これは便利なのですが、ビューを共有する場合は、パスを指定する必要があります。
 
 {code:java}
 def show() {
@@ -96,12 +96,12 @@ def show() {
 {code}
 
 {hidden}In this case Grails will attempt to render a view at the location @grails-app/views/shared/display.gsp@.{hidden}
-上記の例では、@grails-app/views/shared/display.gsp@のレンダリングを試みます。
+上記の例では、@grails-app/views/shared/display.gsp@の描写を試みます。
 
 {hidden}Grails also supports JSPs as views, so if a GSP isn't found in the expected location but a JSP is, it will be used instead.{hidden}
 Grailsでは、ビューにJSPもサポートしています。これによって、参照したパスにGSPが存在しない場合は、JSPが代わりに使用されます。
 
-h4. レスポンスのレンダリング
+h4. レスポンスの描写
 
 {hidden}Sometimes it's easier (for example with Ajax applications) to render snippets of text or code to the response directly from the controller. For this, the highly flexible @render@ method can be used:{hidden}
 直接文字列をコントローラからレスポンス(例としてAjaxアプリケーションなど)したい場合、とてもフレキシブルな@render@メソッドを使うと簡単にできます。
@@ -123,17 +123,17 @@ render {
 {code}
 
 {code}
-// 指定したビューをレンダリング
+// 指定したビューを描写
 render(view: 'show')
 {code}
 
 {code}
-// コレクションの中身をそれぞれ指定したテンプレートを適応してレンダリング
+// コレクションの中身をそれぞれ指定したテンプレートを適応して描写
 render(template: 'book_template', collection: Book.list())
 {code}
 
 {code}
-// 文字列を指定したエンコーディングとコンテントタイプでレンダリング
+// 文字列を指定したエンコーディングとコンテントタイプで描写
 render(text: "<xml>some xml</xml>", contentType: "text/xml", encoding: "UTF-8")
 {code}
 

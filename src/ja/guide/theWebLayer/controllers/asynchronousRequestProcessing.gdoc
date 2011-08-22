@@ -15,10 +15,10 @@ grails.servlet.version = "3.0"
 Servlet 3.0を指定した場合は、Servlet 3.0のみ対応でデプロイされるので、Servlet 3.0に対応したコンテナ(Tomcatの場合は7以上)で運用しましょう。
 {note}
 
-h4. 非同期レンダリング {hidden}Asynchronous Rendering {hidden}
+h4. 非同期描写 {hidden}Asynchronous Rendering {hidden}
 
 {hidden}You can render content (templates, binary data etc.) in an asynchronous manner by calling the @startAsync@ method which returns an instance of the Servlet 3.0 @AsyncContext@. Once you have a reference to the @AsyncContext@ you can use Grails' regular render method to render content:{hidden}
-Servlet 3.0 AsyncContextインスタンスを返す@startAsync@メソッドを呼び出すことで、非同期でコンテンツがレンダリング(コンテンツ、バイナリー等)できます。@AsyncContext@の参照をするだけで、あとは通常のGrailsでのrenderメソッドを使用してコンテンツをレンダリングできます。
+Servlet 3.0のAsyncContextインスタンスを返す@startAsync@メソッドを呼び出すことで、非同期でコンテンツが描写(テンプレート、バイナリー等)できます。@AsyncContext@の参照をするだけで、あとは通常のGrailsのrenderメソッドを使用してコンテンツを描写できます。
 
 
 {code}

@@ -16,7 +16,7 @@ Ajaxを実装するには幾つかの方法があります。通常次のよう�
 h4. コンテント中心のAjax {hidden}Content Centric Ajax {hidden}
 
 {hidden}Just to re-cap, content centric Ajax involves sending some HTML back from the server and is typically done by rendering a template with the [render|controllers] method:{hidden}
-同じ説明になりますが、コンテント中心のAjaxでの要件はHTMLをサーバから返す事です。通常この場合はテンプレートを[render|controllers]メソッドでレンダリングして実装を行います:
+同じ説明になりますが、コンテント中心のAjaxでの要件はHTMLをサーバから返す事です。通常この場合はテンプレートを[render|controllers]メソッドで描写して実装します:
 
 {code:java}
 def showBook() {
@@ -131,7 +131,7 @@ def showBook() {
 h4. AjaxとAjaxでない両方へのレスポンス {hidden}Responding to both Ajax and non-Ajax requests {hidden}
 
 {hidden}It's straightforward to have the same Grails controller action handle both Ajax and non-Ajax requests. Grails adds the @isXhr()@ method to @HttpServletRequest@ which can be used to identify Ajax requests. For example you could render a page fragment using a template for Ajax requests or the full page for regular HTTP requests:{hidden}
-AjaxとAjaxではないリクエストを同じコントローラアクションで処理ができます。Grailsでは、Ajaxリクエストを判別するために、@HttpServletRequest@に@isXhr()@メソッドを追加しています。次の例のように、Ajaxリクエストの場合はテンプレートでページの一部をレンダリングしたり、それ以外はフルページレンダリングをする等の分岐で記述できます:
+AjaxとAjaxではないリクエストを同じコントローラアクションで処理ができます。Grailsでは、Ajaxリクエスト判別用に、@HttpServletRequest@に@isXhr()@メソッドを追加しています。例として、Ajaxリクエストの場合はテンプレートでページの一部を描写し、それ以外は全ページ描写を行う場合:
 
 {code:java}
 def listBooks() {

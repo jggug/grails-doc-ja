@@ -37,4 +37,4 @@ def formatBook = { attrs, body ->
 {code}
 
 {hidden}And then have a separate GSP template that does the actual rendering.{hidden}
-このようにして、実際にレンダリングされるGSPテンプレートと切り離せます.
+このようにして、実際に描写されるGSPテンプレートと切り離せます.

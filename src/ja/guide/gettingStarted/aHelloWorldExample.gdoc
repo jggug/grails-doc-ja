@@ -41,5 +41,5 @@ grails run-app
 !intropage.png!
 
 {hidden}This is the Grails intro page which is rendered by the @web-app/index.gsp@ file. You will note it has a detected the presence of your controller and clicking on the link to our controller we can see the text "Hello World!" printed to the browser window.{hidden}
-これは@grails-app/views/index.gsp@ファイルによってレンダリングされたアプリケーションの初期画面です。画面にはコントローラへのリンクが表示されています。このリンクをクリックすることで、画面に"Hello World！"が表示されます。
+これは@grails-app/views/index.gsp@ファイルによって描写されたアプリケーションの初期画面です。画面にはコントローラへのリンクが表示されています。このリンクをクリックすることで、画面に"Hello World！"が表示されます。
 

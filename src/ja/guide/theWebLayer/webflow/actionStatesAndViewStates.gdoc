@@ -38,7 +38,7 @@ enterPersonalDetails {
 h4. アクションステート {hidden}Action States{hidden}
 
 {hidden}An action state is a state that executes code but does not render a view. The result of the action is used to dictate flow transition. To create an action state you define an action to to be executed. This is done by calling the @action@ method and passing it a block of code to be executed:{hidden}
-アクションステートはコードを実行してビューをレンダリングしないステートです。アクションの結果は指示されたフロートランジションで使用されます。@action@メソッドに実行したいコードブロックを渡してアクションステートを実装します:
+アクションステートはコードを実行してビューを描写しないステートです。アクションの結果は指示されたフロートランジションで使用されます。@action@メソッドに実行したいコードブロックを渡してアクションステートを実装します:
 
 {code:java}
 listBooks {

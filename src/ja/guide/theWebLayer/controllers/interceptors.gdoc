@@ -58,7 +58,7 @@ def afterInterceptor = { model ->
 アフター・インターセプターでは、処理結果のモデルを引数として取得して、モデルやレスポンスを操作することができます。
 
 {hidden}An after interceptor may also modify the Spring MVC [ModelAndView|api:org.springframework.web.servlet.ModelAndView] object prior to rendering. In this case, the above example becomes:{hidden}
-レンダリング直前のSpring MVCの[ModelAndView|api:org.springframework.web.servlet.ModelAndView]も取得して変更することも可能です。以下のケースでは、前の例に追記すると:
+描写直前のSpring MVCの[ModelAndView|api:org.springframework.web.servlet.ModelAndView]も取得して変更することも可能です。以下のケースでは、前の例に追記すると:
 
 {code:java}
 def afterInterceptor = { model, modelAndView ->

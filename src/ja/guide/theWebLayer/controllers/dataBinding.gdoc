@@ -87,7 +87,7 @@ one-to-manyまたはmany-to-manyなどの関連には、それぞれの関連形
 {code}
 
 {hidden}However, with @Set@ based association it is critical that you render the mark-up in the same order that you plan to do the update in. This is because a @Set@ has no concept of order, so although we're referring to @books[0]@ and @books[1]@ it is not guaranteed that the order of the association will be correct on the server side unless you apply some explicit sorting yourself.{hidden}
-ただし、@Set@ベースの関連では、マークアップ(HTML)がレンダリングされた順序とは同じ順序で更新されない危険性あります。 これは@Set@には順序という概念がなく、@books\[0\]@や@books\[1\]@と指定したとしても、サーバサイドでの関連のソートを明快に指定しない限り、順序が保証されないことになるからです。
+ただし、@Set@ベースの関連では、マークアップ(HTML)が描写された順序とは同じ順序で更新されない危険性あります。 これは@Set@には順序という概念がなく、@books\[0\]@や@books\[1\]@と指定したとしても、サーバサイドでの関連のソートを明快に指定しない限り、順序が保証されないことになるからです。
 
 {hidden}This is not a problem if you use @List@ based associations, since a @List@ has a defined order and an index you can refer to. This is also true of @Map@ based associations.{hidden}
 @List@ベース関連の場合は、@List@の順序とインデックスを指定することができるので問題有りません。@Map@ベース関連も同じ事がいえます。

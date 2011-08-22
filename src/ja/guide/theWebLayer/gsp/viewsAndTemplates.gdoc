@@ -4,7 +4,7 @@ Grailsもテンプレートの概念を持っています。ビューを管理�
 h4. テンプレートの基礎 {hidden}Template Basics {hidden}
 
 {hidden}Grails uses the convention of placing an underscore before the name of a view to identify it as a template. For example, you might have a template that renders Books located at @grails-app/views/book/_bookTemplate.gsp@:{hidden}
-Grailsでは、アンダースコアがビュー名称の前にあるとテンプレートとして認識するルールがあります。例として、Bookコントローラからbookをレンダリングするテンプレートは@grails-app/views/books/@に @_bookTemplate.gsp@として配置:
+Grailsでは、アンダースコアがビュー名称の前にあるとテンプレートとして認識するルールがあります。例として、Bookコントローラからbookを描写するテンプレートは@grails-app/views/books/@に @_bookTemplate.gsp@として配置:
 
 {code:xml}
 <div class="book" id="${book?.id}">
@@ -21,7 +21,7 @@ Use the [render|tags] tag to render this template from one of the views in @grai
 {code}
 
 {hidden}Notice how we pass into a model to use using the @model@ attribute of the @render@ tag. If you have multiple @Book@ instances you can also render the template for each @Book@ using the render tag with a @collection@ attribute:{hidden}
-この例のrenderタグのmodel属性を使用してモデルをテンプレートに渡している部分に注目してください。もし複数の@Book@インスタンスを使用して、それぞれの@Book@をテンプレートでレンダリングする場合は、以下のように@render@タグの@collection@属性にコレクションを指定します:
+この例のrenderタグのmodel属性を使用してモデルをテンプレートに渡している部分に注目してください。もし複数の@Book@インスタンスを使用して、それぞれの@Book@をテンプレートで描写する場合は、以下のように@render@タグの@collection@属性にコレクションを指定します:
 
 {code:xml}
 <g:render template="bookTemplate" var="book" collection="${bookList}" />
@@ -65,7 +65,7 @@ This can be expressed with the @tmpl@ namespace as follows:
 h4. コントローラとタグライブラリでのテンプレート {hidden}Templates in Controllers and Tag Libraries {hidden}
 
 {hidden}You can also render templates from controllers using the [render|controllers] controller method. This is useful for [Ajax|guide:ajax] applications where you generate small HTML or data responses to partially update the current page instead of performing new request:{hidden}
-コントローラの[render|controllers]メソッドを使用してコントローラでテンプレートをレンダリングすることもできます。[Ajax|guide:ajax]アプリケーションのように、ページ内の一部をHTMLのパーツやデータをレスポンスして更新する場合に有用です:
+コントローラの[render|controllers]メソッドを使用してコントローラでテンプレートを描写することもできます。[Ajax|guide:ajax]アプリケーションのように、ページ内の一部をHTMLのパーツやデータをレスポンスして更新する場合に有用です:
 
 {code:java}
 def bookData() {
