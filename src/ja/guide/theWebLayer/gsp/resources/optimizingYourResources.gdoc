@@ -47,7 +47,7 @@ modules = {
 この例でモジュールにわたって、リソースは'common','ui','theme'のグループにまとめられます。
 
 {hidden}Note that auto-bundling by module does *not* occur if there is only one resource in the module.{hidden}
-もしモジュールにリソースが１つの場合は、自動バンドりっぐ処理は行われません。
+もしモジュールにリソースが１つの場合は、自動バンドリング処理は行われません。
 
 h4. クライアントのブラウザでリソースを"永久的に"キャッシュさせる {hidden}Making resources cache "eternally" in the client browser {hidden}
 
@@ -63,7 +63,7 @@ h4. クライアントのブラウザでリソースを"永久的に"キャッ�
 h4. リソース(Zip)圧縮 {hidden}Zipping resources {hidden}
 
 {hidden}Returning gzipped resources is another way to reduce page load times and reduce bandwidth.{hidden}
-ページロード時間を帯域を減らす別の方法として、gzipしたリソースを返すことができます。
+ページロード時間と帯域を減らす別の方法として、gzipしたリソースを返すことができます。
 
 {hidden}The [zipped-resources|http://grails.org/plugin/zipped-resources] plugin provides a mapper that automatically compresses your content, excluding by default already compressed formats such as gif, jpeg and png.{hidden}
 [zipped-resources|http://grails.org/plugin/zipped-resources]プラグインは、デフォルトで圧縮されている画像等を除いたコンテンツを自動的に圧縮するマッパーを提供しています。
