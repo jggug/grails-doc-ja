@@ -1,4 +1,4 @@
-h4. Sets of Objects
+h4. Set オブジェクトのセット
 
 By default when you define a relationship with GORM it is a @java.util.Set@ which is an unordered collection that cannot contain duplicates. In other words when you have:
 
@@ -35,7 +35,7 @@ class Book implements Comparable {
 
 The result of the above class is that the Book instances in the books collection of the Author class will be ordered by their release date.
 
-h4. Lists of Objects
+h4. List オブジェクトのリスト
 
 To keep objects in the order which they were added and to be able to reference them by index like an array you can define your collection type as a @List@:
 
@@ -70,11 +70,13 @@ author.addToBooks(book)
 author.save()
 {code}
 
-h4. Bags of Objects
+h4. Bag オブジェクトのコレクション
 
 If ordering and uniqueness aren't a concern (or if you manage these explicitly) then you can use the Hibernate [Bag|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/collections.html] type to represent mapped collections.
+ユニークや順序が必要の無い場合は(また明示的に自分で管理する場合)、Hibernateの[Bag|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/collections.html]型をコレクションマップとして使用できます。
 
 The only change required for this is to define the collection type as a @Collection@:
+この場合はコレクションの型を@Collection@型として定義します。
 
 {code}
 class Author {
@@ -86,10 +88,12 @@ class Author {
 {code}
 
 Since uniqueness and order aren't managed by Hibernate, adding to or removing from collections mapped as a Bag don't trigger a load of all existing instances from the database, so this approach will perform better and require less memory than using a @Set@ or a @List@.
+Hibernateでユニークとオーダーが管理されないので、Bagにマップされたコレクションは、追加削除時に既存のインスタンスをデータベースからロードしません。このため@Set@または@Listよりメモリ使用量が少なくパフォーマンスが良くなります。
 
-h4. Maps of Objects
+h4. Map オブジェクトのマップ
 
 If you want a simple map of string/value pairs GORM can map this with the following:
+文字列/値のような、単純なマップを使用する場合、GORMでは次のように定義します。
 
 {code}
 class Author {
@@ -101,8 +105,10 @@ a.books = ["1590597583":"Grails Book"]
 a.save()
 {code}
 In this case the key and value of the map MUST be strings.
+このケースでは、 キーと値は*必ず*文字列である必要があります。
 
 If you want a Map of objects then you can do this:
+オブジェクトのマップが必要な場合は次のように:
 
 {code}
 class Book {
@@ -120,8 +126,9 @@ book.save()
 {code}
 
 The static @hasMany@ property defines the type of the elements within the Map. The keys for the map *must* be strings.
+@hasMany@プロパティで、Mapのエレメントの型を定義します。マップのキーは*必ず*文字列にしてください。
 
-h4. A Note on Collection Types and Performance
+h4. コレクション型とパフォーマンスについて
 
 The Java @Set@ type doesn't allow duplicates. To ensure uniqueness when adding an entry to a @Set@ association Hibernate has to load the entire associations from the database. If you have a large numbers of entries in the association this can be costly in terms of performance.
 
