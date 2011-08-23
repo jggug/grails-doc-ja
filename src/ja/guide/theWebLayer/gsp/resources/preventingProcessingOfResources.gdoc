@@ -1,10 +1,13 @@
-Sometimes you do not want a resource to be processed in a particular way, or even at all. Occasionally you may also want to disable all resource mapping.
+{hidden}Sometimes you do not want a resource to be processed in a particular way, or even at all. Occasionally you may also want to disable all resource mapping.{hidden}
+特定のリソースだけ変換処理を行わない事もあります。時折リソースマッピングを無効にしたいこともあります。
 
-h4. Preventing the application of a specific mapper to an individual resource
+h4. 個々のリソースの特定のマッパー処理を防ぐ {hidden}Preventing the application of a specific mapper to an individual resource {hidden}
 
-All resource declarations support a convention of noXXXX:true where XXXX is a mapper name.
+{hidden}All resource declarations support a convention of noXXXX:true where XXXX is a mapper name.{hidden}
+全てのリソース宣言では、XXXXがマッパー名称とすると、noXXXX:trueのような規約に対応しています。
 
-So for example to prevent the "hashandcache" mapper from being applied to a resource (which renames and moves it, potentially breaking relative links written in JavaScript code), you would do this:
+{hidden}So for example to prevent the "hashandcache" mapper from being applied to a resource (which renames and moves it, potentially breaking relative links written in JavaScript code), you would do this:{hidden}
+例として、リソースに適用される"hashandcache"マッパーの処理を防ぐ場合は:
 
 {code:java}
 modules = {
@@ -15,11 +18,13 @@ modules = {
 }
 {code}
 
-h4. Excluding/including paths and file types from specific mappers
+h4. 特定のマッパーでの、パス、ファイルタイプの除外と包含 {hidden}Excluding/including paths and file types from specific mappers {hidden}
 
-Mappers have includes/excludes Ant patterns to control whether they apply to a given resource. Mappers set sensible defaults for these based on their activity, for example the zipped-resources plugin's "zip" mapper is set to exclude images by default.
+{hidden}Mappers have includes/excludes Ant patterns to control whether they apply to a given resource. Mappers set sensible defaults for these based on their activity, for example the zipped-resources plugin's "zip" mapper is set to exclude images by default.{hidden}
+マッパーには、Antパターンで対象リソースを制御するincludes/excludes定義があります。各マッパーはそれぞれの動作に対応したふさわしいデフォルトをセットしています。例としてzipped-resourcesプラグインの"zip"マッパーはデフォルトで画像を除外する設定をしています。
 
-You can configure this in your @Config.groovy@ using the mapper name e.g:
+{hidden}You can configure this in your @Config.groovy@ using the mapper name e.g:{hidden}
+@Config.groovy@にマッパー名で定義することができます:
 
 {code:java}
 // We wouldn't link to .exe files using Resources but for the sake of example:
@@ -29,17 +34,22 @@ grails.resources.zip.excludes = ['**/*.zip', '**/*.exe']
 grails.resources.bundle.excludes = ['**/*.less']
 {code}
 
-There is also an "includes" inverse. Note that settings these replaces the default includes/excludes for that mapper - it is not additive.
+{hidden}There is also an "includes" inverse. Note that settings these replaces the default includes/excludes for that mapper - it is not additive.{hidden}
+逆の意味の"includes"も使用できます。設定をするとマッパーデフォルトのincludes/excludesを入れ換えるので注意が必要です。
 
-h4. Controlling what is treated as an "ad-hoc" (legacy) resource
+h4. "ad-hoc"(レガシー)リソースとして扱う物の操作 {hidden}Controlling what is treated as an "ad-hoc" (legacy) resource {hidden}
 
-Ad-hoc resources are those undeclared, but linked to directly in your application *without* using the Grails or Resources linking tags (resource, img or external).
+{hidden}Ad-hoc resources are those undeclared, but linked to directly in your application *without* using the Grails or Resources linking tags (resource, img or external).{hidden}
+"ad-hoc"リソースは、宣言されずGrailsまたResourcesのリンク系タグを使用しないで、直接アプリケーションにリンクされているリソースです。
 
-These may occur with some legacy plugins or code with hardcoded paths in.
+{hidden}These may occur with some legacy plugins or code with hardcoded paths in.{hidden}
+古い方式のプラグインやパスがコードに埋め込まれている場合をさします。
 
-There is a Config.groovy setting *grails.resources.adhoc.patterns* which defines a list of Servlet API compliant filter URI mappings, which the Resources filter will use to detect such "ad-hoc resource" requests.
+{hidden}There is a Config.groovy setting *grails.resources.adhoc.patterns* which defines a list of Servlet API compliant filter URI mappings, which the Resources filter will use to detect such "ad-hoc resource" requests.{hidden}
+サーブレットAPI準拠のフィルタURIマッピングのリストを定義して、どのリクエストを"ad-hoc"リソースとしてResourcesのフィルタが使用するか認識させるConfig.groovy用の設定 *grails.resources.adhoc.patterns* があります。
 
-By default this is set to:
+{hidden}By default this is set to:{hidden}
+デフォルトでは次のようにセットされています:
 {code:java}
 grails.resources.adhoc.patterns = ['images/*', '*.js', '*.css']
 {code}

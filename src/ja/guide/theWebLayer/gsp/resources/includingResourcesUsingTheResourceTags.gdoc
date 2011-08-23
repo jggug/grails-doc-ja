@@ -1,6 +1,8 @@
-h4. Pulling in resources with r:require
+h4. r:requireでリソースを制御する {hidden}Pulling in resources with r:require{hidden}
 
-To use resources, your GSP page must indicate which resource modules it requires. For example with the [jQuery plugin|http://grails.org/plugin/jquery], which exposes a "jquery" resource module, to use jQuery in any page on your site you simply add:
+{hidden}To use resources, your GSP page must indicate which resource modules it requires. For example with the [jQuery plugin|http://grails.org/plugin/jquery], which exposes a "jquery" resource module, to use jQuery in any page on your site you simply add:{hidden}
+リソースを使用するにはどのリソースモジュールが必要がGSPページで示す必要があります。例として、"jquery"リソースモジュールを提供している[jQueryプラグイン|http://grails.org/plugin/jquery]を、サイトの全てのページで使用する場合は単に次のように追加するだけです:
+
 
 {code:xml}
 <html>
@@ -15,9 +17,11 @@ To use resources, your GSP page must indicate which resource modules it requires
 </html>
 {code}
 
-This will automatically include all resources needed for jQuery, including them at the correct locations in the page. By default the plugin sets the disposition to be "head", so they load early in the page.
+{hidden}This will automatically include all resources needed for jQuery, including them at the correct locations in the page. By default the plugin sets the disposition to be "head", so they load early in the page.{hidden}
+これで自動的にjQueryで必要なリソースをページの正確な場所に配置します。デフォルトではプラグインが"head"に配置するので、ページの初めの方でロードされます。
 
-You can call @r:require@ multiple times in a GSP page, and you use the "modules" attribute to provide a list of modules:
+{hidden}You can call @r:require@ multiple times in a GSP page, and you use the "modules" attribute to provide a list of modules:{hidden}
+GSPページで@r:require@を複数回呼んでも構いません。そして"modules"属性を使用してモジュールを列挙することもできます:
 
 {code:xml}
 <html>
@@ -32,44 +36,19 @@ You can call @r:require@ multiple times in a GSP page, and you use the "modules"
 </html>
 {code}
 
-The above may result in many JavaScript and CSS files being included, in the correct order, with some JavaScript files loading at the end of the body to improve the apparent page load time.
+{hidden}The above may result in many JavaScript and CSS files being included, in the correct order, with some JavaScript files loading at the end of the body to improve the apparent page load time.{hidden}
+上記の結果は、多くのJavaScriptとCSSファイルが正確な順番に、そして一部のJavaScriptはページ読み込み時間を向上させるために、ページボディの最後にロードされるようにページに含まれます。
 
-However you cannot use r:require in isolation - as per the examples you must have the <r:layoutResources/> tag to actually perform the render.
+{hidden}However you cannot use r:require in isolation - as per the examples you must have the <r:layoutResources/> tag to actually perform the render.{hidden}
+r:requireは単体で使用することはできません。例にあるように実際に描写を行う@<r:layoutResources/>@タグが必要になります。
 
-h4. Rendering the links to resources with r:layoutResources
+h4. r:layoutResourcesでリソースへのリンクを描写する {hidden}Rendering the links to resources with r:layoutResources {hidden}
 
-When you have declared the resource modules that your GSP page requires, the framework needs to render the links to those resources at the correct time.
+{hidden}When you have declared the resource modules that your GSP page requires, the framework needs to render the links to those resources at the correct time.{hidden}
+GSPページに必要なリソースモジュールを宣言すると、フレームワークは正常なタイミングでリソースへのリンクを描写する必要があります。
 
-To achieve this correctly, you must include the r:layoutResources tag twice in your page, or more commonly, in your GSP layout:
-
-{code:xml}
-<html>
-   <head>
-      <g:layoutTitle/>
-      <r:layoutResources/>
-   </head>
-   <body>
-      <g:layoutBody/>
-      <r:layoutResources/>
-   </body>
-</html>
-{code}
-
-This represents the simplest Sitemesh layout you can have that supports Resources.
-
-The Resources framework has the concept of a "disposition" for every resource. This is an indication of where in the page the resource should be included.
-
-The default disposition applied depends on the type of resource. All CSS must be rendered in <head> in HTML, so "head" is the default for all CSS, and will be rendered by the first r:layoutResources. Page load times are improved when JavaScript is loaded after the page content, so the default for JavaScript files is "defer", which means it is rendered when the second r:layoutResources is invoked.
-
-Note that both your GSP page and your Sitemesh layout (as well as any GSP template fragments) can call r:require to depend on resources. The only limitation is that you must call r:require before the r:layoutResources that should render it.
-
-h4. Adding page-specific JavaScript code with r:script
-
-Grails has the [javascript|tags] tag which is adapted to defer to Resources plugin if installed, but it is recommended that you call @r:script@ directly when you need to include fragments of JavaScript code.
-
-This lets you write some "inline" JavaScript which is actually *not* rendered inline, but either in the <head> or at the end of the body, based on the disposition.
-
-Given a Sitemesh layout like this:
+{hidden}To achieve this correctly, you must include the r:layoutResources tag twice in your page, or more commonly, in your GSP layout:{hidden}
+これを正常に行うには、r:layoutResourcesタグをページまたはGSPレイアウトの２ヶ所に配置します。:
 
 {code:xml}
 <html>
@@ -84,7 +63,45 @@ Given a Sitemesh layout like this:
 </html>
 {code}
 
-...in your GSP you can inject some JavaScript code into the head or deferred regions of the page like this:
+{hidden}This represents the simplest Sitemesh layout you can have that supports Resources.{hidden}
+これはリソースフレームワークに対応した、いちばん単純なSitemeshレイアウトの例です。
+
+{hidden}The Resources framework has the concept of a "disposition" for every resource. This is an indication of where in the page the resource should be included.{hidden}
+リソースフレームワークには全てのリソースに"配置"の概念を持っています。ページのどの部分にリソースを含めるべきかを指示する物です。
+
+{hidden}The default disposition applied depends on the type of resource. All CSS must be rendered in <head> in HTML, so "head" is the default for all CSS, and will be rendered by the first r:layoutResources. Page load times are improved when JavaScript is loaded after the page content, so the default for JavaScript files is "defer", which means it is rendered when the second r:layoutResources is invoked.{hidden}
+基本的な配置はリソースの種類によって適用されます。全てのCSSはHTMLの<head>に描写されるべきです。したがって全てのCSSは、デフォルトで最初のr:layoutResourcesによって"head"に描写されます。JavaScriptはページコンテンツの最後に読み込ませてJavaScriptファイルの実行を遅らせることで("defer")、ページのロード時間が向上されます。したがって２つ目のr:layoutResourcesが実行された時に描写されます。
+
+{hidden}Note that both your GSP page and your Sitemesh layout (as well as any GSP template fragments) can call r:require to depend on resources. The only limitation is that you must call r:require before the r:layoutResources that should render it.{hidden}
+GSPページとSItemeshレイアウト両方で(もちろんGSPテンプレートでも)、リソースに依存するr:requireを呼び出す事ができます。唯一の制約として、内容を描写するr:layoutResourcesの前に必ずr:requireを呼び出す必要があります。
+
+
+h4. r:scriptでページ固有のJavaScriptコードを追加 {hidden}Adding page-specific JavaScript code with r:script {hidden}
+
+{hidden}Grails has the [javascript|tags] tag which is adapted to defer to Resources plugin if installed, but it is recommended that you call @r:script@ directly when you need to include fragments of JavaScript code.{hidden}
+Grailsにはリソースプラグインがインストールされている場合には、リソースプラグインに従う[javascript|tags]タグがありますが、JavaScriptコードを含みたい場合は、直接@r:script@を呼ぶことを推奨します。
+
+{hidden}This lets you write some "inline" JavaScript which is actually *not* rendered inline, but either in the <head> or at the end of the body, based on the disposition.{hidden}
+これはJavaScriptをインラインで記述できて描写はインラインでは無く、配置指定をした<head>またはボディの最後に描写されます。
+
+{hidden}Given a Sitemesh layout like this:{hidden}
+このようなSitemeshレイアウトがあるとします:
+
+{code:xml}
+<html>
+   <head>
+      <g:layoutTitle/>
+      <r:layoutResources/>
+   </head>
+   <body>
+      <g:layoutBody/>
+      <r:layoutResources/>
+   </body>
+</html>
+{code}
+
+{hidden}...in your GSP you can inject some JavaScript code into the head or deferred regions of the page like this:{hidden}
+GSPではJavaScriptコードをヘッドまたページの最後の方に以下のように記述します:
 
 {code:xml}
 <html>
@@ -102,19 +119,25 @@ Given a Sitemesh layout like this:
 </html>
 {code}
 
-The default disposition is "defer", so the disposition in the latter r:script is purely included for demonstration.
+{hidden}The default disposition is "defer", so the disposition in the latter r:script is purely included for demonstration.{hidden}
+disposition属性のデフォルトは"defer"になります。従って後者のr:scriptはここでの説明として定義しているだけです。
 
-Note that such r:script code fragments *always* load after any modules that you have used, to ensure that any required libraries have loaded.
+{hidden}Note that such r:script code fragments *always* load after any modules that you have used, to ensure that any required libraries have loaded.{hidden}
+ r:scripのコードブロックは、必要なライブラリがロードされているのを保証するために、常に指定したモジュールの後に読み込まれます。
 
-h4. Linking to images with r:img
+h4. r:imgで画像へのリンク {hidden}Linking to images with r:img {hidden}
 
-This tag is used to render @<img>@ markup, using the Resources framework to process the resource on the fly (if configured to do so - e.g. make it eternally cacheable).
+{hidden}This tag is used to render @<img>@ markup, using the Resources framework to process the resource on the fly (if configured to do so - e.g. make it eternally cacheable).{hidden}
+このタグは、リソースフレームワークを使用してリソースを処理した、<img>タグを描写するのに使用します。(定義をした場合。e.g.画像キャッシュ等)
 
-This includes any extra attributes on the @<img>@ tag if the resource has been previously declared in a module.
+{hidden}This includes any extra attributes on the @<img>@ tag if the resource has been previously declared in a module.{hidden}
+あらかじめリソースモジュール宣言されたタグの属性も@<img>@タグの属性に追加します。
 
-With this mechanism you can specify the width, height and any other attributes in the resource declaration in the module, and they will be pulled in as necessary.
+{hidden}With this mechanism you can specify the width, height and any other attributes in the resource declaration in the module, and they will be pulled in as necessary.{hidden}
+この仕組みでは、モジュールに宣言した、width,heightまたその他の属性をタグに取り込みます。
 
-Example:
+{hidden}Example:{hidden}
+例として:
 
 {code:xml}
 <html>
@@ -127,8 +150,11 @@ Example:
 </html>
 {code}
 
-Note that Grails has a built-in @g:img@ tag as a shortcut for rendering @<img>@ tags that refer to a static resource. The Grails [img|tags] tag is Resources-aware and will delegate to @r:img@ if found. However it is recommended that you use @r:img@ directly if using the Resources plugin.
+{hidden}Note that Grails has a built-in @g:img@ tag as a shortcut for rendering @<img>@ tags that refer to a static resource. The Grails [img|tags] tag is Resources-aware and will delegate to @r:img@ if found. However it is recommended that you use @r:img@ directly if using the Resources plugin.{hidden}
+Grailsには、@<img>@タグを描写する、リソース参照できる@g:img@タグが存在します。Grailsの[img|tags]タグは、存在した場合リソースフレームワークが認識して@r:img@に委譲しまが、リソースプラグインを使用している場合は直接@r:img@を使用することを推奨します。
 
-Alongside the regular Grails [resource|tags] tag attributes, this also supports the "uri" attribute for increased brevity.
+{hidden}Alongside the regular Grails [resource|tags] tag attributes, this also supports the "uri" attribute for increased brevity.{hidden}
+通常のGrails [img|tags]タグと一緒で、簡潔に記述できる"uri"属性にも対応しています。
 
-See [r:resource documentation|http://grails-plugins.github.com/grails-resources] for full details.
+{hidden}See [r:resource documentation|http://grails-plugins.github.com/grails-resources] for full details.{hidden}
+詳細は[Resources|http://grails-plugins.github.com/grails-resources]プラグインのドキュメントを参照。

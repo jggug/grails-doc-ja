@@ -1,8 +1,11 @@
-A DSL is provided for declaring resources and modules. This can go either in your @Config.groovy@ in the case of application-specific resources, or more commonly in a resources artefact in @grails-app/conf@.
+{hidden}A DSL is provided for declaring resources and modules. This can go either in your @Config.groovy@ in the case of application-specific resources, or more commonly in a resources artefact in @grails-app/conf@.{hidden}
+リソースとモジュールを宣言するためのDSLが提供されています。アプリケーション固有の場合は@Config.groovy@ファイルに記述、また通常はリソースアーテファクトとして@grails-app/conf@にファイルで配置します。
 
-Note that you do not need to declare all your static resources, especially images. However you must to establish dependencies or other resources-specific attributes. Any resource that is not declared is called "ad-hoc" and will still be processed using defaults for that resource type.
+{hidden}Note that you do not need to declare all your static resources, especially images. However you must to establish dependencies or other resources-specific attributes. Any resource that is not declared is called "ad-hoc" and will still be processed using defaults for that resource type.{hidden}
+特に画像に関しては、全ての静的リソースを宣言する必要はありませんが、依存関係またはリソース固有の属性を確立する必要があります。宣言されていないリソースは"ad-hoc"とよばれ、リソースの種類に対応した処理が行われます。
 
-Consider this example resource configuration file, @grails-app/conf/MyAppResources.groovy@:
+{hidden}Consider this example resource configuration file, @grails-app/conf/MyAppResources.groovy@:{hidden}
+次のようなリソース定義が@grails-app/conf/MyAppResources.groovy@ファイルで例として有るとします:
 
 {code:java}
 modules = {
@@ -31,18 +34,26 @@ modules = {
 }
 {code}
 
-This defines three resource modules; 'core', 'utils' and 'forms'. The resources in these modules will be automatically bundled out of the box according to the module name, resulting in fewer files. You can override this with @bundle:'someOtherName'@ on each resource, or call @defaultBundle@ on the module (see [resources plugin documentation|http://grails-plugins.github.com/grails-resources]).
+{hidden}This defines three resource modules; 'core', 'utils' and 'forms'. The resources in these modules will be automatically bundled out of the box according to the module name, resulting in fewer files. You can override this with @bundle:'someOtherName'@ on each resource, or call @defaultBundle@ on the module (see [resources plugin documentation|http://grails-plugins.github.com/grails-resources]).{hidden}
+ここでは'core','utils','forms'の３つのリソースモジュールを定義しています。このモジュールのリソースは、モジュール名に応じて、すぐに使えるように、より少ないファイルに自動的にバンドルされます。それぞれのリソースは@bundle:'someOtherName'@またはモジュールで@defaultBundle@を呼ぶことででオーバーライドできます。([Resourcesプラグイン|http://grails-plugins.github.com/grails-resources]ドキュメントを参照)
 
-It declares dependencies between them using @dependsOn@, which controls the load order of the resources.
+{hidden}It declares dependencies between them using @dependsOn@, which controls the load order of the resources.{hidden}
+リソースの読み込み順を操作するために、それぞれの依存関係を@dependsOn@で宣言しています。
 
-When you include an @<r:require module="forms"/>@ in your GSP, it will pull in all the resources from 'core' and 'utils' as well as 'jquery', all in the correct order.
+{hidden}When you include an @<r:require module="forms"/>@ in your GSP, it will pull in all the resources from 'core' and 'utils' as well as 'jquery', all in the correct order.{hidden}
+GSPに@<r:require module="forms"/>@を含んだ場合、この例では'core','util'そして'jquery'のリソースを正常な順番で引っ張ります。
 
-You'll also notice the @disposition:'head'@ on the @core.js@ file. This tells Resources that while it can defer all the other JS files to the end of the body, this one must go into the @<head>@.
+{hidden}You'll also notice the @disposition:'head'@ on the @core.js@ file. This tells Resources that while it can defer all the other JS files to the end of the body, this one must go into the @<head>@.{hidden}
+さらにcore.jsファイルの@disposition:'head'@に注目してください。その他全てのリソースはボディの最後に配置して、このファイルは必ず@<head>@に配置する指定をしています。
 
-The CSS file for print styling adds custom attributes using the @attrs@ map option, and these are passed through to the @r:external@ tag when the engine renders the link to the resource, so you can customize the HTML attributes of the generated link.
+{hidden}The CSS file for print styling adds custom attributes using the @attrs@ map option, and these are passed through to the @r:external@ tag when the engine renders the link to the resource, so you can customize the HTML attributes of the generated link.{hidden}
+プリント指定用のCSSでは、カスタム属性を@attrs@マップで追加しています。そしてこれらは@r:external@タグを通してリソースへのリンクを形成します。これによってリンクのHTML属性をカスタマイズすることができます。
 
-There is no limit to the number of modules or xxxResources.groovy artefacts you can provide, and plugins can supply them to expose modules to applications, which is exactly how the jQuery plugin works.
+{hidden}There is no limit to the number of modules or xxxResources.groovy artefacts you can provide, and plugins can supply them to expose modules to applications, which is exactly how the jQuery plugin works.{hidden}
+モジュールやxxxResources.groovyアーテファクトには数量制限がありません。jQueryプラグインのようにプラグインでモジュールを提供することもできます。
 
-To define modules like this in your application's Config.groovy, you simply assign the DSL closure to the @grails.resources.modules@ Config variable.
+{hidden}To define modules like this in your application's Config.groovy, you simply assign the DSL closure to the @grails.resources.modules@ Config variable.{hidden}
+アプリケーションのConfig.groovyでモジュールを宣言する場合は、モジュールのDSLクロージャを@grails.resources.modules@に定義します。
 
-For full details of the resource DSL please see the [resources plugin documentation|http://grails-plugins.github.com/grails-resources].
+{hidden}For full details of the resource DSL please see the [resources plugin documentation|http://grails-plugins.github.com/grails-resources].{hidden}
+リソースDSLの詳細は[Resourcesプラグイン|http://grails-plugins.github.com/grails-resources]のドキュメントを参考にしてください。

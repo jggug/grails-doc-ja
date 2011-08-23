@@ -1,8 +1,11 @@
-Because a resource module can define the bundle groupings and other attributes of resources, you may find that the settings provided are not correct for your application.
+{hidden}Because a resource module can define the bundle groupings and other attributes of resources, you may find that the settings provided are not correct for your application.{hidden}
+リソースモジュールにバンドルのグルーピングと他のリソース属性の宣言ができることで、提供されている設定が個々のアプリケーションで違う場合が有るのを認識します。
 
-For example, you may wish to bundle jQuery and some other libraries all together in one file. There is a load-time and caching trade-off here, but often it is the case that you'd like to override some of these settings.
+{hidden}For example, you may wish to bundle jQuery and some other libraries all together in one file. There is a load-time and caching trade-off here, but often it is the case that you'd like to override some of these settings.{hidden}
+例として、jQueryと他のライブラリをまとめてバンドルするとします。これだとロード時間とキャッシングのトレードオフになりますが、しかし良くあるケースとしてこれらの設定をオーバーライドするとします。
 
-To do this, the DSL supports an "overrides" clause, within which you can change the @defaultBundle@ setting for a module, or attributes of individual resources that have been declared with a unique id:
+{hidden}To do this, the DSL supports an "overrides" clause, within which you can change the @defaultBundle@ setting for a module, or attributes of individual resources that have been declared with a unique id:{hidden}
+これには、モジュールまたは固有のリソース属性で変更可能な@defaultBundle@設定で定義した名称を指定する、DSLの"overrides"で対応しています。
 
 {code:java}
 modules = {
@@ -40,8 +43,11 @@ modules = {
 }
 {code}
 
-This will put all code into a single bundle named 'monolith'. Note that this can still result in multiple files, as separate bundles are required for head and defer dispositions, and JavaScript and CSS files are bundled separately.
+{hidden}This will put all code into a single bundle named 'monolith'. Note that this can still result in multiple files, as separate bundles are required for head and defer dispositions, and JavaScript and CSS files are bundled separately.{hidden}
+この設定で全てのコードが'monolith'という名称の一つのバンドルになります。この設定を行ってもそれぞれのバンドルとしてそれぞれのファイルで配置されます。
 
-Note that overriding individual resources requires the original declaration to have included a unique id for the resource.
+{hidden}Note that overriding individual resources requires the original declaration to have included a unique id for the resource.{hidden}
+固有のリソースをオーバライドする場合は、もとの宣言がリソース毎にユニークIDで含まれている必要があります。
 
 For full details of the resource DSL please see the [resources plugin documentation|http://grails-plugins.github.com/grails-resources].
+リソースDSLの詳細は[リソースプラグイン|http://grails-plugins.github.com/grails-resources]のドキュメントを参考にしてください。

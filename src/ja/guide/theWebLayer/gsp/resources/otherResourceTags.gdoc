@@ -1,13 +1,19 @@
 h4. r:resource
 
-This is equivalent to the Grails [resource|Tags] tag, returning a link to the processed static resource. Grails' own @g:resource@ tag delegates to this implementation if found, but if your code requires the Resources plugin, you should use @r:resource@ directly.
+{hidden}This is equivalent to the Grails [resource|Tags] tag, returning a link to the processed static resource. Grails' own @g:resource@ tag delegates to this implementation if found, but if your code requires the Resources plugin, you should use @r:resource@ directly.{hidden}
+これはGrails [resource|Tags]タグと同じで静的リソースへのリンクを処理して返します。Grailsの@g:resource@タグが有った場合はこのタグに委譲します。リソースプラグインを使用している場合は直接@r:resource@を使用しましょう。
 
-Alongside the regular Grails [resource|Tags] tag attributes, this also supports the "uri" attribute for increased brevity.
+{hidden}Alongside the regular Grails [resource|Tags] tag attributes, this also supports the "uri" attribute for increased brevity.{hidden}
+通常のGrails [resource|Tags]タグと一緒で、簡潔に記述できる"uri"属性にも対応しています。
 
-See [r:resource documentation|http://grails-plugins.github.com/grails-resources] for full details.
+
+{hidden}See [r:resource documentation|http://grails-plugins.github.com/grails-resources] for full details.{hidden}
+詳細は[Resources|http://grails-plugins.github.com/grails-resources]プラグインのドキュメントを参照。
 
 h4. r:external
 
-This is a resource-aware version of Grails [external|Tags] tag which renders the HTML markup necessary to include an external file resource such as CSS, JS or a favicon.
+{hidden}This is a resource-aware version of Grails [external|Tags] tag which renders the HTML markup necessary to include an external file resource such as CSS, JS or a favicon.{hidden}
+Grailsでの[external|Tags]タグのリソースフレームワーク版です。CSS,JS,favicon等の外部リソースを含む為のHTMLマークアップを描写します。
 
-See [r:resource documentation|http://grails-plugins.github.com/grails-resources] for full details.
+{hidden}See [r:resource documentation|http://grails-plugins.github.com/grails-resources] for full details.{hidden}
+詳細は[Resources|http://grails-plugins.github.com/grails-resources]プラグインのドキュメントを参照。

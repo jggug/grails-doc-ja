@@ -1,14 +1,19 @@
-The Resources framework uses "mappers" to mutate the resources into the final format served to the user.
+{hidden}The Resources framework uses "mappers" to mutate the resources into the final format served to the user.{hidden}
+リソースフレームワークは"マッパー"を使用して、最終フォーマットへリソースを変化させてユーザへ配信します。
 
-The resource mappers are applied to each static resource once, in a specific order. You can create your own resource mappers, and several plugins provide some already for zipping, caching and minifying.
+{hidden}The resource mappers are applied to each static resource once, in a specific order. You can create your own resource mappers, and several plugins provide some already for zipping, caching and minifying.{hidden}
+リソースマッパーはそれぞれの静的リソースに一度だけ特定の順番で適用されます。幾つかのプラグインzipping, caching や minifyingのように独自のリソースマッパーを作成することが可能です。
 
-Out of the box, the Resources plugin provides bundling of resources into fewer files, which is achieved with a few mappers that also perform CSS re-writing to handle when your CSS files are moved into a bundle.
+{hidden}Out of the box, the Resources plugin provides bundling of resources into fewer files, which is achieved with a few mappers that also perform CSS re-writing to handle when your CSS files are moved into a bundle.{hidden}
+すぐに使用できる仕組みとして、リソースをまとめて少なくするバンドルマッパーをResourcesプラグインで提供しています。
 
-h4. Bundling multiple resources into fewer files
+h4. 複数のリソースを少ないファイルにまとめる {hidden}Bundling multiple resources into fewer files {hidden}
 
-The 'bundle' mapper operates by default on any resource with a "bundle" defined - or inherited from a @defaultBundle@ clause on the module. Modules have an implicit default bundle name the same as the name of the module.
+{hidden}The 'bundle' mapper operates by default on any resource with a "bundle" defined - or inherited from a @defaultBundle@ clause on the module. Modules have an implicit default bundle name the same as the name of the module.{hidden}
+バンドルマッパーは、"bundle"が定義されたリソース、またはモジュールの@defaultBundle@に継承されたリソースに対してデフォルトで操作します。モジュールはモジュール名と同じ名称で、暗黙なデフォルトバンドル名を持っています。
 
-Files of the same kind will be aggregated into this bundle file. Bundles operate across module boundaries:
+{hidden}Files of the same kind will be aggregated into this bundle file. Bundles operate across module boundaries:{hidden}
+同じ種類のファイルがこのバンドルに集計されます。バンドルはモジュールにわたって操作されます:
 
 {code:java}
 modules = {
@@ -38,26 +43,35 @@ modules = {
 }
 {code}
 
-Here you see that resources are grouped into bundles; 'common', 'ui' and 'theme' - across module boundaries.
+{hidden}Here you see that resources are grouped into bundles; 'common', 'ui' and 'theme' - across module boundaries.{hidden}
+この例でモジュールにわたって、リソースは'common','ui','theme'のグループにまとめられます。
 
-Note that auto-bundling by module does *not* occur if there is only one resource in the module.
+{hidden}Note that auto-bundling by module does *not* occur if there is only one resource in the module.{hidden}
+もしモジュールにリソースが１つの場合は、自動バンドりっぐ処理は行われません。
 
-h4. Making resources cache "eternally" in the client browser
+h4. クライアントのブラウザでリソースを"永久的に"キャッシュさせる {hidden}Making resources cache "eternally" in the client browser {hidden}
 
-Caching resources "eternally" in the client is only viable if the resource has a unique name that changes whenever the contents change, and requires caching headers to be set on the response.
+{hidden}Caching resources "eternally" in the client is only viable if the resource has a unique name that changes whenever the contents change, and requires caching headers to be set on the response.{hidden}
+リソースを"永久的に"キャッシュさせるには、コンテンツが変わらない限り唯一のリソース名を持ち、キャッシングヘッダーがレスポンスにセットされている時のみです。
 
-The [cached-resources|http://grails.org/plugin/cached-resources] plugin provides a mapper that achieves this by hashing your files and renaming them based on this hash. It also sets the caching headers on every response for those resources. To use, simply install the cached-resources plugin.
+{hidden}The [cached-resources|http://grails.org/plugin/cached-resources] plugin provides a mapper that achieves this by hashing your files and renaming them based on this hash. It also sets the caching headers on every response for those resources. To use, simply install the cached-resources plugin.{hidden}
+[cached-resources|http://grails.org/plugin/cached-resources]プラグインでは、ファイルをハッシュ管理してハッシュ管理に基づいて名称を変更するマッパーを提供しています。さらにキャッシングヘッダーを全てのリソースのレスポンスにセットします。これを使用するには単にcached-resourcesをインストールするだけです。
 
-Note that the caching headers can only be set if your resources are being served by your application. If you have another server serving the static content from your app (e.g. Apache HTTPD), configure it to send caching headers. Alternatively you can configure it to request and proxy the resources from your container.
+{hidden}Note that the caching headers can only be set if your resources are being served by your application. If you have another server serving the static content from your app (e.g. Apache HTTPD), configure it to send caching headers. Alternatively you can configure it to request and proxy the resources from your container.{hidden}
+キャッシングヘッダーはリソースがアプリケーションから配信されたときのみセットされます。もし別のサーバで静的コンテンツを配信している場合は(Apache HTTPD等で)、サーバでそれらのキャッシングヘッダーの定義を行ってください。あるいはリソースをアプリケーションコンテナーを介して配信するように設定も可能です。
 
-h4. Zipping resources
+h4. リソース(Zip)圧縮 {hidden}Zipping resources {hidden}
 
-Returning gzipped resources is another way to reduce page load times and reduce bandwidth.
+{hidden}Returning gzipped resources is another way to reduce page load times and reduce bandwidth.{hidden}
+ページロード時間を帯域を減らす別の方法として、gzipしたリソースを返すことができます。
 
-The [zipped-resources|http://grails.org/plugin/zipped-resources] plugin provides a mapper that automatically compresses your content, excluding by default already compressed formats such as gif, jpeg and png.
+{hidden}The [zipped-resources|http://grails.org/plugin/zipped-resources] plugin provides a mapper that automatically compresses your content, excluding by default already compressed formats such as gif, jpeg and png.{hidden}
+[zipped-resources|http://grails.org/plugin/zipped-resources]プラグインは、デフォルトで圧縮されている画像等を除いたコンテンツを自動的に圧縮するマッパーを提供しています。
 
-Simply install the zipped-resources plugin and it works.
+{hidden}Simply install the zipped-resources plugin and it works.{hidden}
+単にzipped-resourcesプラグインをインストールするだけで使用できます。
 
-h4. Minifying
+h4. 最小化(Minifying) {hidden}Minifying {hidden}
 
-There are a number of CSS and JavaScript minifiers available to obfuscate and reduce the size of your code. At the time of writing none are publicly released but releases are imminent.
+{hidden}There are a number of CSS and JavaScript minifiers available to obfuscate and reduce the size of your code. At the time of writing none are publicly released but releases are imminent.{hidden}
+最小化してコード内容をわかりにくくしたりサイズを縮小する幾つかのCSSとJavascript minifierが有ります。現段階ではプラグインの提供は無いですが近々リリースされると思います。

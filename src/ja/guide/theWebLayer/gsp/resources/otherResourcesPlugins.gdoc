@@ -1,4 +1,5 @@
-At the time of writing, the following plugins include support for the Resources framework:
+{hidden}At the time of writing, the following plugins include support for the Resources framework:{hidden}
+現時点でのリソースフレームワークに対応したプラグイン:
 
 * [jquery|http://grails.org/plugin/jquery]
 * [jquery-ui|http://grails.org/plugin/jquery-ui]
