@@ -151,7 +151,7 @@ h4. r:imgで画像へのリンク {hidden}Linking to images with r:img {hidden}
 {code}
 
 {hidden}Note that Grails has a built-in @g:img@ tag as a shortcut for rendering @<img>@ tags that refer to a static resource. The Grails [img|tags] tag is Resources-aware and will delegate to @r:img@ if found. However it is recommended that you use @r:img@ directly if using the Resources plugin.{hidden}
-Grailsには、@<img>@タグを描写する、リソース参照できる@g:img@タグが存在します。Grailsの[img|tags]タグは、存在した場合リソースフレームワークが認識して@r:img@に委譲しまが、リソースプラグインを使用している場合は直接@r:img@を使用することを推奨します。
+Grailsには、@<img>@タグを描写する、リソース参照できる@g:img@タグが存在します。Grailsの[img|tags]タグは、存在した場合リソースフレームワークが認識して@r:img@に委譲しますが、リソースプラグインを使用している場合は直接@r:img@を使用することを推奨します。
 
 {hidden}Alongside the regular Grails [resource|tags] tag attributes, this also supports the "uri" attribute for increased brevity.{hidden}
 通常のGrails [img|tags]タグと一緒で、簡潔に記述できる"uri"属性にも対応しています。
