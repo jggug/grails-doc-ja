@@ -1,4 +1,7 @@
-The default URL Mapping mechanism supports camel case names in the URLs.  The default URL for accessing an action named @addNumbers@ in a controller named @MathHelperController@ would be something like @/mathHelper/addNumbers@.  Grails allows for the customization of this pattern and provides an implementation which replaces the camel case convention with a hyphenated convention that would support URLs like @/math-helper/add-numbers@.  To enable hyphenated URLs assign a value of "hyphenated" to the @grails.web.url.converter@ property in @grails-app/conf/Config.groovy@.
+{hidden}The default URL Mapping mechanism supports camel case names in the URLs.  The default URL for accessing an action named @addNumbers@ in a controller named @MathHelperController@ would be something like @/mathHelper/addNumbers@.  Grails allows for the customization of this pattern and provides an implementation which replaces the camel case convention with a hyphenated convention that would support URLs like @/math-helper/add-numbers@.  To enable hyphenated URLs assign a value of "hyphenated" to the @grails.web.url.converter@ property in @grails-app/conf/Config.groovy@.
+{hidden}
+URLでの
+URLマッピングは、デフォルトでキャメルケースのURLになります。例えばコントローラ@MathHelperController@のアクション@addNumbers@の場合、デフォルトURLでのURLは、@/mathHelper/addNumbers@のようになります。Grailsでは、このパターンをカスタマイズして、@/math-helper/add-numbers@のようなハイフン形式にキャメルケース形式を入れ換える実装が可能です。ハイフンURLを可能にするには、@grails-app/conf/Config.groovy@の@grails.web.url.converter@を"hyphenated"にします。
 
 {code:java}
 // grails-app/conf/Config.groovy
@@ -6,8 +9,11 @@ The default URL Mapping mechanism supports camel case names in the URLs.  The de
 grails.web.url.converter = 'hyphenated'
 {code}
 
+{hidden}
 Arbitrary strategies may be plugged in by providing a class which implements the [UrlConverter|api:grails.web.UrlConverter] interface and adding an instance of that class to the Spring application context with the bean name of @grails.web.UrlConverter.BEAN_NAME@.  If Grails finds a bean in the context with that name, it will be used as the default converter and there is no need to assign a value to the @grails.web.url.converter@ config property.
-
+{hidden}
+任意の方法追加するには、インターフェイス[UrlConverter|api:grails.web.UrlConverter]を実装したクラスを、ビーン名称@grails.web.UrlConverter.BEAN_NAME@で追加します。Grailsがそのビーン名称をコンテキストに有ることを認識した場合、指定したクラスの実装がデフォルトとなります。この場合は、@grails.web.url.converter@プロパティは必要有りません。
+{hidden}
 {code:java}
 // src/groovy/com/myapplication/MyUrlConverterImpl.groovy
 
@@ -17,6 +23,19 @@ class MyUrlConverterImpl implements grails.web.UrlConverter {
 
     String toUrlElement(String propertyOrClassName) {
         // return some representation of a property or class name that should be used in URLs...
+    }
+}
+{code}
+{hidden}
+{code:java}
+// src/groovy/com/myapplication/MyUrlConverterImpl.groovy
+
+package com.myapplication
+
+class MyUrlConverterImpl implements grails.web.UrlConverter {
+
+    String toUrlElement(String propertyOrClassName) {
+        // URLで描写するプロパティ名またはクラス名を返す
     }
 }
 {code}
