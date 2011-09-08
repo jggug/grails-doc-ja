@@ -178,6 +178,7 @@ theWebLayer:
     automaticLinkRewriting: 自動リンクリライト
     applyingConstraints: 制約の適用
     namedMappings: 名前付きURLマッピング
+    customizingUrlFormat: URLフォーマットのカスタマイズ
   webflow:
     title: Webフロー
     startAndEndStates: 開始と終了のステート
