@@ -19,7 +19,7 @@ Resourceフレームワークの取り組んだ課題:
 * Preventing multiple inclusion of the same resource
 {hidden}
 * Webアプリケーションのパフォーマンスチューニングが難しい
-* リソースの配置順と、JavaScriptの置き忘れ
+* リソースの配置順と、JavaScriptの遅延包括
 * 先に読み込む必要のある依存関係のあるリソース
 * プラグインやアプリケーションでの、静的リソースを表示する方法の標準化が必要
 * リソースの最適化を行うための拡張可能な連鎖行程が必要
