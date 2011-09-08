@@ -34,7 +34,7 @@ static mappings = {
 /graemerocher/2007/01/10/my_funky_blog_entry
 {code}
 
-The individual tokens in the URL would again be mapped into the [params|controllers] object with values available for @year@, @month@, @day@, @id@ and so on.
+{hidden}The individual tokens in the URL would again be mapped into the [params|controllers] object with values available for @year@, @month@, @day@, @id@ and so on. {hidden}
 URLの個々のトークンは[params|controllers]オブジェクトにマップされるため、変数@blog@, @year@, @month@, @day@, @id@として値を取得する事ができます。
 
 h4. 動的なコントローラ名とアクション名 {hidden}Dynamic Controller and Action Names {hidden}
