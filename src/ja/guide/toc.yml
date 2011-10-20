@@ -287,3 +287,4 @@ hibernate:
   addingConstraints: 制約の追加
 scaffolding: スカッフォルド
 deployment: デプロイ
+traslateReport: 翻訳レポート

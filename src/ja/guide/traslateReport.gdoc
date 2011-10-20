@@ -1,0 +1,260 @@
+
+h1. Document Translation Report.
+
+* *File Count* - 251
+* *Done* - 126
+* *TODO* - 123
+* *Not found or new* - 2
+
+h2. Original document updated after translation.:
+
+*./src/ja/guide/theWebLayer/webflow/dataBindingAndValidation.gdoc*
+
+{code}
+20 : However, what about the capturing the information submitted by the form? To capture the form info we can use a flow transition action:
+{code}
+
+*./src/ja/guide/theWebLayer/controllers/dataBinding.gdoc*
+
+{code}
+271: \{note\}
+272: Note that if an empty List is provided as a value for the @include@ parameter then all fields will be subject to binding if they are not explicitly excluded.
+273: \{note\}
+{code}
+
+*./src/ja/guide/theWebLayer/webflow/flowScopes.gdoc*
+
+{code}
+97 : The flow scope contains a reference to the Hibernate session. As a result, any object loaded into the session through a GORM query will also be in the flow and will need to implement Serializable.
+99 : If you don't want your domain class to be Serializable or stored in the flow, then you will need to evict the entity manually before the end of the state:
+102: flow.persistenceContext.evict(it)
+{code}
+
+*./src/ja/guide/gettingStarted/runningAnApplication.gdoc*
+
+{code}
+13 : Note that it is better to start up the application in interactive mode since a container restart is much quicker:
+16 : $ grails
+17 : grails> run-app
+18 : | Server running. Browse to http://localhost:8080/helloworld
+19 : | Application loaded in interactive mode. Type 'exit' to shutdown.
+20 : | Downloading: plugins-list.xml
+21 : grails> exit
+22 : | Stopping Grails server
+23 : grails> run-app
+24 : | Server running. Browse to http://localhost:8080/helloworld
+25 : | Application loaded in interactive mode. Type 'exit' to shutdown.
+26 : | Downloading: plugins-list.xml
+{code}
+
+*./src/ja/guide/gettingStarted/upgradingFromPreviousVersionsOfGrails.gdoc*
+
+{code}
+22 :         // Add HSQLDB as a runtime dependency
+{code}
+
+*./src/ja/guide/theWebLayer/controllers/modelsAndViews.gdoc*
+
+{code}
+102: // write some markup
+111: // render a specific view
+116: // render a template for each item in a collection
+121: // render some text with encoding and content type
+{code}
+
+*./src/ja/guide/webServices/REST.gdoc*
+
+{code}
+18 : Method     | Action
+{code}
+
+*./src/ja/guide/theWebLayer/gsp/sitemeshContentBlocks.gdoc*
+
+{code}
+5  : ... draw the navbar here...
+9  : ... draw the header here...
+13 : ... draw the footer here...
+17 : ... draw the body here...
+{code}
+
+*./src/ja/guide/gettingStarted/aHelloWorldExample.gdoc*
+
+{code}
+1  : To implement the typical "hello world\!" example @cd@ into the "helloworld" directory created in the previous section and activate interactive mode:
+4  : $ cd helloworld
+5  : $ grails
+8  : Grails' interactive mode will be activated and you should see a prompt that looks like the following:
+10 : \!interactive-helloworld.png\!
+12 : Now run the [create-controller|commandLine] command:
+15 : grails> create-controller hello
+39 : grails> run-app
+{code}
+
+*./src/ja/guide/theWebLayer/urlmappings/namedMappings.gdoc*
+
+{code}
+1  : URL Mappings also support named mappings, that is mappings which have a name associated with them. The name may be used to refer to a specific mapping when links are generated.
+{code}
+
+*./src/ja/guide/theWebLayer/controllers/understandingControllersAndActions.gdoc*
+
+{code}
+65 : If a controller class extends some other class which is not defined under the @grails-app/controllers/@ directory, methods inherited from that class are not converted to controller actions.  If the intent is to expose those inherited methods as controller actions the methods may be overridden in the subclass and the subclass method may invoke the method in the super class.
+{code}
+
+*./src/ja/guide/introduction/whatsNew/webFeatures.gdoc*
+
+{code}
+6  : // action as a method
+10 : // action as a closure
+{code}
+
+*./src/ja/guide/theWebLayer/webflow.gdoc*
+
+{code}
+24 :    def shoppingCartFlow = \{
+{code}
+
+*./src/ja/guide/theWebLayer/webflow/startAndEndStates.gdoc*
+
+{code}
+6  :    def shoppingCartFlow =\{
+{code}
+
+*./src/ja/guide/gettingStarted/creatingAnApplication.gdoc*
+
+{code}
+4  : grails [command name]
+{code}
+
+h2. Not done.
+
+* ./grails-doc/src/en/guide/GORM.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/defaultSortOrder.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/eventsAutoTimestamping.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/ormdsl.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/ormdsl/caching.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/ormdsl/compositePrimaryKeys.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/ormdsl/customCascadeBehaviour.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/ormdsl/customHibernateTypes.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/ormdsl/customNamingStrategy.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/ormdsl/databaseIndices.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/ormdsl/derivedProperties.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/ormdsl/fetchingDSL.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/ormdsl/identity.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/ormdsl/inheritanceStrategies.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/ormdsl/optimisticLockingAndVersioning.gdoc
+* ./grails-doc/src/en/guide/GORM/advancedGORMFeatures/ormdsl/tableAndColumnNames.gdoc
+* ./grails-doc/src/en/guide/GORM/domainClasses.gdoc
+* ./grails-doc/src/en/guide/GORM/domainClasses/gormAssociation.gdoc
+* ./grails-doc/src/en/guide/GORM/domainClasses/gormAssociation/basicCollectionTypes.gdoc
+* ./grails-doc/src/en/guide/GORM/domainClasses/gormAssociation/manyToMany.gdoc
+* ./grails-doc/src/en/guide/GORM/domainClasses/gormAssociation/manyToOneAndOneToOne.gdoc
+* ./grails-doc/src/en/guide/GORM/domainClasses/gormAssociation/oneToMany.gdoc
+* ./grails-doc/src/en/guide/GORM/domainClasses/gormComposition.gdoc
+* ./grails-doc/src/en/guide/GORM/domainClasses/inheritanceInGORM.gdoc
+* ./grails-doc/src/en/guide/GORM/gormConstraints.gdoc
+* ./grails-doc/src/en/guide/GORM/persistenceBasics.gdoc
+* ./grails-doc/src/en/guide/GORM/persistenceBasics/cascades.gdoc
+* ./grails-doc/src/en/guide/GORM/persistenceBasics/deletingObjects.gdoc
+* ./grails-doc/src/en/guide/GORM/persistenceBasics/fetching.gdoc
+* ./grails-doc/src/en/guide/GORM/persistenceBasics/locking.gdoc
+* ./grails-doc/src/en/guide/GORM/persistenceBasics/modificationChecking.gdoc
+* ./grails-doc/src/en/guide/GORM/persistenceBasics/savingAndUpdating.gdoc
+* ./grails-doc/src/en/guide/GORM/programmaticTransactions.gdoc
+* ./grails-doc/src/en/guide/GORM/querying.gdoc
+* ./grails-doc/src/en/guide/GORM/querying/criteria.gdoc
+* ./grails-doc/src/en/guide/GORM/querying/detachedCriteria.gdoc
+* ./grails-doc/src/en/guide/GORM/querying/finders.gdoc
+* ./grails-doc/src/en/guide/GORM/querying/hql.gdoc
+* ./grails-doc/src/en/guide/GORM/querying/whereQueries.gdoc
+* ./grails-doc/src/en/guide/GORM/quickStartGuide.gdoc
+* ./grails-doc/src/en/guide/GORM/quickStartGuide/basicCRUD.gdoc
+* ./grails-doc/src/en/guide/commandLine/interactiveMode.gdoc
+* ./grails-doc/src/en/guide/conf.gdoc
+* ./grails-doc/src/en/guide/conf/config.gdoc
+* ./grails-doc/src/en/guide/conf/config/builtInOptions.gdoc
+* ./grails-doc/src/en/guide/conf/config/configGORM.gdoc
+* ./grails-doc/src/en/guide/conf/config/logging.gdoc
+* ./grails-doc/src/en/guide/conf/configExternalized.gdoc
+* ./grails-doc/src/en/guide/conf/dataSource.gdoc
+* ./grails-doc/src/en/guide/conf/dataSource/JNDIDataSources.gdoc
+* ./grails-doc/src/en/guide/conf/dataSource/automaticDatabaseMigration.gdoc
+* ./grails-doc/src/en/guide/conf/dataSource/dataSourcesAndEnvironments.gdoc
+* ./grails-doc/src/en/guide/conf/dataSource/databaseConsole.gdoc
+* ./grails-doc/src/en/guide/conf/dataSource/multipleDatasources.gdoc
+* ./grails-doc/src/en/guide/conf/dataSource/transactionAwareDataSourceProxy.gdoc
+* ./grails-doc/src/en/guide/conf/docengine.gdoc
+* ./grails-doc/src/en/guide/conf/environments.gdoc
+* ./grails-doc/src/en/guide/conf/ivy.gdoc
+* ./grails-doc/src/en/guide/conf/ivy/configurationsAndDependencies.gdoc
+* ./grails-doc/src/en/guide/conf/ivy/debuggingResolution.gdoc
+* ./grails-doc/src/en/guide/conf/ivy/dependencyReports.gdoc
+* ./grails-doc/src/en/guide/conf/ivy/dependencyRepositories.gdoc
+* ./grails-doc/src/en/guide/conf/ivy/inheritedDependencies.gdoc
+* ./grails-doc/src/en/guide/conf/ivy/mavenIntegration.gdoc
+* ./grails-doc/src/en/guide/conf/ivy/mavendeploy.gdoc
+* ./grails-doc/src/en/guide/conf/ivy/pluginDependencies.gdoc
+* ./grails-doc/src/en/guide/conf/ivy/pluginJARDependencies.gdoc
+* ./grails-doc/src/en/guide/conf/ivy/providingDefaultDependencies.gdoc
+* ./grails-doc/src/en/guide/conf/versioning.gdoc
+* ./grails-doc/src/en/guide/deployment.gdoc
+* ./grails-doc/src/en/guide/hibernate.gdoc
+* ./grails-doc/src/en/guide/hibernate/addingConstraints.gdoc
+* ./grails-doc/src/en/guide/hibernate/mappingWithHibernateAnnotations.gdoc
+* ./grails-doc/src/en/guide/hibernate/usingHibernateXMLMappingFiles.gdoc
+* ./grails-doc/src/en/guide/links.yml
+* ./grails-doc/src/en/guide/plugins.gdoc
+* ./grails-doc/src/en/guide/plugins/addingDynamicMethodsAtRuntime.gdoc
+* ./grails-doc/src/en/guide/plugins/artefactApi.gdoc
+* ./grails-doc/src/en/guide/plugins/artefactApi/customArtefacts.gdoc
+* ./grails-doc/src/en/guide/plugins/artefactApi/queryingArtefacts.gdoc
+* ./grails-doc/src/en/guide/plugins/creatingAndInstallingPlugins.gdoc
+* ./grails-doc/src/en/guide/plugins/evaluatingConventions.gdoc
+* ./grails-doc/src/en/guide/plugins/hookingIntoBuildEvents.gdoc
+* ./grails-doc/src/en/guide/plugins/hookingIntoRuntimeConfiguration.gdoc
+* ./grails-doc/src/en/guide/plugins/participatingInAutoReloadEvents.gdoc
+* ./grails-doc/src/en/guide/plugins/providingBasicArtefacts.gdoc
+* ./grails-doc/src/en/guide/plugins/repositories.gdoc
+* ./grails-doc/src/en/guide/plugins/understandingPluginLoadOrder.gdoc
+* ./grails-doc/src/en/guide/plugins/understandingPluginStructure.gdoc
+* ./grails-doc/src/en/guide/rewriteRules.txt
+* ./grails-doc/src/en/guide/scaffolding.gdoc
+* ./grails-doc/src/en/guide/security.gdoc
+* ./grails-doc/src/en/guide/security/authentication.gdoc
+* ./grails-doc/src/en/guide/security/codecs.gdoc
+* ./grails-doc/src/en/guide/security/securingAgainstAttacks.gdoc
+* ./grails-doc/src/en/guide/security/securityPlugins.gdoc
+* ./grails-doc/src/en/guide/security/securityPlugins/shiro.gdoc
+* ./grails-doc/src/en/guide/security/securityPlugins/springSecurity.gdoc
+* ./grails-doc/src/en/guide/services/declarativeTransactions/transactionsRollbackAndTheSession.gdoc
+* ./grails-doc/src/en/guide/spring.gdoc
+* ./grails-doc/src/en/guide/spring/propertyOverrideConfiguration.gdoc
+* ./grails-doc/src/en/guide/spring/propertyPlaceholderConfiguration.gdoc
+* ./grails-doc/src/en/guide/spring/springdsl.gdoc
+* ./grails-doc/src/en/guide/spring/springdslAdditional.gdoc
+* ./grails-doc/src/en/guide/spring/theBeanBuilderDSLExplained.gdoc
+* ./grails-doc/src/en/guide/spring/theUnderpinningsOfGrails.gdoc
+* ./grails-doc/src/en/guide/testing.gdoc
+* ./grails-doc/src/en/guide/testing/functionalTesting.gdoc
+* ./grails-doc/src/en/guide/testing/integrationTesting.gdoc
+* ./grails-doc/src/en/guide/testing/unitTesting.gdoc
+* ./grails-doc/src/en/guide/testing/unitTesting/mockingCollaborators.gdoc
+* ./grails-doc/src/en/guide/testing/unitTesting/unitTestingControllers.gdoc
+* ./grails-doc/src/en/guide/testing/unitTesting/unitTestingDomains.gdoc
+* ./grails-doc/src/en/guide/testing/unitTesting/unitTestingFilters.gdoc
+* ./grails-doc/src/en/guide/testing/unitTesting/unitTestingTagLibraries.gdoc
+* ./grails-doc/src/en/guide/testing/unitTesting/unitTestingURLMappings.gdoc
+*  *(original file updated)* ./grails-doc/src/en/guide/toc.yml
+* ./grails-doc/src/en/guide/validation.gdoc
+* ./grails-doc/src/en/guide/validation/constraints.gdoc
+* ./grails-doc/src/en/guide/validation/validatingConstraints.gdoc
+* ./grails-doc/src/en/guide/validation/validationAndInternationalization.gdoc
+* ./grails-doc/src/en/guide/validation/validationNonDomainAndCommandObjectClasses.gdoc
+* ./grails-doc/src/en/guide/validation/validationOnTheClient.gdoc
+
+h2. File not found (new file added) or empty file
+
+* ./grails-doc/src/en/guide/gettingStarted.gdoc
+* ./grails-doc/src/en/guide/theWebLayer.gdoc
+
