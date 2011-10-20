@@ -4,7 +4,7 @@
 {code:java}
 class BookController {
    ...
-   def shoppingCartFlow() {
+   def shoppingCartFlow ={
        showCart {
            on("checkout").to "enterPersonalDetails"
            on("continueShopping").to "displayCatalogue"

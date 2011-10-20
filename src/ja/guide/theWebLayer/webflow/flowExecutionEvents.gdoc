@@ -7,7 +7,7 @@ h4. ビューステートからのイベントトリガー {hidden}Triggering Ev
 前のコードの例と同じく、フローの開始ステートには２つのイベントを与えます。@checkout@イベントと@continueShopping@イベントです:
 
 {code:java}
-def shoppingCartFlow() {
+def shoppingCartFlow = {
     showCart {
         on("checkout").to "enterPersonalDetails"
         on("continueShopping").to "displayCatalogue"

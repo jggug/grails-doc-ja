@@ -12,5 +12,21 @@ grails run-app
 grails -Dserver.port=8090 run-app
 {code}
 
+Note that it is better to start up the application in interactive mode since a container restart is much quicker:
+
+{code}
+$ grails
+grails> run-app
+| Server running. Browse to http://localhost:8080/helloworld
+| Application loaded in interactive mode. Type 'exit' to shutdown.
+| Downloading: plugins-list.xml
+grails> exit
+| Stopping Grails server
+grails> run-app
+| Server running. Browse to http://localhost:8080/helloworld
+| Application loaded in interactive mode. Type 'exit' to shutdown.
+| Downloading: plugins-list.xml
+{code}
+
 {hidden}More information on the [run-app|commandLine] command can be found in the reference guide.{hidden}
 [run-app|commandLine]コマンドの詳細は、リファレンスガイドを参照してください。

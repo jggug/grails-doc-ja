@@ -19,7 +19,7 @@ enterPersonalDetails {
 </g:form>
 {code}
 
-{hidden}However, what about the capturing the information submitted by the form? To to capture the form info we can use a flow transition action:{hidden}
+{hidden}However, what about the capturing the information submitted by the form? To capture the form info we can use a flow transition action:{hidden}
 フォームから送信された情報を取り込むには、トランジションアクションを使用します:
 
 {code:java}

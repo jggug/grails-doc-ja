@@ -1,8 +1,21 @@
-{hidden}To implement the typical "hello world!" example run the [create-controller|commandLine] command:{hidden}
-単純な"Hello World！"を実装してみましょう。最初に[create-controller|commandLine]コマンドを実行します。
+{hidden}To implement the typical "hello world!" example @cd@ into the "helloworld" directory created in the previous section and activate interactive mode:{hidden}
+単純な"Hello World！"を実装してみましょう。前のセクションで作成されたディレクトリ"helloworld"に@cd@コマンドで移動してインタラクティブモードを開始します。
+
+{code}
+$ cd helloworld
+$ grails
+{code}
+
+{hidden}Grails' interactive mode will be activated and you should see a prompt that looks like the following:{hidden}
+Grailsのインタラクティブモードが開始されたら、プロンプトが研ぎのように表示されます:
+
+!interactive-helloworld.png!
+
+{hidden}Now run the [create-controller|commandLine] command:{hidden}
+では、[create-controller|commandLine]コマンドを実行してみましょう:
 
 bc.
-grails create-controller hello  
+grails> create-controller hello
 
 {hidden}This will create a new controller (Refer to the section on [Controllers|guide:controllers] for more information) in the @grails-app/controllers@ directory called @helloworld/HelloController.groovy@.{hidden}
 このコマンドによって、@grails-app/controllers@ディレクトリ内に、@HelloController.groovy@という新しいコントローラ（詳細については[コントローラ|guide:controllers]のセクションを参照してください）が生成されます。
@@ -30,7 +43,7 @@ class HelloController {
 作業は以上です。次に[run-app|commandLine]コマンドで、このアプリケーションを起動させましょう:
 
 bc.
-grails run-app
+grails> run-app
 
 {hidden}This will start-up a server on port 8080 and you should now be able to access your application with the URL: @http://localhost:8080/helloworld@ {hidden}
 これで8080番ポートでサーバを起動します。@http://localhost:8080/helloworld@をブラウザで見てみましょう。

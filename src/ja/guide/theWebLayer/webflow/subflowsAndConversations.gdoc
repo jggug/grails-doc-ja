@@ -2,7 +2,7 @@
 GrailsのWebフローはサブフローにも対応しています。サブフローはフォローの中にあるフローです。この検索フローを例とします:
 
 {code:java}
-def searchFlow() {
+def searchFlow = {
     displaySearchForm {
         on("submit").to "executeSearch"
     }
@@ -39,7 +39,7 @@ def searchFlow() {
 サブフローは完全に別のフローです:
 
 {code:java}
-def extendedSearchFlow() {
+def extendedSearchFlow = {
     startExtendedSearch {
         on("findMore").to "searchMore"
         on("searchAgain").to "noResults"

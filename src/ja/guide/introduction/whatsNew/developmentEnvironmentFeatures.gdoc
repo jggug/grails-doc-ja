@@ -103,6 +103,13 @@ grails.project.dependency.resolution = {
 }
 {code}
 
+{hidden}* You can change the ivy cache directory for all projects via @settings.groovy@{hidden}
+* @settings.groovy@に設定することで、全てのプロジェクトのivyキャッシュディレクトリを変更できます。
+
+{code}
+grails.dependency.cache.dir = "${userHome}/.ivy2/cache"
+{code}
+
 {hidden}* It is now possible to completely disable resolution from inherited repositories (repositories defined by other plugins):{hidden}
 * リポジトリの引継を完全に無効にできます(他のプラグインで定義されている場合等):
 
