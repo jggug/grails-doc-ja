@@ -8,45 +8,6 @@ h1. Document Translation Report.
 
 h2. Original document updated after translation.:
 
-*./src/ja/guide/theWebLayer/webflow/dataBindingAndValidation.gdoc*
-
-{code}
-20 : However, what about the capturing the information submitted by the form? To capture the form info we can use a flow transition action:
-{code}
-
-*./src/ja/guide/theWebLayer/controllers/dataBinding.gdoc*
-
-{code}
-271: \{note\}
-272: Note that if an empty List is provided as a value for the @include@ parameter then all fields will be subject to binding if they are not explicitly excluded.
-273: \{note\}
-{code}
-
-*./src/ja/guide/theWebLayer/webflow/flowScopes.gdoc*
-
-{code}
-97 : The flow scope contains a reference to the Hibernate session. As a result, any object loaded into the session through a GORM query will also be in the flow and will need to implement Serializable.
-99 : If you don't want your domain class to be Serializable or stored in the flow, then you will need to evict the entity manually before the end of the state:
-102: flow.persistenceContext.evict(it)
-{code}
-
-*./src/ja/guide/gettingStarted/runningAnApplication.gdoc*
-
-{code}
-13 : Note that it is better to start up the application in interactive mode since a container restart is much quicker:
-16 : $ grails
-17 : grails> run-app
-18 : | Server running. Browse to http://localhost:8080/helloworld
-19 : | Application loaded in interactive mode. Type 'exit' to shutdown.
-20 : | Downloading: plugins-list.xml
-21 : grails> exit
-22 : | Stopping Grails server
-23 : grails> run-app
-24 : | Server running. Browse to http://localhost:8080/helloworld
-25 : | Application loaded in interactive mode. Type 'exit' to shutdown.
-26 : | Downloading: plugins-list.xml
-{code}
-
 *./src/ja/guide/gettingStarted/upgradingFromPreviousVersionsOfGrails.gdoc*
 
 {code}
@@ -77,48 +38,11 @@ h2. Original document updated after translation.:
 17 : ... draw the body here...
 {code}
 
-*./src/ja/guide/gettingStarted/aHelloWorldExample.gdoc*
-
-{code}
-1  : To implement the typical "hello world\!" example @cd@ into the "helloworld" directory created in the previous section and activate interactive mode:
-4  : $ cd helloworld
-5  : $ grails
-8  : Grails' interactive mode will be activated and you should see a prompt that looks like the following:
-10 : \!interactive-helloworld.png\!
-12 : Now run the [create-controller|commandLine] command:
-15 : grails> create-controller hello
-39 : grails> run-app
-{code}
-
-*./src/ja/guide/theWebLayer/urlmappings/namedMappings.gdoc*
-
-{code}
-1  : URL Mappings also support named mappings, that is mappings which have a name associated with them. The name may be used to refer to a specific mapping when links are generated.
-{code}
-
-*./src/ja/guide/theWebLayer/controllers/understandingControllersAndActions.gdoc*
-
-{code}
-65 : If a controller class extends some other class which is not defined under the @grails-app/controllers/@ directory, methods inherited from that class are not converted to controller actions.  If the intent is to expose those inherited methods as controller actions the methods may be overridden in the subclass and the subclass method may invoke the method in the super class.
-{code}
-
 *./src/ja/guide/introduction/whatsNew/webFeatures.gdoc*
 
 {code}
 6  : // action as a method
 10 : // action as a closure
-{code}
-
-*./src/ja/guide/theWebLayer/webflow.gdoc*
-
-{code}
-24 :    def shoppingCartFlow = \{
-{code}
-
-*./src/ja/guide/theWebLayer/webflow/startAndEndStates.gdoc*
-
-{code}
-6  :    def shoppingCartFlow =\{
 {code}
 
 *./src/ja/guide/gettingStarted/creatingAnApplication.gdoc*
