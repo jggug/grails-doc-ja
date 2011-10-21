@@ -65,12 +65,12 @@ h3. Core Grailsターゲット {hidden}Core Grails targets {hidden}
  \_GrailsRun | アプリケーションを起動させるために必要な機能を提供します。通常は（@runApp/runAppHttps@）から、またはWARファイル（@runWar/runWarHttps@）から実行します。
 {table}
 
-{hidden}There are many more scripts provided by Grails, so it is worth digging into the scripts themselves to find out what kind of targets are available. Anything that starts with an "_" is designed for reuse.{hidden}
+{hidden}There are many more scripts provided by Grails, so it is worth digging into the scripts themselves to find out what kind of targets are available. Anything that starts with an "\_" is designed for reuse.{hidden}
 Grailsではもっと多くのスクリプトが提供されていますので、どんな種類のターゲットが利用可能かを調べてみる価値があるでしょう。"_"で始まっているものはすべて再利用されることを考慮してデザインされています。
 
 h3. スクリプトアーキテクチャ {hidden}Script architecture {hidden}
 
-{hidden}You maybe wondering what those underscores are doing in the names of the Grails scripts. That is Grails' way of determining that a script is _internal_, or in other words that it has not corresponding "command". So you can't run "grails _grails-settings" for example. That is also why they don't have a default target.{hidden}
+{hidden}You maybe wondering what those underscores are doing in the names of the Grails scripts. That is Grails' way of determining that a script is _internal_, or in other words that it has not corresponding "command". So you can't run "grails \_grails-settings" for example. That is also why they don't have a default target.{hidden}
 アンダースコアで始まるGrailsスクリプトは、何を示しているものかを説明すると、それらはコマンドではなく、他のスクリプトから利用されるスクリプト群として認識されます。なので、それらのスクリプト（内部スクリプト）はデフォルトターゲットを持っておらず、スクリプトは実行できません。
 
 {hidden}Internal scripts are all about code sharing and reuse. In fact, we recommend you take a similar approach in your own scripts: put all your targets into an internal script that can be easily shared, and provide simple command scripts that parse any command line arguments and delegate to the targets in the internal script. For example if you have a script that runs some functional tests, you can split it like this:{hidden}

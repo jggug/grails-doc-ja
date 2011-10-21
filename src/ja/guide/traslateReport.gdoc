@@ -8,12 +8,6 @@ h1. Document Translation Report.
 
 h2. Original document updated after translation.:
 
-*./src/ja/guide/gettingStarted/upgradingFromPreviousVersionsOfGrails.gdoc*
-
-{code}
-22 :         // Add HSQLDB as a runtime dependency
-{code}
-
 *./src/ja/guide/theWebLayer/controllers/modelsAndViews.gdoc*
 
 {code}
@@ -36,6 +30,12 @@ h2. Original document updated after translation.:
 9  : ... draw the header here...
 13 : ... draw the footer here...
 17 : ... draw the body here...
+{code}
+
+*./src/ja/guide/gettingStarted/upgradingFromPreviousVersionsOfGrails.gdoc*
+
+{code}
+62 :         // Add HSQLDB as a runtime dependency
 {code}
 
 *./src/ja/guide/introduction/whatsNew/webFeatures.gdoc*

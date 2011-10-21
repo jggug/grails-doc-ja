@@ -7,7 +7,7 @@ $ grails
 {code}
 
 {hidden}Grails' interactive mode will be activated and you should see a prompt that looks like the following:{hidden}
-Grailsのインタラクティブモードが開始されたら、プロンプトが研ぎのように表示されます:
+Grailsのインタラクティブモードが開始されたら、プロンプトが次のように表示されます:
 
 !interactive-helloworld.png!
 
@@ -22,7 +22,7 @@ grails> create-controller hello
 
 {note}
 {hidden}If no package is specified with create-controller script, Grails automatically uses the application name as the package name. This default is configurable with the @grails.project.groupId@ attribute in Config.groovy.{hidden}
-create-controllerスクリプトでパッケージが指定されなかった場合はGrailsが自動的にアプリケーション名をパッケージ名として使用します。デフォルト値はCongig.groovyに@grails.project.groupId@を指定することで変更可能です。
+create-controllerスクリプトでパッケージが指定されなかった場合はGrailsが自動的にアプリケーション名をパッケージ名として使用します。デフォルト値はConfig.groovyに@grails.project.groupId@を指定することで変更可能です。
 {note}
 
 {hidden}Controllers are capable of dealing with web requests and to fulfil the "hello world!" use case our implementation needs to look like the following:{hidden}
