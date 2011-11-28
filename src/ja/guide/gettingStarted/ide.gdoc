@@ -23,7 +23,7 @@ h4. NetBeans
 h4. TextMate
 
 {hidden}Since Grails' focus is on simplicity it is often possible to utilize more simple editors and "TextMate":http://macromates.com/ on the Mac has an excellent Groovy/Grails bundle available from the [Texmate bundles SVN|http://wiki.macromates.com/Main/SubversionCheckout].{hidden}
-単純さに焦点があたっているGrailsは、より単純なエディタやを利用することはしばしば可能です。そしてMac上の "TextMate":http://macromates.com/ は[TextmateにバンドルされたSVN|http://wiki.macromates.com/Main/SubversionCheckout]から優秀なGroovy/Grailsバンドルを利用可能です。
+単純さに焦点があたっているGrailsは、より単純なエディタを利用することが可能です。そしてMac上の "TextMate":http://macromates.com/ は[TextmateにバンドルされたSVN|http://wiki.macromates.com/Main/SubversionCheckout]から優秀なGroovy/Grailsバンドルを利用可能です。
 
 {hidden}To integrate Grails with TextMate run the following command to generate appropriate project files:{hidden}
 GrailsでTextMateの設定をするには、次のコマンドを実行してTextMate用のプロジェクトファイルを生成します。

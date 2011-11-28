@@ -13,7 +13,7 @@
 
 * Grailsを[ダウンロード|http://grails.org/Download]し、任意の場所にzipファイルを解凍します。
 * zipファイルを解凍した場所にGRAILS_HOME環境変数を設定します。
-** Unix/Linuxベースのシステムでは、次ののようなものをプロファイル（.profileなど）に追加します。@export GRAILS_HOME=/path/to/grails@
+** Unix/Linuxベースのシステムでは、次のようなものをプロファイル（.profileなど）に追加します。@export GRAILS_HOME=/path/to/grails@
 ** Windowsでは、マイコンピュータ＞詳細＞環境変数に設定します。
 * さらに、@PATH@変数に@bin@ディレクトリを追加する必要があります。
 ** Unix/Linuxベースのシステムでは、このように設定します。@export PATH="$PATH:$GRAILS_HOME/bin"@

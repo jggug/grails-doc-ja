@@ -132,7 +132,7 @@ HTML5ベースのスカッフォールドUIになりました:
 
 !scaffolding-ui.png!
 
-h4. jQueryをデフォルトになりました {hidden}jQuery by Default{hidden}
+h4. jQueryがデフォルトになりました {hidden}jQuery by Default{hidden}
 
 {hidden}The jQuery plugin is now the default JavaScript library installed into a Grails application. For backwards compatibility a [Prototype plugin|http://grails.org/plugin/prototype] is available. Refer to the [documentation|http://grails.org/plugin/prototype] on the Prototype plugin for installation instructions.{hidden}
 jQueryプラグインがデフォルトのJavaScriptライブラリとしてGrailsアプリケーションにインストールされます。 下位互換として、Prototypeはプラグインとして提供しています。 Prototypeついてはプラグインのドキュメントを参考にしてください。 [Prototype plugin|http://grails.org/plugin/prototype]
