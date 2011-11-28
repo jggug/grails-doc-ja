@@ -1,9 +1,9 @@
 
 h1. Document Translation Report.
 
-* *File Count* - 251
-* *Done* - 126
-* *TODO* - 123
+* *File Count* - 257
+* *Done* - 127
+* *TODO* - 128
 * *Not found or new* - 2
 
 h2. Original document updated after translation.:
@@ -122,6 +122,11 @@ h2. Not done.
 * ./grails-doc/src/en/guide/conf/ivy/pluginJARDependencies.gdoc
 * ./grails-doc/src/en/guide/conf/ivy/providingDefaultDependencies.gdoc
 * ./grails-doc/src/en/guide/conf/versioning.gdoc
+* ./grails-doc/src/en/guide/contributing.gdoc
+* ./grails-doc/src/en/guide/contributing/build.gdoc
+* ./grails-doc/src/en/guide/contributing/issues.gdoc
+* ./grails-doc/src/en/guide/contributing/patchesCore.gdoc
+* ./grails-doc/src/en/guide/contributing/patchesDoc.gdoc
 * ./grails-doc/src/en/guide/deployment.gdoc
 * ./grails-doc/src/en/guide/hibernate.gdoc
 * ./grails-doc/src/en/guide/hibernate/addingConstraints.gdoc

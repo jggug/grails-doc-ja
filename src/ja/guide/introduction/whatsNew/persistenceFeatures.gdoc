@@ -43,7 +43,7 @@ h4. 抽象クラス継承のサポート {hidden}Abstract Inheritance{hidden}
 GORMが抽象クラス継承階層をサポートしました。これによって、関連リンクやクエリ等を抽象クラスに定義することができます:
 
 {code}
-abstract Media {
+abstract class Media {
     String title
     …
 }
